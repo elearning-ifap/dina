@@ -1,0 +1,62 @@
+/* DINA — kit de visuels de lancement. Palette et polices : tokens.css (CAN-VIS-01, D50 à D53, D104, D105).
+   D105 : fond blanc comme les logos IFAP et DINA ; titres gris anthracite (10,9:1) ; jaune et bleu-vert IFAP en accents seulement.
+   Jamais de texte jaune, jamais de texte sur la photo. */
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #ddd; }
+body { font-family: var(--police-texte); color: var(--texte); }
+.visuel { position: relative; overflow: hidden; background: var(--carte); margin: 0 auto; display: grid; }
+.photo { position: relative; overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Cadrage (D105) : personnages au centre, têtes entières. Fenêtre object-view-box centrée sur le groupe, recadrage restant pris par le bas.
+   Repli pour les navigateurs sans object-view-box : object-position. */
+.photo img[data-cadre="ILL-N01"] { object-position: 50% 0%; object-view-box: inset(4% 33% 0% 0%); }      /* Samuel et Noa, x 220-900 sur 1672 */
+.photo img[data-cadre="ILL-N02"] { object-position: 50% 0%; object-view-box: inset(0% 33.6% 0% 14.4%); } /* Noa et Malia, centre x 675 */
+.photo img[data-cadre="ILL-N03"] { object-position: 50% 0%; object-view-box: inset(0% 38.3% 0% 5.4%); }  /* Noa et deux collègues, centre x 560 */
+.panneau { color: var(--texte); display: flex; flex-direction: column; border-top: 6px solid var(--turquoise); }
+.surtitre-com { display: inline-flex; align-items: center; gap: .6em; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--bleu); }
+.surtitre-com::before { content: ""; flex: none; width: 2.6em; height: 1em; background:
+  radial-gradient(circle at .45em .5em, var(--jaune) .38em, transparent .42em) no-repeat,
+  linear-gradient(var(--turquoise), var(--turquoise)) 1.1em calc(.5em - 1px) / calc(100% - 1.1em) 2px no-repeat; }
+.titre-com { font-family: var(--police-titre); font-weight: 800; color: var(--anthracite); line-height: 1.08; margin: .35em 0 .45em; letter-spacing: -.005em; }
+.texte-com { line-height: 1.45; margin: 0; color: var(--texte); }
+.encart { background: var(--fond); color: var(--texte); border-radius: 14px; border-left: 8px solid var(--jaune); }
+.encart strong { display: block; font-family: var(--police-titre); font-weight: 800; color: var(--anthracite); }
+.encart p { margin: .2em 0 0; }
+.pied { background: var(--carte); display: flex; align-items: center; border-top: 1px solid var(--bordure); }
+.pied .filet { width: 2px; align-self: stretch; background: #C9C9C9; }
+.pied img { display: block; height: 100%; width: auto; }
+.pied .logos { display: flex; align-items: center; height: 100%; }
+.mention { color: var(--texte-2); }
+
+/* ---- Affiche A4 portrait (impression, affichage) ---- */
+.affiche { width: 210mm; height: 297mm; grid-template-rows: 46% 1fr 26mm; }
+.affiche .panneau { padding: 11mm 14mm 9mm; font-size: 13.5pt; }
+.affiche .surtitre-com { font-size: 13pt; }
+.affiche .titre-com { font-size: 36pt; }
+.affiche .encart { margin-top: auto; padding: 5mm 6mm; font-size: 12.5pt; }
+.affiche .pied { padding: 5mm 14mm; justify-content: space-between; }
+.affiche .pied .logos { gap: 7mm; height: 16mm; }
+.affiche .mention { font-size: 9pt; text-align: right; max-width: 60mm; }
+
+/* ---- Écran 16:9 (affichage numérique, 1920 × 1080) ---- */
+.ecran16 { width: 1920px; height: 1080px; grid-template-columns: 52% 1fr; grid-template-rows: 1fr 150px; }
+.ecran16 .photo { grid-row: 1 / 3; }
+.ecran16 .panneau, .banniere .panneau { border-top: 0; }
+.ecran16 .panneau { padding: 90px 90px 50px; font-size: 32px; }
+.ecran16 .surtitre-com { font-size: 28px; }
+.ecran16 .titre-com { font-size: 74px; }
+.ecran16 .encart { margin-top: auto; padding: 28px 34px; font-size: 28px; }
+.ecran16 .pied { padding: 28px 90px; gap: 40px; }
+.ecran16 .pied .logos { gap: 40px; height: 94px; }
+
+/* ---- Bannière intranet / courriel (1200 × 400) ---- */
+.banniere { width: 1200px; height: 400px; grid-template-columns: 1fr 400px; grid-template-rows: 1fr 76px; }
+.banniere .photo { grid-column: 2; grid-row: 1 / 3; }
+.banniere .panneau { padding: 36px 44px 20px; font-size: 20px; }
+.banniere .surtitre-com { font-size: 16px; }
+.banniere .titre-com { font-size: 38px; margin: .3em 0 .35em; }
+.banniere .pied { grid-column: 1; padding: 12px 44px; }
+.banniere .pied .logos { gap: 22px; height: 52px; }
+
+@page { size: A4; margin: 0; }
+@media print { html, body { background: none; } }

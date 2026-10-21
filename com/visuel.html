@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DINA — visuel de lancement</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="com.css">
+<script src="textes.js"></script>
+</head>
+<body>
+<!-- Gabarit maître des visuels DINA (L9-CDC-05).
+     Format : ?f=affiche | ecran | banniere   Version : ?v=agents | rh
+     Exemple : visuel.html?f=ecran&v=rh   Les textes se modifient dans textes.js. -->
+<main id="visuel"></main>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var f = q.get("f") || "affiche", v = q.get("v") === "rh" ? "rh" : "agents";
+  var T = window.DINA_COM[v], A = window.DINA_COM.alt;
+  var photo = { affiche: "ILL-N01", ecran: "ILL-N02", banniere: "ILL-N03" }[f] || "ILL-N01";
+  var court = f === "banniere";
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
+  var cls = { affiche: "affiche", ecran: "ecran16", banniere: "banniere" }[f] || "affiche";
+  var logos = '<div class="logos"><img src="../assets/logo/' + (f === "banniere" ? "logo-dina-compact.svg" : "logo-dina.svg") + '" alt="DINA — Mes repères pour agir"><span class="filet" aria-hidden="true"></span><img src="../assets/logo/logo-ifap.png" alt="IFAP — Institut de formation à l\'administration publique"></div>';
+  var html =
+    '<section class="visuel ' + cls + '" aria-label="' + esc(T.titre) + '">' +
+      '<div class="photo"><img data-cadre="' + photo + '" src="../assets/img/' + photo + '.jpg" alt="' + esc(A[photo] || "") + '"></div>' +
+      '<div class="panneau">' +
+        '<span class="surtitre-com">' + esc(T.surtitre) + '</span>' +
+        '<h1 class="titre-com">' + esc(court ? T.titreCourt : T.titre) + '</h1>' +
+        '<p class="texte-com">' + esc(court ? T.texteCourt : T.texte) + '</p>' +
+        (court ? '' : '<div class="encart"><strong>' + esc(T.encartTitre) + '</strong><p>' + esc(T.encart) + '</p></div>') +
+      '</div>' +
+      '<div class="pied">' + logos + (f === "affiche" ? '<span class="mention">Personnages et organisme ÉLAN fictifs. Un dispositif de l\'IFAP.</span>' : '') + '</div>' +
+    '</section>';
+  document.getElementById("visuel").innerHTML = html;
+  document.title = "DINA — " + f + " (" + v + ")";
+})();
+</script>
+</body>
+</html>
