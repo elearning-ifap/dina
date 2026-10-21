@@ -401,38 +401,55 @@ window.DINA_DATA = {
      "feedback": "Noa répond sur le fond à la place du service compétent. Si le formulaire n'est pas le bon, l'habitant perd du temps."
     }
    ],
-   "suite": "M1-E1-D5"
+   "suite": "M1-E1-CARTE"
   },
-  "M1-E1-D5": {
-   "id": "M1-E1-D5",
-   "type": "choix",
+  "M1-E1-CARTE": {
+   "id": "M1-E1-CARTE",
+   "type": "hotspot",
+   "mode": "audit",
+   "illustration": "ILL-N07",
    "etape": "Épisode 1",
-   "personnage": "Samuel",
-   "texte": "Samuel : « Tu sais pourquoi il faut orienter juste du premier coup, ici ? » Quel repère Noa choisit-il pour l'expliquer ?",
-   "brief": "Un repère chiffré n'est utile que si l'on sait d'où il vient et de quand il date.",
+   "titre": "Les chiffres de la carte",
+   "texte": "Samuel : « Tu sais pourquoi il faut orienter juste du premier coup ? Dans le Nord, une mauvaise orientation peut coûter un long déplacement. Avant de reprendre la carte du guide d'orientation, vérifie ses chiffres. »",
+   "consigne": "Signalez chaque chiffre qui ne peut pas être repris tel quel, puis validez.",
    "competences": [
     "C01"
    ],
-   "options": [
+   "zones": [
     {
-     "id": "A",
-     "libelle": "« Le Nord, c'est 50 000 habitants. »",
-     "verdict": "partiel",
-     "feedback": "Proche de la réalité, mais sans source ni date : impossible de savoir si le chiffre est à jour."
+     "id": "nord",
+     "x": 37.9,
+     "y": 48,
+     "titre": "Province Nord : environ 50 000 habitants",
+     "anomalie": true,
+     "feedback": "Ni source ni date : impossible de savoir si le chiffre est à jour. Le repère sourcé : environ un habitant sur cinq (19 %), recensement 2025, ISEE."
     },
     {
-     "id": "B",
-     "libelle": "« Province Nord : environ un habitant sur cinq (19 %), recensement 2025, ISEE. »",
-     "verdict": "adapte",
-     "feedback": "Un chiffre daté et sourcé peut être réutilisé. Il rappelle que les habitants du Nord vivent sur un grand territoire : une mauvaise orientation peut leur coûter un long déplacement."
+     "id": "sud",
+     "x": 63,
+     "y": 80.4,
+     "titre": "Province Sud : 74 % des habitants (ISEE, recensement 2025)",
+     "anomalie": false,
+     "feedback": "Sourcé et daté : Noa peut le reprendre."
     },
     {
-     "id": "C",
-     "libelle": "Un chiffre tiré d'un ancien diaporama, daté de 2019.",
-     "verdict": "risque",
-     "feedback": "Un recensement plus récent existe : ce chiffre est dépassé."
+     "id": "iles",
+     "x": 74,
+     "y": 52.6,
+     "titre": "Îles Loyauté : chiffre repris d'un diaporama de 2019",
+     "anomalie": true,
+     "feedback": "Un recensement plus récent existe : ce chiffre est dépassé. En 2025, 7 % des habitants (ISEE)."
+    },
+    {
+     "id": "total",
+     "x": 33,
+     "y": 87,
+     "titre": "Nouvelle-Calédonie : 264 596 habitants (ISEE, recensement 2025)",
+     "anomalie": false,
+     "feedback": "Sourcé et daté : Noa peut le reprendre."
     }
    ],
+   "synthese": "Un repère chiffré n'est utile que si l'on sait d'où il vient et de quand il date.",
    "sources": "ISEE, recensement de la population 2025 : 264 596 habitants ; province Sud 74 %, province Nord 19 %, îles Loyauté 7 %.",
    "suite": "M1-E1-APP1"
   },
@@ -442,24 +459,58 @@ window.DINA_DATA = {
    "etape": "Épisode 1",
    "titre": "Quatre niveaux, chacun ses compétences",
    "texte": "L'organisation de la Nouvelle-Calédonie est fixée par la Constitution (titre XIII) et par la loi organique du 19 mars 1999, issue de l'accord de Nouméa.",
-   "points": [
-    {
-     "titre": "L'État",
-     "texte": "Représenté par le haut-commissaire (art. 2). Par exemple : la justice, l'ordre public, la défense, l'entrée et le séjour des étrangers (art. 21)."
-    },
-    {
-     "titre": "La Nouvelle-Calédonie",
-     "texte": "Ses institutions : le congrès, le gouvernement, le Sénat coutumier, le conseil économique, social et environnemental, les conseils coutumiers (art. 2). Par exemple : la fiscalité, la protection sociale, la circulation routière (art. 22)."
-    },
-    {
-     "titre": "Les trois provinces",
-     "texte": "Nord, Sud, îles Loyauté. Elles sont compétentes dans toutes les matières qui ne sont pas attribuées aux autres (art. 20)."
-    },
-    {
-     "titre": "Les 33 communes",
-     "texte": "Collectivités territoriales de la République, comme les provinces (art. 3). Par exemple : la voirie communale, le guichet de l'état civil."
-    }
-   ],
+   "infographie": {
+    "blocs": [
+     {
+      "icone": "i-balance",
+      "titre": "L'État",
+      "role": "Représenté par le haut-commissaire (art. 2).",
+      "exemples": [
+       "La justice",
+       "L'ordre public",
+       "La défense",
+       "L'entrée et le séjour des étrangers"
+      ],
+      "ref": "Loi organique, art. 21"
+     },
+     {
+      "icone": "i-batiment",
+      "titre": "La Nouvelle-Calédonie",
+      "role": "Ses institutions : le congrès, le gouvernement, le Sénat coutumier, le conseil économique, social et environnemental, les conseils coutumiers (art. 2).",
+      "exemples": [
+       "La fiscalité",
+       "La protection sociale",
+       "La circulation routière"
+      ],
+      "ref": "Loi organique, art. 22"
+     },
+     {
+      "icone": "i-lieu",
+      "titre": "Les trois provinces",
+      "role": "Nord, Sud, îles Loyauté. Compétentes dans toutes les matières qui ne sont pas attribuées aux autres (art. 20).",
+      "exemples": [
+       "Le développement économique de proximité"
+      ],
+      "ref": "Loi organique, art. 20"
+     },
+     {
+      "icone": "i-equipe",
+      "titre": "Les 33 communes",
+      "role": "Collectivités territoriales de la République, comme les provinces (art. 3).",
+      "exemples": [
+       "La voirie communale",
+       "Le guichet de l'état civil"
+      ],
+      "ref": "Loi organique, art. 3"
+     }
+    ],
+    "fil_titre": "Avant d'orienter",
+    "fil": [
+     "Quelle est la demande ?",
+     "Qui a la compétence ?",
+     "À quel guichet l'habitant s'adresse-t-il ?"
+    ]
+   },
    "a_retenir": "Le congrès délibère, le gouvernement exécute. Une même politique peut mobiliser plusieurs acteurs : avant d'orienter, je cherche qui a la compétence.",
    "note_expert": "Contenu institutionnel à faire valider par un expert (scénario M1 v0.2, § 8).",
    "sources": "Loi organique n° 99-209 du 19 mars 1999, version consolidée (Légifrance), art. 2, 3, 20, 21 et 22.",
@@ -1107,37 +1158,130 @@ window.DINA_DATA = {
     }
    ],
    "bandeau_final": "La meilleure source dépend de la question : le texte officiel pour la règle, la page institutionnelle pour l'explication pratique, l'intranet pour une procédure interne.",
-   "suite": "M1-E3-D1"
+   "suite": "M1-E3-RCH"
   },
-  "M1-E3-D1": {
-   "id": "M1-E3-D1",
-   "type": "choix",
+  "M1-E3-RCH": {
+   "id": "M1-E3-RCH",
+   "type": "recherche",
    "etape": "Épisode 3",
-   "texte": "Par quel document Noa commence-t-il ?",
+   "texte": "Noa cherche la règle d'affiliation après une embauche. Lancez une recherche, puis choisissez le document à utiliser.",
    "brief": "La fiche servira à l'accueil pour répondre aux habitants. Une erreur serait répétée à chaque appel.",
    "competences": [
     "C17"
    ],
-   "options": [
+   "moteur": "Base documentaire du pôle (moteur fictif)",
+   "placeholder": "Par exemple : affiliation embauche",
+   "exemples": [
+    "délai",
+    "affiliation embauche"
+   ],
+   "consigne_choix": "Choisissez le document que Noa utilise pour la fiche.",
+   "conseil_mots": "Aucun document ne correspond. Essayez des mots précis : la démarche et la situation, par exemple « affiliation embauche ».",
+   "mots_cles": [
     {
-     "id": "A",
-     "libelle": "La page du site officiel, mise à jour le mois dernier.",
-     "verdict": "adapte",
-     "feedback": "Une source officielle, datée et récente : c'est le meilleur point de départ pour une explication pratique."
+     "si": [
+      "affiliation",
+      "affilier",
+      "affilie",
+      "embauche",
+      "embaucher",
+      "cafat",
+      "couverture",
+      "sociale"
+     ],
+     "resultats": "R1"
     },
     {
-     "id": "B",
-     "libelle": "Le guide PDF : il est déjà dans le dossier partagé.",
-     "verdict": "risque",
-     "feedback": "Facile à trouver ne veut pas dire à jour. Une règle a pu changer depuis 2019."
+     "si": [
+      "delai",
+      "delais"
+     ],
+     "resultats": "R2"
     },
     {
-     "id": "C",
-     "libelle": "La capture d'écran : un collègue l'a envoyée cette semaine.",
-     "verdict": "inadapte",
-     "feedback": "Sans auteur ni date, impossible de savoir d'où elle vient ni si elle est juste."
+     "sinon": "R0"
     }
    ],
+   "jeux": {
+    "R0": [],
+    "R1": [
+     {
+      "id": "guide",
+      "icone": "i-fichier",
+      "titre": "Guide d'orientation — fiche « Couverture sociale » (PDF)",
+      "auteur": "ÉLAN, pôle études et projets",
+      "date": "2019",
+      "statut": "Jamais mis à jour",
+      "extrait": "Dans le dossier partagé du pôle.",
+      "verdict": "risque",
+      "feedback": "Facile à trouver ne veut pas dire à jour. Une règle a pu changer depuis 2019."
+     },
+     {
+      "id": "presse",
+      "icone": "i-informer",
+      "titre": "« Embauche : ce qui change » — article de presse",
+      "auteur": "Un journal local",
+      "date": "La semaine dernière",
+      "statut": "Article d'information",
+      "verdict": "partiel",
+      "feedback": "Utile pour être alerté d'un changement, mais ce n'est pas la source de la règle. Noa remonte à la source officielle."
+     },
+     {
+      "id": "officiel",
+      "icone": "i-batiment",
+      "titre": "S'affilier après une embauche",
+      "auteur": "CAFAT, site officiel",
+      "date": "Mis à jour le mois dernier",
+      "statut": "Page officielle à jour",
+      "extrait": "Qui fait la démarche, dans quel délai, avec quelles pièces.",
+      "verdict": "adapte",
+      "feedback": "Auteur connu, date récente, source officielle : c'est le meilleur point de départ pour une explication pratique."
+     },
+     {
+      "id": "capture",
+      "icone": "i-image",
+      "titre": "Capture d'écran « délai affiliation »",
+      "auteur": "Inconnu (transférée par un collègue)",
+      "date": "Sans date",
+      "statut": "Inconnu",
+      "verdict": "inadapte",
+      "feedback": "Sans auteur ni date, impossible de savoir d'où elle vient ni si elle est juste."
+     }
+    ],
+    "R2": [
+     {
+      "id": "paiement",
+      "icone": "i-fichier",
+      "titre": "Délais de paiement des fournisseurs",
+      "auteur": "ÉLAN, service administratif",
+      "date": "2024",
+      "statut": "Note de service",
+      "verdict": "inadapte",
+      "feedback": "Hors sujet. Le mot « délai » seul ramène tout ce qui parle de délais : précisez la démarche."
+     },
+     {
+      "id": "recours",
+      "icone": "i-balance",
+      "titre": "Les délais de recours contre une décision administrative",
+      "auteur": "Fiche pratique d'un site officiel",
+      "date": "2025",
+      "statut": "En vigueur",
+      "verdict": "inadapte",
+      "feedback": "Fiable, mais hors sujet. Précisez la démarche : affiliation, embauche."
+     },
+     {
+      "id": "guide2",
+      "icone": "i-fichier",
+      "titre": "Guide d'orientation — fiche « Couverture sociale » (PDF)",
+      "auteur": "ÉLAN, pôle études et projets",
+      "date": "2019",
+      "statut": "Jamais mis à jour",
+      "verdict": "risque",
+      "feedback": "Le bon sujet, mais un document de 2019 : la règle a pu changer. Cherchez avec des mots plus précis pour trouver la source à jour."
+     }
+    ]
+   },
+   "synthese": "Qui l'a produit, de quand il date, quel est son statut : trois vérifications avant d'utiliser un document.",
    "suite": "M1-E3-D2"
   },
   "M1-E3-D2": {
@@ -2421,6 +2565,11 @@ window.DINA_DATA = {
    "scene": "Noa en fin de première semaine",
    "personnages": "Noa",
    "alt": "Vendredi après-midi. Noa, à son bureau, relit ses notes de la semaine, détendu."
+  },
+  "ILL-N07": {
+   "scene": "Carte schématique des trois provinces",
+   "personnages": "—",
+   "alt": "Carte schématique de la Nouvelle-Calédonie. La Grande Terre est partagée entre la province Nord, chef-lieu Koné, et la province Sud, chef-lieu Nouméa, qui comprend aussi l'île des Pins. À l'est, la province des îles Loyauté, chef-lieu Wé, à Lifou."
   }
  },
  "source": "Storyboard — M1 v0.1.md"
