@@ -22,9 +22,9 @@ window.DINA_VERSION = {
 
   /* Ordre fixé par D84. "fichier" est relatif à cette page. */
   etapes: [
-    { code: "pos", fichier: "positionnement.html", cle: "dina-pos", titre: "Test de positionnement",
+    { code: "pos", fichier: "positionnement.html", cle: "dina-positionnement", titre: "Test de positionnement",
       texte: "Dix situations de travail. Vous voyez où vous en êtes, bloc par bloc, avant d'entrer dans le parcours.",
-      duree: "10 à 15 min", disponible: false },
+      duree: "10 à 15 min", disponible: true },
     { code: "prologue", fichier: "prologue.html", cle: "dina-prologue", titre: "Prologue « Bienvenue à ÉLAN »",
       texte: "Vous rencontrez Noa, ses collègues et l'organisation où il prend son poste.",
       duree: "20 min", disponible: true },
