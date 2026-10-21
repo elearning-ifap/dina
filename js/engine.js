@@ -397,11 +397,12 @@
     if (e.points) zone.classList.add("ecran--points");
     var sur = { apport: "Micro-apport", document: "Document" }[e.type] || libelleEtape(e);
     if (e.type === "apport" && e.carnet !== false) ajouterCarnet("ecran", e.id);
-    var visuel = e.points || e.fiche_identite || e.colonnes || e.orbite;
+    var visuel = e.points || e.fiche_identite || e.colonnes || e.orbite || e.infographie;
     if (visuel) zone.classList.add("ecran--visuel");
     var html = '<div class="colonne' + (visuel ? " colonne--large" : "") + '">' + (e.points && e.illustration ? illustration(e.illustration, "illu-bandeau") : "") + entete(e, sur);
     if ((e.type === "message" || e.type === "narration") && (e.personnage || e.canal)) html += locuteur(e) + corpsMessage(e);
     else html += '<div class="texte texte--' + e.type + '">' + md(e.texte) + "</div>";
+    if (e.infographie) html += infographie(e.infographie);
     if (e.points) html += points(e.points);
     if (e.fiche_identite) html += ficheIdentite(e.fiche_identite);
     if (e.texte_officiel) html += texteOfficiel(e.texte_officiel);
@@ -460,6 +461,19 @@
     b.setAttribute("aria-expanded", String(!ouvert)); d.hidden = ouvert; b.textContent = ouvert ? "En clair" : "Masquer";
   });
   /* Deux colonnes contrastées (ex. inventé / réel) */
+  /* Infographie (D39) : blocs illustrés côte à côte, puis un fil de questions. Tout est du texte : lisible au lecteur d'écran. */
+  function infographie(g) {
+    return '<figure class="infog">' + (g.titre ? '<figcaption class="infog-titre">' + inline(g.titre) + "</figcaption>" : "") +
+      '<ul class="infog-blocs">' + (g.blocs || []).map(function (b, k) {
+        return '<li class="infog-bloc" style="--teinte:' + TEINTES[k % TEINTES.length] + ";--teinte-fonce:" + TEINTES_FONCEES[k % TEINTES.length] + '">' +
+          '<span class="infog-ico">' + ic(b.icone || "i-batiment") + "</span><h2>" + inline(b.titre) + "</h2>" +
+          (b.role ? '<p class="infog-role">' + inline(b.role) + "</p>" : "") +
+          (b.exemples ? '<p class="infog-ex-tete">Par exemple</p><ul class="infog-ex">' + b.exemples.map(function (x) { return "<li>" + inline(x) + "</li>"; }).join("") + "</ul>" : "") +
+          (b.ref ? '<p class="infog-ref">' + esc(b.ref) + "</p>" : "") + "</li>";
+      }).join("") + "</ul>" +
+      (g.fil ? '<ol class="infog-fil" aria-label="' + esc(g.fil_titre || "Avant d'orienter") + '">' + g.fil.map(function (x) { return "<li>" + inline(x) + "</li>"; }).join("") + "</ol>" : "") +
+      "</figure>";
+  }
   function colonnes(cols) {
     return '<div class="duo">' + cols.map(function (c, k) {
       return '<section class="duo-col duo-col--' + (k === 0 ? "a" : "b") + '">' + (c.icone ? '<span class="duo-ico">' + ic(c.icone) + "</span>" : "") + "<h2>" + esc(c.titre) + "</h2><ul>" + (c.items || []).map(function (x) { return "<li>" + inline(x) + "</li>"; }).join("") + "</ul></section>";
@@ -1286,6 +1300,80 @@
     principal("Continuer", function () { suivant(e); });
   }
 
+  /* ---------- Recherche documentaire simulée (D49, CAN-TECH-01 §6 bis) ----------
+     Moteur fictif, sobre : les mots saisis choisissent un jeu de résultats ; l'apprenant
+     choisit le document à utiliser, puis voit les trois vérifications (qui, quand, quel statut). */
+  function sansAccent(t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function rendreRecherche(e) {
+    zone.classList.add("ecran--decision");
+    var regles = e.mots_cles || [], jeux = e.jeux || {}, courant = null, requete = "";
+    var html = '<div class="colonne">' + situation(e) +
+      '<form class="rch" role="search" novalidate><div class="rch-entete">' + ic("i-loupe") + "<span>" + esc(e.moteur || "Base documentaire") + "</span></div>" +
+      '<div class="rch-ligne"><label class="sr-only" for="rch-q">Mots à chercher</label><input id="rch-q" class="rch-q" type="search" autocomplete="off" placeholder="' + esc(e.placeholder || "Tapez quelques mots…") + '">' +
+      '<button type="submit" class="btn btn-secondaire">' + ic("i-loupe") + " Rechercher</button></div>" +
+      (e.exemples ? '<p class="rch-exemples">Exemples : ' + e.exemples.map(function (x) { return '<button type="button" class="lien rch-ex">' + esc(x) + "</button>"; }).join(" · ") + "</p>" : "") +
+      "</form>" +
+      '<div class="rch-res" id="rch-res" aria-live="polite"></div>' +
+      '<div class="feedback" id="feedback" hidden aria-live="polite"></div></div>';
+    zone.innerHTML = html;
+    var form = zone.querySelector(".rch"), q = $("rch-q"), res = $("rch-res"), fb = $("feedback");
+    function jeuPour(texte) {
+      var mots = sansAccent(texte).split(/[^a-z0-9]+/).filter(Boolean), meilleur = null, score = 0, defaut = null;
+      regles.forEach(function (r) {
+        if (r.sinon) { defaut = r.sinon; return; }
+        var n = (r.si || []).filter(function (m) { return mots.indexOf(sansAccent(m)) >= 0; }).length;
+        if (n > score) { score = n; meilleur = r.resultats; }
+      });
+      return meilleur || defaut;
+    }
+    function verifs(d) {
+      return '<dl class="rch-verifs"><div><dt>Qui ?</dt><dd>' + esc(d.auteur || "Inconnu") + "</dd></div><div><dt>Quand ?</dt><dd>" + esc(d.date || "Sans date") + "</dd></div><div><dt>Quel statut ?</dt><dd>" + esc(d.statut || "Inconnu") + "</dd></div></dl>";
+    }
+    function chercher(texte, restaure) {
+      requete = String(texte || "").trim(); if (!requete) { q.focus(); return; }
+      courant = jeuPour(requete); fb.hidden = true;
+      var docs = jeux[courant] || [];
+      if (!docs.length) {
+        res.innerHTML = '<p class="rch-compte">Aucun résultat pour « ' + esc(requete) + " ».</p>" + (e.conseil_mots ? '<div class="brief">' + ic("i-boussole") + "<div>" + md(e.conseil_mots) + "</div></div>" : "");
+        principal("Valider", valider, { icone: "i-check", desactive: true });
+        return;
+      }
+      res.innerHTML = '<p class="rch-compte">' + docs.length + " résultat" + (docs.length > 1 ? "s" : "") + " pour « " + esc(requete) + " »</p>" +
+        (e.consigne_choix ? '<p class="consigne">' + esc(e.consigne_choix) + "</p>" : "") +
+        '<fieldset class="options rch-liste"><legend class="sr-only">Résultats</legend>' + docs.map(function (d) {
+          return '<label class="option rch-doc" data-id="' + esc(d.id) + '"><input type="radio" name="rch-' + esc(e.id) + '" value="' + esc(d.id) + '">' +
+            '<span class="rch-ico">' + ic(d.icone || "i-fichier") + '</span><span class="rch-corps"><span class="rch-titre">' + inline(d.titre) + "</span>" +
+            '<span class="rch-meta">' + esc(d.auteur || "Auteur inconnu") + " · " + esc(d.date || "sans date") + (d.statut ? ' · <span class="rch-statut">' + esc(d.statut) + "</span>" : "") + "</span>" +
+            (d.extrait ? '<span class="rch-extrait">' + inline(d.extrait) + "</span>" : "") + "</span></label>";
+        }).join("") + "</fieldset>";
+      res.querySelector(".rch-liste").addEventListener("change", function () { principal("Valider", valider, { icone: "i-check" }); });
+      principal("Valider", valider, { icone: "i-check", desactive: true });
+      if (!restaure) res.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function valider(restaure) {
+      var choisi = res.querySelector("input:checked"); if (!choisi) return;
+      var d = (jeux[courant] || []).filter(function (x) { return x.id === choisi.value; })[0];
+      var v = d.verdict || (d.bon ? "adapte" : "risque");
+      memoriser(e.id, { q: requete, doc: d.id });
+      res.querySelector(".rch-liste").classList.add("verrouille");
+      res.querySelectorAll("input").forEach(function (i) { i.disabled = true; });
+      form.querySelectorAll("input, button").forEach(function (i) { i.disabled = true; });
+      var lab = choisi.closest(".option"); lab.classList.add("choisie"); lab.insertAdjacentHTML("beforeend", badge(v));
+      fb.className = "feedback feedback--" + v;
+      fb.innerHTML = badge(v) + "<p>" + inline(d.feedback) + "</p>" + verifs(d) + (v === "adapte" && e.synthese ? md(e.synthese) : "") +
+        (v !== "adapte" ? '<button type="button" class="btn btn-secondaire btn-petit" id="reessayer">' + ic("i-recommencer") + " Chercher encore</button>" : "");
+      fb.hidden = false;
+      var r = $("reessayer"); if (r) r.addEventListener("click", function () { oublier(e.id); rendreRecherche(e); brancherImages(zone); $("rch-q").value = requete; chercher(requete, true); $("rch-q").focus(); });
+      if (restaure !== true) fb.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      principal("Continuer", function () { suivant(e); });
+    }
+    form.addEventListener("submit", function (ev) { ev.preventDefault(); chercher(q.value); });
+    zone.querySelectorAll(".rch-ex").forEach(function (b) { b.addEventListener("click", function () { q.value = b.textContent; chercher(q.value); }); });
+    principal("Valider", valider, { icone: "i-check", desactive: true });
+    var deja = reponse(e.id);
+    if (deja && deja.q) { q.value = deja.q; chercher(deja.q, true); var inp = res.querySelector('input[value="' + deja.doc + '"]'); if (inp) { inp.checked = true; valider(true); } }
+  }
+
   /* ---------- Réponse libre, non enregistrée (D49) ---------- */
   function rendreReponseLibre(e) {
     zone.classList.add("ecran--lecture");
@@ -1399,7 +1487,7 @@
     classement: rendreClassement, assemblage: rendreAssemblage, messagerie: rendreMessagerie, outil: rendreOutil,
     "eval-item": rendreEvalItem, "eval-resultat": rendreEvalResultat, "auto-positionnement": rendreAuto,
     ressources: rendreRessources, "fin-section": rendreFin, fin: rendreFin,
-    hotspot: rendreHotspot, planning: rendrePlanning, cartes: rendreCartes, "reponse-libre": rendreReponseLibre,
+    hotspot: rendreHotspot, planning: rendrePlanning, cartes: rendreCartes, "reponse-libre": rendreReponseLibre, recherche: rendreRecherche,
     "pos-item": rendrePosItem, "pos-profil": rendrePosProfil
   };
 
