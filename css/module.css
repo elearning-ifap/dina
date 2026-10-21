@@ -784,3 +784,43 @@ a.btn { text-decoration: none; }
   .ecran--scene .illu[data-code="ILL-N03"] img { object-view-box: inset(0% 38.3% 0% 5.4%); object-position: 50% 0%; }  /* comité de direction */
   .ecran--scene .illu[data-code="ILL-P1"] img { object-view-box: inset(0% 46% 0% 0%); object-position: 50% 0%; }       /* Noa devant ÉLAN */
 }
+
+/* ---------- Recherche documentaire simulée (D49) — moteur fictif, sobre ---------- */
+.rch { margin-top: 1rem; padding: 1rem 1.1rem; background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); box-shadow: var(--ombre); }
+.rch-entete { display: flex; align-items: center; gap: .45rem; font: 800 .95rem var(--police-titre); color: var(--anthracite); margin-bottom: .6rem; }
+.rch-entete .icone { color: var(--bleu); }
+.rch-ligne { display: flex; gap: .5rem; flex-wrap: wrap; }
+.rch-q { flex: 1 1 14rem; min-height: 46px; padding: .5rem .9rem; border: 2px solid var(--bordure); border-radius: 999px; font: inherit; color: var(--texte); background: var(--fond); }
+.rch-q:focus-visible { outline: none; border-color: var(--bleu); box-shadow: var(--focus); }
+.rch-exemples { margin: .6rem 0 0; font-size: var(--taille-petit); color: var(--texte-2); }
+.rch-compte { margin: 1rem 0 .5rem; font-size: var(--taille-petit); color: var(--texte-2); font-weight: 700; }
+.rch-doc { align-items: flex-start; }
+.rch-ico { flex: none; display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: var(--rayon-petit); background: var(--bleu-clair); color: var(--bleu); }
+.rch-corps { display: grid; gap: .2rem; min-width: 0; }
+.rch-titre { font-weight: 700; color: var(--bleu); }
+.rch-meta { font-size: var(--taille-petit); color: var(--texte-2); }
+.rch-statut { font-weight: 700; color: var(--texte); }
+.rch-extrait { font-size: var(--taille-petit); color: var(--texte); }
+.rch-doc .verdict { margin-left: auto; align-self: center; }
+.rch-verifs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; margin: .7rem 0 .2rem; }
+.rch-verifs > div { padding: .5rem .7rem; border-radius: var(--rayon-petit); background: var(--carte); border: 1px solid var(--bordure); }
+.rch-verifs dt { font: 800 .8rem var(--police-titre); color: var(--texte-2); text-transform: uppercase; letter-spacing: .03em; }
+.rch-verifs dd { margin: .15rem 0 0; font-size: var(--taille-petit); }
+@container lecteur (max-width: 720px) { .rch-verifs { grid-template-columns: 1fr; } .rch-doc .verdict { margin-left: 0; } .rch-doc { flex-wrap: wrap; } }
+
+/* ---------- Infographie d'apport (D39) ---------- */
+.infog { margin: 1rem 0 0; }
+.infog-titre { font: 800 1.05rem var(--police-titre); color: var(--anthracite); margin-bottom: .6rem; }
+.infog-blocs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr)); gap: .8rem; }
+.infog-bloc { position: relative; padding: 2.4rem 1rem 1rem; background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre); border-top: 6px solid var(--teinte); margin-top: 1.4rem; }
+.infog-ico { position: absolute; top: -1.6rem; left: 1rem; display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 50%; background: var(--teinte); color: #fff; border: 4px solid var(--carte); box-shadow: var(--ombre); }
+.infog-ico .icone { width: 1.5rem; height: 1.5rem; color: var(--anthracite); }
+.infog-bloc h2 { font-size: 1.15rem; color: var(--teinte-fonce); margin: 0 0 .35rem; }
+.infog-role { margin: 0; font-size: var(--taille-petit); }
+.infog-ex-tete { margin: .7rem 0 .3rem; font: 800 .75rem var(--police-titre); text-transform: uppercase; letter-spacing: .04em; color: var(--texte-2); }
+.infog-ex { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .3rem; }
+.infog-ex li { padding: .15rem .6rem; border-radius: 999px; background: var(--fond); border: 1px solid var(--bordure); font-size: .82rem; }
+.infog-ref { margin: .7rem 0 0; font-size: .78rem; color: var(--texte-2); }
+.infog-fil { list-style: none; counter-reset: fil; margin: 1rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; align-items: stretch; }
+.infog-fil li { counter-increment: fil; flex: 1 1 10rem; display: flex; align-items: center; gap: .55rem; padding: .6rem .9rem; border-radius: var(--rayon-petit); background: var(--bleu-clair); font-weight: 700; color: var(--texte); position: relative; }
+.infog-fil li::before { content: counter(fil); flex: none; display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--bleu); color: #fff; font: 800 .85rem var(--police-titre); }
