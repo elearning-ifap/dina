@@ -771,3 +771,16 @@ a.btn { text-decoration: none; }
 .pos-vigilance ul { margin: 0; padding-left: 1.1rem; }
 .pos-manque { display: flex; gap: .5rem; align-items: center; color: var(--orange-texte); }
 .pos-manque .icone { flex: none; width: 1.1rem; height: 1.1rem; }
+
+/* ---------- Cadrage des illustrations (D105) : personnages au centre, têtes entières ----------
+   Fenêtre object-view-box centrée sur le personnage (Chrome, Edge) ; object-position règle la hauteur gardée.
+   Grand écran : les scènes gardent le personnage à gauche, la carte de texte occupe la droite (cadrage d'origine). */
+.illu.illu-bandeau[data-code="ILL-N04"] img { object-view-box: inset(0% 12% 0% 0%); object-position: 50% 27%; }  /* Noa au bureau, centre x 44 % */
+.illu.illu-bandeau[data-code="ILL-N05"] img { object-view-box: inset(0% 31% 0% 0%); object-position: 50% 30%; }  /* Noa au téléphone, centre x 34,5 % */
+.illu.illu-bandeau[data-code="ILL-N06"] img { object-view-box: inset(0% 12% 0% 0%); object-position: 50% 36%; }  /* Noa relit ses notes, centre x 44 % */
+@container lecteur (max-width: 720px) {
+  .ecran--scene .illu[data-code="ILL-N01"] img { object-view-box: inset(4% 33% 0% 0%); object-position: 50% 0%; }      /* Samuel et Noa */
+  .ecran--scene .illu[data-code="ILL-N02"] img { object-view-box: inset(0% 33.6% 0% 14.4%); object-position: 50% 0%; } /* Noa et Malia */
+  .ecran--scene .illu[data-code="ILL-N03"] img { object-view-box: inset(0% 38.3% 0% 5.4%); object-position: 50% 0%; }  /* comité de direction */
+  .ecran--scene .illu[data-code="ILL-P1"] img { object-view-box: inset(0% 46% 0% 0%); object-position: 50% 0%; }       /* Noa devant ÉLAN */
+}

@@ -32,7 +32,7 @@ a { color: var(--bleu); }
 .accroche-photo { position: relative; min-height: 320px; }
 .accroche-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   /* Cadrage sur Noa et Samuel (sujet dans les deux tiers gauche de ILL-N01) ; repli sans object-view-box */
-  object-position: 18% 50%; object-view-box: inset(0% 34% 0% 0%); }
+  object-position: 50% 0%; object-view-box: inset(4% 33% 0% 0%); }  /* têtes entières, recadrage restant par le bas */
 /* La photo va jusqu'au bord droit de la fenêtre sur grand écran */
 @media (min-width: 72rem) { .accroche-photo { margin-right: calc((72rem - 100vw) / 2); } }
 
