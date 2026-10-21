@@ -1,0 +1,129 @@
+/* DINA — animations légères (D54, CAN-VIS-01 § 7 bis).
+   Règle : une animation guide la lecture (ce qui arrive, dans quel ordre, ce qui relie quoi) ou confirme une action.
+   Courte (moins d'une seconde), jouée une fois à l'arrivée de l'écran. Les repères d'attention (point « en cours »,
+   ÉLAN dans l'orbite, flux vers les habitants) bouclent lentement ; un bouton Pause (bandeau, schéma, touche A)
+   les arrête (WCAG 2.2.2).
+   Tout s'arrête si le poste demande moins de mouvement (bas de fichier).
+   On utilise translate / scale / rotate (propriétés séparées) pour ne pas écraser les transform des composants,
+   et le remplissage « backwards » pour qu'aucun transform ne reste après l'animation. */
+
+:root {
+  --dn-vite: .35s;
+  --dn-normal: .5s;
+  --dn-pas: 70ms;            /* écart entre deux éléments d'une liste */
+  --dn-sortie: cubic-bezier(.2, .7, .3, 1);
+  --dn-rebond: cubic-bezier(.2, 1.5, .4, 1);
+}
+
+@keyframes dn-entree  { from { opacity: 0; translate: 0 10px; } }
+@keyframes dn-fondu   { from { opacity: 0; } }
+@keyframes dn-monte   { from { opacity: 0; translate: 0 14px; } }
+@keyframes dn-gauche  { from { opacity: 0; translate: -28px 0; } }
+@keyframes dn-droite  { from { opacity: 0; translate: 28px 0; } }
+@keyframes dn-pop     { from { opacity: 0; scale: .4; } }
+@keyframes dn-deplie  { from { opacity: 0; translate: 0 -6px; } }
+@keyframes dn-zoom    { from { scale: 1.08; } }
+
+/* ---------- Arrivée d'un écran ---------- */
+.ecran > .colonne, .ecran > .menu, .ecran > .fin { animation: dn-entree var(--dn-normal) var(--dn-sortie) backwards; }
+
+/* Scène : la photo se pose lentement, puis le texte glisse depuis la droite */
+.ecran--scene .illu img { animation: dn-zoom 9s ease-out backwards; transform-origin: 40% 50%; }
+.ecran--scene .carte-texte { animation: dn-droite .6s .35s var(--dn-sortie) backwards; }
+@media (max-width: 720px) { .ecran--scene .carte-texte { animation-name: dn-monte; } }
+
+/* ---------- Listes : apparition échelonnée (--i posé par le moteur) ---------- */
+.sections > li, .points > li, .acquis > li, .cartes > li, .trombi > li,
+.off-alineas > li, .options > *, .reflexes > *, .ressources > * {
+  animation: dn-monte var(--dn-normal) var(--dn-sortie) backwards;
+  animation-delay: calc(.2s + var(--i, 0) * var(--dn-pas));
+}
+.points > li, .acquis > li { animation-delay: calc(.4s + var(--i, 0) * 110ms); }
+
+/* ---------- Badge d'identité : il descend au bout de son cordon ---------- */
+@keyframes dn-badge {
+  0%   { opacity: 0; translate: 0 -48px; rotate: -5deg; }
+  55%  { opacity: 1; translate: 0 4px;   rotate: 2deg; }
+  80%  { rotate: -1deg; }
+  100% { translate: 0 0; rotate: 0deg; }
+}
+.badge-id { animation: dn-badge .9s .15s var(--dn-sortie) backwards; transform-origin: 50% 0; }
+.badge-sigle { animation: dn-pop .5s .7s var(--dn-rebond) backwards; }
+.badge-lignes > div { animation: dn-monte .45s var(--dn-sortie) backwards; animation-delay: calc(.85s + var(--i, 0) * 90ms); }
+.badge-pied { animation: dn-fondu .5s 1.3s ease-out backwards; }
+
+/* ---------- Texte officiel : les alinéas s'alignent, « En clair » se déplie ---------- */
+.officiel { animation: dn-monte var(--dn-normal) .1s var(--dn-sortie) backwards; }
+.off-alineas > li { animation-delay: calc(.35s + var(--i, 0) * 90ms); }
+.off-fin { animation: dn-fondu .5s .8s ease-out backwards; }
+.off-clair:not([hidden]), .tb-detail:not([hidden]), .hs-detail:not([hidden]) { animation: dn-deplie var(--dn-vite) var(--dn-sortie); }
+.off-btn { transition: background .2s, color .2s; }
+
+/* ---------- Deux colonnes : l'inventé arrive d'un côté, le réel de l'autre ---------- */
+@keyframes dn-trait { from { scale: 1 0; } }
+.duo-col--a { animation: dn-gauche .6s .15s var(--dn-sortie) backwards; }
+.duo-col--b { animation: dn-droite .6s .35s var(--dn-sortie) backwards; }
+.duo-sep { animation: dn-trait .5s .25s ease-out backwards; transform-origin: 50% 0; }
+.duo-col li { animation: dn-monte .4s var(--dn-sortie) backwards; animation-delay: calc(.7s + var(--i, 0) * 90ms); }
+.duo-col--b li { animation-delay: calc(.9s + var(--i, 0) * 90ms); }
+
+/* ---------- Orbite : les acteurs se placent, puis tout converge vers les habitants ---------- */
+@keyframes dn-trace   { from { stroke-dashoffset: 1; } }
+@keyframes dn-derive  { to { stroke-dashoffset: -200; } }
+@keyframes dn-anneau  { from { opacity: 0; scale: .7; } }
+@keyframes dn-onde    { 0% { scale: 1; opacity: .55; } 100% { scale: 1.55; opacity: 0; } }
+@keyframes dn-halo    { 0% { scale: 1; opacity: .9; } 100% { scale: 2.6; opacity: 0; } }
+.orb-anneau { transform-box: fill-box; transform-origin: center;
+  animation: dn-anneau .8s var(--dn-sortie) backwards, dn-derive 40s linear infinite; }
+.orb-anneau--int { animation: dn-anneau .8s .1s var(--dn-sortie) backwards, dn-derive 28s linear infinite reverse; }
+.orb-rayon { stroke-dasharray: 1; animation: dn-trace .6s ease-out backwards; animation-delay: calc(.35s + var(--i, 0) * 80ms); }
+.orb-centre { animation: dn-pop .6s .1s var(--dn-rebond) backwards; }
+.orb-onde { animation: dn-onde 3.2s 1.6s ease-out infinite; }
+.orb-noeud { animation: dn-pop .5s var(--dn-rebond) backwards; animation-delay: calc(.6s + var(--i, 0) * 80ms); }
+.orb-halo { opacity: .7; animation: dn-halo 2.4s 1.5s ease-out infinite; }
+.orbite figcaption { animation: dn-fondu .6s 1.4s ease-out backwards; }
+.orb-groupe { animation: dn-fondu .6s .2s ease-out backwards; }
+.orb-groupe--b { animation-delay: .9s; }
+.orb-separation { animation: dn-fondu .6s .4s ease-out backwards; }
+@media (max-width: 720px) {
+  .orb-liste li { animation: dn-monte .45s var(--dn-sortie) backwards; animation-delay: calc(.2s + var(--i, 0) * var(--dn-pas)); }
+  .orbite figcaption { animation-delay: .9s; }
+}
+
+/* ---------- Chemin de Noa (D55) : le relief apparaît, les repères se posent, le tronçon gagné se trace ---------- */
+.chm-relief { animation: dn-fondu .9s ease-out backwards; }
+.chm-repere { animation: dn-pop .45s var(--dn-rebond) backwards; animation-delay: calc(.2s + var(--i, 0) * 120ms); }
+.chm-neuf { stroke-dasharray: 1; animation: dn-trace 1s .5s ease-out backwards; }
+.chm-repere--neuf { animation-delay: 1.3s; }
+.chm-halo { animation: dn-halo 2.4s 1s ease-out infinite; }
+.chm-halo { opacity: .6; }
+
+/* ---------- Cartes retournables ---------- */
+@keyframes dn-retourne { from { transform: perspective(800px) rotateY(80deg); opacity: .4; } }
+.carte-ret { transition: background .2s, border-color .2s, translate .2s, box-shadow .2s; }
+.carte-ret:hover { translate: 0 -3px; box-shadow: var(--ombre-forte); }
+.carte-ret.tourne { animation: dn-retourne .45s var(--dn-sortie); }
+
+/* ---------- Retours, feedbacks, panneaux ---------- */
+.feedback:not([hidden]), .pl-fb:not([hidden]), .mel-fb:not([hidden]) { animation: dn-monte .4s var(--dn-sortie); }
+.a-retenir { animation: dn-monte .5s .45s var(--dn-sortie) backwards; }
+.voile:not([hidden]) { animation: dn-fondu .25s ease-out; }
+.panneau:not([hidden]) { animation: dn-monte .3s var(--dn-sortie); }
+
+/* ---------- Fins d'étape et de module ---------- */
+.pastille { animation: dn-pop .6s .3s var(--dn-rebond) backwards; }
+.fin .prochain { animation: dn-monte .5s .9s var(--dn-sortie) backwards; }
+.fin .revenir, .badge-module { animation: dn-fondu .5s .8s ease-out backwards; }
+.badge-module--ok .icone { animation: dn-pop .6s 1s var(--dn-rebond) backwards; }
+
+/* ---------- Pause (bouton du bandeau, du schéma, touche A) : les boucles s'arrêtent, les repères restent visibles ---------- */
+.anim-pause .orb-anneau { animation: dn-anneau .8s var(--dn-sortie) backwards; }
+.anim-pause .orb-onde, .anim-pause .orb-halo, .anim-pause .chm-halo, .anim-pause .hs-point::after { animation: none; }
+.anim-pause .orb-flux { display: none; }
+
+/* ---------- Moins de mouvement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .anim-btn, #btn-anim { display: none; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .carte-ret:hover { translate: none; }
+}

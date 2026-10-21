@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>DINA — démonstrateur</title>
+<link rel="icon" href="assets/logo/picto-dina.svg">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/accueil.css">
+<script src="version.js"></script>
+</head>
+<body>
+<!-- Page d'entrée du démonstrateur DINA (D84, D86). Un seul lien pour la séance et après.
+     Les textes de version se modifient dans version.js, pas ici. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-droite" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-horloge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-cadenas" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-ecran" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></symbol>
+  <symbol id="i-plein" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+  <symbol id="i-carnet" viewBox="0 0 24 24"><path d="M5 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5z"/><path d="M5 3v18"/><path d="M9 8h6"/><path d="M9 12h6"/></symbol>
+  <symbol id="i-bouclier" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-recommencer" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="i-courriel" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+</svg>
+
+<a class="lien-evitement" href="#parcours">Aller au parcours</a>
+
+<header class="entete">
+  <div class="page">
+    <img class="logo-dina" src="assets/logo/logo-dina.svg" alt="DINA — Mes repères pour agir">
+    <div class="entete-droite">
+      <span class="badge-version" id="badge-version"></span>
+      <img class="logo-ifap" src="assets/logo/logo-ifap.png" alt="IFAP — Institut de formation à l'administration publique">
+    </div>
+  </div>
+</header>
+
+<div class="accroche">
+  <div class="page">
+    <div class="accroche-texte">
+      <span class="surtitre-sombre">Démonstrateur</span>
+      <h1>Bien démarrer dans la fonction publique calédonienne</h1>
+      <p>DINA est le parcours d'intégration en ligne de l'IFAP pour les nouveaux agents. Des situations concrètes pour comprendre son environnement de travail et agir avec assurance.</p>
+      <p>Cette version vous fait découvrir le début du parcours, tel que l'agent le vivra.</p>
+      <p class="mention-fiction">Noa, ses collègues et l'organisme ÉLAN sont fictifs.</p>
+    </div>
+    <div class="accroche-photo">
+      <img src="assets/img/ILL-N01.jpg" alt="Dans un bureau lumineux, un responsable accueille un nouvel agent d'une poignée de main.">
+    </div>
+  </div>
+</div>
+
+<main class="page">
+  <section id="parcours" aria-labelledby="t-parcours">
+    <span class="surtitre">Votre parcours</span>
+    <h2 id="t-parcours">Trois étapes, dans cet ordre</h2>
+    <ol class="etapes" id="etapes"></ol>
+    <p class="consigne-ordre">Chaque étape s'ouvre dans cet onglet. Pour revenir ici, utilisez le bouton Précédent du navigateur.</p>
+  </section>
+
+  <section aria-labelledby="t-version">
+    <div class="deux-colonnes">
+      <div class="carte" id="carte-version">
+        <span class="surtitre">Cette version</span>
+        <h3 id="t-version"></h3>
+        <span class="statut" id="statut-version"></span>
+        <p class="sous-titre">Caractéristiques</p>
+        <ul class="liste" id="caracteristiques"></ul>
+        <div id="bloc-evolutions">
+          <p class="sous-titre">Évolutions</p>
+          <ul class="liste" id="evolutions"></ul>
+        </div>
+        <div class="avis" id="avis"></div>
+        <div id="bloc-historique" hidden>
+          <p class="sous-titre">Versions précédentes</p>
+          <ul class="historique" id="historique"></ul>
+        </div>
+      </div>
+
+      <div class="carte">
+        <span class="surtitre">Avant de commencer</span>
+        <h3>Conseils pratiques</h3>
+        <ul class="conseils">
+          <li><svg class="icone" aria-hidden="true"><use href="#i-ecran"/></svg><span>Utilisez un ordinateur, avec Chrome ou Edge.</span></li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-plein"/></svg><span>Passez en plein écran avec la touche <kbd>F</kbd> dans chaque étape.</span></li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-carnet"/></svg><span>Les documents et fiches rencontrés sont rangés dans votre carnet. Vous pouvez le télécharger.</span></li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-bouclier"/></svg><span>Aucune donnée personnelle n'est collectée. Votre progression est gardée sur cet ordinateur seulement.</span></li>
+        </ul>
+        <button type="button" class="btn btn-secondaire" id="btn-reinit">
+          <svg class="icone" aria-hidden="true"><use href="#i-recommencer"/></svg>Effacer ma progression sur cet ordinateur
+        </button>
+        <p class="message-reinit" id="message-reinit" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="page">
+    <p>DINA — un dispositif de l'IFAP, Nouvelle-Calédonie.</p>
+    <p id="contact"></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var V = window.DINA_VERSION;
+  if (!V) return;
+  var A = V.actuelle;
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  /* Les informations entre crochets restent visibles en surligné tant qu'elles ne sont pas confirmées. */
+  function txt(s) { return esc(s).replace(/\[([^\]]+)\]/g, '<mark class="a-confirmer">[$1]</mark>'); }
+  function ic(id) { return '<svg class="icone" aria-hidden="true"><use href="#' + id + '"/></svg>'; }
+  function lis(arr) { return (arr || []).map(function (x) { return "<li>" + txt(x) + "</li>"; }).join(""); }
+
+  /* Progression locale : le moteur range chaque étape sous une clé "dina-<code>-…". */
+  function cles(prefixe) {
+    var r = [];
+    try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf(prefixe) === 0) r.push(k); } } catch (e) {}
+    return r;
+  }
+
+  var libelleVersion = "Version " + A.numero + " · " + A.date;
+  $("badge-version").textContent = "v" + A.numero;
+  $("t-version").textContent = libelleVersion;
+  $("statut-version").innerHTML = txt(A.statut);
+  if (!A.statut) $("statut-version").hidden = true;
+  $("caracteristiques").innerHTML = lis(A.caracteristiques);
+  $("evolutions").innerHTML = lis(A.evolutions);
+  if (!A.evolutions || !A.evolutions.length) $("bloc-evolutions").hidden = true;
+  document.title = "DINA — démonstrateur v" + A.numero;
+
+  /* Étapes (ordre D84). Le bouton principal va à la première étape ouverte. */
+  var premier = -1;
+  V.etapes.forEach(function (e, i) { if (premier < 0 && e.disponible) premier = i; });
+  $("etapes").innerHTML = V.etapes.map(function (e, i) {
+    var commence = e.disponible && e.cle && cles(e.cle + "-").length > 0;
+    var meta = (e.duree ? '<span class="puce">' + ic("i-horloge") + esc(e.duree) + "</span>" : "") +
+      (!e.disponible ? '<span class="puce puce--attente">Bientôt disponible</span>' : "") +
+      (commence ? '<span class="puce puce--cours">Commencé sur cet ordinateur</span>' : "");
+    var bouton = e.disponible
+      ? '<a class="btn ' + (i === premier || commence ? "btn-principal" : "btn-secondaire") + '" href="' + esc(e.fichier) + '">' + (commence ? "Reprendre" : "Commencer") + ic("i-droite") + "</a>"
+      : '<span class="btn" aria-disabled="true" role="link">' + ic("i-cadenas") + "Pas encore ouvert</span>";
+    return '<li class="etape"><span class="etape-num" aria-hidden="true">' + (i + 1) + "</span>" +
+      "<h3><span class=\"lien-evitement\">Étape " + (i + 1) + " : </span>" + esc(e.titre) + "</h3>" +
+      "<p>" + txt(e.texte) + "</p>" +
+      (meta ? '<div class="etape-meta">' + meta + "</div>" : "") + bouton + "</li>";
+  }).join("");
+
+  /* Recueil des retours, rattaché à la version (D86) */
+  var av = V.avis || {};
+  var html = "<p><strong>Votre avis</strong></p><p>" + txt(av.texte || "") + "</p>";
+  if (av.courriel) {
+    var sujet = "DINA démonstrateur v" + A.numero + " — mes remarques";
+    var corps = "Version : " + A.numero + " (" + A.date + ")\nÉtape concernée : \nCe qui me plaît : \nCe qui me gêne : \nCe qui manque : \n";
+    html += '<p><a class="btn btn-principal" href="mailto:' + encodeURIComponent(av.courriel).replace(/%40/g, "@") +
+      "?subject=" + encodeURIComponent(sujet) + "&body=" + encodeURIComponent(corps) + '">' + ic("i-courriel") + "Envoyer mes remarques</a></p>";
+  }
+  $("avis").innerHTML = html;
+
+  /* Versions précédentes */
+  if (V.historique && V.historique.length) {
+    $("bloc-historique").hidden = false;
+    $("historique").innerHTML = V.historique.map(function (h) {
+      return '<li><a href="' + esc(h.lien) + '">Version ' + esc(h.numero) + "</a> · " + esc(h.date) + (h.resume ? " — " + txt(h.resume) : "") + "</li>";
+    }).join("");
+  }
+
+  $("contact").innerHTML = txt(V.contact || "");
+
+  /* Réinitialisation : utile sur les postes partagés de la salle */
+  $("btn-reinit").addEventListener("click", function () {
+    var k = cles("dina-");
+    try { k.forEach(function (x) { localStorage.removeItem(x); }); } catch (e) {}
+    $("message-reinit").textContent = k.length ? "Progression effacée. Vous pouvez recommencer depuis le début." : "Aucune progression enregistrée sur cet ordinateur.";
+    document.querySelectorAll(".puce--cours").forEach(function (p) { p.remove(); });
+    document.querySelectorAll(".etape a.btn").forEach(function (b, i) {
+      b.className = "btn " + (i === 0 ? "btn-principal" : "btn-secondaire");
+      b.innerHTML = "Commencer" + ic("i-droite");
+    });
+  });
+})();
+</script>
+</body>
+</html>

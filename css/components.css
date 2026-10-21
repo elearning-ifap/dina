@@ -1,0 +1,163 @@
+/* DINA — composants du lecteur (gabarit d'écran v0.1). Couleurs : uniquement via tokens.css. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: var(--police-texte); font-size: var(--taille-texte); line-height: var(--interligne); color: var(--texte); background: var(--fond); }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { font-family: var(--police-titre); font-weight: 800; color: var(--bleu-sombre); line-height: 1.2; margin: 0 0 .5em; }
+p { margin: 0 0 .8em; }
+:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--rayon-compact); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.icone { width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- Lecteur ---------- */
+.dina-player {
+  display: grid; grid-template-rows: var(--bandeau-h) minmax(0, 1fr) var(--action-h); grid-template-columns: minmax(0, 1fr);
+  width: 100%; max-width: 1200px; height: min(760px, 86vh); margin: 0 auto;
+  background: var(--fond); border: 1px solid var(--bordure); border-radius: var(--rayon);
+  box-shadow: var(--ombre-forte); overflow: hidden; position: relative;
+  container: lecteur / inline-size;
+}
+.dina-player:fullscreen { max-width: none; width: 100vw; height: 100vh; border: 0; border-radius: 0; }
+.dina-player:-webkit-full-screen { max-width: none; width: 100vw; height: 100vh; border: 0; border-radius: 0; }
+
+/* ---------- Bandeau léger (CAN-VIS-01 §11) ---------- */
+.bandeau { display: flex; align-items: center; gap: 1.25rem; padding: 0 1rem 0 1.25rem; background: var(--carte); border-bottom: 3px solid var(--turquoise); }  /* présence du bleu-vert IFAP (D53) */
+.marque { display: flex; align-items: center; gap: .45rem; font-family: var(--police-titre); font-weight: 800; font-size: 1.25rem; letter-spacing: .02em; color: var(--bleu); }
+.marque svg { width: 34px; height: 18px; }
+.logo-bandeau { height: 42px; width: auto; }
+.contexte { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; padding-left: 1.25rem; border-left: 1px solid var(--bordure); }
+.contexte .module { font-size: var(--taille-petit); color: var(--texte-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.contexte .episode { font-weight: 600; color: var(--bleu-sombre); }
+
+/* Fil de parcours = progression (motif CAN-VIS-01 §4) */
+.fil { margin-left: auto; }
+.fil ol { display: flex; align-items: flex-start; list-style: none; margin: 0; padding: 0; }
+.fil li { position: relative; display: flex; flex-direction: column; align-items: center; width: 5.6rem; font-size: .75rem; color: var(--texte-2); text-align: center; }
+.fil li::before { content: ""; position: absolute; top: 7px; left: -50%; width: 100%; height: 2px; background: var(--bordure); z-index: 0; }
+.fil li:first-child::before { display: none; }
+.fil .point { position: relative; z-index: 1; width: 16px; height: 16px; border-radius: 50%; background: var(--carte); border: 2px solid var(--gris); margin-bottom: .2rem; display: grid; place-items: center; }
+.fil li.fait::before, .fil li.encours::before { background: var(--turquoise); }
+.fil li.fait .point { background: var(--vert); border-color: var(--vert); }
+.fil li.fait .point svg { width: 10px; height: 10px; stroke: #fff; stroke-width: 3.5; }
+.fil li.encours .point { border-color: var(--bleu); box-shadow: 0 0 0 4px var(--bleu-clair); }
+.fil li.encours .point::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--bleu); }
+.fil li.encours { color: var(--bleu-sombre); font-weight: 600; }
+
+.outils { display: flex; gap: .35rem; }
+.btn-outil { display: inline-flex; align-items: center; gap: .4rem; height: 40px; padding: 0 .75rem; border: 1px solid var(--bordure); border-radius: var(--rayon-petit); background: var(--carte); color: var(--bleu-sombre); font: 500 var(--taille-petit) var(--police-texte); cursor: pointer; }
+.btn-outil:hover { background: var(--bleu-clair); border-color: var(--bleu-clair); }
+.btn-outil[hidden] { display: none; }
+
+/* ---------- Zone principale ---------- */
+.ecran { position: relative; overflow: auto; }
+.ecran[hidden] { display: none; }
+.tag-provisoire { position: absolute; left: .75rem; top: .75rem; z-index: 2; padding: .15rem .55rem; border-radius: var(--rayon-compact); background: rgba(15, 61, 92, .78); color: #fff; font-size: .75rem; }
+
+/* Mise en page SCÈNE : photo plein cadre, texte sur le tiers droit */
+.ecran--scene { overflow: hidden; background: var(--bleu-sombre); }
+.ecran--scene .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ecran--scene .carte-texte { position: absolute; right: 2.5%; top: 50%; transform: translateY(-50%); width: min(31%, 24rem); }
+.carte-texte { background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-forte); padding: 1.5rem 1.6rem; }
+.locuteur { display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem; }
+.locuteur img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: top; }
+.locuteur strong { display: block; color: var(--bleu-sombre); }
+.locuteur span { font-size: var(--taille-petit); color: var(--texte-2); }
+.citation { margin: 0; padding-left: .9rem; border-left: 3px solid var(--marque-sarcelle); font-size: 1.05rem; }
+/* Repère en capitales au-dessus des titres, précédé du motif « fil de parcours » (point jaune + trait bleu-vert) — D104 */
+.surtitre { display: inline-flex; align-items: center; gap: .5rem; font-size: .875rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--bleu); margin-bottom: .4rem; }
+.surtitre::before { content: ""; flex: none; width: 1.75rem; height: 10px; background:
+  radial-gradient(circle at 5px 5px, var(--jaune) 4px, transparent 4.6px) no-repeat,
+  linear-gradient(var(--turquoise), var(--turquoise)) 12px 4px / calc(100% - 12px) 2px no-repeat; }
+
+/* Mise en page DÉCISION */
+.ecran--decision, .ecran--lecture, .ecran--fin { padding: 2rem 1.5rem 2.5rem; }
+.colonne { max-width: 46rem; margin: 0 auto; }
+.situation { display: flex; gap: 1.1rem; align-items: center; margin-bottom: 1.4rem; }
+.situation .vignette { position: relative; flex: none; width: 132px; height: 96px; border-radius: var(--rayon-petit); overflow: hidden; }
+.situation .vignette img { width: 100%; height: 100%; object-fit: cover; }
+.situation h1 { font-size: var(--taille-titre); margin: 0; }
+.options { display: grid; gap: .7rem; margin: 0; padding: 0; border: 0; }
+.option { position: relative; display: flex; gap: .9rem; align-items: flex-start; padding: 1rem 1.1rem; background: var(--carte); border: 2px solid var(--bordure); border-radius: var(--rayon); cursor: pointer; transition: border-color .15s, background .15s; }
+.option:hover { border-color: #BCE8EA; }
+.option input { position: absolute; opacity: 0; pointer-events: none; }
+.option .lettre { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--gris-clair); color: var(--bleu-sombre); font-family: var(--police-titre); font-weight: 800; }
+.option:has(input:checked) { border-color: var(--bleu); background: var(--bleu-clair); }
+.option:has(input:checked) .lettre { background: var(--bleu); color: #fff; }
+.option:has(input:focus-visible) { box-shadow: var(--focus); }
+.options.verrouille .option { cursor: default; }
+.options.verrouille .option:not(.choisie) { opacity: .6; }
+.option .verdict { margin-left: auto; }
+
+/* Feedback (CAN-VIS-01 §16) */
+.feedback { margin-top: 1.2rem; padding: 1.1rem 1.25rem; border-radius: var(--rayon); border-left: 6px solid; background: var(--carte); box-shadow: var(--ombre); }
+.feedback[hidden] { display: none; }
+.feedback .verdict { margin-bottom: .5rem; }
+.feedback p { margin: 0; }
+.feedback--adapte { border-color: var(--vert); background: var(--vert-clair); }
+.feedback--partiel { border-color: var(--orange); background: var(--orange-clair); }
+.feedback--risque { border-color: var(--corail); background: var(--corail-clair); }
+.feedback--inadapte { border-color: var(--rouge); background: var(--rouge-clair); }
+
+/* Signalétique : badges de verdict — icône + libellé + couleur, jamais la couleur seule */
+.verdict { display: inline-flex; align-items: center; gap: .35rem; padding: .2rem .65rem .2rem .45rem; border-radius: 999px; font-size: var(--taille-petit); font-weight: 600; white-space: nowrap; }
+.verdict--adapte { background: var(--vert); color: #fff; }
+.verdict--partiel { background: var(--orange-clair); color: var(--orange-texte); box-shadow: inset 0 0 0 1px var(--orange); }
+.verdict--risque { background: var(--corail-clair); color: var(--corail-texte); box-shadow: inset 0 0 0 1px var(--corail); }
+.verdict--inadapte { background: var(--rouge); color: #fff; }
+
+/* Mise en page LECTURE */
+.ecran--lecture .colonne { max-width: var(--lecture); }
+.ecran--lecture h1 { font-size: var(--taille-titre); }
+.reflexes { list-style: none; counter-reset: r; margin: 1.4rem 0 0; padding: 0; display: grid; gap: .8rem; }
+.reflexes li { counter-increment: r; display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 1.2rem; background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); }
+.reflexes li::before { content: counter(r); flex: none; display: grid; place-items: center; width: 2.1rem; height: 2.1rem; border-radius: 50%; background: var(--bleu); color: #fff; font-family: var(--police-titre); font-weight: 800; }
+.reflexes strong { color: var(--bleu-sombre); }
+.a-retenir { display: flex; gap: .7rem; margin-top: 1.4rem; padding: 1rem 1.2rem; border-radius: var(--rayon); background: var(--bleu-clair); color: var(--bleu-sombre); }
+
+/* Mise en page FIN */
+.ecran--fin { display: grid; place-items: center; }
+.fin { max-width: 32rem; text-align: center; background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre); padding: 2.2rem 2rem; }
+.fin .pastille { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--vert-clair); color: var(--vert); margin-bottom: 1rem; }
+.fin .pastille svg { width: 34px; height: 34px; }
+.fin ul { text-align: left; margin: 1rem 0 1.4rem; padding-left: 1.2rem; }
+
+/* ---------- Zone d'action ---------- */
+.actions { display: flex; align-items: center; gap: 1rem; padding: 0 1.25rem; background: var(--carte); border-top: 1px solid var(--bordure); }
+.compteur { margin: 0 auto; font-size: var(--taille-petit); color: var(--texte-2); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: 0 1.4rem; border-radius: var(--rayon-petit); font: 600 1rem var(--police-texte); cursor: pointer; border: 2px solid transparent; }
+[hidden].btn { display: none; }
+.btn-principal { background: var(--bleu); color: #fff; }
+.btn-principal:hover { background: var(--bleu-sombre); }
+.btn-principal:disabled { background: var(--gris); cursor: not-allowed; }
+.btn-secondaire { background: transparent; color: var(--bleu); border-color: var(--bordure); }
+.btn-secondaire:hover { background: var(--bleu-clair); }
+
+/* ---------- Téléphone (375 px) ---------- */
+@container lecteur (max-width: 720px) {
+  .contexte .module, .fil li span.libelle, .btn-outil .libelle { display: none; }
+  .fil li { width: 1.6rem; }
+  .bandeau { gap: .6rem; padding: 0 .6rem; }
+  .contexte { padding-left: .6rem; min-width: 0; }
+  .contexte .episode { font-size: .9rem; white-space: nowrap; }
+  .marque { font-size: 1.05rem; }
+  .marque svg { width: 26px; }
+  .logo-bandeau { height: 30px; }
+  .btn-outil { padding: 0 .55rem; }
+  .ecran--scene { overflow: auto; background: var(--fond); }
+  .ecran--scene .photo { position: static; height: 44%; min-height: 200px; }
+  .ecran--scene .carte-texte { position: static; transform: none; width: auto; margin: -1.5rem .8rem 1rem; }
+  .ecran--decision, .ecran--lecture, .ecran--fin { padding: 1.2rem .9rem 1.5rem; }
+  .situation .vignette { width: 72px; height: 56px; }
+  .situation h1, .ecran--lecture h1 { font-size: 1.25rem; }
+  .fil { margin-left: .4rem; }
+  .situation { align-items: flex-start; }
+  .option { padding: .85rem; }
+  .option .verdict { display: none; }
+  .actions { padding: 0 .7rem; gap: .5rem; }
+  .compteur { font-size: .75rem; }
+  .btn { padding: 0 1rem; }
+}
+
+/* ---------- Mouvement réduit ---------- */
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

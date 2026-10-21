@@ -1,0 +1,76 @@
+/* DINA — jetons de design (source : CAN-VIS-01 §5 à §7). Ne pas coder de couleur en dur ailleurs. */
+
+@font-face { font-family: "Nunito"; font-weight: 700; font-display: swap; src: url("../assets/fonts/nunito-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Nunito"; font-weight: 800; font-display: swap; src: url("../assets/fonts/nunito-latin-800-normal.woff2") format("woff2"); }
+/* Lato (D50) : rappel de l'identité IFAP. Deux fichiers ; 500 s'affiche en 400, 600 en 700. */
+@font-face { font-family: "Lato"; font-weight: 400 500; font-display: swap; src: url("../assets/fonts/lato-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Lato"; font-weight: 600 700; font-display: swap; src: url("../assets/fonts/lato-latin-700-normal.woff2") format("woff2"); }
+
+:root {
+  /* Palette CAN-VIS-01 §5 — alignée sur les couleurs IFAP (D51) : bleu-vert principal, jaune en accent, gris.
+     Les noms --bleu* sont conservés pour le code : ils portent désormais le bleu-vert IFAP. */
+  --bleu: #1F767A;          /* bleu-vert IFAP foncé : boutons, titres forts (5,3:1 sur blanc) */
+  --bleu-sombre: #103F41;   /* bleu-vert très foncé : titres */
+  --turquoise: #00B2B8;     /* bleu-vert IFAP officiel (RVB 0/178/184, logo IFAP) : repères graphiques, jamais de texte */
+  --jaune: #FFCB00;         /* jaune IFAP officiel : accent, fond avec texte foncé, jamais de texte sur blanc */
+  --jaune-fonce: #997A00;   /* pictogrammes jaunes sur fond clair (3:1 minimum) */
+  --vert: #2E7D32;            /* réussite, conduite adaptée (5,1:1) — D104 */
+  --bleu-progression: #1A7BB2;   /* bleu IFAP #63B8E8 assombri (4,65:1) — en cours (D53) */
+  --orange: #A88600;          /* jaune IFAP assombri (3,5:1) — vigilance : filets, pictogrammes (D53) */
+  --corail: #B85000;          /* orange (arc du logo IFAP) assombri — conduite risquée, alerter (5,0:1) — D104 */
+  --rouge: #C62828;           /* rouge d'alerte — conduite inadaptée, erreur (5,6:1) — D104, seule couleur hors palette IFAP avec le vert */
+  --violet: #7C6EAF;
+  --fond: #F7F5F2;
+  --carte: #FFFFFF;
+  --texte: #2D3748;
+  --texte-2: #5F6B7A;      /* #718096 de la charte, assombri pour atteindre AA sur fond clair */
+  --bordure: #E8E4DF;
+
+  /* Couleurs de marque — déclinaison du logo IFAP (logo DINA, pictogrammes, accents) */
+  --marque-gris: #878787;      /* gris IFAP (lettres du logo) */
+  --marque-orange: #FFCB00;      /* jaune IFAP (nom conservé pour le code) */
+  --marque-sarcelle: #00B2B8;    /* bleu-vert IFAP */
+  --marque-bleu: #63B8E8;        /* bleu IFAP */
+  --marque-violet: #7C6EAF;      /* violet IFAP */
+  --marque-corail: #ED9C89;      /* saumon IFAP */
+  --marque-lilas: #A59FCE;       /* lilas IFAP */
+  --marque-signature: #1F767A;   /* bleu-vert foncé, lisible en texte */
+
+  /* Teintes dérivées (fonds de feedback, états) */
+  --bleu-clair: #E6F6F7;     /* bleu-vert à 12 % */
+  --jaune-clair: #FFF6D1;    /* jaune à 18 % */
+  --vert-clair: #E8F3E9;
+  --vert-texte: #1E6B22;       /* vert sur --vert-clair, texte petit (5,8:1) — positionnement */
+  --bleu-progression-clair: #E3F0F8;
+  --bleu-progression-texte: #155F8A;   /* sur --bleu-progression-clair (6,0:1) */
+  --orange-clair: #FFF2BF;    /* jaune IFAP à 25 % */
+  --orange-texte: #705900;
+  --corail-clair: #FCEEE2;    /* orange à 15 % */
+  --corail-texte: #9A4300;
+  --corail-fonce: #852A14;    /* conservé pour la compatibilité ; préférer --rouge-texte */
+  --rouge-clair: #FBE9E9;
+  --rouge-texte: #A31F1F;
+  --gris: #A0AEC0;
+  --gris-clair: #EDF0F3;
+
+  /* Typographie CAN-VIS-01 §6 */
+  --police-titre: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --police-texte: "Lato", "Segoe UI", system-ui, sans-serif;
+  --taille-texte: 1.0625rem;   /* 17 px */
+  --taille-petit: 0.875rem;
+  --taille-titre: clamp(1.4rem, 1.1rem + 1.2vw, 2rem);
+  --interligne: 1.55;
+
+  /* Formes CAN-VIS-01 §7 */
+  --rayon: 14px;
+  --rayon-petit: 10px;
+  --rayon-compact: 6px;
+  --ombre: 0 1px 2px rgba(15, 61, 92, .06), 0 4px 14px rgba(15, 61, 92, .07);
+  --ombre-forte: 0 8px 28px rgba(15, 61, 92, .16);
+
+  /* Mise en page */
+  --lecture: 40rem;            /* largeur de lecture maîtrisée */
+  --bandeau-h: 64px;
+  --action-h: 76px;
+  --focus: 0 0 0 3px #fff, 0 0 0 6px var(--bleu);
+}

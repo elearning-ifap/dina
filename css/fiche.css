@@ -1,0 +1,75 @@
+/* DINA — fiche outil (CAN-VIS-01 §12) : écran + version imprimable A4. */
+
+/* ---------- Écran : chemin de décision pas à pas ---------- */
+.outil-intro { display: flex; gap: .8rem; align-items: flex-start; padding: 1rem 1.2rem; margin: 1rem 0 1.4rem; border-radius: var(--rayon); background: var(--bleu-clair); color: var(--bleu-sombre); }
+.chemin { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.etape-q { display: grid; grid-template-columns: 2.4rem 1fr; gap: .9rem; align-items: start; padding: 1rem 1.1rem; background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); }
+.etape-q .num { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--gris-clair); color: var(--bleu-sombre); font-family: var(--police-titre); font-weight: 800; }
+.etape-q.active { border: 2px solid var(--bleu); box-shadow: var(--ombre); }
+.etape-q.active .num { background: var(--bleu); color: #fff; }
+.etape-q.repondue .num { background: var(--vert); color: #fff; }
+.etape-q.attente { opacity: .55; }
+.etape-q .q { font-weight: 600; color: var(--bleu-sombre); margin: .35rem 0 0; }
+.etape-q .aide { font-size: var(--taille-petit); color: var(--texte-2); margin: .2rem 0 0; }
+.reponses { display: flex; gap: .5rem; margin-top: .7rem; }
+.reponses .btn { min-height: 42px; padding: 0 1.2rem; }
+.reponse-donnee { display: inline-block; margin-top: .45rem; font-size: var(--taille-petit); font-weight: 600; color: var(--vert); }
+
+/* Conduites : 4 issues, icône + libellé + couleur */
+.conduite { display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start; margin-top: 1.1rem; padding: 1.1rem 1.25rem; border-radius: var(--rayon); border-left: 6px solid; background: var(--carte); box-shadow: var(--ombre); }
+.conduite[hidden] { display: none; }
+.conduite h2 { font-size: 1.2rem; margin: 0 0 .25rem; }
+.conduite p { margin: 0; }
+.conduite .ico { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; }
+.conduite .ico svg { width: 1.4rem; height: 1.4rem; }
+.c-agir     { border-color: var(--vert); }             .c-agir .ico     { background: var(--vert-clair); color: var(--vert); }
+.c-informer { border-color: var(--bleu-progression); } .c-informer .ico { background: var(--bleu-clair); color: var(--bleu); }
+.c-valider  { border-color: var(--orange); }           .c-valider .ico  { background: var(--orange-clair); color: var(--orange-texte); }
+.c-alerter  { border-color: var(--corail); }           .c-alerter .ico  { background: var(--corail-clair); color: var(--corail-texte); }
+.alerte-permanente { display: flex; gap: .7rem; align-items: flex-start; margin-top: 1.2rem; padding: .9rem 1.1rem; border-radius: var(--rayon); background: var(--rouge-clair); color: var(--rouge-texte); font-size: .95rem; }
+.liens-outil { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.2rem; }
+
+/* ---------- Fiche A4 ---------- */
+.fiche { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 14mm 15mm 12mm; background: #fff; color: var(--texte); font-size: 10.5pt; line-height: 1.45; box-shadow: var(--ombre-forte); display: flex; flex-direction: column; }
+.fiche-bandeau { display: flex; justify-content: space-between; align-items: center; padding-bottom: 4mm; border-bottom: 1.5px solid var(--bleu); }
+.fiche-bandeau .marque { font-size: 13pt; }
+.fiche-bandeau .type { font-family: var(--police-titre); font-weight: 800; color: var(--bleu); letter-spacing: .04em; }
+.fiche h1 { font-size: 22pt; margin: 6mm 0 2mm; }
+.fiche .quand { margin: 0 0 5mm; padding: 3mm 4mm; border-radius: 3mm; background: var(--bleu-clair); color: var(--bleu-sombre); }
+.fiche h2 { font-size: 12pt; margin: 4mm 0 2.5mm; color: var(--bleu); }
+.fiche-chemin { display: grid; gap: 2.2mm; margin: 0; padding: 0; list-style: none; }
+.fiche-chemin li { display: grid; grid-template-columns: 8mm 1fr 44mm; gap: 3mm; align-items: center; padding: 2.4mm 3mm; border: 1px solid var(--bordure); border-radius: 3mm; }
+.fiche-chemin .num { display: grid; place-items: center; width: 7mm; height: 7mm; border-radius: 50%; background: var(--bleu); color: #fff; font-family: var(--police-titre); font-weight: 800; font-size: 10pt; }
+.fiche-chemin .q { font-weight: 600; color: var(--bleu-sombre); }
+.fiche-chemin .si { font-size: 9pt; color: var(--texte-2); }
+.fiche-chemin .si strong { color: var(--texte); }
+.fiche-conduites { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5mm; }
+.fiche-conduites div { padding: 3mm; border-radius: 3mm; border-top: 1.4mm solid; background: #FAFAF8; font-size: 9pt; }
+.fiche-conduites strong { display: flex; align-items: center; gap: 1.5mm; font-size: 10pt; margin-bottom: 1mm; }
+.fiche-conduites svg { width: 4.2mm; height: 4.2mm; }
+.fiche-conduites .c-agir { border-color: var(--vert); } .fiche-conduites .c-agir strong { color: var(--vert); }
+.fiche-conduites .c-informer { border-color: var(--bleu-progression); } .fiche-conduites .c-informer strong { color: var(--bleu); }
+.fiche-conduites .c-valider { border-color: var(--orange); } .fiche-conduites .c-valider strong { color: var(--orange-texte); }
+.fiche-conduites .c-alerter { border-color: var(--corail); } .fiche-conduites .c-alerter strong { color: var(--corail-texte); }
+.fiche .retenir { display: flex; gap: 3mm; align-items: center; margin-top: 5mm; padding: 3.5mm 4mm; border-radius: 3mm; border: 1.5px solid var(--turquoise); color: var(--bleu-sombre); font-weight: 600; }
+.fiche .alerte { margin-top: 3mm; padding: 2.5mm 4mm; border-radius: 3mm; background: var(--rouge-clair); color: var(--rouge-texte); font-size: 9.5pt; }
+.reperes p { margin: 0 0 2.5mm; padding-bottom: 7mm; border-bottom: 1px dashed #C9C3BB; font-size: 9.5pt; color: var(--texte-2); }
+.fiche-pied { margin-top: auto; padding-top: 4mm; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--bordure); font-size: 8pt; color: var(--texte-2); }
+.fiche-pied svg { width: 22mm; height: 6mm; }
+
+@page { size: A4; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .ne-pas-imprimer { display: none !important; }
+  .fiche { box-shadow: none; margin: 0; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* Fiche check-list (D37) */
+.fiche-checklist { display: grid; gap: 2.2mm; margin: 0; padding: 0; list-style: none; }
+.fiche-checklist li { display: grid; grid-template-columns: 8mm 1fr; gap: 3mm; align-items: start; padding: 2.4mm 3mm; border: 1px solid var(--bordure); border-radius: 3mm; }
+.fiche-checklist .num { display: grid; place-items: center; width: 7mm; height: 7mm; border-radius: 50%; background: var(--bleu); color: #fff; font-family: var(--police-titre); font-weight: 800; font-size: 10pt; }
+.fiche-checklist .q { display: block; font-weight: 600; color: var(--bleu-sombre); }
+.fiche-checklist .verif, .fiche-checklist .si { display: block; font-size: 9pt; color: var(--texte-2); margin-top: .8mm; }
+.fiche-conclusion { margin-top: 3mm; padding: 2.4mm 3mm; border-left: 4px solid var(--bleu); background: var(--bleu-clair); border-radius: 2mm; }
+.fiche-conclusion strong { display: flex; align-items: center; gap: 2mm; color: var(--bleu-sombre); }

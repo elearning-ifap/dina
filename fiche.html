@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DINA — Fiche outil</title>
+<link rel="icon" href="assets/logo/picto-dina.svg">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/fiche.css">
+<link rel="stylesheet" href="css/fiche-imprimable.css">
+</head>
+<body class="page-fiche">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-agir" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-informer" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-valider" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+  <symbol id="i-alerter" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-ampoule" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2z"/></symbol>
+  <symbol id="i-imprimer" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></symbol>
+</svg>
+
+<div class="barre-fiche ne-pas-imprimer">
+  <p id="consigne-fiche"></p>
+  <button type="button" class="btn btn-principal" id="imprimer"><svg class="icone"><use href="#i-imprimer"/></svg> Imprimer / enregistrer en PDF</button>
+</div>
+<main id="fiche-cible"></main>
+
+<script>
+/* Charge les données du module de la fiche : FICHE-M1-… → data/m1.js ; sinon data/m2.js (fiches M2 historiques FICHE-E1…). */
+(function () {
+  var id = decodeURIComponent((location.search.match(/[?&]id=([^&]+)/) || [])[1] || "");
+  var m = (id.match(/^FICHE-(M\d)-/) || [])[1];
+  var donnees = document.createElement("script");
+  donnees.src = "data/" + (m ? m.toLowerCase() : "m2") + ".js";
+  donnees.onload = donnees.onerror = function () {
+    var f = document.createElement("script"); f.src = "js/fiche.js"; document.body.appendChild(f);
+  };
+  document.body.appendChild(donnees);
+})();
+</script>
+</body>
+</html>
