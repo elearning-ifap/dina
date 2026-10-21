@@ -10,7 +10,8 @@
   /* Palette CAN-VIS-01 §5 — alignée sur les couleurs IFAP (D51) : bleu-vert principal, jaune en accent, gris.
      Les noms --bleu* sont conservés pour le code : ils portent désormais le bleu-vert IFAP. */
   --bleu: #1F767A;          /* bleu-vert IFAP foncé : boutons, titres forts (5,3:1 sur blanc) */
-  --bleu-sombre: #103F41;   /* bleu-vert très foncé : titres */
+  --bleu-sombre: #103F41;   /* bleu-vert très foncé : titres des modules */
+  --anthracite: #3C3C3B;    /* gris IFAP #878787 assombri : titres de la page d'entrée et des visuels de com sur fond blanc (10,9:1) — D105 */
   --turquoise: #00B2B8;     /* bleu-vert IFAP officiel (RVB 0/178/184, logo IFAP) : repères graphiques, jamais de texte */
   --jaune: #FFCB00;         /* jaune IFAP officiel : accent, fond avec texte foncé, jamais de texte sur blanc */
   --jaune-fonce: #997A00;   /* pictogrammes jaunes sur fond clair (3:1 minimum) */

@@ -1,5 +1,5 @@
-/* DINA — page d'entrée du démonstrateur (D84, D86). Palette et polices : tokens.css (CAN-VIS-01, D104).
-   Règle de contraste : titre jaune uniquement sur bleu-vert sombre ; jamais de texte sur la photo. */
+/* DINA — page d'entrée du démonstrateur (D84, D86). Palette et polices : tokens.css (CAN-VIS-01, D104, D105).
+   D105 : fond blanc, titres gris anthracite, jaune et bleu-vert IFAP en accents seulement. Jamais de texte jaune, jamais de texte sur la photo. */
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--fond); color: var(--texte); font: 400 var(--taille-texte)/var(--interligne) var(--police-texte); }
@@ -15,34 +15,38 @@ a { color: var(--bleu); }
 .entete .page { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 72px; }
 .entete .logo-dina { height: 44px; width: auto; }
 .entete .logo-ifap { height: 40px; width: auto; }
-.badge-version { display: inline-flex; align-items: center; gap: .4rem; font: 700 var(--taille-petit) var(--police-texte); color: var(--bleu-sombre); background: var(--jaune-clair); border: 1px solid #F1DE8F; border-radius: 999px; padding: .25rem .75rem; white-space: nowrap; }
+.badge-version { display: inline-flex; align-items: center; gap: .4rem; font: 700 var(--taille-petit) var(--police-texte); color: var(--anthracite); background: var(--jaune-clair); border: 1px solid #F1DE8F; border-radius: 999px; padding: .25rem .75rem; white-space: nowrap; }
 .entete-droite { display: flex; align-items: center; gap: 1rem; }
 
 /* ---- Accroche ---- */
-.accroche { background: var(--bleu-sombre); color: #fff; }
+.accroche { background: var(--carte); color: var(--texte); border-bottom: 4px solid var(--turquoise); overflow: hidden; }
 .accroche .page { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; padding: 0; }
 .accroche-texte { padding: 3rem 2.5rem 2.75rem 16px; display: flex; flex-direction: column; justify-content: center; }
-.accroche .surtitre-sombre { display: inline-flex; align-items: center; gap: .6em; font-weight: 700; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; color: #8FE3E6; }
+.accroche .surtitre-sombre { display: inline-flex; align-items: center; gap: .6em; font-weight: 700; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; color: var(--bleu); }
 .surtitre-sombre::before, .surtitre::before { content: ""; flex: none; width: 1.75rem; height: 10px; background:
   radial-gradient(circle at 5px 5px, var(--jaune) 4px, transparent 4.6px) no-repeat,
   linear-gradient(var(--turquoise), var(--turquoise)) 12px 4px / calc(100% - 12px) 2px no-repeat; }
-.accroche h1 { font-family: var(--police-titre); font-weight: 800; color: var(--jaune); font-size: clamp(1.9rem, 1.3rem + 2.2vw, 2.9rem); line-height: 1.08; margin: .5rem 0 .9rem; }
-.accroche p { margin: 0 0 .75rem; color: #F2F7F7; max-width: 34rem; }
-.accroche .mention-fiction { font-size: var(--taille-petit); color: #BFE3E4; margin-top: .5rem; }
+.accroche h1 { font-family: var(--police-titre); font-weight: 800; color: var(--anthracite); font-size: clamp(1.9rem, 1.3rem + 2.2vw, 2.9rem); line-height: 1.08; margin: .5rem 0 .9rem; }
+.accroche p { margin: 0 0 .75rem; color: var(--texte); max-width: 34rem; }
+.accroche .mention-fiction { font-size: var(--taille-petit); color: var(--texte-2); margin-top: .5rem; }
 .accroche-photo { position: relative; min-height: 320px; }
-.accroche-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.accroche-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  /* Cadrage sur Noa et Samuel (sujet dans les deux tiers gauche de ILL-N01) ; repli sans object-view-box */
+  object-position: 18% 50%; object-view-box: inset(0% 34% 0% 0%); }
+/* La photo va jusqu'au bord droit de la fenêtre sur grand écran */
+@media (min-width: 72rem) { .accroche-photo { margin-right: calc((72rem - 100vw) / 2); } }
 
 /* ---- Sections ---- */
 main section { padding: 2.5rem 0 0; }
 .surtitre { display: inline-flex; align-items: center; gap: .5rem; font-size: .875rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--bleu); margin-bottom: .3rem; }
-h2 { font-family: var(--police-titre); font-weight: 800; color: var(--bleu-sombre); font-size: var(--taille-titre); line-height: 1.15; margin: 0 0 1rem; }
-h3 { font-family: var(--police-titre); font-weight: 700; color: var(--bleu-sombre); font-size: 1.2rem; line-height: 1.2; margin: 0; }
+h2 { font-family: var(--police-titre); font-weight: 800; color: var(--anthracite); font-size: var(--taille-titre); line-height: 1.15; margin: 0 0 1rem; }
+h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite); font-size: 1.2rem; line-height: 1.2; margin: 0; }
 
 /* ---- Parcours : trois étapes reliées par le fil de parcours ---- */
 .etapes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; position: relative; counter-reset: etape; }
 .etapes::before { content: ""; position: absolute; top: 31px; left: 12%; right: 12%; height: 2px; background: var(--turquoise); z-index: 0; }
 .etape { position: relative; z-index: 1; background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); box-shadow: var(--ombre); padding: 0 1.25rem 1.25rem; display: flex; flex-direction: column; }
-.etape-num { width: 44px; height: 44px; margin: 9px 0 .9rem; border-radius: 50%; background: var(--jaune); color: var(--bleu-sombre); font: 800 1.25rem/44px var(--police-titre); text-align: center; box-shadow: 0 0 0 6px var(--carte); }
+.etape-num { width: 44px; height: 44px; margin: 9px 0 .9rem; border-radius: 50%; background: var(--jaune); color: var(--anthracite); font: 800 1.25rem/44px var(--police-titre); text-align: center; box-shadow: 0 0 0 6px var(--carte); }
 .etape p { margin: .5rem 0 1rem; color: var(--texte-2); flex: 1; }
 .etape-meta { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
 .puce { display: inline-flex; align-items: center; gap: .3rem; font-size: .8125rem; font-weight: 600; border-radius: 999px; padding: .15rem .6rem; background: var(--gris-clair); color: var(--texte); }
@@ -67,7 +71,7 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--bleu-sombr
 .liste { margin: 0 0 1.1rem; padding-left: 1.15rem; }
 .liste li { margin: .3rem 0; }
 .liste li::marker { color: var(--turquoise); }
-.sous-titre { font: 700 1rem var(--police-titre); color: var(--bleu-sombre); margin: 1rem 0 .3rem; }
+.sous-titre { font: 700 1rem var(--police-titre); color: var(--anthracite); margin: 1rem 0 .3rem; }
 .avis { border-left: 6px solid var(--jaune); background: var(--jaune-clair); border-radius: var(--rayon-petit); padding: 1rem 1.1rem; margin-top: .5rem; }
 .avis p { margin: 0 0 .6rem; }
 .avis p:last-child { margin-bottom: 0; }
@@ -100,6 +104,5 @@ kbd { font: 700 .85em var(--police-texte); background: var(--gris-clair); border
 }
 @media print {
   .accroche-photo, .btn, .entete-droite .badge-version { display: none; }
-  .accroche { background: none; color: var(--texte); }
-  .accroche h1 { color: var(--bleu-sombre); }
+  .accroche { border-bottom: 0; }
 }
