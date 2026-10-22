@@ -418,39 +418,39 @@ window.DINA_DATA = {
    "zones": [
     {
      "id": "nord",
-     "x": 37.9,
-     "y": 48,
+     "x": 31.3,
+     "y": 30,
      "titre": "Province Nord : environ 50 000 habitants",
      "anomalie": true,
-     "feedback": "Ni source ni date : impossible de savoir si le chiffre est à jour. Le repère sourcé : environ un habitant sur cinq (19 %), recensement 2025, ISEE."
+     "feedback": "Ni source ni date : impossible de savoir si le chiffre est à jour. Le chiffre officiel : 50 947 habitants en 2025, environ un habitant sur cinq (ISEE, recensement 2025)."
     },
     {
      "id": "sud",
-     "x": 63,
-     "y": 80.4,
+     "x": 51.7,
+     "y": 72,
      "titre": "Province Sud : 74 % des habitants (ISEE, recensement 2025)",
      "anomalie": false,
-     "feedback": "Sourcé et daté : Noa peut le reprendre."
+     "feedback": "Sourcé et daté : Noa peut le reprendre (194 978 habitants sur 264 596)."
     },
     {
      "id": "iles",
-     "x": 74,
-     "y": 52.6,
-     "titre": "Îles Loyauté : chiffre repris d'un diaporama de 2019",
+     "x": 91,
+     "y": 64,
+     "titre": "Îles Loyauté : 18 353 habitants (ISEE, recensement 2019)",
      "anomalie": true,
-     "feedback": "Un recensement plus récent existe : ce chiffre est dépassé. En 2025, 7 % des habitants (ISEE)."
+     "feedback": "Sourcé et daté, mais dépassé : le recensement 2025 a été publié. En 2025 : 18 671 habitants. Avant de reprendre un chiffre, je vérifie qu'il n'existe pas plus récent."
     },
     {
      "id": "total",
-     "x": 33,
-     "y": 87,
+     "x": 29,
+     "y": 86,
      "titre": "Nouvelle-Calédonie : 264 596 habitants (ISEE, recensement 2025)",
      "anomalie": false,
      "feedback": "Sourcé et daté : Noa peut le reprendre."
     }
    ],
    "synthese": "Un repère chiffré n'est utile que si l'on sait d'où il vient et de quand il date.",
-   "sources": "ISEE, recensement de la population 2025 : 264 596 habitants ; province Sud 74 %, province Nord 19 %, îles Loyauté 7 %.",
+   "sources": "ISEE, recensement de la population 2025, résultats authentifiés par le décret n° 2025-966 du 18 septembre 2025 (population municipale) : Nouvelle-Calédonie 264 596 ; province Sud 194 978 (74 %) ; province Nord 50 947 (19 %) ; îles Loyauté 18 671 (7 %). Recensement 2019 (Insee, populations légales) : îles Loyauté 18 353.",
    "suite": "M1-E1-APP1"
   },
   "M1-E1-APP1": {
@@ -2567,9 +2567,9 @@ window.DINA_DATA = {
    "alt": "Vendredi après-midi. Noa, à son bureau, relit ses notes de la semaine, détendu."
   },
   "ILL-N07": {
-   "scene": "Carte schématique des trois provinces",
+   "scene": "Carte en relief des trois provinces",
    "personnages": "—",
-   "alt": "Carte schématique de la Nouvelle-Calédonie. La Grande Terre est partagée entre la province Nord, chef-lieu Koné, et la province Sud, chef-lieu Nouméa, qui comprend aussi l'île des Pins. À l'est, la province des îles Loyauté, chef-lieu Wé, à Lifou."
+   "alt": "Carte en relief de la Nouvelle-Calédonie. La Grande Terre est partagée entre la province Nord, chef-lieu Koné, et la province Sud, chef-lieu Nouméa, qui comprend aussi l'île des Pins. À l'est, la province des îles Loyauté, chef-lieu Wé, à Lifou."
   }
  },
  "source": "Storyboard — M1 v0.1.md"
