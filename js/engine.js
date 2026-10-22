@@ -1388,47 +1388,86 @@
     ta.addEventListener("input", function () { btnP.disabled = false; });
   }
 
-  /* ---------- Positionnement initial (D83, D101) ----------
-     Une décision par situation, puis la certitude. Aucun retour item par item.
+  /* ---------- Positionnement initial (D83, D106) ----------
+     Format « semaine » (v0.4) : chaque situation a un moment (jour, heure, canal), un verdict par compétence observée
+     et une conséquence par réponse. Le choix est enregistré avant la conséquence et ne se modifie plus.
+     Format v0.3 encore lu : « verdict » unique, « bloc » sur l'item, certitude facultative.
      Le résultat situe l'agent par bloc et relie chaque bloc au module qui le travaille. */
+  var POS_CANAUX = {
+    oral: { libelle: "En face à face", icone: "i-oral" }, reunion: { libelle: "En réunion", icone: "i-oral" },
+    sms: { libelle: "SMS", icone: "i-telephone" }, appel: { libelle: "Appel", icone: "i-telephone" },
+    courriel: { libelle: "Courriel", icone: "i-courriel" }, messagerie: { libelle: "Messagerie", icone: "i-informer" },
+    note: { libelle: "Sur votre bureau", icone: "i-fichier" }
+  };
+  var JOURS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"];
   function posItems() {
     var ids = [];
     SECTIONS.forEach(function (s) { (ORDRE[s.id] || []).forEach(function (id) { if (E[id].type === "pos-item") ids.push(id); }); });
     return ids;
   }
+  function posVerdicts(i, o) {
+    /* { Cxx: verdict } pour une réponse, quel que soit le format */
+    if (o.verdicts) return o.verdicts;
+    var r = {}; (i.competences || [i.bloc]).forEach(function (c) { r[c] = o.verdict; }); return r;
+  }
+  function posSemaine(courant) {
+    /* Frise L M M J V : jours faits, jour en cours */
+    var jours = posItems().map(function (id) { return E[id].moment && E[id].moment.jour; });
+    if (!jours.some(Boolean)) return "";
+    var iCourant = JOURS.indexOf(courant);
+    return '<ol class="pos-semaine" aria-label="Jour ' + (iCourant + 1) + ' sur 5 : ' + esc(courant || "") + '">' + JOURS.map(function (j, k) {
+      var etatJ = k < iCourant ? "fait" : k === iCourant ? "encours" : "avenir";
+      return '<li class="pos-jour pos-jour--' + etatJ + '"' + (k === iCourant ? ' aria-current="step"' : "") + '><span class="pos-jour-ini" aria-hidden="true">' + esc(j.charAt(0)) + '</span><span class="pos-jour-nom">' + esc(j) + "</span></li>";
+    }).join("") + "</ol>";
+  }
   function rendrePosItem(e) {
-    zone.classList.add("ecran--decision");
+    zone.classList.add("ecran--decision", "ecran--pos");
     var liste = posItems(), n = liste.indexOf(e.id) + 1, deja = reponse(e.id) || {};
-    var cert = M.certitude || [];
-    zone.innerHTML = '<div class="colonne"><div class="situation"><div><span class="surtitre">Situation ' + n + " sur " + liste.length + "</span>" +
-      '<h1 id="titre-q"' + (String(e.texte).length > 110 ? ' class="titre-long"' : "") + ">" + md(e.texte).replace(/^<p>|<\/p>$/g, "").replace(/<\/p><p>/g, "<br>") + "</h1></div></div>" +
-      '<fieldset class="options" aria-labelledby="titre-q">' + e.options.map(function (o) {
-        return '<label class="option"><input type="radio" name="q-' + esc(e.id) + '" value="' + esc(o.id) + '"><span class="lettre">' + esc(o.id) + "</span><span>" + inline(o.libelle) + "</span></label>";
+    var cert = M.certitude || [], mo = e.moment || null, avecSuite = e.options.some(function (o) { return o.consequence; });
+    var C = mo ? (POS_CANAUX[mo.canal] || POS_CANAUX.note) : null;
+    var sur = mo ? mo.jour + " · " + mo.heure : "Situation " + n + " sur " + liste.length;
+    var qui = mo && mo.de && mo.de !== "Vous" ? '<span class="pos-de">' + ic(C.icone) + "<span><strong>" + esc(mo.de) + "</strong> · " + esc(C.libelle) + "</span></span>"
+      : (mo ? '<span class="pos-de">' + ic(C.icone) + "<span>" + esc(C.libelle) + "</span></span>" : "");
+    var corps = mo && mo.canal !== "note"
+      ? '<div class="texte bulle bulle--' + esc(mo.canal) + ' pos-bulle">' + md(e.texte) + "</div>"
+      : '<div class="texte pos-texte">' + md(e.texte) + "</div>";
+    zone.innerHTML = '<div class="colonne">' + posSemaine(mo && mo.jour) +
+      '<div class="pos-tete">' + (e.rebond ? '<span class="pos-rebond">La suite…</span>' : "") + '<span class="surtitre">' + esc(sur) + "</span>" +
+      '<h1 id="titre-q">' + esc(e.titre || "") + "</h1>" + qui + "</div>" + corps +
+      '<fieldset class="options' + (mo ? " options--reponses" : "") + '" aria-labelledby="titre-q"><legend class="sr-only">Que faites-vous ?</legend>' + e.options.map(function (o) {
+        return '<label class="option" data-id="' + esc(o.id) + '"><input type="radio" name="q-' + esc(e.id) + '" value="' + esc(o.id) + '">' + (mo ? "" : '<span class="lettre">' + esc(o.id) + "</span>") + "<span>" + inline(o.libelle) + "</span></label>";
       }).join("") + "</fieldset>" +
-      '<fieldset class="pos-certitude" id="pos-cert" hidden><legend>' + esc(M.certitude_question || "Comment avez-vous répondu ?") + '</legend><div class="pos-cert-choix">' +
-      cert.map(function (x, k) { return '<label class="pos-cert"><input type="radio" name="c-' + esc(e.id) + '" value="' + k + '"><span>' + esc(x) + "</span></label>"; }).join("") +
-      "</div></fieldset></div>";
-    compteur.textContent = "Situation " + n + " / " + liste.length;
-    var fsC = $("pos-cert");
+      (!cert.length ? "" : '<fieldset class="pos-certitude" id="pos-cert" hidden><legend>' + esc(M.certitude_question || "Comment avez-vous répondu ?") + '</legend><div class="pos-cert-choix">' +
+        cert.map(function (x, k) { return '<label class="pos-cert"><input type="radio" name="c-' + esc(e.id) + '" value="' + k + '"><span>' + esc(x) + "</span></label>"; }).join("") + "</div></fieldset>") +
+      '<div class="pos-suite" id="pos-suite" hidden aria-live="polite"></div></div>';
+    compteur.textContent = (mo ? mo.jour + " · " : "Situation ") + n + " / " + liste.length;
+    var fs = zone.querySelector(".options"), fsC = $("pos-cert"), suite = $("pos-suite");
     function lu(nom) { var i = zone.querySelector('input[name="' + nom + "-" + e.id + '"]:checked'); return i ? i.value : null; }
+    function verrouiller(c, restaure) {
+      /* Le choix est enregistré : on montre la conséquence, sans verdict */
+      fs.classList.add("verrouille"); fs.querySelectorAll("input").forEach(function (i) { i.disabled = true; });
+      var lab = fs.querySelector('.option[data-id="' + c + '"]'); if (lab) lab.classList.add("choisie");
+      var o = e.options.filter(function (x) { return x.id === c; })[0];
+      suite.innerHTML = '<span class="pos-suite-tete">' + ic("i-lecture") + "Ce qui se passe ensuite</span><p>" + inline(o.consequence) + "</p>";
+      suite.hidden = false;
+      if (!restaure) suite.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      principal("Continuer", function () { suivant(e); });
+    }
     function maj() {
-      var c = lu("q"), k = lu("c");
-      if (c && fsC.hidden) { fsC.hidden = false; if (!restaure) fsC.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+      var c = lu("q"), k = cert.length ? lu("c") : "";
+      if (c && fsC && fsC.hidden) { fsC.hidden = false; fsC.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
       btnP.disabled = !(c && k !== null);
     }
-    zone.querySelector(".colonne").addEventListener("change", maj);
-    principal("Continuer", function () {
-      var c = lu("q"), k = lu("c"); if (!c || k === null) return;
-      memoriser(e.id, { c: c, k: +k });
-      suivant(e);
-    }, { desactive: true });
-    var restaure = false;
+    zone.querySelector(".colonne").addEventListener("change", function () { if (!fs.classList.contains("verrouille")) maj(); });
+    principal(avecSuite ? "Valider" : "Continuer", function () {
+      var c = lu("q"), k = cert.length ? lu("c") : ""; if (!c || k === null) return;
+      memoriser(e.id, cert.length ? { c: c, k: +k } : { c: c });
+      if (avecSuite) verrouiller(c, false); else suivant(e);
+    }, { desactive: true, icone: avecSuite ? "i-check" : null });
     if (deja.c) {
-      restaure = true;
       var a = zone.querySelector('input[name="q-' + e.id + '"][value="' + deja.c + '"]'); if (a) a.checked = true;
       var b = zone.querySelector('input[name="c-' + e.id + '"][value="' + deja.k + '"]'); if (b) b.checked = true;
-      maj();
-      restaure = false;
+      if (avecSuite) verrouiller(deja.c, true); else { maj(); }
     }
   }
   function rendrePosProfil(e) {
@@ -1437,39 +1476,60 @@
     if (sec && etat.faites.indexOf(sec.id) < 0) { etat.faites.push(sec.id); sauver(); majBandeau(sec); }
     var POINTS = { adapte: 1, partiel: 0.5 }, N = e.niveaux, CT = e.certitude_textes || {};
     var items = posItems().map(function (id) { return E[id]; });
-    var vigilances = [], manquantes = 0;
-    var cartes = e.blocs.map(function (b) {
-      var its = items.filter(function (i) { return i.bloc === b.id; });
-      var score = 0, faites = 0, justeIncertain = false, fauxAssure = false;
-      its.forEach(function (i) {
-        var r = reponse(i.id); if (!r || !r.c) return;
-        faites++;
-        var o = i.options.filter(function (x) { return x.id === r.c; })[0], v = o ? o.verdict : null;
-        score += POINTS[v] || 0;
-        var nonAdapte = v === "inadapte" || v === "risque";
-        if (v === "adapte" && r.k > 0) justeIncertain = true;
-        if (nonAdapte && r.k === 0) {
-          if (i.vigilance) vigilances.push({ item: i, bloc: b }); else fauxAssure = true;
+    /* Compétence → bloc : liste « competences » des blocs (v0.4), sinon « bloc » de l'item (v0.3) */
+    var blocDe = {};
+    e.blocs.forEach(function (b) { (b.competences || []).forEach(function (c) { blocDe[c] = b.id; }); });
+    var obs = {}, sit = {}, vigilances = [], manquantes = 0, jusIncertain = {}, fauxAssure = {};
+    e.blocs.forEach(function (b) { obs[b.id] = []; sit[b.id] = []; });
+    items.forEach(function (i) {
+      var comps = i.competences && i.competences.length ? i.competences : [i.bloc];
+      var r = reponse(i.id), o = r && r.c ? i.options.filter(function (x) { return x.id === r.c; })[0] : null;
+      var V = o ? posVerdicts(i, o) : null;
+      var vig = Array.isArray(i.vigilance) ? i.vigilance : (i.vigilance ? comps : []);
+      comps.forEach(function (c) {
+        var b = blocDe[c] || i.bloc; if (!obs[b]) return;
+        if (sit[b].indexOf(i) < 0) sit[b].push(i);
+        if (!V) { obs[b].push(null); return; }
+        var v = V[c], nonAdapte = v === "inadapte" || v === "risque";
+        obs[b].push(POINTS[v] || 0);
+        if (v === "adapte" && r.k > 0) jusIncertain[b] = true;
+        if (nonAdapte && (r.k === 0 || r.k == null)) {
+          if (vig.indexOf(c) >= 0) { if (!vigilances.some(function (x) { return x.item === i; })) vigilances.push({ item: i, bloc: e.blocs.filter(function (x) { return x.id === b; })[0] }); }
+          else if (r.k === 0) fauxAssure[b] = true;
         }
       });
-      if (faites < its.length) { manquantes += its.length - faites; }
-      var niveau = faites < its.length ? null : score >= its.length ? "present" : score >= its.length / 2 ? "approfondir" : "decouvrir";
+      if (!V) manquantes++;
+    });
+    var cartes = e.blocs.map(function (b) {
+      var L = obs[b.id], faites = L.filter(function (x) { return x !== null; });
+      var moy = faites.length ? faites.reduce(function (s, x) { return s + x; }, 0) / faites.length : 0;
+      var niveau = !L.length || faites.length < L.length ? null : moy >= 0.85 ? "present" : moy >= 0.5 ? "approfondir" : "decouvrir";
       var phrases = [];
       if (niveau) phrases.push(b[niveau]);
-      if (justeIncertain && CT.juste_incertain) phrases.push(CT.juste_incertain);
-      if (fauxAssure && CT.faux_assure) phrases.push(CT.faux_assure);
+      if (jusIncertain[b.id] && CT.juste_incertain) phrases.push(CT.juste_incertain);
+      if (fauxAssure[b.id] && CT.faux_assure) phrases.push(CT.faux_assure);
       return '<li class="pos-bloc pos-bloc--' + (niveau || "vide") + '">' +
         '<div class="pos-bloc-tete"><h2>' + esc(b.titre) + '</h2><span class="pos-niveau pos-niveau--' + (niveau || "vide") + '">' + esc(niveau ? N[niveau] : "Non renseigné") + "</span></div>" +
         (phrases.length ? "<p>" + phrases.map(inline).join(" ") + "</p>" : "") +
-        '<p class="pos-situations">Situations : ' + its.map(function (i) { return esc(i.titre); }).join(" · ") + "</p>" +
-        '<div class="pos-module">' + ic("i-chemin") + '<div><span class="pos-module-quand">Travaillé dans le</span> <strong>' + esc(b.module) + "</strong>" +
+        '<p class="pos-situations">Situations : ' + sit[b.id].map(function (i) { return esc(i.titre); }).join(" · ") + "</p>" +
+        '<div class="pos-module">' + ic("i-chemin") + '<div><span class="pos-module-quand">Travaillé dans :</span> <strong>' + esc(b.module) + "</strong>" +
         "<p><em>Par exemple :</em> " + inline(b.exemple) + "</p></div></div></li>";
     }).join("");
+    /* Frise de la semaine : les moments vécus, sans verdict ; les points de vigilance sont signalés */
+    var avecMoments = items.some(function (i) { return i.moment; });
+    var frise = !avecMoments ? "" : '<h2 class="fin-sous">Votre semaine</h2><ol class="pos-frise">' + JOURS.map(function (j) {
+      var du = items.filter(function (i) { return i.moment && i.moment.jour === j; });
+      if (!du.length) return "";
+      return '<li class="pos-frise-jour"><strong>' + esc(j) + "</strong><ul>" + du.map(function (i) {
+        var v = vigilances.some(function (x) { return x.item === i; });
+        return '<li' + (v ? ' class="pos-frise-vig"' : "") + "><span>" + esc(i.moment.heure) + "</span> " + esc(i.titre) + (v ? ic("i-attention") + '<span class="sr-only"> (point de vigilance)</span>' : "") + "</li>";
+      }).join("") + "</ul></li>";
+    }).join("") + "</ol>";
     var vig = vigilances.length ? '<div class="pos-vigilance" role="note">' + ic("i-attention") + "<div>" + md(e.vigilance) +
       "<ul>" + vigilances.map(function (x) { return "<li><strong>" + esc(x.item.titre) + "</strong> — " + esc(x.bloc.module) + "</li>"; }).join("") + "</ul></div></div>" : "";
     zone.innerHTML = '<div class="colonne colonne--large">' + entete(e, libelleEtape(e)) + '<div class="texte">' + md(e.texte) + "</div>" + vig +
-      (manquantes ? '<p class="pos-manque">' + ic("i-moitie") + "<span>" + manquantes + " situation" + (manquantes > 1 ? "s" : "") + " sans réponse : le domaine concerné n'est pas renseigné.</span></p>" : "") +
-      '<ol class="pos-blocs">' + cartes + "</ol>" +
+      (manquantes ? '<p class="pos-manque">' + ic("i-moitie") + "<span>" + manquantes + " situation" + (manquantes > 1 ? "s" : "") + " sans réponse : les domaines concernés ne sont pas renseignés.</span></p>" : "") +
+      '<ol class="pos-blocs">' + cartes + "</ol>" + frise +
       '<p class="rl-mention">' + ic("i-cadenas") + "<span>" + esc(e.mention || "") + "</span></p>" +
       '<p class="refaire"><button type="button" class="lien" id="pos-refaire">' + ic("i-recommencer") + " Refaire le positionnement</button></p></div>";
     $("pos-refaire").addEventListener("click", function () {
