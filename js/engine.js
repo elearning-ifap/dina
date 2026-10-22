@@ -1420,6 +1420,31 @@
       return '<li class="pos-jour pos-jour--' + etatJ + '"' + (k === iCourant ? ' aria-current="step"' : "") + '><span class="pos-jour-ini" aria-hidden="true">' + esc(j.charAt(0)) + '</span><span class="pos-jour-nom">' + esc(j) + "</span></li>";
     }).join("") + "</ol>";
   }
+  var POS_VUS = {};
+  function posMessage(e, mo) {
+    if (!mo || mo.canal === "note") return '<div class="texte pos-texte">' + md(e.texte) + "</div>";
+    if (mo.canal === "courriel") {
+      return '<div class="pos-mail"><dl class="pos-mail-tete">' +
+        "<div><dt>De</dt><dd>" + esc(mo.de || "") + "</dd></div><div><dt>À</dt><dd>Vous</dd></div>" +
+        (mo.objet ? "<div><dt>Objet</dt><dd><strong>" + esc(mo.objet) + "</strong></dd></div>" : "") +
+        "<div><dt>Reçu</dt><dd>" + esc(mo.jour + ", " + mo.heure) + "</dd></div></dl>" +
+        '<div class="texte pos-mail-corps">' + md(e.texte) + "</div></div>";
+    }
+    return '<div class="texte bulle bulle--' + esc(mo.canal) + ' pos-bulle">' + md(e.texte) + "</div>";
+  }
+  function posArrivee(mode, mo) {
+    var C = POS_CANAUX[mo.canal];
+    if (mode === "notif") {
+      var titre = mo.canal === "courriel" ? "Nouveau courriel" : "Appel entrant";
+      var bouton = mo.canal === "courriel" ? "Ouvrir le courriel" : "Décrocher";
+      return '<div class="pos-arrivee pos-notif pos-notif--' + esc(mo.canal) + '" id="pos-arrivee" role="status">' +
+        '<span class="pos-notif-ico">' + ic(C.icone) + "</span><div class=\"pos-notif-txt\"><span class=\"pos-notif-titre\">" + titre + " · " + esc(mo.heure) + "</span><strong>" + esc(mo.de || "") + "</strong>" +
+        (mo.objet ? "<span>" + esc(mo.objet) + "</span>" : "") + "</div>" +
+        '<button type="button" class="btn btn-principal btn-petit" id="pos-ouvrir">' + esc(bouton) + "</button></div>";
+    }
+    return '<div class="pos-arrivee pos-ecrit" id="pos-arrivee"><span class="pos-ecrit-points" aria-hidden="true"><span></span><span></span><span></span></span>' +
+      '<span class="pos-ecrit-txt">' + esc(mo.de || "") + " est en train d'écrire…</span></div>";
+  }
   function rendrePosItem(e) {
     zone.classList.add("ecran--decision", "ecran--pos");
     var liste = posItems(), n = liste.indexOf(e.id) + 1, deja = reponse(e.id) || {};
@@ -1428,20 +1453,33 @@
     var sur = mo ? mo.jour + " · " + mo.heure : "Situation " + n + " sur " + liste.length;
     var qui = mo && mo.de && mo.de !== "Vous" ? '<span class="pos-de">' + ic(C.icone) + "<span><strong>" + esc(mo.de) + "</strong> · " + esc(C.libelle) + "</span></span>"
       : (mo ? '<span class="pos-de">' + ic(C.icone) + "<span>" + esc(C.libelle) + "</span></span>" : "");
-    var corps = mo && mo.canal !== "note"
-      ? '<div class="texte bulle bulle--' + esc(mo.canal) + ' pos-bulle">' + md(e.texte) + "</div>"
-      : '<div class="texte pos-texte">' + md(e.texte) + "</div>";
+    /* Arrivée du message (22-10) : notification pour le courriel et l'appel, « en train d'écrire » pour le SMS et la messagerie */
+    var arrivee = mo && !deja.c && !POS_VUS[e.id] ? ({ courriel: "notif", appel: "notif", sms: "ecrit", messagerie: "ecrit" }[mo.canal] || null) : null;
+    var corps = '<div id="pos-msg"' + (arrivee ? " hidden" : "") + ">" + posMessage(e, mo) + "</div>" + (arrivee ? posArrivee(arrivee, mo) : "");
     zone.innerHTML = '<div class="colonne">' + posSemaine(mo && mo.jour) +
       '<div class="pos-tete">' + (e.rebond ? '<span class="pos-rebond">La suite…</span>' : "") + '<span class="surtitre">' + esc(sur) + "</span>" +
       '<h1 id="titre-q">' + esc(e.titre || "") + "</h1>" + qui + "</div>" + corps +
-      '<fieldset class="options' + (mo ? " options--reponses" : "") + '" aria-labelledby="titre-q"><legend class="sr-only">Que faites-vous ?</legend>' + e.options.map(function (o) {
+      '<fieldset class="options' + (mo ? " options--reponses" : "") + '" aria-labelledby="titre-q"' + (arrivee ? " hidden" : "") + '><legend class="sr-only">Que faites-vous ?</legend>' + e.options.map(function (o) {
         return '<label class="option" data-id="' + esc(o.id) + '"><input type="radio" name="q-' + esc(e.id) + '" value="' + esc(o.id) + '">' + (mo ? "" : '<span class="lettre">' + esc(o.id) + "</span>") + "<span>" + inline(o.libelle) + "</span></label>";
       }).join("") + "</fieldset>" +
       (!cert.length ? "" : '<fieldset class="pos-certitude" id="pos-cert" hidden><legend>' + esc(M.certitude_question || "Comment avez-vous répondu ?") + '</legend><div class="pos-cert-choix">' +
         cert.map(function (x, k) { return '<label class="pos-cert"><input type="radio" name="c-' + esc(e.id) + '" value="' + k + '"><span>' + esc(x) + "</span></label>"; }).join("") + "</div></fieldset>") +
-      '<div class="pos-suite" id="pos-suite" hidden aria-live="polite"></div></div>';
+      '<div class="pos-suite" id="pos-suite" hidden aria-live="polite"></div><p class="sr-only" id="pos-annonce" aria-live="polite"></p></div>';
     compteur.textContent = (mo ? mo.jour + " · " : "Situation ") + n + " / " + liste.length;
     var fs = zone.querySelector(".options"), fsC = $("pos-cert"), suite = $("pos-suite");
+    function devoiler(focus) {
+      /* Le message est là : on l'affiche, puis les réponses */
+      POS_VUS[e.id] = true;
+      var a = $("pos-arrivee"); if (a) a.remove();
+      $("pos-msg").hidden = false; fs.hidden = false;
+      $("pos-annonce").textContent = (mo.de && mo.de !== "Vous" ? mo.de + " : " : "") + String(e.texte).replace(/\s+/g, " ").trim();
+      if (focus) { var m = $("pos-msg"); m.setAttribute("tabindex", "-1"); m.focus({ preventScroll: true }); }
+    }
+    if (arrivee === "notif") $("pos-ouvrir").addEventListener("click", function () { devoiler(true); });
+    if (arrivee === "ecrit") {
+      var delai = MOUVEMENT && !etat.animPause ? 1400 : 0;
+      setTimeout(function () { if ($("pos-arrivee") && zone.dataset.ecran === e.id) devoiler(false); }, delai);
+    }
     function lu(nom) { var i = zone.querySelector('input[name="' + nom + "-" + e.id + '"]:checked'); return i ? i.value : null; }
     function verrouiller(c, restaure) {
       /* Le choix est enregistré : on montre la conséquence, sans verdict */
