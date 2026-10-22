@@ -859,3 +859,41 @@ a.btn { text-decoration: none; }
   .pos-jour-ini { display: inline; }
   .pos-frise { grid-template-columns: 1fr; }
 }
+
+/* Arrivée des messages (22-10) : notification, courriel, « en train d'écrire » */
+.options[hidden] { display: none; }
+.pos-notif { display: flex; align-items: center; gap: .9rem; margin-bottom: 1.1rem; padding: .9rem 1rem; border-radius: var(--rayon); background: var(--carte); border: 1px solid var(--bordure); box-shadow: var(--ombre-forte); }
+.pos-notif-ico { flex: none; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--bleu-clair); color: var(--bleu); }
+.pos-notif--courriel .pos-notif-ico { background: var(--orange-clair); color: var(--orange-texte); }
+.pos-notif--appel .pos-notif-ico { background: var(--vert-clair); color: var(--vert-texte); }
+.pos-notif-ico .icone { width: 1.3rem; height: 1.3rem; }
+.pos-notif-txt { flex: 1; min-width: 0; display: grid; gap: .1rem; }
+.pos-notif-titre { font-size: var(--taille-petit); color: var(--texte-2); }
+.pos-notif .btn { flex: none; margin: 0; }
+.pos-mail { margin-bottom: 1.1rem; border-radius: var(--rayon); background: var(--carte); border: 1px solid var(--bordure); border-top: 4px solid var(--orange); box-shadow: var(--ombre); overflow: hidden; }
+.pos-mail-tete { display: grid; gap: .15rem; margin: 0; padding: .75rem 1rem; background: var(--fond); border-bottom: 1px solid var(--bordure); font-size: var(--taille-petit); }
+.pos-mail-tete > div { display: flex; gap: .5rem; }
+.pos-mail-tete dt { flex: none; width: 3.6rem; color: var(--texte-2); }
+.pos-mail-tete dd { margin: 0; }
+.pos-mail-corps { padding: .9rem 1rem; }
+.pos-mail-corps p:last-child { margin-bottom: 0; }
+.pos-ecrit { display: inline-flex; align-items: center; gap: .6rem; margin-bottom: 1.1rem; padding: .7rem 1rem; border-radius: 18px 18px 18px 4px; background: var(--vert-clair); color: var(--texte-2); font-size: var(--taille-petit); }
+.pos-ecrit-points { display: inline-flex; gap: .25rem; }
+.pos-ecrit-points span { width: .45rem; height: .45rem; border-radius: 50%; background: var(--texte-2); opacity: .5; }
+@media (prefers-reduced-motion: no-preference) {
+  .pos-notif { animation: pos-glisse .45s cubic-bezier(.2, .8, .2, 1) both; }
+  .pos-notif--appel .pos-notif-ico { animation: pos-sonne 1.2s ease-in-out 3; }
+  .pos-ecrit-points span { animation: pos-point 1s ease-in-out infinite; }
+  .pos-ecrit-points span:nth-child(2) { animation-delay: .15s; }
+  .pos-ecrit-points span:nth-child(3) { animation-delay: .3s; }
+  #pos-msg:not([hidden]) .pos-bulle, #pos-msg:not([hidden]) .pos-mail { animation: pos-apparait .35s ease-out both; }
+  .anim-pause .pos-notif, .anim-pause .pos-notif-ico, .anim-pause .pos-ecrit-points span, .anim-pause #pos-msg .pos-bulle, .anim-pause #pos-msg .pos-mail { animation: none; }
+}
+@keyframes pos-glisse { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+@keyframes pos-sonne { 0%, 100% { transform: rotate(0); } 20%, 60% { transform: rotate(-12deg); } 40%, 80% { transform: rotate(12deg); } }
+@keyframes pos-point { 0%, 100% { opacity: .3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+@keyframes pos-apparait { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@container lecteur (max-width: 560px) {
+  .pos-notif { flex-wrap: wrap; }
+  .pos-notif .btn { width: 100%; }
+}
