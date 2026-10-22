@@ -824,3 +824,38 @@ a.btn { text-decoration: none; }
 .infog-fil { list-style: none; counter-reset: fil; margin: 1rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; align-items: stretch; }
 .infog-fil li { counter-increment: fil; flex: 1 1 10rem; display: flex; align-items: center; gap: .55rem; padding: .6rem .9rem; border-radius: var(--rayon-petit); background: var(--bleu-clair); font-weight: 700; color: var(--texte); position: relative; }
 .infog-fil li::before { content: counter(fil); flex: none; display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--bleu); color: #fff; font: 800 .85rem var(--police-titre); }
+
+/* ---------- Positionnement « Votre première semaine » (D106) ---------- */
+.pos-semaine { list-style: none; display: flex; gap: .35rem; margin: 0 0 1.1rem; padding: 0; }
+.pos-jour { flex: 1; display: flex; align-items: center; justify-content: center; gap: .4rem; padding: .35rem .3rem; border-radius: var(--rayon-compact); background: var(--gris-clair); color: var(--texte-2); font-size: var(--taille-petit); font-weight: 700; }
+.pos-jour--fait { background: var(--bleu-clair); color: var(--bleu-sombre); }
+.pos-jour--encours { background: var(--bleu); color: #fff; }
+.pos-jour-ini { display: none; }
+.pos-tete { margin-bottom: .8rem; }
+.pos-tete h1 { margin: .15rem 0 .35rem; }
+.pos-rebond { display: block; margin-bottom: .2rem; font-size: var(--taille-petit); font-style: italic; color: var(--texte-2); }
+.pos-de { display: inline-flex; align-items: center; gap: .4rem; font-size: var(--taille-petit); color: var(--texte-2); }
+.pos-de .icone { flex: none; width: 1.05rem; height: 1.05rem; color: var(--bleu); }
+.pos-bulle, .pos-texte { margin-bottom: 1.1rem; }
+.pos-bulle p:last-child, .pos-texte p:last-child { margin-bottom: 0; }
+.options--reponses .option { padding: .85rem 1.1rem; border-radius: 16px 16px 16px 4px; }
+.options--reponses .option::before { content: ""; flex: none; width: 1.1rem; height: 1.1rem; margin-top: .15rem; border-radius: 50%; border: 2px solid var(--gris); background: var(--carte); }
+.options--reponses .option:has(input:checked)::before { border-color: var(--bleu); background: radial-gradient(circle, var(--bleu) 45%, var(--carte) 50%); }
+.options.verrouille .option.choisie { opacity: 1; }
+.pos-suite { margin-top: 1rem; padding: 1rem 1.15rem; border-radius: var(--rayon); background: var(--carte); border: 1px solid var(--bordure); border-left: 6px solid var(--bleu); box-shadow: var(--ombre); }
+.pos-suite[hidden] { display: none; }
+.pos-suite-tete { display: flex; align-items: center; gap: .4rem; margin-bottom: .35rem; font-family: var(--police-titre); font-weight: 800; color: var(--bleu-sombre); }
+.pos-suite-tete .icone { width: 1.1rem; height: 1.1rem; color: var(--bleu); }
+.pos-suite p { margin: 0; }
+.pos-frise { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .6rem; margin: .6rem 0 1.2rem; padding: 0; }
+.pos-frise-jour { padding: .7rem .75rem; border-radius: var(--rayon-petit); background: var(--carte); border: 1px solid var(--bordure); }
+.pos-frise-jour > strong { display: block; margin-bottom: .35rem; color: var(--bleu-sombre); }
+.pos-frise-jour ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; font-size: var(--taille-petit); }
+.pos-frise-jour li span:first-child { color: var(--texte-2); }
+.pos-frise-vig { color: var(--corail-texte); font-weight: 700; }
+.pos-frise-vig .icone { width: .95rem; height: .95rem; margin-left: .25rem; vertical-align: -2px; }
+@container lecteur (max-width: 720px) {
+  .pos-jour-nom { display: none; }
+  .pos-jour-ini { display: inline; }
+  .pos-frise { grid-template-columns: 1fr; }
+}
