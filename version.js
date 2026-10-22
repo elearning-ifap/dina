@@ -11,7 +11,7 @@ window.DINA_VERSION = {
     statut: "Démonstrateur — contenus en cours de relecture",
     caracteristiques: [
       "Trois étapes à suivre dans l'ordre : positionnement, prologue, puis module M1 « Je me repère ».",
-      "Positionnement : 10 situations courantes, restitution par bloc de compétences. Aucune réponse n'est enregistrée.",
+      "Positionnement « Votre première semaine » : 15 situations du lundi au vendredi, une conséquence après chaque choix, résultat sur les six blocs du référentiel. Aucune réponse n'est enregistrée.",
       "Prologue « Bienvenue à ÉLAN » : l'univers de Noa, ses collègues et son organisation.",
       "Module M1 : une semaine de Noa, du lundi au vendredi. Situations, apports, fiches outils, évaluation du vendredi.",
       "Le dossier Passerelles sert de fil rouge d'un module à l'autre.",
@@ -23,8 +23,8 @@ window.DINA_VERSION = {
   /* Ordre fixé par D84. "fichier" est relatif à cette page. */
   etapes: [
     { code: "pos", fichier: "positionnement.html", cle: "dina-positionnement", titre: "Test de positionnement",
-      texte: "Dix situations de travail. Vous voyez où vous en êtes, bloc par bloc, avant d'entrer dans le parcours.",
-      duree: "10 à 15 min", disponible: true },
+      texte: "Votre première semaine dans un service public : quinze situations, et ce qui se passe après chacun de vos choix. Vous voyez où vous en êtes, domaine par domaine.",
+      duree: "20 à 25 min", disponible: true },
     { code: "prologue", fichier: "prologue.html", cle: "dina-prologue", titre: "Prologue « Bienvenue à ÉLAN »",
       texte: "Vous rencontrez Noa, ses collègues et l'organisation où il prend son poste.",
       duree: "20 min", disponible: true },
