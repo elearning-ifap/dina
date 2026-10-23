@@ -436,9 +436,9 @@ window.DINA_DATA = {
      "id": "iles",
      "x": 91,
      "y": 64,
-     "titre": "Îles Loyauté : 18 353 habitants (ISEE, recensement 2019)",
+     "titre": "Îles Loyauté : 18 353 habitants (chiffre repris d'un diaporama de 2019)",
      "anomalie": true,
-     "feedback": "Sourcé et daté, mais dépassé : le recensement 2025 a été publié. En 2025 : 18 671 habitants. Avant de reprendre un chiffre, je vérifie qu'il n'existe pas plus récent."
+     "feedback": "Un diaporama n'est pas une source : on ne sait pas d'où vient le chiffre. Et il date de 2019 : le recensement 2025 donne 18 671 habitants (ISEE). Je remonte à la source officielle et je prends la donnée la plus récente."
     },
     {
      "id": "total",
@@ -450,7 +450,7 @@ window.DINA_DATA = {
     }
    ],
    "synthese": "Un repère chiffré n'est utile que si l'on sait d'où il vient et de quand il date.",
-   "sources": "ISEE, recensement de la population 2025, résultats authentifiés par le décret n° 2025-966 du 18 septembre 2025 (population municipale) : Nouvelle-Calédonie 264 596 ; province Sud 194 978 (74 %) ; province Nord 50 947 (19 %) ; îles Loyauté 18 671 (7 %). Recensement 2019 (Insee, populations légales) : îles Loyauté 18 353.",
+   "sources": "ISEE, recensement de la population 2025, résultats authentifiés par le décret n° 2025-966 du 18 septembre 2025 (population municipale) : Nouvelle-Calédonie 264 596 ; province Sud 194 978 (74 %) ; province Nord 50 947 (19 %) ; îles Loyauté 18 671 (7 %). Chiffre du diaporama : îles Loyauté 18 353 (population légale 2019, Insee).",
    "suite": "M1-E1-APP1"
   },
   "M1-E1-APP1": {
