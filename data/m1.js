@@ -467,7 +467,7 @@ window.DINA_DATA = {
       "role": "Représenté par le haut-commissaire (art. 2).",
       "exemples": [
        "La justice",
-       "L'ordre public",
+       "Le maintien de l'ordre",
        "La défense",
        "L'entrée et le séjour des étrangers"
       ],
@@ -629,7 +629,7 @@ window.DINA_DATA = {
      "id": "B",
      "libelle": "Déposer plainte après un vol.",
      "attendu": "etat",
-     "feedback": "L'ordre public et la justice relèvent de l'État : la police ou la gendarmerie reçoivent la plainte."
+     "feedback": "Le maintien de l'ordre et la justice relèvent de l'État : la police ou la gendarmerie reçoivent la plainte."
     },
     {
      "id": "C",
@@ -2324,39 +2324,39 @@ window.DINA_DATA = {
    "modele": "formulaire",
    "categorie": "outil",
    "titre": "Mes premiers jours",
-   "quand": "Dans vos premiers jours, chez votre employeur. Cochez au fur et à mesure et notez les noms.",
+   "quand": "Dans vos premiers jours, chez votre employeur. Complétez au fur et à mesure : à la fin de la semaine, vous devez pouvoir commencer à travailler sans chercher.",
    "sections": [
     {
-     "titre": "Mes accès",
+     "titre": "De quoi ai-je besoin ?",
      "champs": [
-      "Messagerie",
-      "Intranet",
-      "Dossier partagé",
-      "Badge"
+      "Ma messagerie et mon poste de travail",
+      "Mes dossiers de travail (dossier partagé, intranet… selon mon employeur)",
+      "Mon accès aux locaux (badge, clés… s'il y en a)"
      ]
     },
     {
-     "titre": "Mes interlocuteurs",
+     "titre": "Qu'attend-on de moi ?",
+     "champs": [
+      "Où trouver ma fiche de poste",
+      "Mes premières missions",
+      "À qui demander des précisions sur ces missions"
+     ]
+    },
+    {
+     "titre": "Qui peut m'aider ?",
      "champs": [
       "Mon responsable",
-      "Mon parrain ou ma marraine",
-      "Mon contact RH"
-     ]
-    },
-    {
-     "titre": "Mes repères",
-     "champs": [
-      "L'organigramme de mon employeur et de mon service",
-      "Ma fiche de poste",
-      "Mes sources officielles en favori (Leginova, JONC, site de mon employeur, intranet)"
+      "Un collègue référent (parrain ou marraine, s'il y en a un)",
+      "Mon contact aux ressources humaines"
      ]
     },
     {
      "titre": "Mes questions de la semaine",
      "champs": [
-      "Question 1",
-      "Question 2",
-      "Question 3"
+      "Ma question",
+      "La réponse, et qui me l'a donnée",
+      "Ma question",
+      "La réponse, et qui me l'a donnée"
      ]
     }
    ],
@@ -2364,7 +2364,7 @@ window.DINA_DATA = {
    "competences": [
     "C02"
    ],
-   "version": "0.1"
+   "version": "0.2"
   },
   "FICHE-M1-E1": {
    "id": "FICHE-M1-E1",
@@ -2373,55 +2373,56 @@ window.DINA_DATA = {
    "modele": "aide-memoire",
    "categorie": "outil",
    "titre": "Qui fait quoi en Nouvelle-Calédonie ?",
-   "quand": "Chaque fois qu'une demande ne semble pas pour vous : avant de l'orienter.",
+   "quand": "Une demande arrive et elle ne semble pas pour vous : avant de l'orienter.",
+   "definition": "Une administration est **compétente** lorsqu'un texte lui attribue la responsabilité d'un domaine ou d'une mission.",
    "etapes": [
     {
-     "titre": "1. Je lis la demande",
-     "texte": "De quoi s'agit-il vraiment ? Un acte, une aide, une autorisation, une information ?"
+     "titre": "1. Je comprends la demande",
+     "texte": "De quoi la personne a-t-elle besoin ? Une information, un document, une aide ou une autorisation ?"
     },
     {
-     "titre": "2. Je cherche qui a la compétence",
-     "texte": "Pas qui est le plus proche, ni « comme d'habitude »."
+     "titre": "2. J'identifie l'administration compétente",
+     "texte": "Je recherche si la demande relève de l'État, de la Nouvelle-Calédonie, d'une province ou d'une commune."
     },
     {
-     "titre": "3. Dans le doute, je vérifie",
-     "texte": "Délégation, compétence partagée, sources contradictoires : je lis le texte ou je demande avant de répondre."
+     "titre": "3. Je vérifie en cas de doute",
+     "texte": "Je consulte une source officielle ou je demande confirmation à mon responsable avant d'orienter la demande."
     },
     {
-     "titre": "4. Je réponds en trois éléments",
-     "texte": "L'acteur compétent, la raison, un moyen de le joindre."
+     "titre": "4. J'oriente vers le bon interlocuteur",
+     "texte": "J'indique le service à contacter, pourquoi il est compétent et comment le joindre."
     }
    ],
-   "titre_types": "Qui est compétent ?",
+   "titre_types": "Qui est compétent ? Quelques exemples (liste non exhaustive)",
    "types": [
     {
      "titre": "L'État",
-     "texte": "Haut-commissariat. Justice, ordre public, défense, entrée et séjour des étrangers."
+     "texte": "L'entrée et le séjour des étrangers, la justice, le maintien de l'ordre."
     },
     {
      "titre": "La Nouvelle-Calédonie",
-     "texte": "Congrès, gouvernement. Fiscalité, protection sociale (CAFAT), circulation routière, enseignement du second degré, droit civil."
+     "texte": "Les impôts et taxes, la protection sociale, la circulation routière."
     },
     {
      "titre": "La province",
-     "texte": "Toutes les matières qui ne sont pas attribuées aux autres : développement économique, environnement…"
+     "texte": "Tout ce qui n'est pas attribué aux autres : le développement économique, l'aide sociale…"
     },
     {
      "titre": "La commune",
-     "texte": "Mairie. Voirie communale, guichet de l'état civil."
+     "texte": "La voirie communale, la police municipale. **À noter :** l'état civil se demande en mairie ; ses règles relèvent de la Nouvelle-Calédonie."
     }
    ],
-   "exemple": "« Pour un titre de séjour, l'habitant s'adresse aux services de l'État, au haut-commissariat : le séjour des étrangers est une compétence de l'État. Les coordonnées sont sur le site du haut-commissariat. »",
-   "a_retenir": "Le lieu de la demande ne dit pas qui est compétent. Dans le doute, je vérifie avant de répondre.",
+   "exemple": "« Titre de séjour : l'entrée et le séjour des étrangers relèvent de l'**État** (la compétence). La demande se dépose auprès des services du **haut-commissariat**, qui la traitent (le guichet). Démarche : [nouvelle-caledonie.gouv.fr](https://www.nouvelle-caledonie.gouv.fr). »",
+   "a_retenir": "Ce n'est pas parce qu'une demande arrive dans mon service que celui-ci est compétent. Je vérifie avant de l'orienter.",
    "reperes": [
-    "Loi organique n° 99-209 (Légifrance)",
-    "Leginova",
-    "Le site du gouvernement de la Nouvelle-Calédonie"
+    "Loi organique n° 99-209, art. 20 à 22 (Légifrance)",
+    "La personne qui confirme une orientation dans mon service",
+    "Les coordonnées des guichets que j'oriente souvent"
    ],
    "competences": [
     "C01"
    ],
-   "version": "0.1"
+   "version": "0.2"
   },
   "FICHE-M1-E2": {
    "id": "FICHE-M1-E2",
@@ -2430,40 +2431,41 @@ window.DINA_DATA = {
    "modele": "formulaire",
    "categorie": "outil",
    "titre": "Mon employeur et mes interlocuteurs",
-   "quand": "Dans vos premières semaines, avec l'organigramme de votre employeur.",
+   "quand": "Dans vos premières semaines, avec l'organigramme de votre employeur. Ce n'est pas un annuaire : notez pour quoi vous solliciterez chaque interlocuteur.",
    "sections": [
     {
      "titre": "Mon employeur",
      "champs": [
       "Son nom",
       "Son type (commune, province, Nouvelle-Calédonie, établissement public…)",
-      "Qui délibère",
-      "Qui dirige"
+      "Qui prend les grandes décisions ? (conseil municipal, assemblée, conseil d'administration…)",
+      "Qui dirige les services ? (secrétaire général, directeur…)"
      ]
     },
     {
      "titre": "Mon service",
      "champs": [
       "Mon service et ma direction",
-      "Mon responsable",
+      "Mon responsable : une consigne, une priorité, une difficulté",
       "Le responsable de mon responsable"
      ]
     },
     {
-     "titre": "Mes interlocuteurs",
+     "titre": "Mes interlocuteurs, et quand les solliciter",
      "champs": [
-      "Ressources humaines",
-      "Support informatique",
-      "Locaux et véhicules",
-      "Mon parrain ou ma marraine"
+      "Ressources humaines : ma situation administrative (contrat, congés, paie)",
+      "Support informatique : un accès, un matériel",
+      "Logistique : locaux, véhicules, fournitures",
+      "Mon référent : les pratiques du service",
+      "Autre interlocuteur utile, et pour quoi"
      ]
     }
    ],
-   "a_retenir": "Ce qui engage mon employeur se décide à la direction : je transmets, je ne décide pas.",
+   "a_retenir": "Je connais mon périmètre d'action. Quand je ne suis pas habilité à décider, je transmets à la personne compétente.",
    "competences": [
     "C02"
    ],
-   "version": "0.1"
+   "version": "0.2"
   },
   "FICHE-M1-E3": {
    "id": "FICHE-M1-E3",
@@ -2484,7 +2486,7 @@ window.DINA_DATA = {
     },
     {
      "titre": "3. Je vérifie",
-     "texte": "Qui l'a produite ? De quand date-t-elle ? Est-elle définitive, en vigueur ?"
+     "texte": "Qui l'a produite ? De quand date-t-elle ? Est-elle en vigueur ? La version consolidée donne la règle actuelle, le JONC sa date."
     },
     {
      "titre": "4. Je garde la référence",
@@ -2499,35 +2501,36 @@ window.DINA_DATA = {
    "types": [
     {
      "titre": "Leginova",
-     "texte": "Les textes calédoniens en vigueur, en version consolidée (anciennement Juridoc)."
+     "lien": "https://leginova.gouv.nc",
+     "texte": "Les textes calédoniens en vigueur (versions consolidées) et le Journal officiel. Anciennement Juridoc."
     },
     {
      "titre": "JONC",
-     "texte": "Le Journal officiel de la Nouvelle-Calédonie : les textes publiés."
+     "texte": "Le Journal officiel de la Nouvelle-Calédonie : la publication officielle des textes, avec leur date. Consultable sur Leginova."
     },
     {
      "titre": "Légifrance",
-     "texte": "Les textes nationaux, dont la loi organique."
+     "lien": "https://www.legifrance.gouv.fr",
+     "texte": "Les textes nationaux, dont la loi organique de 1999."
     },
     {
      "titre": "DRHFPNC",
-     "texte": "Les règles RH de la fonction publique calédonienne."
+     "lien": "https://drhfpnc.gouv.nc",
+     "texte": "Les règles et procédures RH de la fonction publique calédonienne."
     }
    ],
-   "exemple": "« Quel est le délai d'affiliation après une embauche ? Le site officiel (mis à jour le mois dernier) et une seconde source officielle donnent un délai ; le guide de 2019 en donne un autre. Je ne sais pas si la règle a changé. Peux-tu me dire quelle source fait foi ? »",
+   "exemple": "« Délai d'affiliation après une embauche : deux sources officielles récentes donnent un délai, le guide de 2019 un autre. Peux-tu me dire quelle source fait foi ? »",
    "a_retenir": "Facile à trouver ne veut pas dire à jour. Je vérifie avant de transmettre.",
    "reperes": [
-    "Leginova",
-    "JONC",
-    "Légifrance",
-    "Site de la DRHFPNC",
-    "Intranet de mon employeur"
+    "Le site de mon employeur",
+    "L'intranet ou le dossier des procédures internes (s'il existe)",
+    "La personne à qui je demande confirmation"
    ],
    "competences": [
     "C17",
     "C18"
    ],
-   "version": "0.1"
+   "version": "0.2"
   }
  },
  "illustrations": {

@@ -9,7 +9,7 @@
   var M = D.module;
   var ICONES = { agir: "i-agir", informer: "i-informer", valider: "i-valider", alerter: "i-alerter" };
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
-  function inline(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>"); }
+  function inline(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>'); }
   function ic(i) { return '<svg class="icone" aria-hidden="true"><use href="#' + i + '"/></svg>'; }
   document.title = "DINA — " + f.titre;
 
@@ -43,17 +43,20 @@
   } else if (f.modele === "aide-memoire") {
     var NOMBRES = ["", "Une étape", "Deux étapes", "Trois étapes", "Quatre étapes", "Cinq étapes", "Six étapes", "Sept étapes"];
     corps += '<h2>' + esc(f.titre_etapes || NOMBRES[f.etapes.length] || "Les étapes") + '</h2><ol class="fiche-etapes">' + f.etapes.map(function (e) { return "<li><strong>" + esc(e.titre) + "</strong><span>" + inline(e.texte) + "</span></li>"; }).join("") + "</ol>";
-    corps += '<h2>' + esc(f.titre_types || "Quel type de demande ?") + '</h2><div class="fiche-types">' + f.types.map(function (t) { return "<div><strong>" + esc(t.titre) + "</strong>" + inline(t.texte) + "</div>"; }).join("") + "</div>";
+    corps += '<h2>' + esc(f.titre_types || "Quel type de demande ?") + '</h2><div class="fiche-types">' + f.types.map(function (t) {
+      var titre = t.lien ? '<a href="' + esc(t.lien) + '" target="_blank" rel="noopener">' + esc(t.titre) + "</a>" : esc(t.titre);
+      var lien = t.lien ? '<span class="lien">' + esc(t.lien.replace(/^https?:\/\/(www\.)?/, "")) + "</span>" : "";
+      return "<div><strong>" + titre + "</strong>" + inline(t.texte) + lien + "</div>"; }).join("") + "</div>";
     if (f.exemple) corps += '<h2>Exemple</h2><blockquote class="fiche-exemple">' + inline(f.exemple) + "</blockquote>";
   }
   if (f.a_retenir) corps += '<p class="retenir">' + ic("i-ampoule") + inline(f.a_retenir) + "</p>";
   if (f.reperes) {
-    corps += '<h2>Mes repères dans mon service</h2><div class="reperes' + (f.reperes.length > 3 ? " reperes--2col" : "") + '">' + f.reperes.map(function (r) { return "<p><span>" + esc(r) + " :</span></p>"; }).join("") + "</div>";
+    corps += '<h2>Mes repères dans mon service</h2><div class="reperes' + (f.reperes.length > 2 ? " reperes--2col" : "") + '">' + f.reperes.map(function (r) { return "<p><span>" + esc(r) + " :</span></p>"; }).join("") + "</div>";
   }
 
   cible.innerHTML = '<article class="fiche fiche--' + esc(f.modele) + '" aria-label="' + esc(f.titre) + '">' +
     '<div class="fiche-bandeau"><img src="assets/logo/logo-dina.svg" alt="DINA" style="height:17mm"><span class="type">OUTIL</span></div>' +
-    "<h1>" + esc(f.titre) + '</h1><p class="quand"><strong>Quand l\'utiliser ?</strong> ' + inline(f.quand) + "</p>" + corps +
+    "<h1>" + esc(f.titre) + '</h1><p class="quand"><strong>Quand l\'utiliser ?</strong> ' + inline(f.quand) + "</p>" + (f.definition ? '<p class="definition">' + inline(f.definition) + "</p>" : "") + corps +
     '<div class="fiche-pied"><span>Module ' + esc(M.code) + " — " + esc(M.titre) + " · " + esc(f.code) + " · Compétences " + esc((f.competences || []).join(", ")) + "<br>DINA, IFAP — version " + esc(f.version) + "</span>" +
     '<span style="text-align:right">Un dispositif de l\'IFAP<br>Institut de formation de l\'administration publique</span></div></article>';
 
