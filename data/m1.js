@@ -172,7 +172,7 @@ window.DINA_DATA = {
    "canal": "oral",
    "titre": "Lundi, 8 h 30",
    "recit": "Ana travaille au pôle ressources et administration de l'ÉLAN. Elle accompagne les nouveaux agents dans leurs premiers jours.",
-   "texte": "« Bonjour Noa, bienvenue ! Voici votre badge définitif et vos accès. Je vous donne aussi une liste pour vos premiers jours : ce qu'il vous faut, ce qu'on attend de vous, qui peut vous aider. »",
+   "texte": "« Bonjour Noa, bienvenue ! Voici ton badge définitif et tes accès. Je te donne aussi une liste pour tes premiers jours : ce qu'il te faut, ce qu'on attend de toi, qui peut t'aider. »",
    "suite": "M1-ENT-3"
   },
   "M1-ENT-3": {
