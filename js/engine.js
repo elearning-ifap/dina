@@ -1754,7 +1754,7 @@
       if (c.type === "ecran") {
         var x = E[c.id]; if (!x) return;
         g = x.type === "document" ? "Documents" : "Apports"; titre = x.titre || x.id;
-        corps = x.type === "document" ? docHtml(x) : md(x.texte) + (x.a_retenir ? '<p class="a-retenir">' + ic("i-ampoule") + "<span><strong>À retenir</strong> — " + inline(x.a_retenir) + "</span></p>" : "");
+        corps = x.type === "document" ? docHtml(x) : contenuApport(x) + (x.a_retenir ? '<p class="a-retenir">' + ic("i-ampoule") + "<span><strong>À retenir</strong> — " + inline(x.a_retenir) + "</span></p>" : "");
       } else {
         var f = F[c.id]; if (!f) return;
         g = GROUPES_FICHES[f.categorie] || "Fiches outils"; titre = f.titre;
@@ -1764,6 +1764,16 @@
       (groupes[g] = groupes[g] || []).push({ titre: titre, corps: corps, extra: extra });
     });
     return ordre.filter(function (g) { return groupes[g]; }).map(function (g) { return { groupe: g, items: groupes[g] }; });
+  }
+  /* Carnet : le contenu de l'apport, sans la mise en situation (27-10 : le texte peut n'être qu'un récit) */
+  function contenuApport(x) {
+    var h = x.repliques ? "" : md(x.texte);
+    if (x.infographie) h += "<ul>" + (x.infographie.blocs || []).map(function (b) {
+      return "<li><strong>" + inline(b.titre) + "</strong>" + (b.role ? " — " + inline(b.role) : "") + (b.exemples ? " Par exemple : " + b.exemples.map(inline).join(", ") + "." : "") + "</li>";
+    }).join("") + "</ul>" + (x.infographie.fil ? "<p><strong>" + esc(x.infographie.fil_titre || "Avant d'orienter") + " :</strong> " + x.infographie.fil.map(inline).join(" → ") + "</p>" : "");
+    if (x.points) h += "<ul>" + x.points.map(function (p) { if (typeof p === "string") p = { titre: p }; return "<li><strong>" + inline(p.titre) + "</strong>" + (p.texte ? " — " + inline(p.texte) : "") + "</li>"; }).join("") + "</ul>";
+    if (x.cartes) h += "<ul>" + x.cartes.map(function (c) { return "<li><strong>" + inline(c.recto) + "</strong> — " + inline(c.verso) + "</li>"; }).join("") + "</ul>";
+    return h;
   }
   function ficheTexte(f) {
     if (f.modele === "checklist" || f.modele === "chemin") return "<ol>" + f.questions.map(function (q) { return "<li><strong>" + esc(q.q) + "</strong>" + (q.aide ? " — " + inline(q.aide) : "") + (q.si_non ? "<br><em>Sinon :</em> " + inline(q.si_non) : "") + "</li>"; }).join("") + "</ol>" + (f.conclusion ? "<p><strong>" + esc(f.conclusion.titre) + "</strong> — " + inline(f.conclusion.texte) + "</p>" : "") + (f.alerte ? "<p>" + inline(f.alerte) + "</p>" : "");
