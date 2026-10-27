@@ -361,7 +361,7 @@
         "</button></li>";
     }).join("");
     zone.innerHTML = '<div class="menu">' +
-      '<div class="menu-tete"><span class="surtitre">' + esc(libModule()) + " · " + esc(M.duree || "") + "</span><h1>" + esc(M.titre) + "</h1>" + md(M.intro) +
+      '<div class="menu-tete"><span class="surtitre">' + esc(libModule()) + " · " + esc(M.duree || "") + "</span><h1>" + esc(M.titre) + "</h1>" + (M.sous_titre ? '<p class="menu-sous">' + esc(M.sous_titre) + "</p>" : "") + md(M.intro) +
       "</div>" + dossierSuivi({ compact: true }) + chemin({ interactif: true }) +
       '<p class="menu-legende">' + (!faites ? "Chaque étape terminée trace un bout du chemin de Noa." : faites === SECTIONS.length ? "Toutes les étapes sont faites : le chemin de Noa est tracé." : faites + " étape" + (faites > 1 ? "s" : "") + " sur " + SECTIONS.length + " : le chemin de Noa se dessine.") + "</p>" +
       '<ol class="sections sections--liste">' + cartes + "</ol></div>";
@@ -416,13 +416,18 @@
   /* Qui parle (portrait + nom + fonction) et par quel canal */
   function locuteur(e) {
     if (!e.personnage) return e.canal ? '<div class="locuteur locuteur--seul">' + canal(e) + "</div>" : "";
+    if (e.portrait === "grand") return '<div class="locuteur locuteur--portrait">' + avatar(e.personnage, "avatar--xl") + '<div><strong>' + esc(e.personnage) + "</strong>" + role(e.personnage) + canal(e) + "</div></div>";
     return '<div class="locuteur">' + avatar(e.personnage, "avatar--grand") + "<div><strong>" + esc(e.personnage) + "</strong>" + role(e.personnage) + canal(e) + "</div></div>";
+  }
+  function texteOuRepliques(e) {
+    if (e.repliques) return corpsMessage(e, false);
+    return e.texte ? '<div class="texte">' + md(e.texte) + "</div>" : "";
   }
   function corpsMessage(e, progressif) {
     if (e.repliques) return (e.texte ? '<div class="texte recit">' + md(e.texte) + "</div>" : "") + repliquesHtml(e, progressif);
     var tete = "";
     if (e.canal === "courriel" && (e.objet || e.personnage)) tete = '<div class="bulle-tete">' + (e.personnage ? "<span>De : <strong>" + esc(e.personnage) + "</strong></span>" : "") + (e.objet ? "<span>Objet : " + esc(e.objet) + "</span>" : "") + "</div>";
-    return '<div class="texte' + (e.canal ? " bulle bulle--" + esc(e.canal) : "") + '">' + tete + md(e.texte) + "</div>";
+    return (e.recit ? '<div class="texte recit">' + md(e.recit) + "</div>" : "") + '<div class="texte' + (e.canal ? " bulle bulle--" + esc(e.canal) : "") + '">' + tete + md(e.texte) + "</div>";
   }
 
   function rendreLecture(e) {
@@ -433,7 +438,7 @@
     var visuel = e.points || e.fiche_identite || e.colonnes || e.orbite || e.infographie;
     if (visuel) zone.classList.add("ecran--visuel");
     var html = '<div class="colonne' + (visuel ? " colonne--large" : "") + '">' + (e.points && e.illustration ? illustration(e.illustration, "illu-bandeau") : "") + entete(e, sur);
-    if ((e.type === "message" || e.type === "narration") && e.repliques) html += canalSeul(e) + corpsMessage(e, true);
+    if (e.repliques) html += (e.type === "message" || e.type === "narration" ? canalSeul(e) : "") + corpsMessage(e, e.type === "message" || e.type === "narration");
     else if ((e.type === "message" || e.type === "narration") && (e.personnage || e.canal)) html += locuteur(e) + corpsMessage(e);
     else html += '<div class="texte texte--' + e.type + '">' + md(e.texte) + "</div>";
     if (e.infographie) html += infographie(e.infographie);
@@ -456,10 +461,10 @@
     principal("Continuer", function () { suivant(e); });
   }
   function docHtml(e) {
-    var html = (e.intro ? '<p class="intro">' + inline(e.intro) + "</p>" : "");
-    html += '<div class="document">' + (e.blocs || []).map(function (b) {
+    var html = (e.intro ? '<p class="intro">' + inline(e.intro) + "</p>" : ""), blocs = '<div class="document">' + (e.blocs || []).map(function (b) {
       return '<section class="doc-bloc"><h2>' + esc(b.titre) + "</h2>" + md(b.texte) + "</section>";
     }).join("") + "</div>";
+    if (!e.organigramme) html += blocs;
     if (e.organigramme) {
       html += '<section class="organigramme" aria-label="Organigramme simplifié"><h2>Organigramme simplifié</h2>' + e.organigramme.map(function (niveau) {
         return '<div class="orga-niveau">' + niveau.map(function (p) {
@@ -467,7 +472,7 @@
         }).join("") + "</div>";
       }).join('<div class="orga-lien" aria-hidden="true"></div>');
       if (e.partenaires) html += '<p class="orga-partenaires">' + esc(e.partenaires) + "</p>";
-      html += "</section>";
+      html += "</section>" + blocs;
     }
     return html;
   }
@@ -596,11 +601,11 @@
     }).join("") + "</ul>" : "";
     var teaser = apres ? '<div class="prochain">' + ic("i-lecture") + '<div><span class="surtitre">Et ensuite</span><strong>' + esc(libelleSection(apres)) + " — " + esc(apres.titre || "") + "</strong>" + (apres.accroche ? "<p>" + inline(apres.accroche) + "</p>" : "") + "</div></div>" : "";
     /* Fin de journée (27-10) : un seul point focal — ce que vous avez fait. Pas de carte : le bandeau montre déjà la progression. */
-    var sur = sec && sec.jour ? "Bilan · " + sec.jour : libelleSection(sec);
+    var sur = e.surtitre || (sec && sec.jour ? "Bilan · " + sec.jour : libelleSection(sec));
     var ensuite = apres ? '<p class="ensuite">' + ic("i-lecture") + '<span><strong>Ensuite : ' + esc(libelleSection(apres)) + "</strong> — " + esc(apres.titre || "") + "</span></p>" : "";
     zone.innerHTML = '<div class="fin fin--large fin--journee"><div class="fin-tete"><span class="pastille">' + ic("i-check") + "</span><div><span class=\"surtitre\">" + esc(sur) + "</span><h1>" + esc(e.titre || "Étape terminée") + "</h1>" +
       (e.texte ? '<div class="texte fin-chapeau">' + md(e.texte) + "</div>" : "") + "</div></div>" +
-      acquis + (e.dossier ? dossierSuivi({ section: sec && sec.id, texte: e.dossier }) : "") + ensuite + "</div>";
+      (e.repliques ? '<div class="fin-pensee">' + repliquesHtml(e, false) + "</div>" : "") + acquis + (e.dossier ? dossierSuivi({ section: sec && sec.id, texte: e.dossier }) : "") + ensuite + "</div>";
     if (apres && disponible(i + 1)) principal("Continuer : " + libelleSection(apres), function () { demarrerSection(apres); });
     else principal("Retour au sommaire", function () { etat.historique = []; aller("MENU", true); }, { icone: "i-sommaire" });
   }
@@ -1171,7 +1176,7 @@
     zone.classList.add("ecran--decision");
     var audit = e.mode === "audit", ouvertes = {}, signalees = {};
     var info = D.illustrations[e.illustration] || {};
-    var html = '<div class="colonne colonne--large">' + entete(e, libelleEtape(e)) + (e.texte ? '<div class="texte">' + md(e.texte) + "</div>" : "") +
+    var html = '<div class="colonne colonne--large">' + entete(e, libelleEtape(e)) + texteOuRepliques(e) +
       consigneZone(null, e.consigne || (audit ? "Sélectionnez chaque élément qui vous paraît anormal, puis validez." : "Cliquez sur chaque point numéroté.")) +
       '<div class="hs-cadre"><img class="hs-img" src="assets/img/' + esc(e.illustration) + '.jpg" alt="' + esc(e.alt || info.alt) + '" data-essai="jpg">' +
       e.zones.map(function (z, n) {
@@ -1348,7 +1353,7 @@
   /* ---------- Cartes retournables (D49) ---------- */
   function rendreCartes(e) {
     zone.classList.add("ecran--lecture");
-    zone.innerHTML = '<div class="colonne colonne--large">' + entete(e, libelleEtape(e)) + (e.texte ? '<div class="texte">' + md(e.texte) + "</div>" : "") +
+    zone.innerHTML = '<div class="colonne colonne--large">' + entete(e, libelleEtape(e)) + texteOuRepliques(e) +
       consigneZone(null, e.consigne || "Cliquez sur chaque carte pour la retourner.") +
       '<ul class="cartes">' + e.cartes.map(function (c, n) {
         return '<li><button type="button" class="carte-ret" data-n="' + n + '" aria-pressed="false" style="--teinte:' + TEINTES[n % TEINTES.length] + ";--teinte-fonce:" + TEINTES_FONCEES[n % TEINTES.length] + '"><span class="cr-recto">' + (c.icone ? '<span class="cr-ico">' + ic(c.icone) + "</span>" : "") + '<span class="cr-titre">' + inline(c.recto) + '</span><span class="cr-indice">Retourner</span></span><span class="cr-verso" hidden><span class="cr-rappel">' + inline(c.recto) + "</span>" + md(c.verso) + "</span></button></li>";

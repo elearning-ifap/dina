@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 v0.1.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « sb_v02.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M1",
@@ -6,7 +6,7 @@ window.DINA_DATA = {
   "titre": "Je me repère",
   "code": "M1",
   "duree": "1 h",
-  "intro": "Première semaine de Noa à ÉLAN. Il ne connaît encore ni les institutions calédoniennes, ni son établissement, ni les bonnes sources. Du lundi au vendredi, aidez-le à savoir qui fait quoi, où se situe ÉLAN et comment trouver une information sûre. Jeudi, un premier appel va tout mettre à l'épreuve.",
+  "intro": "Première semaine de Noa à l'ÉLAN. Son établissement, il le connaît sur le papier ; reste à découvrir comment on y travaille. Du lundi au vendredi, aidez-le à savoir qui fait quoi, qui décide à l'ÉLAN et comment trouver une information sûre.",
   "sections": [
    {
     "id": "entree",
@@ -27,14 +27,14 @@ window.DINA_DATA = {
     "titre": "Qui fait quoi ?",
     "debut": "M1-E1-S1",
     "duree": "15 min",
-    "accroche": "Six demandes arrivées à ÉLAN par erreur. Qui est compétent ?"
+    "accroche": "Six demandes arrivées à l'ÉLAN par erreur. Qui est compétent ?"
    },
    {
     "id": "ep2",
     "libelle": "Épisode 2",
     "jour": "Mardi",
     "savoir": "Savoir qui décide à l'ÉLAN",
-    "titre": "Où est ÉLAN dans tout ça ?",
+    "titre": "Où est l'ÉLAN dans tout ça ?",
     "debut": "M1-E2-S1",
     "duree": "12 min",
     "accroche": "Premier comité de direction. Qui décide, qui prépare, qui exécute ?"
@@ -84,8 +84,8 @@ window.DINA_DATA = {
   "dossier": {
    "titre": "Vers le dossier Passerelles",
    "visible_des": "defi",
-   "objet": "Le dossier n'existe pas encore. Ce que Noa apprend cette semaine lui servira jeudi, au premier appel de l'association Passerelles.",
-   "roles": "Passerelles porte ses projets et décide. ÉLAN qualifie, étudie et coordonne.",
+   "objet": "Jeudi, Joël, de l'association Passerelles, appelle l'ÉLAN. Sa demande devient le premier dossier de Noa : tout ce qu'il a appris depuis lundi lui sert.",
+   "roles": "Passerelles porte ses projets et décide. L'ÉLAN qualifie, étudie et coordonne.",
    "jalons": [
     {
      "id": "competent",
@@ -96,7 +96,7 @@ window.DINA_DATA = {
     {
      "id": "decide",
      "jour": "Mardi",
-     "libelle": "Savoir qui décide à ÉLAN",
+     "libelle": "Savoir qui décide à l'ÉLAN",
      "section": "ep2"
     },
     {
@@ -120,14 +120,16 @@ window.DINA_DATA = {
    ]
   },
   "personnages": {
-   "Noa": "Chargé d'études et d'appui aux projets, ÉLAN",
-   "Samuel": "Responsable du pôle études et projets, ÉLAN",
-   "Malia": "Chargée d'études et d'évaluation, marraine de Noa, ÉLAN",
-   "Ariane": "Directrice d'ÉLAN",
-   "Ana": "Développement des compétences, ÉLAN",
+   "Noa": "Chargé d'études et d'appui aux projets, l'ÉLAN",
+   "Samuel": "Responsable du pôle études et projets, l'ÉLAN",
+   "Malia": "Chargée d'études et d'évaluation, marraine de Noa, l'ÉLAN",
+   "Ariane": "Directrice de l'ÉLAN",
+   "Ana": "Développement des compétences, pôle ressources et administration, l'ÉLAN",
    "Élise": "Agente d'accueil, une commune",
-   "Joël": "Coordinateur de terrain, association Passerelles"
-  }
+   "Joël": "Coordinateur de terrain, association Passerelles",
+   "Cédric": "Accueil et logistique, l'ÉLAN"
+  },
+  "sous_titre": "Comprendre mon environnement"
  },
  "ecrans": {
   "M1-ENT-1": {
@@ -138,7 +140,7 @@ window.DINA_DATA = {
    "personnage": "Samuel",
    "canal": "oral",
    "titre": "Koné, lundi, 8 h",
-   "texte": "Samuel accueille Noa au pôle études et projets.\n« Bienvenue, Noa. Cette semaine, pas de dossier : tu observes, tu poses des questions, tu apprends qui fait quoi. Ici, la moitié des demandes qu'on reçoit ne sont pas pour nous. Il faut savoir où les envoyer. »\n",
+   "texte": "Samuel accueille Noa au pôle études et projets. L'ÉLAN, Noa le connaît sur le papier ; reste à découvrir les habitudes, les collègues, les outils.\n\n« Bienvenue, Noa. Cette semaine, pas de dossier : tu apprends qui fait quoi. Ici, la moitié des demandes qu'on reçoit ne sont pas pour nous. Il faut savoir où les envoyer. »",
    "suite": "M1-ENT-2"
   },
   "M1-ENT-2": {
@@ -159,6 +161,18 @@ window.DINA_DATA = {
      "texte": "« Au début, il y a beaucoup de choses à comprendre et à intégrer. C'est normal. »"
     }
    ],
+   "suite": "M1-ENT-ANA"
+  },
+  "M1-ENT-ANA": {
+   "id": "M1-ENT-ANA",
+   "type": "message",
+   "etape": "Entrée",
+   "personnage": "Ana",
+   "portrait": "grand",
+   "canal": "oral",
+   "titre": "Lundi, 8 h 30",
+   "recit": "Ana travaille au pôle ressources et administration de l'ÉLAN. Elle accompagne les nouveaux agents dans leurs premiers jours.",
+   "texte": "« Bonjour Noa, bienvenue ! Voici votre badge définitif et vos accès. Je vous donne aussi une liste pour vos premiers jours : ce qu'il vous faut, ce qu'on attend de vous, qui peut vous aider. »",
    "suite": "M1-ENT-3"
   },
   "M1-ENT-3": {
@@ -167,7 +181,7 @@ window.DINA_DATA = {
    "etape": "Entrée",
    "fiche": "FICHE-M1-ENT",
    "titre": "Mes premiers jours",
-   "texte": "Ana, du pôle ressources, remet à Noa son badge, ses accès et une liste pour ses premiers jours.\n**Quand l'utiliser ?** Dans vos premiers jours, chez votre employeur. Cochez au fur et à mesure, et notez les noms.\n",
+   "texte": "**La liste des premiers jours** : ce qu'il faut avoir pour travailler, ce qu'on attend de vous, qui peut vous aider. Noa la reçoit de l'ÉLAN ; elle vaut chez tous les employeurs.\n\n**Quand l'utiliser ?** Dans vos premiers jours, chez votre employeur. Cochez au fur et à mesure, et notez les noms.",
    "competences": [
     "C02"
    ],
@@ -210,33 +224,10 @@ window.DINA_DATA = {
    "id": "M1-ENT-FIN",
    "type": "fin-section",
    "etape": "Entrée",
-   "titre": "La semaine de Noa",
-   "texte": "Chaque jour, une situation de travail. Vous décidez avec Noa ; chaque réponse est expliquée. Ce que Noa reçoit d'utile est rangé dans votre **carnet**, en haut de l'écran.\n",
-   "acquis_titre": "Au programme",
-   "acquis": [
-    {
-     "titre": "Lundi — Qui fait quoi ?",
-     "texte": "L'État, la Nouvelle-Calédonie, les provinces, les communes."
-    },
-    {
-     "titre": "Mardi — Où est ÉLAN dans tout ça ?",
-     "texte": "Son employeur, son organigramme, ses interlocuteurs."
-    },
-    {
-     "titre": "Mercredi — Une information fiable",
-     "texte": "Chercher, vérifier, garder la référence."
-    },
-    {
-     "titre": "Jeudi — Le premier appel de Joël",
-     "texte": "Le défi : tout mettre en pratique, seul."
-    },
-    {
-     "titre": "Vendredi — Le bilan",
-     "texte": "Trois situations nouvelles, puis ce que vous retenez."
-    }
-   ],
-   "dossier": "Joël et Teiva, de l'association Passerelles, sont des partenaires d'ÉLAN. Il n'y a pas encore de dossier : cette semaine, Noa apprend ce qui lui servira jeudi.",
-   "suite": "MENU"
+   "titre": "La semaine de Noa commence",
+   "texte": "Chaque jour, une situation de travail. Vous décidez avec Noa ; chaque réponse est expliquée. Ce qui vous sera utile est rangé dans votre **carnet**, en haut de l'écran.",
+   "suite": "MENU",
+   "surtitre": "C'est parti"
   },
   "M1-E1-S1": {
    "id": "M1-E1-S1",
@@ -254,7 +245,7 @@ window.DINA_DATA = {
    "type": "classement",
    "etape": "Épisode 1",
    "texte": "À qui l'habitant doit-il s'adresser ? Classez les six demandes.",
-   "brief": "Six demandes arrivées à ÉLAN par erreur. Pour chacune, Noa doit dire qui est compétent. Ne choisissez pas « la Nouvelle-Calédonie » seulement parce que tout se passe sur le territoire.",
+   "brief": "Six demandes arrivées à l'ÉLAN par erreur. Pour chacune, Noa doit dire qui est compétent. Ne choisissez pas « la Nouvelle-Calédonie » seulement parce que tout se passe sur le territoire.",
    "competences": [
     "C01"
    ],
@@ -343,7 +334,7 @@ window.DINA_DATA = {
     },
     {
      "id": "C",
-     "libelle": "Parce qu'on fait toujours comme ça à ÉLAN.",
+     "libelle": "Parce qu'on fait toujours comme ça à l'ÉLAN.",
      "verdict": "inadapte",
      "feedback": "L'habitude n'est pas une raison. Si la règle a changé, l'habitude conduit à l'erreur."
     }
@@ -435,7 +426,6 @@ window.DINA_DATA = {
    "illustration": "ILL-N07",
    "etape": "Épisode 1",
    "titre": "Les chiffres de la carte",
-   "texte": "Samuel : « Tu sais pourquoi il faut orienter juste du premier coup ? Dans le Nord, une mauvaise orientation peut coûter un long déplacement. Avant de reprendre la carte du guide d'orientation, vérifie ses chiffres. »",
    "consigne": "Sélectionnez chaque chiffre qui ne peut pas être repris tel quel, puis validez.",
    "competences": [
     "C01"
@@ -475,53 +465,59 @@ window.DINA_DATA = {
     }
    ],
    "synthese": "Un repère chiffré n'est utile que si l'on sait d'où il vient et de quand il date.",
-   "sources": "ISEE, recensement de la population 2025, résultats authentifiés par le décret n° 2025-966 du 18 septembre 2025 (population municipale) : Nouvelle-Calédonie 264 596 ; province Sud 194 978 (74 %) ; province Nord 50 947 (19 %) ; îles Loyauté 18 671 (7 %). Chiffre du diaporama : îles Loyauté 18 353 (population légale 2019, Insee).",
-   "suite": "M1-E1-APP1"
+   "suite": "M1-E1-APP1",
+   "personnage": "Samuel",
+   "repliques": [
+    {
+     "personnage": "Samuel",
+     "texte": "« Tu sais pourquoi il faut orienter juste du premier coup ? Dans le Nord, une mauvaise orientation peut coûter un long déplacement. Avant de reprendre la carte du guide d'orientation, vérifie ses chiffres. »"
+    }
+   ]
   },
   "M1-E1-APP1": {
    "id": "M1-E1-APP1",
    "type": "apport",
    "etape": "Épisode 1",
    "titre": "Quatre niveaux, chacun ses compétences",
-   "texte": "L'organisation de la Nouvelle-Calédonie est fixée par la Constitution (titre XIII) et par la loi organique du 19 mars 1999, issue de l'accord de Nouméa.",
+   "texte": "Midi. Malia dessine quatre colonnes sur le tableau blanc du pôle.",
    "infographie": {
     "blocs": [
      {
       "icone": "i-balance",
       "titre": "L'État",
-      "role": "Représenté par le haut-commissaire (art. 2).",
+      "role": "Représenté en Nouvelle-Calédonie par le haut-commissaire.",
       "exemples": [
        "La justice",
        "Le maintien de l'ordre",
        "La défense",
        "L'entrée et le séjour des étrangers"
       ],
-      "ref": "Loi organique, art. 21"
+      "ref": "Loi organique, art. 2 et 21"
      },
      {
       "icone": "i-batiment",
       "titre": "La Nouvelle-Calédonie",
-      "role": "Ses institutions : le congrès, le gouvernement, le Sénat coutumier, le conseil économique, social et environnemental, les conseils coutumiers (art. 2).",
+      "role": "Ses institutions : le congrès, le gouvernement, le Sénat coutumier, le conseil économique, social et environnemental, les conseils coutumiers.",
       "exemples": [
        "La fiscalité",
        "La protection sociale",
        "La circulation routière"
       ],
-      "ref": "Loi organique, art. 22"
+      "ref": "Loi organique, art. 2 et 22"
      },
      {
       "icone": "i-lieu",
       "titre": "Les trois provinces",
-      "role": "Nord, Sud, îles Loyauté. Compétentes dans toutes les matières qui ne sont pas attribuées aux autres (art. 20).",
+      "role": "Nord, Sud, îles Loyauté. Compétentes dans toutes les matières qui ne sont pas attribuées aux autres.",
       "exemples": [
        "Le développement économique de proximité"
       ],
       "ref": "Loi organique, art. 20"
      },
      {
-      "icone": "i-equipe",
+      "icone": "i-mairie",
       "titre": "Les 33 communes",
-      "role": "Collectivités territoriales de la République, comme les provinces (art. 3).",
+      "role": "Collectivités territoriales de la République, comme les provinces.",
       "exemples": [
        "La voirie communale",
        "Le guichet de l'état civil"
@@ -538,19 +534,24 @@ window.DINA_DATA = {
    },
    "a_retenir": "Le congrès délibère, le gouvernement exécute. Une même politique peut mobiliser plusieurs acteurs : avant d'orienter, je cherche qui a la compétence.",
    "note_expert": "Contenu institutionnel à faire valider par un expert (scénario M1 v0.2, § 8).",
-   "sources": "Loi organique n° 99-209 du 19 mars 1999, version consolidée (Légifrance), art. 2, 3, 20, 21 et 22.",
    "competences": [
     "C01"
    ],
-   "suite": "M1-E1-APP2"
+   "suite": "M1-E1-APP2",
+   "repliques": [
+    {
+     "personnage": "Malia",
+     "texte": "« Retiens ces quatre niveaux. Le reste en découle. »"
+    }
+   ]
   },
   "M1-E1-APP2": {
    "id": "M1-E1-APP2",
    "type": "cartes",
    "etape": "Épisode 1",
-   "titre": "Ce qui surprend quand on vient d'ailleurs",
-   "texte": "Certaines compétences ne sont pas là où on les attend. Retournez les cartes.",
-   "consigne": "Cliquez sur chaque carte.",
+   "titre": "Ici, ce n'est pas comme ailleurs",
+   "texte": "Ailleurs en France, ces sujets relèvent souvent de l'État. En Nouvelle-Calédonie, la répartition est différente.",
+   "consigne": "Cliquez sur chaque carte pour la retourner.",
    "competences": [
     "C01"
    ],
@@ -573,19 +574,35 @@ window.DINA_DATA = {
     {
      "icone": "i-batiment",
      "recto": "La santé et l'aide sociale",
-     "verso": "Elles ne relèvent pas de l'État : la Nouvelle-Calédonie et les provinces se les partagent. Je vérifie avant d'orienter."
+     "verso": "La santé et la protection sociale relèvent de la Nouvelle-Calédonie (loi organique, art. 22, 4°). L'aide sociale relève des provinces : chacune a ses propres dispositifs. Je vérifie avant d'orienter."
+    },
+    {
+     "icone": "i-equipe",
+     "recto": "Deux statuts civils",
+     "verso": "Le statut civil coutumier kanak et le statut civil de droit commun coexistent (Constitution, art. 75 ; loi organique, art. 7). Pour le mariage, la filiation ou la succession, les règles ne sont pas les mêmes. Le statut civil coutumier relève de la Nouvelle-Calédonie (art. 22, 5°)."
+    },
+    {
+     "icone": "i-lieu",
+     "recto": "L'environnement",
+     "verso": "Chaque province a son propre code de l'environnement. Une même règle, par exemple la protection d'une espèce, peut changer d'une province à l'autre."
     }
    ],
    "encadre": "Ne plaquez pas le modèle d'un autre territoire : ici, la répartition est différente.",
    "note_expert": "Contenu institutionnel à faire valider par un expert (scénario M1 v0.2, § 8).",
-   "suite": "M1-E1-APP3"
+   "suite": "M1-E1-APP3",
+   "repliques": [
+    {
+     "personnage": "Malia",
+     "texte": "« Ceux qui arrivent d'ailleurs se trompent souvent sur ces sujets. Retourne les cartes, tu verras. »"
+    }
+   ]
   },
   "M1-E1-APP3": {
    "id": "M1-E1-APP3",
    "type": "apport",
    "etape": "Épisode 1",
    "titre": "Trois repères pour comprendre",
-   "texte": "Pourquoi la répartition des compétences ne ressemble-t-elle pas à celle d'autres territoires ? Trois dates suffisent pour s'y retrouver.",
+   "texte": "En fin d'après-midi, Noa demande à Malia pourquoi la répartition est si différente ici.",
    "points": [
     {
      "titre": "1988-1989 — Accords de Matignon-Oudinot",
@@ -602,11 +619,16 @@ window.DINA_DATA = {
    ],
    "a_retenir": "Ces dates expliquent pourquoi, ici, certaines compétences relèvent de la Nouvelle-Calédonie ou des provinces.",
    "note_expert": "Repères hors référentiel : accord de Marie-Noëlle Blanck, puis dates et formulations à valider par l'expert institutionnel.",
-   "sources": "Accord de Nouméa du 5 mai 1998 ; Loi organique n° 99-209 du 19 mars 1999, version consolidée (Légifrance) ; lois du pays n° 2009-09 et n° 2012-2.",
    "competences": [
     "C01"
    ],
-   "suite": "M1-E1-OUT"
+   "suite": "M1-E1-OUT",
+   "repliques": [
+    {
+     "personnage": "Malia",
+     "texte": "« Trois dates suffisent pour s'y retrouver. »"
+    }
+   ]
   },
   "M1-E1-OUT": {
    "id": "M1-E1-OUT",
@@ -614,7 +636,7 @@ window.DINA_DATA = {
    "etape": "Épisode 1",
    "fiche": "FICHE-M1-E1",
    "titre": "Qui fait quoi en Nouvelle-Calédonie ?",
-   "texte": "**Quand l'utiliser ?** Chaque fois qu'une demande ne semble pas pour vous : avant de l'orienter, vérifiez qui est compétent.\n",
+   "texte": "Malia lui tend une fiche : « Garde-la près de ton clavier. »\n\n**Quand l'utiliser ?** Chaque fois qu'une demande ne semble pas pour vous : avant de l'orienter, vérifiez qui est compétent.",
    "competences": [
     "C01"
    ],
@@ -624,7 +646,7 @@ window.DINA_DATA = {
    "id": "M1-E1-TR",
    "type": "classement",
    "etape": "Épisode 1",
-   "texte": "Trois nouvelles demandes, sans aide. À qui l'habitant s'adresse-t-il ?",
+   "texte": "16 h. Trois nouveaux messages dans la boîte du pôle. Malia est en réunion : Noa trie seul.\n\nÀ qui l'habitant doit-il s'adresser ?",
    "brief": "Mêmes réflexes que ce matin : cherchez qui a la compétence, pas qui est le plus proche.",
    "competences": [
     "C01"
@@ -664,30 +686,72 @@ window.DINA_DATA = {
     }
    ],
    "synthese": "Vous savez orienter seul. Dans le doute, vérifiez avant de répondre.",
+   "suite": "M1-E1-SRC"
+  },
+  "M1-E1-SRC": {
+   "id": "M1-E1-SRC",
+   "type": "sources",
+   "etape": "Épisode 1",
+   "titre": "Les sources du lundi",
+   "texte": "Les textes cités aujourd'hui. Ouvrez-les si vous voulez aller plus loin.",
+   "liens": [
+    {
+     "titre": "Constitution du 4 octobre 1958",
+     "lien": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000571356",
+     "note": "Titre XIII (art. 76 et 77) : la Nouvelle-Calédonie. Art. 75 : les statuts civils."
+    },
+    {
+     "titre": "Loi organique n° 99-209 du 19 mars 1999 relative à la Nouvelle-Calédonie",
+     "lien": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000393606/",
+     "note": "Art. 2, 3, 7, 20, 21, 22 et 47 : les institutions, les statuts civils, la répartition des compétences. Lisez la version consolidée."
+    },
+    {
+     "titre": "Accord de Nouméa du 5 mai 1998",
+     "note": "Il fonde la loi organique de 1999."
+    },
+    {
+     "titre": "Lois du pays n° 2009-09 et n° 2012-2",
+     "lien": "https://leginova.gouv.nc",
+     "note": "L'échéancier des transferts de compétences, dont l'enseignement du second degré ; le transfert du droit civil et de l'état civil. À chercher sur Leginova."
+    },
+    {
+     "titre": "Recensement de la population 2025",
+     "lien": "https://www.insee.fr/fr/statistiques/2122859",
+     "note": "Populations de référence de la Nouvelle-Calédonie (décret n° 2025-966 du 18 septembre 2025). Les chiffres de la carte."
+    }
+   ],
+   "note_expert": "Contenu institutionnel à faire valider par un expert (scénario M1 v0.2, § 8).",
    "suite": "M1-E1-FIN"
   },
   "M1-E1-FIN": {
    "id": "M1-E1-FIN",
    "type": "fin-section",
    "etape": "Épisode 1",
-   "titre": "Lundi, c'est fait",
-   "texte": "Noa sait vers qui orienter une demande, et pourquoi.",
+   "titre": "Noa a trouvé ses premiers repères",
+   "texte": "Il sait vers qui orienter une demande, et pourquoi.",
    "acquis": [
     {
-     "titre": "Il a orienté six demandes",
+     "titre": "Vous avez orienté six demandes",
      "texte": "État, Nouvelle-Calédonie, province, commune : chacune vers l'acteur compétent."
     },
     {
-     "titre": "Il a su dire « je vérifie »",
-     "texte": "Deux sources officielles contradictoires : il n'a pas choisi au hasard."
+     "titre": "Vous avez su dire « je vérifie »",
+     "texte": "Deux sources officielles se contredisaient : vous n'avez pas choisi au hasard."
     },
     {
-     "titre": "Il a répondu utilement à Élise",
+     "titre": "Vous avez répondu utilement à Élise",
      "texte": "L'acteur, la raison, un moyen de le joindre."
     }
    ],
-   "dossier": "Noa sait vers qui orienter une demande. Ce sera utile plus vite que prévu.",
-   "suite": "MENU"
+   "suite": "MENU",
+   "repliques": [
+    {
+     "personnage": "Noa",
+     "didascalie": "En rangeant son bureau, il se dit",
+     "canal": "note",
+     "texte": "« Six demandes, et pas une au hasard. Demain, le comité de direction. »"
+    }
+   ]
   },
   "M1-E2-S1": {
    "id": "M1-E2-S1",
@@ -707,7 +771,7 @@ window.DINA_DATA = {
    "personnage": "Malia",
    "canal": "oral",
    "titre": "9 h 15",
-   "texte": "En sortant, Malia lui montre l'organigramme d'ÉLAN.\n« Tu vas voir, l'organigramme, c'est simple. Ce qui est plus difficile, c'est qui travaille avec qui. »\n",
+   "texte": "En sortant, Malia lui montre l'organigramme de l'ÉLAN.\n« Tu vas voir, l'organigramme, c'est simple. Ce qui est plus difficile, c'est qui travaille avec qui. »\n",
    "suite": "M1-E2-D1"
   },
   "M1-E2-D1": {
@@ -715,7 +779,7 @@ window.DINA_DATA = {
    "type": "choix",
    "etape": "Épisode 2",
    "texte": "Un ami demande à Noa : « Alors, tu travailles pour la province Nord ? » Que répond Noa ?",
-   "brief": "ÉLAN est installé à Koné, en province Nord. Mais le lieu d'implantation suffit-il à dire de qui dépend un établissement ?",
+   "brief": "L'ÉLAN est installé à Koné, en province Nord. Mais le lieu d'implantation suffit-il à dire de qui dépend un établissement ?",
    "competences": [
     "C02",
     "C01"
@@ -723,13 +787,13 @@ window.DINA_DATA = {
    "options": [
     {
      "id": "A",
-     "libelle": "« Oui : ÉLAN est à Koné, c'est un service de la province Nord. »",
+     "libelle": "« Oui : l'ÉLAN est à Koné, c'est un service de la province Nord. »",
      "verdict": "inadapte",
      "feedback": "Koné est bien en province Nord. Mais le lieu d'implantation ne dit pas de qui dépend un établissement."
     },
     {
      "id": "B",
-     "libelle": "« Non : ÉLAN est un établissement public de la Nouvelle-Calédonie, installé à Koné. Il a son conseil d'administration et sa directrice. »",
+     "libelle": "« Non : l'ÉLAN est un établissement public de la Nouvelle-Calédonie, installé à Koné. Il a son conseil d'administration et sa directrice. »",
      "verdict": "adapte",
      "feedback": "Noa situe son employeur : un établissement public, avec ses propres instances, qui agit dans le cadre de ses missions."
     },
@@ -737,13 +801,13 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "« Je travaille pour l'État. »",
      "verdict": "inadapte",
-     "feedback": "ÉLAN ne dépend pas de l'État. Confondre les niveaux, c'est mal orienter les partenaires qui s'adressent à lui."
+     "feedback": "L'ÉLAN ne dépend pas de l'État. Confondre les niveaux, c'est mal orienter les partenaires qui s'adressent à lui."
     },
     {
      "id": "D",
      "libelle": "« Pour une association, comme Passerelles. »",
      "verdict": "inadapte",
-     "feedback": "Passerelles est une association privée, partenaire d'ÉLAN. ÉLAN est un établissement public."
+     "feedback": "Passerelles est une association privée, partenaire de l'ÉLAN. L'ÉLAN est un établissement public."
     }
    ],
    "suite": "M1-E2-DOC"
@@ -752,7 +816,7 @@ window.DINA_DATA = {
    "id": "M1-E2-DOC",
    "type": "document",
    "etape": "Épisode 2",
-   "titre": "ÉLAN — organisation",
+   "titre": "L'ÉLAN — organisation",
    "intro": "Document fictif, construit sur le modèle d'un établissement public administratif de la Nouvelle-Calédonie.",
    "blocs": [
     {
@@ -761,7 +825,7 @@ window.DINA_DATA = {
     },
     {
      "titre": "La direction",
-     "texte": "Ariane, directrice, prépare et met en œuvre les décisions du conseil, arbitre les moyens et représente ÉLAN."
+     "texte": "Ariane, directrice, prépare et met en œuvre les décisions du conseil, arbitre les moyens et représente l'ÉLAN."
     },
     {
      "titre": "Trois pôles",
@@ -769,14 +833,14 @@ window.DINA_DATA = {
     },
     {
      "titre": "Repère",
-     "texte": "Les partenaires (associations, communes, province) gardent leur propre hiérarchie. ÉLAN ne leur donne pas d'instruction."
+     "texte": "Les partenaires (associations, communes, province) gardent leur propre hiérarchie. L'ÉLAN ne leur donne pas d'instruction."
     }
    ],
    "organigramme": [
     [
      {
       "nom": "Ariane",
-      "role": "Directrice d'ÉLAN"
+      "role": "Directrice de l'ÉLAN"
      }
     ],
     [
@@ -820,7 +884,7 @@ window.DINA_DATA = {
    "categories": [
     {
      "id": "decide",
-     "libelle": "Décide pour ÉLAN"
+     "libelle": "Décide pour l'ÉLAN"
     },
     {
      "id": "encadre",
@@ -846,7 +910,7 @@ window.DINA_DATA = {
      "id": "B",
      "libelle": "Ariane",
      "attendu": "decide",
-     "feedback": "La directrice décide au quotidien et engage ÉLAN. Noa passe par Samuel pour lui soumettre une question."
+     "feedback": "La directrice décide au quotidien et engage l'ÉLAN. Noa passe par Samuel pour lui soumettre une question."
     },
     {
      "id": "C",
@@ -918,9 +982,9 @@ window.DINA_DATA = {
     },
     {
      "id": "D",
-     "libelle": "Une commune demande à ÉLAN un courrier de soutien signé.",
+     "libelle": "Une commune demande à l'ÉLAN un courrier de soutien signé.",
      "attendu": "samuel",
-     "feedback": "Un courrier signé engage ÉLAN : il se décide et se signe à la direction. Noa ne répond pas lui-même ; il transmet à Samuel avec le contexte."
+     "feedback": "Un courrier signé engage l'ÉLAN : il se décide et se signe à la direction. Noa ne répond pas lui-même ; il transmet à Samuel avec le contexte."
     }
    ],
    "synthese": "Une mauvaise orientation fait perdre du temps. Un engagement pris sans validation met l'employeur en difficulté.",
@@ -969,7 +1033,7 @@ window.DINA_DATA = {
    "type": "apport",
    "etape": "Épisode 2",
    "titre": "Qui décide, qui prépare, qui exécute ?",
-   "texte": "Les employeurs publics suivent un même schéma : une assemblée délibère, un exécutif décide et dirige, une administration prépare et met en œuvre.",
+   "texte": "Après le comité, Samuel fait le point avec Noa.",
    "points": [
     {
      "titre": "La commune",
@@ -994,15 +1058,21 @@ window.DINA_DATA = {
     "C02",
     "C01"
    ],
-   "suite": "M1-E2-APP2"
+   "suite": "M1-E2-APP2",
+   "repliques": [
+    {
+     "personnage": "Samuel",
+     "texte": "« Tu as vu au comité : le conseil délibère, Ariane dirige, les pôles préparent et exécutent. C'est le même schéma chez tous les employeurs publics. »"
+    }
+   ]
   },
   "M1-E2-APP2": {
    "id": "M1-E2-APP2",
    "type": "cartes",
    "etape": "Épisode 2",
    "titre": "Travailler avec d'autres services et d'autres employeurs",
-   "texte": "Quatre règles simples. Retournez les cartes.",
-   "consigne": "Cliquez sur chaque carte.",
+   "texte": "Malia complète.",
+   "consigne": "Cliquez sur chaque carte pour la retourner.",
    "competences": [
     "C02"
    ],
@@ -1015,21 +1085,27 @@ window.DINA_DATA = {
     {
      "icone": "i-equipe",
      "recto": "Les partenaires gardent leur hiérarchie",
-     "verso": "Joël répond à son association, Léna à la province. ÉLAN ne leur donne pas d'ordre."
+     "verso": "Joël répond à son association, Léna à la province. L'ÉLAN ne leur donne pas d'ordre."
     },
     {
      "icone": "i-valider",
-     "recto": "Ce qui engage ÉLAN se décide à la direction",
+     "recto": "Ce qui engage l'ÉLAN se décide à la direction",
      "verso": "Un courrier signé, une convention, une promesse : Noa transmet, il ne décide pas."
     },
     {
      "icone": "i-lieu",
      "recto": "Je transpose chez moi",
-     "verso": "ÉLAN est fictif. Chez votre employeur, cherchez l'organigramme et le nom de vos interlocuteurs."
+     "verso": "L'ÉLAN est fictif. Chez votre employeur, cherchez l'organigramme et le nom de vos interlocuteurs."
     }
    ],
    "encadre": "Savoir qui travaille avec qui évite les doublons, les oublis et les engagements pris sans droit.",
-   "suite": "M1-E2-OUT"
+   "suite": "M1-E2-OUT",
+   "repliques": [
+    {
+     "personnage": "Malia",
+     "texte": "« Quatre règles simples, et tu éviteras la plupart des faux pas. »"
+    }
+   ]
   },
   "M1-E2-OUT": {
    "id": "M1-E2-OUT",
@@ -1047,7 +1123,7 @@ window.DINA_DATA = {
    "id": "M1-E2-TR",
    "type": "choix",
    "etape": "Épisode 2",
-   "texte": "Noa voudrait suivre une formation. Comment s'y prend-il ?",
+   "texte": "En fin de journée, Noa repère une formation utile à son poste.\n\nComment s'y prend-il ?",
    "brief": "Une demande nouvelle : trouver le bon circuit à partir de l'organigramme.",
    "competences": [
     "C02"
@@ -1084,24 +1160,31 @@ window.DINA_DATA = {
    "id": "M1-E2-FIN",
    "type": "fin-section",
    "etape": "Épisode 2",
-   "titre": "Mardi, c'est fait",
-   "texte": "Noa sait où se situe ÉLAN, qui y décide et à qui s'adresser.",
+   "titre": "Noa sait où il travaille",
+   "texte": "Il sait où se situe l'ÉLAN, qui y décide et à qui s'adresser.",
    "acquis": [
     {
-     "titre": "Il a situé son employeur",
+     "titre": "Vous avez situé l'employeur de Noa",
      "texte": "Un établissement public de la Nouvelle-Calédonie, installé à Koné."
     },
     {
-     "titre": "Il a lu l'organigramme",
+     "titre": "Vous avez lu l'organigramme",
      "texte": "Qui décide, qui encadre, qui aide sans encadrer."
     },
     {
-     "titre": "Il a trouvé ses interlocuteurs",
+     "titre": "Vous avez trouvé les bons interlocuteurs",
      "texte": "Le support, Ana, le pôle liaison territoriale, Samuel."
     }
    ],
-   "dossier": "Noa sait qu'une demande d'appui passe par Samuel et que la directrice décide.",
-   "suite": "MENU"
+   "suite": "MENU",
+   "repliques": [
+    {
+     "personnage": "Noa",
+     "didascalie": "Il se dit",
+     "canal": "note",
+     "texte": "« Le conseil délibère, Ariane dirige, Samuel valide. Et Malia m'aide. »"
+    }
+   ]
   },
   "M1-E3-S1": {
    "id": "M1-E3-S1",
@@ -1234,7 +1317,7 @@ window.DINA_DATA = {
       "id": "guide",
       "icone": "i-fichier",
       "titre": "Guide d'orientation — fiche « Couverture sociale » (PDF)",
-      "auteur": "ÉLAN, pôle études et projets",
+      "auteur": "L'ÉLAN, pôle études et projets",
       "date": "2019",
       "statut": "Jamais mis à jour",
       "extrait": "Dans le dossier partagé du pôle.",
@@ -1278,7 +1361,7 @@ window.DINA_DATA = {
       "id": "paiement",
       "icone": "i-fichier",
       "titre": "Délais de paiement des fournisseurs",
-      "auteur": "ÉLAN, service administratif",
+      "auteur": "L'ÉLAN, service administratif",
       "date": "2024",
       "statut": "Note de service",
       "verdict": "inadapte",
@@ -1298,7 +1381,7 @@ window.DINA_DATA = {
       "id": "guide2",
       "icone": "i-fichier",
       "titre": "Guide d'orientation — fiche « Couverture sociale » (PDF)",
-      "auteur": "ÉLAN, pôle études et projets",
+      "auteur": "L'ÉLAN, pôle études et projets",
       "date": "2019",
       "statut": "Jamais mis à jour",
       "verdict": "risque",
@@ -1512,7 +1595,7 @@ window.DINA_DATA = {
    "type": "apport",
    "etape": "Épisode 3",
    "titre": "Reconnaître un document administratif",
-   "texte": "Avant d'utiliser un texte, je regarde qui l'a pris : cela dit ce qu'il engage.",
+   "texte": "Malia profite de la question de Noa pour faire le point.",
    "points": [
     {
      "titre": "La loi organique",
@@ -1537,11 +1620,16 @@ window.DINA_DATA = {
    ],
    "a_retenir": "Je regarde toujours qui a pris le texte, sa date, et s'il est encore en vigueur.",
    "note_expert": "Contenu institutionnel à faire valider par un expert (scénario M1 v0.2, § 8).",
-   "sources": "Loi organique n° 99-209 du 19 mars 1999, version consolidée (Légifrance), art. 99 (lois du pays) ; Leginova pour les textes calédoniens ; Légifrance pour les textes nationaux.",
    "competences": [
     "C17"
    ],
-   "suite": "M1-E3-APP2"
+   "suite": "M1-E3-APP2",
+   "repliques": [
+    {
+     "personnage": "Malia",
+     "texte": "« Avant d'utiliser un texte, regarde qui l'a pris : ça dit ce qu'il engage. »"
+    }
+   ]
   },
   "M1-E3-APP2": {
    "id": "M1-E3-APP2",
@@ -1549,7 +1637,7 @@ window.DINA_DATA = {
    "etape": "Épisode 3",
    "titre": "Comment une règle change",
    "texte": "Un texte trouvé facilement n'est pas forcément à jour. Retournez les cartes.",
-   "consigne": "Cliquez sur chaque carte.",
+   "consigne": "Cliquez sur chaque carte pour la retourner.",
    "competences": [
     "C17"
    ],
@@ -1595,7 +1683,7 @@ window.DINA_DATA = {
    "id": "M1-E3-TR",
    "type": "choix",
    "etape": "Épisode 3",
-   "texte": "L'accueil demande à Noa si les horaires d'ouverture au public, affichés dans un PDF de l'an dernier, sont toujours valables. Que fait-il ?",
+   "texte": "16 h. Cédric, à l'accueil, appelle Noa : les horaires d'ouverture au public, affichés dans un PDF de l'an dernier, sont-ils toujours valables ?\n\nQue fait Noa ?",
    "brief": "Mêmes réflexes que ce matin : qui, quand, quel statut.",
    "competences": [
     "C17"
@@ -1620,30 +1708,63 @@ window.DINA_DATA = {
      "feedback": "La réponse se trouve. Noa sait maintenant où chercher."
     }
    ],
+   "suite": "M1-E3-SRC",
+   "personnage": "Cédric"
+  },
+  "M1-E3-SRC": {
+   "id": "M1-E3-SRC",
+   "type": "sources",
+   "etape": "Épisode 3",
+   "titre": "Les sources du mercredi",
+   "texte": "Où trouver les textes dont vous avez parlé aujourd'hui.",
+   "liens": [
+    {
+     "titre": "Leginova",
+     "lien": "https://leginova.gouv.nc",
+     "note": "Les textes calédoniens en vigueur, en version consolidée, et le Journal officiel de la Nouvelle-Calédonie. Anciennement Juridoc."
+    },
+    {
+     "titre": "Légifrance",
+     "lien": "https://www.legifrance.gouv.fr",
+     "note": "Les textes nationaux, dont la loi organique de 1999 (art. 99 : les lois du pays)."
+    },
+    {
+     "titre": "DRHFPNC",
+     "lien": "https://drhfpnc.gouv.nc",
+     "note": "Les règles et procédures RH de la fonction publique calédonienne."
+    }
+   ],
    "suite": "M1-E3-FIN"
   },
   "M1-E3-FIN": {
    "id": "M1-E3-FIN",
    "type": "fin-section",
    "etape": "Épisode 3",
-   "titre": "Mercredi, c'est fait",
-   "texte": "Noa sait trouver une information sûre, et dire quand il ne l'est pas.",
+   "titre": "Noa sait vérifier",
+   "texte": "Il sait trouver une information sûre, et dire quand elle ne l'est pas.",
    "acquis": [
     {
-     "titre": "Il a choisi la bonne source",
+     "titre": "Vous avez choisi la bonne source",
      "texte": "La page officielle à jour, pas le PDF le plus facile à trouver."
     },
     {
-     "titre": "Il a fait les trois vérifications",
+     "titre": "Vous avez fait les trois vérifications",
      "texte": "Qui l'a produite, de quand elle date, si elle est définitive."
     },
     {
-     "titre": "Il a demandé un appui précis",
-     "texte": "Une question, ses sources datées, ce qui reste incertain."
+     "titre": "Vous avez demandé un appui précis",
+     "texte": "Une question, les sources datées, ce qui reste incertain."
     }
    ],
-   "dossier": "Noa sait donner une source officielle et datée.",
-   "suite": "MENU"
+   "suite": "MENU",
+   "repliques": [
+    {
+     "personnage": "Noa",
+     "didascalie": "Il se dit",
+     "canal": "note",
+     "texte": "« Demain, Samuel et Malia sont absents. Pourvu que le téléphone ne sonne pas trop. »"
+    }
+   ]
   },
   "M1-DI-1": {
    "id": "M1-DI-1",
@@ -1675,7 +1796,7 @@ window.DINA_DATA = {
    "personnage": "Joël",
    "canal": "appel",
    "titre": "10 h 02",
-   "texte": "« Bonjour, Joël, de l'association Passerelles. On veut monter une permanence pour aider les habitants dans leurs démarches. Mais nos bénévoles ne savent pas toujours où envoyer les gens. Vous pouvez m'envoyer une liste : pour quoi, on va où ? Et on aimerait l'aide d'ÉLAN pour monter le projet. »\n",
+   "texte": "« Bonjour, Joël, de l'association Passerelles. On veut monter une permanence pour aider les habitants dans leurs démarches. Mais nos bénévoles ne savent pas toujours où envoyer les gens. Vous pouvez m'envoyer une liste : pour quoi, on va où ? Et on aimerait l'aide de l'ÉLAN pour monter le projet. »\n",
    "suite": "M1-DI-D1"
   },
   "M1-DI-D1": {
@@ -1684,20 +1805,20 @@ window.DINA_DATA = {
    "etape": "Défi",
    "personnage": "Joël",
    "texte": "Que répond Noa à Joël, au téléphone ?",
-   "brief": "La liste d'interlocuteurs est une information publique. L'appui d'ÉLAN à un projet, lui, se décide à la direction. Noa dit « vous » à Joël.",
+   "brief": "La liste d'interlocuteurs est une information publique. L'appui de l'ÉLAN à un projet, lui, se décide à la direction. Noa dit « vous » à Joël.",
    "competences": [
     "C02"
    ],
    "options": [
     {
      "id": "A",
-     "libelle": "« Bien sûr, ÉLAN va vous aider à monter le projet. »",
+     "libelle": "« Bien sûr, l'ÉLAN va vous aider à monter le projet. »",
      "verdict": "inadapte",
      "feedback": "Noa promet un appui qu'il n'a pas le droit d'engager. Si la direction dit non, Passerelles aura annoncé une aide qui n'existe pas."
     },
     {
      "id": "B",
-     "libelle": "« Je vous envoie la liste aujourd'hui. Pour l'appui d'ÉLAN, je transmets votre demande à mon responsable, qui reviendra vers vous. »",
+     "libelle": "« Je vous envoie la liste aujourd'hui. Pour l'appui de l'ÉLAN, je transmets votre demande à mon responsable, qui reviendra vers vous. »",
      "verdict": "adapte",
      "feedback": "Noa fait ce qui est à lui (la liste) et transmet ce qui ne l'est pas (l'appui). Joël sait ce qui va se passer."
     },
@@ -1705,7 +1826,7 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "« Je ne peux rien vous envoyer sans l'accord de mon responsable. »",
      "verdict": "partiel",
-     "feedback": "Trop prudent : une liste d'interlocuteurs n'engage pas ÉLAN. Joël attend pour rien."
+     "feedback": "Trop prudent : une liste d'interlocuteurs n'engage pas l'ÉLAN. Joël attend pour rien."
     },
     {
      "id": "D",
@@ -1731,8 +1852,8 @@ window.DINA_DATA = {
    "destinataire": "Joël",
    "objet": "Où orienter les habitants : votre liste",
    "salutation": "Bonjour Monsieur,",
-   "signature": "Bien cordialement,\nNoa, ÉLAN\n",
-   "synthese": "Un interlocuteur juste, une source officielle datée pour chaque démarche, et aucune promesse au nom d'ÉLAN.",
+   "signature": "Bien cordialement,\nNoa, l'ÉLAN\n",
+   "synthese": "Un interlocuteur juste, une source officielle datée pour chaque démarche, et aucune promesse au nom de l'ÉLAN.",
    "parties": [
     {
      "id": "etatcivil",
@@ -1833,7 +1954,7 @@ window.DINA_DATA = {
       },
       {
        "id": "B",
-       "texte": "ÉLAN accompagnera votre projet.",
+       "texte": "L'ÉLAN accompagnera votre projet.",
        "verdict": "inadapte"
       },
       {
@@ -1861,7 +1982,7 @@ window.DINA_DATA = {
    "options": [
     {
      "id": "A",
-     "libelle": "« Joël, de l'association Passerelles, a appelé à 10 h. Ils veulent monter une permanence d'aide aux démarches et demandent l'appui d'ÉLAN. Je lui ai envoyé une liste d'interlocuteurs sourcée. Je ne lui ai rien promis sur l'appui. Ses coordonnées sont ci-dessous. »",
+     "libelle": "« Joël, de l'association Passerelles, a appelé à 10 h. Ils veulent monter une permanence d'aide aux démarches et demandent l'appui de l'ÉLAN. Je lui ai envoyé une liste d'interlocuteurs sourcée. Je ne lui ai rien promis sur l'appui. Ses coordonnées sont ci-dessous. »",
      "verdict": "adapte",
      "feedback": "Qui, quoi, ce qui a été fait, ce qui reste à décider : Samuel peut agir tout de suite."
     },
@@ -1875,7 +1996,7 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "« J'ai dit à Passerelles qu'on les aiderait. »",
      "verdict": "inadapte",
-     "feedback": "Noa a engagé ÉLAN sans en avoir le droit. Samuel doit maintenant rattraper la promesse."
+     "feedback": "Noa a engagé l'ÉLAN sans en avoir le droit. Samuel doit maintenant rattraper la promesse."
     },
     {
      "id": "D",
@@ -1900,24 +2021,32 @@ window.DINA_DATA = {
    "id": "M1-DI-SYN",
    "type": "fin-section",
    "etape": "Défi",
-   "titre": "Défi terminé",
+   "titre": "Le premier appel est passé",
    "texte": "Seul au pôle, Noa a répondu à un partenaire sans dépasser son rôle.",
    "acquis": [
     {
-     "titre": "Il a orienté juste",
+     "titre": "Vous avez orienté juste",
      "texte": "Quatre démarches, quatre interlocuteurs compétents."
     },
     {
-     "titre": "Il a sourcé chaque ligne",
+     "titre": "Vous avez sourcé chaque ligne",
      "texte": "Des sources officielles, datées, vérifiées mercredi."
     },
     {
-     "titre": "Il n'a pas promis l'appui d'ÉLAN",
-     "texte": "Il a transmis à Samuel, avec le contexte."
+     "titre": "Vous n'avez pas promis l'appui de l'ÉLAN",
+     "texte": "Vous avez transmis à Samuel, avec le contexte."
     }
    ],
    "dossier": "Joël a reçu une liste sourcée. Sa demande d'appui est chez Samuel.",
-   "suite": "MENU"
+   "suite": "MENU",
+   "repliques": [
+    {
+     "personnage": "Noa",
+     "didascalie": "Il se dit",
+     "canal": "note",
+     "texte": "« Mon premier appel. Et peut-être mon premier dossier. »"
+    }
+   ]
   },
   "M1-EVA-INTRO": {
    "id": "M1-EVA-INTRO",
@@ -2317,7 +2446,7 @@ window.DINA_DATA = {
    "type": "fin",
    "etape": "Sortie",
    "titre": "Bravo, la première semaine de Noa est terminée",
-   "texte": "Vous avez accompagné Noa pendant sa première semaine à ÉLAN. Il sait désormais qui fait quoi, où se situe son employeur, et comment vérifier une information.\n",
+   "texte": "Vous avez accompagné Noa pendant sa première semaine à l'ÉLAN. Il sait désormais qui fait quoi, où se situe son employeur, et comment vérifier une information.\n",
    "points_titre": "Ce que vous avez appris",
    "points": [
     {
@@ -2333,7 +2462,7 @@ window.DINA_DATA = {
      "texte": "Une source officielle, datée, en vigueur ; la référence notée."
     }
    ],
-   "dossier": "Un dossier est né : Samuel parle de la demande de Passerelles à Ariane. Prochaine étape : le dossier est confié à Noa.",
+   "dossier": "Le fil rouge de la semaine, c'était ça : lundi, mardi et mercredi préparaient l'appel de jeudi. Samuel parle de la demande de Passerelles à Ariane : un dossier est né.",
    "prochain": {
     "titre": "M2 — Je trouve ma place",
     "texte": "Deux semaines plus tard, Samuel confie à Noa son premier dossier : Passerelles."
@@ -2584,9 +2713,9 @@ window.DINA_DATA = {
    "alt": "Malia, penchée vers l'écran de Noa, lui montre les messages reçus par le pôle ; Noa prend des notes."
   },
   "ILL-N03": {
-   "scene": "Le comité de direction d'ÉLAN",
+   "scene": "Le comité de direction de l'ÉLAN",
    "personnages": "Ariane, Samuel, Noa",
-   "alt": "Salle de réunion d'ÉLAN. Ariane ouvre le comité de direction ; Samuel et Noa sont assis autour de la table."
+   "alt": "Salle de réunion de l'ÉLAN. Ariane ouvre le comité de direction ; Samuel et Noa sont assis autour de la table."
   },
   "ILL-N04": {
    "scene": "Noa compare trois documents",
@@ -2609,5 +2738,5 @@ window.DINA_DATA = {
    "alt": "Carte en relief de la Nouvelle-Calédonie. La Grande Terre est partagée entre la province Nord, chef-lieu Koné, et la province Sud, chef-lieu Nouméa, qui comprend aussi l'île des Pins. À l'est, la province des îles Loyauté, chef-lieu Wé, à Lifou."
   }
  },
- "source": "Storyboard — M1 v0.1.md"
+ "source": "sb_v02.md"
 };

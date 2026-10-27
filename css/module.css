@@ -1111,3 +1111,25 @@ a.btn { text-decoration: none; }
 /* Logo de l'établissement dans la fiche d'identité (27-10) */
 .badge-sigle--logo { background: #fff; border: 1px solid var(--bordure); padding: .25rem; }
 .badge-sigle--logo img { width: 100%; height: 100%; object-fit: contain; }
+
+/* M1 v0.2 (27-10) — sous-titre du module, grand portrait, pensée en fin de journée, organigramme lisible */
+.menu-sous { margin: -.2rem 0 .7rem; font-size: clamp(1.05rem, .95rem + .4vw, 1.3rem); font-weight: 700; color: var(--bleu); }
+.locuteur--portrait { align-items: center; gap: 1.2rem; margin: .4rem 0 1rem; }
+.avatar--xl { width: 9rem; height: 9rem; font-size: 3rem; box-shadow: 0 0 0 4px var(--carte), 0 0 0 5px var(--bordure); }
+.locuteur--portrait strong { font-size: 1.2rem; }
+@media (max-width: 480px) { .avatar--xl { width: 6.5rem; height: 6.5rem; } }
+.fin-pensee { margin: .2rem 0 1rem; }
+.fin-pensee .repliques { margin: 0; }
+.document + .organigramme, .organigramme + .document { margin-top: 1.2rem; }
+.organigramme { padding: 1.2rem 1.4rem 1.4rem; }
+.organigramme h2 { font-size: 1.1rem; margin-bottom: .8rem; }
+.orga-niveau { gap: 1rem; }
+.orga-lien { height: 22px; }
+.orga-case { min-width: 13rem; padding: .8rem 1.1rem; }
+.orga-case strong { font-size: 1.08rem; }
+.orga-case span { font-size: .95rem; }
+@media (max-width: 560px) { .orga-case { min-width: 0; flex: 1 1 100%; } }
+@media (max-width: 560px) {
+  .fin--journee .fin-tete .pastille { display: none; }
+  .fin--journee .fin-tete h1 { font-size: 1.55rem; }
+}
