@@ -1,15 +1,15 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — positionnement v0.4.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — positionnement v0.5.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "POS",
   "type": "module",
   "code": "Positionnement",
   "titre": "Votre première semaine",
-  "duree": "20 à 25 min",
+  "duree": "15 à 20 min",
   "sans_menu": true,
   "page_suivante": {
    "href": "prologue.html",
-   "libelle": "Bienvenue à ÉLAN"
+   "libelle": "Bienvenue à l'ÉLAN"
   },
   "sections": [
    {
@@ -17,7 +17,7 @@ window.DINA_DATA = {
     "libelle": "Positionnement",
     "titre": "Votre première semaine",
     "debut": "POS-INTRO",
-    "duree": "20 à 25 min"
+    "duree": "15 à 20 min"
    }
   ]
  },
@@ -26,8 +26,8 @@ window.DINA_DATA = {
    "id": "POS-INTRO",
    "type": "narration",
    "etape": "Positionnement",
-   "titre": "Votre première semaine",
-   "texte": "Imaginez votre première semaine dans un service public calédonien : messages, appels, guichet, collègues.\nPour chaque situation, choisissez ce que vous feriez, puis voyez ce qui se passe.\nPas de note, rien n'est validé. À la fin, vous voyez où vous en êtes et le module où chaque sujet sera travaillé.\nVotre employeur n'a pas accès à vos réponses.\n",
+   "titre": "Votre première semaine commence",
+   "texte": "Lundi, 8 h. Vous prenez votre poste dans un service public calédonien. Messages, appels, accueil, collègues : la semaine va vite.\nÀ chaque moment, choisissez ce que vous feriez et découvrez ce qui se passe. Pas de note. À la fin, vous voyez où vous en êtes.\nVos réponses ne sont vues que par vous.\n",
    "a_retenir": "Version de démonstration : contenus non validés par un expert, réponses non enregistrées.",
    "suite": "POS-S01"
   },
@@ -35,7 +35,7 @@ window.DINA_DATA = {
    "id": "POS-S01",
    "type": "pos-item",
    "etape": "Positionnement",
-   "titre": "Un ami et ses congés",
+   "titre": "Un ami vous demande conseil sur ses congés",
    "moment": {
     "jour": "Lundi",
     "heure": "8 h",
@@ -47,6 +47,7 @@ window.DINA_DATA = {
     "C17"
    ],
    "texte": "« Toi qui travailles dans l'administration : mon patron refuse mes congés payés. Je me renseigne où ? »\nVotre ami est salarié d'une entreprise privée à Nouméa.\n",
+   "enjeu": "Orienter quelqu'un vers le bon interlocuteur, avec une information sûre et à jour.",
    "options": [
     {
      "id": "A",
@@ -101,11 +102,12 @@ window.DINA_DATA = {
    "competences": [
     "C02"
    ],
-   "texte": "Vous voulez suivre une formation utile à votre poste. Personne ne vous a dit à qui adresser la demande.\n",
+   "texte": "Vous avez repéré une formation utile à votre poste. Personne ne vous a dit à qui adresser la demande.\n",
+   "enjeu": "Connaître le circuit de votre organisation : à qui s'adresser, et dans quel ordre.",
    "options": [
     {
      "id": "A",
-     "libelle": "Vous écrivez au directeur général : c'est lui qui décide des formations.",
+     "libelle": "Vous écrivez directement au directeur : c'est lui qui décide des formations.",
      "verdicts": {
       "C02": "inadapte"
      },
@@ -142,7 +144,7 @@ window.DINA_DATA = {
    "id": "POS-S03",
    "type": "pos-item",
    "etape": "Positionnement",
-   "titre": "Une signature à votre place",
+   "titre": "Signer à la place d'un collègue",
    "moment": {
     "jour": "Lundi",
     "heure": "16 h",
@@ -153,6 +155,7 @@ window.DINA_DATA = {
     "C03"
    ],
    "texte": "« Je suis débordé. Tu peux signer ce courrier de réponse à un usager à ma place ? Il est déjà rédigé. »\n",
+   "enjeu": "Savoir ce que vous avez le droit de faire : une signature engage le service.",
    "options": [
     {
      "id": "A",
@@ -206,6 +209,7 @@ window.DINA_DATA = {
     "C18"
    ],
    "texte": "« Pouvez-vous répondre au partenaire au nom du service ? Réponse attendue jeudi. »\nLe sujet est technique et vous ne le maîtrisez pas encore. Une collègue de l'équipe le connaît bien.\n",
+   "enjeu": "Répondre au nom du service sans rester seul : s'appuyer sur un collègue, faire valider, tenir informé.",
    "options": [
     {
      "id": "A",
@@ -218,12 +222,12 @@ window.DINA_DATA = {
     },
     {
      "id": "B",
-     "libelle": "Vous demandez les éléments à votre collègue, rédigez, puis faites valider avant l'envoi.",
+     "libelle": "Vous demandez les éléments à votre collègue, rédigez, faites valider par votre responsable et le mettez en copie de l'envoi.",
      "verdicts": {
       "C04": "adapte",
       "C18": "adapte"
      },
-     "consequence": "Le partenaire reçoit jeudi une réponse juste et validée."
+     "consequence": "Le partenaire reçoit jeudi une réponse juste et validée. Votre responsable, en copie, sait que c'est fait."
     },
     {
      "id": "C",
@@ -261,6 +265,7 @@ window.DINA_DATA = {
     "C05"
    ],
    "texte": "« J'ai besoin de ce dossier pour ce soir. » Vous aviez déjà trois tâches, dont deux à rendre demain matin.\n",
+   "enjeu": "Tenir vos priorités quand une urgence arrive, et prévenir à temps.",
    "options": [
     {
      "id": "A",
@@ -313,6 +318,7 @@ window.DINA_DATA = {
     "C06"
    ],
    "texte": "« Toujours rien reçu de votre part. C'est urgent. »\nVous lui aviez pourtant répondu la semaine dernière.\n",
+   "enjeu": "Garder un ton professionnel, même quand le message reçu ne l'est pas.",
    "options": [
     {
      "id": "A",
@@ -365,6 +371,7 @@ window.DINA_DATA = {
     "C08"
    ],
    "texte": "La réunion n'a pas pu se tenir : l'invitation n'est pas partie. Votre collègue estime que c'était à vous de l'envoyer. Vous pensiez l'inverse. Le ton monte.\n",
+   "enjeu": "Préserver la relation tout en évitant que le problème se reproduise.",
    "options": [
     {
      "id": "A",
@@ -420,6 +427,7 @@ window.DINA_DATA = {
     "C12"
    ],
    "texte": "Depuis plusieurs semaines, votre collègue semble à bout. Ce soir, elle vous dit : « Je n'en peux plus de ce rythme. Mais n'en parle à personne. »\n",
+   "enjeu": "Être attentif à la santé d'un collègue, sans trahir sa confiance.",
    "options": [
     {
      "id": "A",
@@ -474,6 +482,7 @@ window.DINA_DATA = {
     "C10"
    ],
    "texte": "« Colle le tableau des usagers dans un outil d'IA gratuit en ligne, il te fait la synthèse en deux minutes. »\nLe tableau contient des noms et des adresses.\n",
+   "enjeu": "Protéger les données personnelles des usagers, quel que soit l'outil.",
    "options": [
     {
      "id": "A",
@@ -527,6 +536,7 @@ window.DINA_DATA = {
     "C19"
    ],
    "texte": "« À partir de lundi, le service passe à un nouvel outil de gestion des dossiers. Une présentation d'une heure est proposée vendredi. »\n",
+   "enjeu": "S'adapter à un changement annoncé plutôt que le subir.",
    "options": [
     {
      "id": "A",
@@ -581,6 +591,7 @@ window.DINA_DATA = {
     "C09"
    ],
    "texte": "On vous demande de signer l'attestation de service fait d'une prestation que vous n'avez pas constatée. Le prestataire insiste : sa facture doit partir aujourd'hui.\n",
+   "enjeu": "Ce que votre signature atteste : elle engage de l'argent public.",
    "options": [
     {
      "id": "A",
@@ -636,6 +647,7 @@ window.DINA_DATA = {
     "C11"
    ],
    "texte": "« Le véhicule de service ne sort pas le week-end. Prends-le samedi pour ton déménagement, personne ne verra rien. »\n",
+   "enjeu": "Les moyens du service servent au service, même quand personne ne regarde.",
    "options": [
     {
      "id": "A",
@@ -676,7 +688,7 @@ window.DINA_DATA = {
    "id": "POS-S13",
    "type": "pos-item",
    "etape": "Positionnement",
-   "titre": "Un dossier familial",
+   "titre": "La demande d'un proche",
    "moment": {
     "jour": "Vendredi",
     "heure": "9 h",
@@ -689,11 +701,12 @@ window.DINA_DATA = {
    "vigilance": [
     "C14"
    ],
-   "texte": "Un membre de votre famille a déposé une demande. C'est vous qui êtes chargé de l'instruire.\n",
+   "texte": "Parmi les demandes à traiter ce matin, vous reconnaissez celle de votre cousine. C'est vous qui devez la traiter.\n",
+   "enjeu": "L'impartialité : personne ne doit pouvoir douter d'une décision.",
    "options": [
     {
      "id": "A",
-     "libelle": "Vous l'instruisez normalement, comme les autres, en veillant à rester impartial.",
+     "libelle": "Vous la traitez normalement, comme les autres, en veillant à rester impartial.",
      "verdicts": {
       "C14": "risque"
      },
@@ -701,27 +714,27 @@ window.DINA_DATA = {
     },
     {
      "id": "B",
-     "libelle": "Vous l'instruisez vite pour ne pas faire attendre votre proche.",
+     "libelle": "Vous la traitez vite pour ne pas faire attendre votre cousine.",
      "verdicts": {
       "C14": "inadapte"
      },
-     "consequence": "Votre proche a une réponse en deux jours, les autres en trois semaines. L'écart est remarqué."
+     "consequence": "Votre cousine a une réponse en deux jours, les autres en trois semaines. L'écart est remarqué."
     },
     {
      "id": "C",
-     "libelle": "Vous le signalez à votre responsable pour confier le dossier à un collègue.",
+     "libelle": "Vous le signalez à votre responsable pour confier la demande à un collègue.",
      "verdicts": {
       "C14": "adapte"
      },
-     "consequence": "Une collègue instruit le dossier. Personne ne peut mettre la décision en doute."
+     "consequence": "Une collègue traite la demande. Personne ne peut mettre la décision en doute."
     },
     {
      "id": "D",
-     "libelle": "Vous mettez le dossier de côté sans en parler.",
+     "libelle": "Vous mettez la demande de côté sans en parler.",
      "verdicts": {
       "C14": "inadapte"
      },
-     "consequence": "Le dossier dépasse le délai. Votre proche relance, et le service découvre la situation."
+     "consequence": "La demande dépasse le délai. Votre cousine relance, et le service découvre la situation."
     }
    ],
    "suite": "POS-S14"
@@ -730,7 +743,7 @@ window.DINA_DATA = {
    "id": "POS-S14",
    "type": "pos-item",
    "etape": "Positionnement",
-   "titre": "Au guichet",
+   "titre": "Passer avant les autres",
    "moment": {
     "jour": "Vendredi",
     "heure": "11 h",
@@ -741,7 +754,8 @@ window.DINA_DATA = {
     "C13",
     "C16"
    ],
-   "texte": "« Je connais bien le directeur. Vous pouvez passer mon dossier en premier ? »\nD'autres dossiers ont été déposés avant le sien.\n",
+   "texte": "À l'accueil, un usager vous dit : « Je connais bien le directeur. Vous pouvez passer mon dossier en premier ? »\nD'autres dossiers ont été déposés avant le sien.\n",
+   "enjeu": "Traiter chaque usager selon les mêmes règles, avec respect.",
    "options": [
     {
      "id": "A",
@@ -798,6 +812,7 @@ window.DINA_DATA = {
     "C20"
    ],
    "texte": "Avant de mettre sous enveloppe trente courriers de rappel, vous remarquez que le modèle donne un ancien numéro de téléphone du service. C'est la troisième fois ce mois-ci.\n",
+   "enjeu": "Bien faire son travail aujourd'hui, et éviter que l'erreur revienne.",
    "options": [
     {
      "id": "A",
@@ -843,12 +858,15 @@ window.DINA_DATA = {
    "type": "reponse-libre",
    "etape": "Positionnement",
    "titre": "Votre semaine se termine",
+   "texte": "Vendredi, 17 h. Voici ce que vous avez vécu cette semaine.",
+   "agenda": true,
+   "garder": true,
    "competences": [
     "C21"
    ],
    "question": "Qu'est-ce qui vous a semblé le plus délicat cette semaine ? Qu'aimeriez-vous mieux maîtriser dans vos premiers mois ?",
-   "apres": "Gardez cette réponse en tête : la même question vous sera posée au bilan de fin de parcours. Vous pourrez mesurer le chemin parcouru.",
-   "mention": "Votre réponse reste sur cet écran. Elle n'est transmise à personne.",
+   "apres": "Votre réponse sera reprise sur votre profil et à l'impression. La même question vous sera posée au bilan de fin de parcours : vous pourrez mesurer le chemin parcouru.",
+   "mention": "Votre réponse reste sur cet appareil. Elle n'est transmise à personne.",
    "suite": "POS-PROFIL"
   },
   "POS-PROFIL": {
@@ -856,7 +874,7 @@ window.DINA_DATA = {
    "type": "pos-profil",
    "etape": "Positionnement",
    "titre": "Où vous en êtes",
-   "texte": "Voici ce que montrent vos choix de la semaine. Ce n'est pas une note et rien n'est validé : quelques situations par domaine ne disent pas tout de vos compétences.\nVous suivrez tous les modules, dans l'ordre. Pour chaque domaine, vous voyez où il sera travaillé, avec un exemple.\n",
+   "texte": "Voici ce que montrent vos choix de la semaine, domaine par domaine. Ce n'est pas une note : quelques situations ne disent pas tout de vos compétences.\nVous suivrez tous les modules, dans l'ordre.\n",
    "niveaux": {
     "present": "Repères présents",
     "approfondir": "À approfondir",
@@ -864,6 +882,8 @@ window.DINA_DATA = {
    },
    "vigilance": "**Point de vigilance.** Sur un sujet sensible, vous avez choisi une conduite qui comporte un risque. Le module indiqué vous donne les repères à connaître avant d'agir.\n",
    "mention": "Ce résultat n'est vu que par vous. Votre employeur n'y a pas accès.",
+   "transition": "Dans quelques minutes, vous rencontrez Noa, qui vient d'être recruté. Sa première semaine commence par le premier domaine : se repérer.",
+   "sans_vigilance": "Aucun point de vigilance sur les sujets sensibles de la semaine.",
    "blocs": [
     {
      "id": "B1",
@@ -945,7 +965,7 @@ window.DINA_DATA = {
       "C19",
       "C20"
      ],
-     "module": "Tout au long du parcours, et au bilan de fin de parcours",
+     "module": "Tout au long du parcours DINA, et au bilan de fin de parcours",
      "exemple": "Vérifier une source, demander de l'aide au bon moment, s'adapter à un changement, proposer une amélioration.",
      "present": "Dans ces situations, vous avez su vérifier, demander de l'aide et proposer une amélioration.",
      "approfondir": "Vérifier une information, solliciter un appui, faire évoluer une pratique : certains réflexes restent à installer.",
@@ -957,5 +977,5 @@ window.DINA_DATA = {
  },
  "fiches": {},
  "illustrations": {},
- "source": "Storyboard — positionnement v0.4.md"
+ "source": "Storyboard — positionnement v0.5.md"
 };

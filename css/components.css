@@ -95,7 +95,7 @@ p { margin: 0 0 .8em; }
 .feedback .verdict { margin-bottom: .5rem; }
 .feedback p { margin: 0; }
 .feedback--adapte { border-color: var(--vert); background: var(--vert-clair); }
-.feedback--partiel { border-color: var(--orange); background: var(--orange-clair); }
+.feedback--partiel { border-color: var(--orange); background: var(--jaune-pale); }
 .feedback--risque { border-color: var(--corail); background: var(--corail-clair); }
 .feedback--inadapte { border-color: var(--rouge); background: var(--rouge-clair); }
 

@@ -12,6 +12,8 @@ window.DINA_DATA = {
     "id": "entree",
     "libelle": "Entrée",
     "etiquette": "Le contexte",
+    "jour": "Lundi matin",
+    "savoir": "Prendre son poste",
     "titre": "Premier lundi",
     "debut": "M1-ENT-1",
     "duree": "3 min",
@@ -20,6 +22,8 @@ window.DINA_DATA = {
    {
     "id": "ep1",
     "libelle": "Épisode 1",
+    "jour": "Lundi",
+    "savoir": "Savoir qui est compétent",
     "titre": "Qui fait quoi ?",
     "debut": "M1-E1-S1",
     "duree": "15 min",
@@ -28,6 +32,8 @@ window.DINA_DATA = {
    {
     "id": "ep2",
     "libelle": "Épisode 2",
+    "jour": "Mardi",
+    "savoir": "Savoir qui décide à l'ÉLAN",
     "titre": "Où est ÉLAN dans tout ça ?",
     "debut": "M1-E2-S1",
     "duree": "12 min",
@@ -36,6 +42,8 @@ window.DINA_DATA = {
    {
     "id": "ep3",
     "libelle": "Épisode 3",
+    "jour": "Mercredi",
+    "savoir": "Savoir vérifier une source",
     "titre": "Une information fiable",
     "debut": "M1-E3-S1",
     "duree": "12 min",
@@ -44,6 +52,8 @@ window.DINA_DATA = {
    {
     "id": "defi",
     "libelle": "Défi",
+    "jour": "Jeudi",
+    "savoir": "Le défi : le premier appel de Joël",
     "titre": "Le premier appel de Joël",
     "debut": "M1-DI-1",
     "duree": "8 min",
@@ -52,6 +62,8 @@ window.DINA_DATA = {
    {
     "id": "eval",
     "libelle": "Évaluation",
+    "jour": "Vendredi",
+    "savoir": "L'évaluation de la semaine",
     "titre": "Le bilan de la semaine",
     "debut": "M1-EVA-INTRO",
     "duree": "6 min",
@@ -61,6 +73,8 @@ window.DINA_DATA = {
     "id": "sortie",
     "libelle": "Sortie",
     "etiquette": "Mon bilan",
+    "jour": "Mon bilan",
+    "savoir": "Faire le point sur la semaine",
     "titre": "Ce que Noa a appris",
     "debut": "M1-SOR-1",
     "duree": "4 min",
@@ -69,6 +83,7 @@ window.DINA_DATA = {
   ],
   "dossier": {
    "titre": "Vers le dossier Passerelles",
+   "visible_des": "defi",
    "objet": "Le dossier n'existe pas encore. Ce que Noa apprend cette semaine lui servira jeudi, au premier appel de l'association Passerelles.",
    "roles": "Passerelles porte ses projets et décide. ÉLAN qualifie, étudie et coordonne.",
    "jalons": [
@@ -130,10 +145,20 @@ window.DINA_DATA = {
    "id": "M1-ENT-2",
    "type": "message",
    "etape": "Entrée",
-   "personnage": "Samuel",
    "canal": "oral",
    "titre": "Lundi, 8 h 10",
-   "texte": "Samuel se tourne vers Malia.\n« Malia sera ta marraine. Elle connaît la maison par cœur : pour toute question, va la voir. Pour les priorités et les validations, c'est moi. »\nMalia sourit : « Au début, on demande beaucoup. C'est normal. »\n",
+   "texte": "Samuel se tourne vers Malia.",
+   "repliques": [
+    {
+     "personnage": "Samuel",
+     "texte": "« Malia sera ta marraine. Elle connaît la maison par cœur : pour toute question, va la voir. Pour les priorités et les validations, c'est moi. »"
+    },
+    {
+     "personnage": "Malia",
+     "didascalie": "Elle sourit.",
+     "texte": "« Au début, il y a beaucoup de choses à comprendre et à intégrer. C'est normal. »"
+    }
+   ],
    "suite": "M1-ENT-3"
   },
   "M1-ENT-3": {
@@ -411,7 +436,7 @@ window.DINA_DATA = {
    "etape": "Épisode 1",
    "titre": "Les chiffres de la carte",
    "texte": "Samuel : « Tu sais pourquoi il faut orienter juste du premier coup ? Dans le Nord, une mauvaise orientation peut coûter un long déplacement. Avant de reprendre la carte du guide d'orientation, vérifie ses chiffres. »",
-   "consigne": "Signalez chaque chiffre qui ne peut pas être repris tel quel, puis validez.",
+   "consigne": "Sélectionnez chaque chiffre qui ne peut pas être repris tel quel, puis validez.",
    "competences": [
     "C01"
    ],
@@ -538,7 +563,7 @@ window.DINA_DATA = {
     {
      "icone": "i-carnet",
      "recto": "Le lycée et le collège",
-     "verso": "L'enseignement du second degré relève de la Nouvelle-Calédonie depuis le 1er janvier 2012. La construction et l'entretien des collèges sont restés aux provinces."
+     "verso": "Depuis le 1er janvier 2012, la Nouvelle-Calédonie organise l'enseignement du second degré et s'occupe des lycées. Le champ pédagogique (programmes, diplômes) reste national. Les collèges sont construits et entretenus par les provinces."
     },
     {
      "icone": "i-fichier",
@@ -572,7 +597,7 @@ window.DINA_DATA = {
     },
     {
      "titre": "Depuis 2000 — Les transferts de compétences",
-     "texte": "Des compétences passent progressivement de l'État à la Nouvelle-Calédonie : par exemple l'enseignement du second degré (2012), le droit civil et l'état civil (2013)."
+     "texte": "Des compétences passent progressivement de l'État à la Nouvelle-Calédonie : par exemple l'organisation de l'enseignement du second degré (2012), le droit civil et l'état civil (2013)."
     }
    ],
    "a_retenir": "Ces dates expliquent pourquoi, ici, certaines compétences relèvent de la Nouvelle-Calédonie ou des provinces.",
@@ -2324,34 +2349,37 @@ window.DINA_DATA = {
    "modele": "formulaire",
    "categorie": "outil",
    "titre": "Mes premiers jours",
-   "quand": "Dans vos premiers jours, chez votre employeur. Complétez au fur et à mesure : à la fin de la semaine, vous devez pouvoir commencer à travailler sans chercher.",
+   "quand": "Dans vos premiers jours chez votre employeur. Cochez au fur et à mesure. À la fin de la semaine, vous pouvez travailler sans chercher.",
    "sections": [
     {
      "titre": "De quoi ai-je besoin ?",
+     "coches": true,
      "champs": [
-      "Ma messagerie et mon poste de travail",
-      "Mes dossiers de travail (dossier partagé, intranet… selon mon employeur)",
-      "Mon accès aux locaux (badge, clés… s'il y en a)"
+      "Ma messagerie",
+      "Mon poste de travail",
+      "Mes dossiers de travail — où ils sont rangés, comment j'y accède",
+      "Mon accès aux locaux — badge, clés… s'il y en a"
      ]
     },
     {
      "titre": "Qu'attend-on de moi ?",
+     "coches": true,
      "champs": [
-      "Où trouver ma fiche de poste",
-      "Mes premières missions",
-      "À qui demander des précisions sur ces missions"
+      "Ma fiche de poste",
+      "Mes premières missions"
      ]
     },
     {
      "titre": "Qui peut m'aider ?",
+     "coches": true,
      "champs": [
-      "Mon responsable",
-      "Un collègue référent (parrain ou marraine, s'il y en a un)",
+      "Mon responsable — mes missions et mes priorités",
+      "Un collègue qui m'accompagne — il m'explique les pratiques du service (parfois un tuilage avec la personne que je remplace)",
       "Mon contact aux ressources humaines"
      ]
     },
     {
-     "titre": "Mes questions de la semaine",
+     "titre": "Mes questions et leurs réponses",
      "champs": [
       "Ma question",
       "La réponse, et qui me l'a donnée",
@@ -2360,11 +2388,11 @@ window.DINA_DATA = {
      ]
     }
    ],
-   "a_retenir": "Les premiers jours, on demande beaucoup : c'est normal. Notez les réponses ici, vous n'aurez pas à reposer les questions.",
+   "a_retenir": "Au début, il y a beaucoup de choses à comprendre et à intégrer. C'est normal. Notez les réponses : vous pourrez vous appuyer dessus.",
    "competences": [
     "C02"
    ],
-   "version": "0.2"
+   "version": "0.3"
   },
   "FICHE-M1-E1": {
    "id": "FICHE-M1-E1",
@@ -2378,51 +2406,51 @@ window.DINA_DATA = {
    "etapes": [
     {
      "titre": "1. Je comprends la demande",
-     "texte": "De quoi la personne a-t-elle besoin ? Une information, un document, une aide ou une autorisation ?"
+     "texte": "La personne a-t-elle besoin d'une information, d'un document, d'une aide, d'une autorisation… ?"
     },
     {
      "titre": "2. J'identifie l'administration compétente",
-     "texte": "Je recherche si la demande relève de l'État, de la Nouvelle-Calédonie, d'une province ou d'une commune."
+     "texte": "L'État, la Nouvelle-Calédonie, une province, une commune, un établissement public…"
     },
     {
      "titre": "3. Je vérifie en cas de doute",
-     "texte": "Je consulte une source officielle ou je demande confirmation à mon responsable avant d'orienter la demande."
+     "texte": "Je consulte une source officielle ou je demande confirmation à mon responsable."
     },
     {
-     "titre": "4. J'oriente vers le bon interlocuteur",
-     "texte": "J'indique le service à contacter, pourquoi il est compétent et comment le joindre."
+     "titre": "4. J'oriente",
+     "texte": "J'indique à la personne le service à contacter et comment le joindre. Si je peux, je dis aussi pourquoi ce service est compétent : la personne comprend mieux."
     }
    ],
    "titre_types": "Qui est compétent ? Quelques exemples (liste non exhaustive)",
    "types": [
     {
      "titre": "L'État",
-     "texte": "L'entrée et le séjour des étrangers, la justice, le maintien de l'ordre."
+     "texte": "La justice, la police et la gendarmerie nationales (porter plainte), la défense."
     },
     {
      "titre": "La Nouvelle-Calédonie",
-     "texte": "Les impôts et taxes, la protection sociale, la circulation routière."
+     "texte": "Les impôts, la protection sociale, le permis de conduire."
     },
     {
      "titre": "La province",
-     "texte": "Tout ce qui n'est pas attribué aux autres : le développement économique, l'aide sociale…"
+     "texte": "Le développement économique, l'aide sociale, l'environnement, les collèges."
     },
     {
      "titre": "La commune",
-     "texte": "La voirie communale, la police municipale. **À noter :** l'état civil se demande en mairie ; ses règles relèvent de la Nouvelle-Calédonie."
+     "texte": "La voirie, la police municipale, les écoles primaires, le guichet de l'état civil."
     }
    ],
-   "exemple": "« Titre de séjour : l'entrée et le séjour des étrangers relèvent de l'**État** (la compétence). La demande se dépose auprès des services du **haut-commissariat**, qui la traitent (le guichet). Démarche : [nouvelle-caledonie.gouv.fr](https://www.nouvelle-caledonie.gouv.fr). »",
+   "exemple": "« Déposer plainte après un vol : la justice et le maintien de l'ordre relèvent de l'**État**. La plainte se dépose au **commissariat de police ou à la gendarmerie**. La police municipale, elle, dépend de la commune. »",
    "a_retenir": "Ce n'est pas parce qu'une demande arrive dans mon service que celui-ci est compétent. Je vérifie avant de l'orienter.",
    "reperes": [
     "Loi organique n° 99-209, art. 20 à 22 (Légifrance)",
     "La personne qui confirme une orientation dans mon service",
-    "Les coordonnées des guichets que j'oriente souvent"
+    "Les services vers lesquels j'oriente souvent et leurs coordonnées (vous pouvez vous constituer une liste)"
    ],
    "competences": [
     "C01"
    ],
-   "version": "0.2"
+   "version": "0.3"
   },
   "FICHE-M1-E2": {
    "id": "FICHE-M1-E2",
@@ -2432,31 +2460,37 @@ window.DINA_DATA = {
    "categorie": "outil",
    "titre": "Mon employeur et mes interlocuteurs",
    "quand": "Dans vos premières semaines, avec l'organigramme de votre employeur. Ce n'est pas un annuaire : notez pour quoi vous solliciterez chaque interlocuteur.",
+   "mention": "À compléter avec votre responsable (N+1) si besoin.",
    "sections": [
     {
      "titre": "Mon employeur",
      "champs": [
-      "Son nom",
-      "Son type (commune, province, Nouvelle-Calédonie, établissement public…)",
-      "Qui prend les grandes décisions ? (conseil municipal, assemblée, conseil d'administration…)",
-      "Qui dirige les services ? (secrétaire général, directeur…)"
+      "Son nom et son statut (exemple : l'IFAP, établissement public)",
+      "Qui prend les grandes décisions ?",
+      "Qui dirige les services ?"
      ]
     },
     {
      "titre": "Mon service",
      "champs": [
       "Mon service et ma direction",
-      "Mon responsable : une consigne, une priorité, une difficulté",
+      "Mon responsable",
       "Le responsable de mon responsable"
      ]
     },
     {
-     "titre": "Mes interlocuteurs, et quand les solliciter",
+     "titre": "Quand je sollicite qui",
      "champs": [
-      "Ressources humaines : ma situation administrative (contrat, congés, paie)",
-      "Support informatique : un accès, un matériel",
-      "Logistique : locaux, véhicules, fournitures",
-      "Mon référent : les pratiques du service",
+      "Mon responsable : une décision à prendre, une priorité à arbitrer, une difficulté que je ne peux pas régler seul",
+      "Un collègue : une pratique du service, un outil, un document"
+     ]
+    },
+    {
+     "titre": "Mes autres interlocuteurs",
+     "champs": [
+      "Les ressources humaines : ma carrière, mes congés, ma paie",
+      "Le support informatique : un accès, un matériel",
+      "La logistique : locaux, véhicules, fournitures",
       "Autre interlocuteur utile, et pour quoi"
      ]
     }
@@ -2465,7 +2499,7 @@ window.DINA_DATA = {
    "competences": [
     "C02"
    ],
-   "version": "0.2"
+   "version": "0.3"
   },
   "FICHE-M1-E3": {
    "id": "FICHE-M1-E3",
@@ -2474,10 +2508,10 @@ window.DINA_DATA = {
    "modele": "aide-memoire",
    "categorie": "outil",
    "titre": "Trouver une information fiable",
-   "quand": "Avant de transmettre une règle, un délai ou un chiffre, et chaque fois que deux sources ne disent pas la même chose.",
+   "quand": "Avant de transmettre une règle, un délai ou un chiffre, ou de rédiger un document qui s'appuie sur une règle.",
    "etapes": [
     {
-     "titre": "1. Je formule mon besoin",
+     "titre": "1. Je clarifie mon besoin",
      "texte": "Une règle ? Une explication pratique ? Une procédure interne ?"
     },
     {
@@ -2519,7 +2553,7 @@ window.DINA_DATA = {
      "texte": "Les règles et procédures RH de la fonction publique calédonienne."
     }
    ],
-   "exemple": "« Délai d'affiliation après une embauche : deux sources officielles récentes donnent un délai, le guide de 2019 un autre. Peux-tu me dire quelle source fait foi ? »",
+   "exemple": "« Pour préparer une réponse, je trouve deux délais différents : l'un sur une page d'information non datée, l'autre dans le texte en vigueur sur Leginova. Je retiens le texte en vigueur, je note sa référence et je signale l'écart à mon responsable. »",
    "a_retenir": "Facile à trouver ne veut pas dire à jour. Je vérifie avant de transmettre.",
    "reperes": [
     "Le site de mon employeur",
@@ -2530,7 +2564,7 @@ window.DINA_DATA = {
     "C17",
     "C18"
    ],
-   "version": "0.2"
+   "version": "0.3"
   }
  },
  "illustrations": {

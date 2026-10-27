@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>DINA — démonstrateur</title>
+<title>DINA — prototype</title>
 <link rel="icon" href="assets/logo/picto-dina.svg">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/accueil.css">
@@ -40,11 +40,11 @@
 <div class="accroche">
   <div class="page">
     <div class="accroche-texte">
-      <span class="surtitre-sombre">Démonstrateur</span>
+      <span class="surtitre-sombre">Prototype</span>
       <h1>Bien démarrer dans la fonction publique calédonienne</h1>
       <p>DINA est le parcours d'intégration en ligne de l'IFAP pour les nouveaux agents. Des situations concrètes pour comprendre son environnement de travail et agir avec assurance.</p>
       <p>Cette version vous fait découvrir le début du parcours, tel que l'agent le vivra.</p>
-      <p class="mention-fiction">Noa, ses collègues et l'organisme ÉLAN sont fictifs.</p>
+      <p class="mention-fiction">Noa, ses collègues et l'ÉLAN sont fictifs.</p>
     </div>
     <div class="accroche-photo">
       <img src="assets/img/ILL-N01.jpg" alt="Dans un bureau lumineux, un responsable accueille un nouvel agent d'une poignée de main.">
@@ -83,13 +83,13 @@
         <span class="surtitre">Avant de commencer</span>
         <h3>Conseils pratiques</h3>
         <ul class="conseils">
-          <li><svg class="icone" aria-hidden="true"><use href="#i-ecran"/></svg><span>Utilisez un ordinateur, avec Chrome ou Edge.</span></li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-ecran"/></svg><span>Sur ordinateur (Chrome ou Edge) ou sur téléphone.</span></li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-plein"/></svg><span>Passez en plein écran avec la touche <kbd>F</kbd> dans chaque étape.</span></li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-carnet"/></svg><span>Les documents et fiches rencontrés sont rangés dans votre carnet. Vous pouvez le télécharger.</span></li>
-          <li><svg class="icone" aria-hidden="true"><use href="#i-bouclier"/></svg><span>Aucune donnée personnelle n'est collectée. Votre progression est gardée sur cet ordinateur seulement.</span></li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-bouclier"/></svg><span>Aucune donnée personnelle n'est collectée. Votre progression est gardée sur cet appareil seulement.</span></li>
         </ul>
         <button type="button" class="btn btn-secondaire" id="btn-reinit">
-          <svg class="icone" aria-hidden="true"><use href="#i-recommencer"/></svg>Effacer ma progression sur cet ordinateur
+          <svg class="icone" aria-hidden="true"><use href="#i-recommencer"/></svg>Effacer ma progression sur cet appareil
         </button>
         <p class="message-reinit" id="message-reinit" role="status" aria-live="polite"></p>
       </div>
@@ -132,7 +132,7 @@
   $("caracteristiques").innerHTML = lis(A.caracteristiques);
   $("evolutions").innerHTML = lis(A.evolutions);
   if (!A.evolutions || !A.evolutions.length) $("bloc-evolutions").hidden = true;
-  document.title = "DINA — démonstrateur v" + A.numero;
+  document.title = "DINA — prototype v" + A.numero;
 
   /* Étapes (ordre D84). Le bouton principal va à la première étape ouverte. */
   var premier = -1;
@@ -141,7 +141,7 @@
     var commence = e.disponible && e.cle && cles(e.cle + "-").length > 0;
     var meta = (e.duree ? '<span class="puce">' + ic("i-horloge") + esc(e.duree) + "</span>" : "") +
       (!e.disponible ? '<span class="puce puce--attente">Bientôt disponible</span>' : "") +
-      (commence ? '<span class="puce puce--cours">Commencé sur cet ordinateur</span>' : "");
+      (commence ? '<span class="puce puce--cours">Commencé sur cet appareil</span>' : "");
     var bouton = e.disponible
       ? '<a class="btn ' + (i === premier || commence ? "btn-principal" : "btn-secondaire") + '" href="' + esc(e.fichier) + '">' + (commence ? "Reprendre" : "Commencer") + ic("i-droite") + "</a>"
       : '<span class="btn" aria-disabled="true" role="link">' + ic("i-cadenas") + "Pas encore ouvert</span>";
@@ -155,7 +155,7 @@
   var av = V.avis || {};
   var html = "<p><strong>Votre avis</strong></p><p>" + txt(av.texte || "") + "</p>";
   if (av.courriel) {
-    var sujet = "DINA démonstrateur v" + A.numero + " — mes remarques";
+    var sujet = "DINA prototype v" + A.numero + " — mes remarques";
     var corps = "Version : " + A.numero + " (" + A.date + ")\nÉtape concernée : \nCe qui me plaît : \nCe qui me gêne : \nCe qui manque : \n";
     html += '<p><a class="btn btn-principal" href="mailto:' + encodeURIComponent(av.courriel).replace(/%40/g, "@") +
       "?subject=" + encodeURIComponent(sujet) + "&body=" + encodeURIComponent(corps) + '">' + ic("i-courriel") + "Envoyer mes remarques</a></p>";
@@ -176,7 +176,7 @@
   $("btn-reinit").addEventListener("click", function () {
     var k = cles("dina-");
     try { k.forEach(function (x) { localStorage.removeItem(x); }); } catch (e) {}
-    $("message-reinit").textContent = k.length ? "Progression effacée. Vous pouvez recommencer depuis le début." : "Aucune progression enregistrée sur cet ordinateur.";
+    $("message-reinit").textContent = k.length ? "Progression effacée. Vous pouvez recommencer depuis le début." : "Aucune progression enregistrée sur cet appareil.";
     document.querySelectorAll(".puce--cours").forEach(function (p) { p.remove(); });
     document.querySelectorAll(".etape a.btn").forEach(function (b, i) {
       b.className = "btn " + (i === 0 ? "btn-principal" : "btn-secondaire");

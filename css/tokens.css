@@ -15,7 +15,7 @@
   --turquoise: #00B2B8;     /* bleu-vert IFAP officiel (RVB 0/178/184, logo IFAP) : repères graphiques, jamais de texte */
   --jaune: #FFCB00;         /* jaune IFAP officiel : accent, fond avec texte foncé, jamais de texte sur blanc */
   --jaune-fonce: #997A00;   /* pictogrammes jaunes sur fond clair (3:1 minimum) */
-  --vert: #2E7D32;            /* réussite, conduite adaptée (5,1:1) — D104 */
+  --vert: #2D7A63;            /* réussite, conduite adaptée : vert sarcelle discret, accordé au bleu-vert IFAP (5,2:1) — D114 (remplace #2E7D32) */
   --bleu-progression: #1A7BB2;   /* bleu IFAP #63B8E8 assombri (4,65:1) — en cours (D53) */
   --orange: #A88600;          /* jaune IFAP assombri (3,5:1) — vigilance : filets, pictogrammes (D53) */
   --corail: #B85000;          /* orange (arc du logo IFAP) assombri — conduite risquée, alerter (5,0:1) — D104 */
@@ -40,11 +40,12 @@
   /* Teintes dérivées (fonds de feedback, états) */
   --bleu-clair: #E6F6F7;     /* bleu-vert à 12 % */
   --jaune-clair: #FFF6D1;    /* jaune à 18 % */
-  --vert-clair: #E8F3E9;
-  --vert-texte: #1E6B22;       /* vert sur --vert-clair, texte petit (5,8:1) — positionnement */
+  --vert-clair: #E9F3EF;
+  --vert-texte: #1F5C4A;       /* vert sur --vert-clair, texte petit (6,9:1) — positionnement, D114 */
   --bleu-progression-clair: #E3F0F8;
   --bleu-progression-texte: #155F8A;   /* sur --bleu-progression-clair (6,0:1) */
   --orange-clair: #FFF2BF;    /* jaune IFAP à 25 % */
+  --jaune-pale: #FFFAE6;      /* fond du texte des feedbacks « en partie adaptée » : distinct du badge jaune (D114) */
   --orange-texte: #705900;
   --corail-clair: #FCEEE2;    /* orange à 15 % */
   --corail-texte: #9A4300;
