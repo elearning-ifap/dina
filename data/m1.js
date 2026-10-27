@@ -168,7 +168,7 @@ window.DINA_DATA = {
    "type": "message",
    "etape": "Entrée",
    "personnage": "Ana",
-   "portrait": "grand",
+   "illustration": "ILL-N08",
    "canal": "oral",
    "titre": "Lundi, 8 h 30",
    "recit": "Ana travaille au pôle ressources et administration de l'ÉLAN. Elle accompagne les nouveaux agents dans leurs premiers jours.",
@@ -2736,6 +2736,11 @@ window.DINA_DATA = {
    "scene": "Carte en relief des trois provinces",
    "personnages": "—",
    "alt": "Carte en relief de la Nouvelle-Calédonie. La Grande Terre est partagée entre la province Nord, chef-lieu Koné, et la province Sud, chef-lieu Nouméa, qui comprend aussi l'île des Pins. À l'est, la province des îles Loyauté, chef-lieu Wé, à Lifou."
+  },
+  "ILL-N08": {
+   "scene": "Ana remet son badge définitif à Noa, lundi 8 h 30",
+   "personnages": "Ana, Noa",
+   "alt": "Lundi matin au pôle études et projets. Ana tend à Noa son badge définitif et une feuille de liste ; Noa la prend en souriant."
   }
  },
  "source": "sb_v02.md"
