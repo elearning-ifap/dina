@@ -1108,3 +1108,6 @@ a.btn { text-decoration: none; }
 /* D114 : plus d'aplat #103F41 — centre du schéma en orbite en bleu-vert IFAP foncé */
 .orb-centre circle { fill: var(--bleu); }
 @media (max-width: 720px) { .orb-liste .orb-liste-centre { background: var(--bleu) !important; } }
+/* Logo de l'établissement dans la fiche d'identité (27-10) */
+.badge-sigle--logo { background: #fff; border: 1px solid var(--bordure); padding: .25rem; }
+.badge-sigle--logo img { width: 100%; height: 100%; object-fit: contain; }

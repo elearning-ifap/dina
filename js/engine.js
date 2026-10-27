@@ -473,7 +473,7 @@
   }
   /* Badge d'identité (« carte de visite » d'une structure) */
   function ficheIdentite(f) {
-    return '<div class="badge-id"><span class="badge-trou" aria-hidden="true"></span><div class="badge-tete"><span class="badge-sigle" aria-hidden="true">' + esc(f.sigle || String(f.nom).charAt(0)) + "</span><div><strong>" + esc(f.nom) + "</strong>" + (f.sous_titre ? "<span>" + esc(f.sous_titre) + "</span>" : "") + "</div></div>" +
+    return '<div class="badge-id"><span class="badge-trou" aria-hidden="true"></span><div class="badge-tete">' + (f.logo ? '<span class="badge-sigle badge-sigle--logo" aria-hidden="true"><img src="assets/img/' + esc(f.logo) + '" alt=""></span>' : '<span class="badge-sigle" aria-hidden="true">' + esc(f.sigle || String(f.nom).charAt(0)) + "</span>") + "<div><strong>" + esc(f.nom) + "</strong>" + (f.sous_titre ? "<span>" + esc(f.sous_titre) + "</span>" : "") + "</div></div>" +
       '<dl class="badge-lignes">' + (f.lignes || []).map(function (l) { return "<div>" + (l.icone ? ic(l.icone) : "") + "<dt>" + esc(l.libelle) + "</dt><dd>" + inline(l.valeur) + "</dd></div>"; }).join("") + "</dl>" +
       (f.pied ? '<p class="badge-pied">' + inline(f.pied) + "</p>" : "") + "</div>";
   }

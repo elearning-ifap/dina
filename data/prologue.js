@@ -71,6 +71,7 @@ window.DINA_DATA = {
    "texte": "En attendant Samuel, Noa relit la présentation de son nouvel employeur.",
    "fiche_identite": {
     "sigle": "É",
+    "logo": "logo-elan-symbole.png",
     "nom": "L'ÉLAN",
     "sous_titre": "Établissement de liaison et d'appui de Nouvelle-Calédonie",
     "lignes": [
