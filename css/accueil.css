@@ -51,6 +51,7 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
 .etape-meta { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
 .puce { display: inline-flex; align-items: center; gap: .3rem; font-size: .8125rem; font-weight: 600; border-radius: 999px; padding: .15rem .6rem; background: var(--gris-clair); color: var(--texte); }
 .puce--cours { background: var(--bleu-clair); color: var(--bleu-sombre); }
+.puce--fini { background: var(--vert-clair); color: var(--vert-texte); }
 .puce--attente { background: var(--orange-clair); color: var(--orange-texte); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: 0 1.3rem; border-radius: var(--rayon-petit); font: 600 1rem var(--police-texte); cursor: pointer; border: 2px solid transparent; text-decoration: none; }
 .btn-principal { background: var(--bleu); color: #fff; }

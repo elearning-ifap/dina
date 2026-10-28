@@ -6,9 +6,9 @@ window.DINA_DATA = {
   "titre": "Bienvenue à l'ÉLAN",
   "code": "Prologue",
   "duree": "8 à 10 min",
-  "page_suivante": {
-   "href": "m1.html",
-   "libelle": "Module 1 — Je me repère"
+  "hub": {
+   "href": "index.html",
+   "libelle": "Retour à l'accueil du prototype"
   },
   "intro": "Bienvenue dans votre parcours DINA. Avant de commencer, découvrez l'univers dans lequel vous allez évoluer au fil des semaines : Noa, qui vient d'être recruté, l'établissement public qui l'emploie, et les personnes qu'il va côtoyer.\n",
   "sections": [

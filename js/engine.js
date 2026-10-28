@@ -623,11 +623,18 @@
       (appris.length ? '<h2 class="fin-sous">' + esc(e.points_titre || "Ce que vous avez appris") + "</h2>" + points(appris) : "") + badge +
       '<p class="revenir">' + ic("i-carnet") + "<span>" + esc(e.revenir || "Vous pouvez revenir sur ce module quand vous le souhaitez : les épisodes restent ouverts et votre carnet garde vos documents et vos fiches.") + "</span></p>" +
       (e.prochain ? '<div class="prochain">' + ic("i-lecture") + '<div><span class="surtitre">Votre prochain défi</span><strong>' + esc(e.prochain.titre) + "</strong>" + (e.prochain.texte ? "<p>" + inline(e.prochain.texte) + "</p>" : "") + "</div></div>" : "") + "</div>";
-    if (M.page_suivante) principal("Continuer : " + M.page_suivante.libelle, function () { pageSuivante(); });
-    else principal("Retour au sommaire", function () { etat.historique = []; aller("MENU", true); }, { icone: "i-sommaire" });
+    boutonFin(function () { principal("Retour au sommaire", function () { etat.historique = []; aller("MENU", true); }, { icone: "i-sommaire" }); });
   }
   /* Enchaînement du démonstrateur (D84) : positionnement → prologue → M1 */
   function pageSuivante() { window.location.href = M.page_suivante.href; }
+  /* 28-10 (Marc) : l'accueil du prototype sert de hub ; chaque étape terminée y ramène et y est marquée « terminée » */
+  function marquerFini() { try { localStorage.setItem("dina-" + (M.code || M.id).toLowerCase() + "-fini", "1"); } catch (e) {} }
+  function boutonFin(sinon) {
+    marquerFini();
+    if (M.hub) principal(M.hub.libelle || "Retour à l'accueil", function () { window.location.href = M.hub.href; }, { icone: "i-sommaire" });
+    else if (M.page_suivante) principal("Continuer : " + M.page_suivante.libelle, pageSuivante);
+    else sinon();
+  }
 
   /* ---------- Décision à options exclusives (avec nouvel essai) ---------- */
   function rendreChoix(e) {
@@ -1689,8 +1696,7 @@
       etat.faites = []; etat.historique = []; sauver();
       aller(SECTIONS[0].debut, true);
     });
-    if (M.page_suivante) principal("Continuer : " + M.page_suivante.libelle, pageSuivante);
-    else principal("", null);
+    boutonFin(function () { principal("", null); });
   }
 
   var RENDUS = {

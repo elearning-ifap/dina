@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « sb_v02.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 v0.2.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M1",
@@ -81,6 +81,10 @@ window.DINA_DATA = {
     "accroche": "Ce que Noa retient, et où vous en êtes, vous."
    }
   ],
+  "hub": {
+   "href": "index.html",
+   "libelle": "Retour à l'accueil du prototype"
+  },
   "dossier": {
    "titre": "Vers le dossier Passerelles",
    "visible_des": "defi",
@@ -2743,5 +2747,5 @@ window.DINA_DATA = {
    "alt": "Lundi matin au pôle études et projets. Ana tend à Noa son badge définitif et une feuille de liste ; Noa la prend en souriant."
   }
  },
- "source": "sb_v02.md"
+ "source": "Storyboard — M1 v0.2.md"
 };

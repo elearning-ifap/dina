@@ -7,9 +7,9 @@ window.DINA_DATA = {
   "titre": "Votre première semaine",
   "duree": "15 à 20 min",
   "sans_menu": true,
-  "page_suivante": {
-   "href": "prologue.html",
-   "libelle": "Bienvenue à l'ÉLAN"
+  "hub": {
+   "href": "index.html",
+   "libelle": "Retour à l'accueil du prototype"
   },
   "sections": [
    {

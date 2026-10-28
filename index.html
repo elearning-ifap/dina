@@ -15,6 +15,7 @@
      Les textes de version se modifient dans version.js, pas ici. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-droite" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
   <symbol id="i-horloge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
   <symbol id="i-cadenas" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
   <symbol id="i-ecran" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></symbol>
@@ -135,15 +136,19 @@
   document.title = "DINA — prototype v" + A.numero;
 
   /* Étapes (ordre D84). Le bouton principal va à la première étape ouverte. */
+  function fini(e) { try { return !!(e.cle && localStorage.getItem(e.cle + "-fini")); } catch (x) { return false; } }
+  /* Hub (28-10) : le bouton principal va à la première étape ouverte et pas encore terminée */
   var premier = -1;
-  V.etapes.forEach(function (e, i) { if (premier < 0 && e.disponible) premier = i; });
+  V.etapes.forEach(function (e, i) { if (premier < 0 && e.disponible && !fini(e)) premier = i; });
   $("etapes").innerHTML = V.etapes.map(function (e, i) {
-    var commence = e.disponible && e.cle && cles(e.cle + "-").length > 0;
+    var termine = e.disponible && fini(e);
+    var commence = !termine && e.disponible && e.cle && cles(e.cle + "-").length > 0;
     var meta = (e.duree ? '<span class="puce">' + ic("i-horloge") + esc(e.duree) + "</span>" : "") +
       (!e.disponible ? '<span class="puce puce--attente">Bientôt disponible</span>' : "") +
-      (commence ? '<span class="puce puce--cours">Commencé sur cet appareil</span>' : "");
+      (commence ? '<span class="puce puce--cours">Commencé sur cet appareil</span>' : "") +
+      (termine ? '<span class="puce puce--fini">' + ic("i-check") + "Terminé</span>" : "");
     var bouton = e.disponible
-      ? '<a class="btn ' + (i === premier || commence ? "btn-principal" : "btn-secondaire") + '" href="' + esc(e.fichier) + '">' + (commence ? "Reprendre" : "Commencer") + ic("i-droite") + "</a>"
+      ? '<a class="btn ' + (i === premier ? "btn-principal" : "btn-secondaire") + '" href="' + esc(e.fichier) + '">' + (termine ? "Revoir" : commence ? "Reprendre" : "Commencer") + ic("i-droite") + "</a>"
       : '<span class="btn" aria-disabled="true" role="link">' + ic("i-cadenas") + "Pas encore ouvert</span>";
     return '<li class="etape"><span class="etape-num" aria-hidden="true">' + (i + 1) + "</span>" +
       "<h3><span class=\"lien-evitement\">Étape " + (i + 1) + " : </span>" + esc(e.titre) + "</h3>" +
