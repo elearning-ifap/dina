@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>DINA — tableau de bord du projet</title>
+<link rel="icon" href="../assets/logo/picto-dina.svg">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="pilotage.css">
+<script src="livrables.js"></script>
+</head>
+<body>
+<!-- Tableau de bord des livrables DINA. Les données sont dans livrables.js : ne rien modifier ici pour une mise à jour. -->
+<a class="lien-evitement" href="#contenu">Aller au contenu</a>
+
+<header class="entete">
+  <div class="page">
+    <img class="logo-dina" src="../assets/logo/logo-dina.svg" alt="DINA — Mes repères pour agir">
+    <img class="logo-ifap" src="../assets/logo/logo-ifap.png" alt="IFAP — Institut de formation à l'administration publique">
+  </div>
+</header>
+
+<main id="contenu" class="page">
+  <section class="tete">
+    <p class="surtitre">Pilotage du projet</p>
+    <h1>Où en est DINA ?</h1>
+    <p class="maj" id="maj"></p>
+    <p class="avertissement" id="avertissement" hidden></p>
+    <div class="synthese" id="synthese" aria-label="Synthèse des livrables"></div>
+  </section>
+
+  <section aria-labelledby="t-jalons">
+    <p class="surtitre">Calendrier</p>
+    <h2 id="t-jalons">Les jalons jusqu'à l'ouverture</h2>
+    <ol class="jalons" id="jalons"></ol>
+  </section>
+
+  <section aria-labelledby="t-attente">
+    <p class="surtitre">Qui doit agir</p>
+    <h2 id="t-attente">En attente de</h2>
+    <div class="attentes" id="attentes"></div>
+  </section>
+
+  <section aria-labelledby="t-parcours">
+    <p class="surtitre">Le parcours de l'agent</p>
+    <h2 id="t-parcours">Avancement module par module</h2>
+    <div class="legende" id="legende-matrice"></div>
+    <div class="matrice" id="matrice"></div>
+  </section>
+
+  <section aria-labelledby="t-livrables">
+    <p class="surtitre">Inventaire</p>
+    <h2 id="t-livrables">Tous les livrables, par catégorie</h2>
+    <div class="filtres" role="group" aria-label="Filtrer par statut" id="filtres"></div>
+    <div id="categories"></div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="page">
+    <p>Tableau de bord tenu par l'équipe projet DINA de l'IFAP. Les statuts reprennent le coffre de projet à la date de mise à jour.</p>
+    <p><a href="../">Voir le prototype</a></p>
+  </div>
+</footer>
+
+<script src="pilotage.js"></script>
+</body>
+</html>
