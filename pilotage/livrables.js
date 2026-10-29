@@ -14,8 +14,8 @@ window.DINA_PILOTAGE = {
   /* Temps de travail, en jours temps plein. Reprendre les chiffres de « Suivi du temps DINA » (coffre Obsidian). */
   temps: {
     prevuJours: 32,          /* charge annoncée à la direction */
-    passeJours: 7.05,        /* cumul saisi */
-    arreteAu: "22-10-2026"   /* date de la dernière saisie */
+    passeJours: 9.9,         /* cumul saisi */
+    arreteAu: "29-10-2026"   /* date de la dernière saisie */
   },
 
   /* Avancement global : chaque livrable et chaque case de la matrice du parcours comptent pour une unité.
