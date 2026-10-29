@@ -63,7 +63,7 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
 .synthese-texte { margin: .6rem 0 0; font-size: var(--taille-petit); color: var(--texte-2); }
 
 /* ---- Jalons ---- */
-.jalons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(8, 1fr); gap: .5rem; position: relative; }
+.jalons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n, 8), minmax(0, 1fr)); gap: .5rem; position: relative; }
 .jalons::before { content: ""; position: absolute; top: 13px; left: 4%; right: 4%; height: 2px; background: var(--bordure); }
 .jalon { position: relative; padding-top: 2.1rem; }
 .jalon::before { content: ""; position: absolute; top: 4px; left: 0; width: 20px; height: 20px; rotate: 45deg; border-radius: 3px; background: var(--carte); border: 2px solid var(--gris); }
@@ -74,7 +74,7 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
 .jalon--a_venir .jalon-date { color: var(--texte-2); }
 .jalon h3 { font-size: 1rem; margin: .1rem 0 .25rem; }
 .jalon p { margin: 0; font-size: .8125rem; line-height: 1.4; color: var(--texte-2); }
-.jalon--prochain h3::after { content: "Prochain"; margin-left: .4rem; font: 700 .7rem var(--police-texte); text-transform: uppercase; letter-spacing: .05em; background: var(--jaune); color: var(--anthracite); border-radius: 4px; padding: .05rem .35rem; vertical-align: middle; }
+.jalon--prochain h3::after { content: "Prochain"; display: table; margin: .25rem 0 0; font: 700 .7rem var(--police-texte); text-transform: uppercase; letter-spacing: .05em; background: var(--jaune); color: var(--anthracite); border-radius: 4px; padding: .05rem .35rem; vertical-align: middle; }
 
 /* ---- En attente de ---- */
 .attentes { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1rem; }

@@ -87,6 +87,7 @@
   })();
 
   /* Jalons */
+  $("jalons").style.setProperty("--n", D.jalons.length);
   $("jalons").innerHTML = D.jalons.map(function (j) {
     return '<li class="jalon jalon--' + j.etat + (j.pause ? " jalon--pause" : "") + '">' +
       '<span class="jalon-date">' + esc(j.date) + "</span><h3>" + esc(j.titre) + "</h3><p>" + esc(j.texte) + "</p></li>";
@@ -100,7 +101,12 @@
       if (l.attente && parPersonne[l.attente]) parPersonne[l.attente].push({ titre: (l.statut === "a_valider" ? "Valider : " : "") + l.titre, detail: l.note });
     });
     (D.actions || []).forEach(function (a) {
-      if (parPersonne[a.attente]) parPersonne[a.attente].push({ titre: a.titre, detail: [a.note, a.echeance ? "Échéance : " + a.echeance : ""].filter(Boolean).join(" ") });
+      var qui = [].concat(a.attente), avec = function (k) { return qui.filter(function (x) { return x !== k; }).map(nom); };
+      qui.forEach(function (k) {
+        if (!parPersonne[k]) return;
+        var autres = avec(k);
+        parPersonne[k].push({ titre: a.titre, detail: [autres.length ? "Avec " + autres.join(", ") + "." : "", a.note, a.echeance ? "Échéance : " + a.echeance : ""].filter(Boolean).join(" ") });
+      });
     });
     $("attentes").innerHTML = Object.keys(D.personnes).filter(function (k) {
       return PERSONNES_TOUJOURS.indexOf(k) >= 0 || parPersonne[k].length;

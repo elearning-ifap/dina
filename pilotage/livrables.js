@@ -8,7 +8,7 @@
    Ne rien écrire ici sur le temps passé, les noms des experts ou des testeurs, ni les remarques internes. */
 
 window.DINA_PILOTAGE = {
-  miseAJour: "29-10-2026",
+  miseAJour: "30-10-2026",
   avertissement: "Statuts de départ établis le 29-10 à partir du coffre de projet, à confirmer par Marc Rolland.",
 
   /* Temps de travail, en jours temps plein. Reprendre les chiffres de « Suivi du temps DINA » (coffre Obsidian). */
@@ -36,10 +36,11 @@ window.DINA_PILOTAGE = {
   jalons: [
     { date: "15-09-2026", titre: "COPIL employeurs", texte: "Lancement de la démarche", etat: "franchi" },
     { date: "10-10-2026", titre: "Environnement de production", texte: "Règles, gabarits et outils prêts (J-ENV)", etat: "franchi" },
-    { date: "28-10-2026", titre: "Démonstration du prototype", texte: "Positionnement, prologue et module 1 testés par les employeurs (J-PROT)", etat: "franchi" },
-    { date: "Début nov. 2026", titre: "Retours des testeurs", texte: "2 ou 3 agents par employeur testent le prototype, retours sous 10 jours", etat: "prochain" },
+    { date: "28-10-2026", titre: "Démonstration du prototype", texte: "Positionnement, prologue et module 1 testés par les employeurs (J-PROT). Retours recueillis, provinces Nord et des Îles comprises", etat: "franchi" },
+    { date: "Début nov. 2026", titre: "Retours des agents testeurs", texte: "2 ou 3 agents par employeur testent le prototype, retours sous 10 jours", etat: "prochain" },
     { date: "Novembre 2026", titre: "Validation technique", texte: "Un module en SCORM fonctionne dans LIANE : lancement, reprise, traces (J-TECH). Date à fixer", etat: "a_venir" },
     { date: "Décembre 2026", titre: "Pause de production", texte: "Trois semaines sans production", etat: "a_venir", pause: true },
+    { date: "Janvier 2027", titre: "Test interne IFAP", texte: "Des agents de l'IFAP vivent le parcours complet et font leurs retours, avant toute ouverture à l'externe. Date à fixer", etat: "a_venir" },
     { date: "Février 2027", titre: "Pilote", texte: "Un mois, 10 à 20 agents, version actuelle sans vidéo ni audio", etat: "a_venir" },
     { date: "Mi-mars 2027", titre: "Ouverture de DINA", texte: "Inscription sur demande de l'employeur", etat: "a_venir" }
   ],
@@ -85,7 +86,9 @@ window.DINA_PILOTAGE = {
         { titre: "Règles de production (pédagogie, récit, visuels, évaluation)", lot: "L1", statut: "en_cours", qui: "marc" },
         { titre: "Univers de l'ÉLAN : personnages et lieux", lot: "L1", statut: "valide", qui: "marc", valide: "mnb" },
         { titre: "Fil rouge : le dossier Passerelles", lot: "L1", statut: "valide", qui: "marc" },
-        { titre: "Logo DINA et signature « Mes repères pour agir »", lot: "L1", statut: "valide", qui: "marc", valide: "mfp" }
+        { titre: "Logo DINA et signature « Mes repères pour agir »", lot: "L1", statut: "valide", qui: "marc", valide: "mfp" },
+        { titre: "Charte graphique DINA (couleurs, typographie, règles visuelles)", lot: "L1", statut: "a_valider", qui: "marc", valide: "mfp", attente: "mfp" },
+        { titre: "Récit adapté à l'agent déjà en poste", lot: "L1", statut: "a_faire", qui: "marc", note: "L'agent ne suit pas DINA le jour de sa prise de poste. Le récit doit rejoindre les situations professionnelles qu'il vit déjà." }
       ] },
 
     { code: "ressources", titre: "Ressources et évaluations", texte: "Ce que l'agent garde, ce qui valide ses acquis.",
@@ -115,11 +118,14 @@ window.DINA_PILOTAGE = {
         { titre: "Quatre indicateurs de suivi pour l'IFAP", lot: "L8", statut: "a_faire", qui: "marc" },
         { titre: "Vue employeur : avancement de ses agents", lot: "L8", statut: "a_faire", qui: "marc", note: "Avancement seul, sans résultats ni badges." },
         { titre: "Information de l'employeur après deux échecs", lot: "L8", statut: "a_faire", qui: "marc", note: "Modalité à définir." },
+        { titre: "Test interne IFAP : testeurs et recueil des retours", lot: "L7", statut: "a_faire", qui: "marc", valide: "mnb", echeance: "Janvier 2027", note: "Des agents de l'IFAP suivent le parcours dans sa globalité avant le pilote externe." },
         { titre: "Bilan du pilote", lot: "L8", statut: "a_faire", qui: "mnb", echeance: "Mars 2027" }
       ] },
 
     { code: "communication", titre: "Communication et accompagnement", texte: "Faire connaître DINA et accompagner les agents.",
       livrables: [
+        { titre: "Stratégie de communication", lot: "L9", statut: "a_valider", qui: "marc", valide: "mfp", attente: "mfp", note: "Document de travail, version 0.1." },
+        { titre: "Stratégie de déploiement et d'adoption (marketing)", lot: "L9", statut: "a_valider", qui: "marc", valide: "mfp", attente: "mfp", note: "Document de travail, version 0.2." },
         { titre: "Présentation aux employeurs", lot: "L9", statut: "livre", qui: "marc", valide: "mnb", note: "Version courte du 28-10." },
         { titre: "Livret de test et annexe « DINA en bref »", lot: "L9", statut: "livre", qui: "marc", valide: "mnb", note: "Séance du 28-10." },
         { titre: "Prototype en ligne", lot: "L9", statut: "livre", qui: "marc", note: "Lien unique et QR code." },
@@ -150,11 +156,10 @@ window.DINA_PILOTAGE = {
   /* Actions qui ne sont pas des livrables mais qui bloquent l'avancée. Elles s'ajoutent à « En attente de ». */
   actions: [
     { attente: "employeurs", titre: "Faire tester le prototype par 2 ou 3 agents aux profils variés", echeance: "Début nov. 2026" },
-    { attente: "employeurs", titre: "Désigner un ou deux référents par module pour valider le fond", note: "Condition pour tenir le pilote." },
-    { attente: "mnb", titre: "Recontacter la province des Îles après la séance du 28-10" },
-    { attente: "marc", titre: "Trancher l'ergonomie : regrouper des écrans pour réduire les clics" },
-    { attente: "marc", titre: "Trancher le récit du premier jour pour un agent déjà en poste" },
-    { attente: "marc", titre: "Trancher le prérequis numérique avant l'inscription" },
-    { attente: "mfp", titre: "Relecture finale de la neutralité de genre" }
+    { attente: "employeurs", titre: "Désigner un ou deux référents par module pour valider le fond", note: "Indispensable : sans référents, pas de pilote." },
+    { attente: ["marc", "mnb"], titre: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics" },
+    { attente: "marc", titre: "Adapter le récit à l'agent déjà en poste depuis quelques semaines" },
+    { attente: ["marc", "mnb"], titre: "Rediscuter du prérequis numérique avant l'inscription" },
+    { attente: ["marc", "mnb"], titre: "Choisir les testeurs internes de l'IFAP" }
   ]
 };
