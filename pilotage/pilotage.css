@@ -130,6 +130,7 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
 .cat-texte p { margin: .1rem 0 0; font-size: .875rem; color: var(--texte-2); }
 .mini-barre { flex: none; width: 8rem; }
 .mini-barre .barre { margin: 0; height: 8px; }
+.a-estimer { font-style: italic; }
 .mini-barre small { display: block; text-align: right; font-size: .75rem; color: var(--texte-2); margin-top: .2rem; }
 .liste { list-style: none; margin: 0; padding: 0 1.1rem .6rem; }
 .livrable { display: grid; grid-template-columns: 1fr auto; gap: .2rem 1rem; padding: .75rem 0; border-top: 1px solid var(--bordure); }

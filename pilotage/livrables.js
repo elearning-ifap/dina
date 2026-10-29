@@ -20,6 +20,8 @@ window.DINA_PILOTAGE = {
 
   /* Avancement global : chaque livrable et chaque case de la matrice du parcours comptent pour une unité.
      Part réalisée selon le statut ci-dessous. */
+  /* Durée prévisionnelle de production : ajouter « duree: 2 » (en jours) sur un livrable ou une ligne du parcours.
+     Sans durée, la page affiche « à estimer ». */
   ponderation: { a_faire: 0, en_cours: 0.5, a_valider: 0.8, valide: 1, livre: 1 },
 
   personnes: {
@@ -98,16 +100,26 @@ window.DINA_PILOTAGE = {
         { titre: "Badges des 5 modules", lot: "L6", statut: "en_cours", qui: "marc", note: "Un badge par module, au nom du module. Délivré en cas de réussite." },
         { titre: "Fiches outils du module 1", lot: "L5", statut: "en_cours", qui: "marc", note: "Présentées le 28-10, à reprendre." },
         { titre: "Fiches outils des modules 2 à 5", lot: "L5", statut: "a_faire", qui: "marc" },
-        { titre: "Carnet unique du parcours, en PDF", lot: "L5", statut: "a_faire", qui: "marc" },
-        { titre: "Espace « Mes ressources »", lot: "L5", statut: "a_faire", qui: "marc" }
+        { titre: "Contenus de l'espace « Mes ressources »", lot: "L5", statut: "a_faire", qui: "marc" }
       ] },
 
-    { code: "plateforme", titre: "Plateforme LIANE", texte: "Le parcours installé dans Moodle.",
+    { code: "plateforme", titre: "Plateforme LIANE", texte: "Le parcours installé dans Moodle. La partie la plus complexe : LIANE s'utilise telle quelle, sans plugin.",
       livrables: [
-        { titre: "Test technique SCORM dans LIANE", lot: "J-TECH", statut: "a_faire", qui: "marc", valide: "si", echeance: "Novembre 2026", note: "Condition avant de produire les modules 2 à 5 en série." },
-        { titre: "Page d'accueil DINA dans Moodle (tableau de bord)", lot: "L2", statut: "a_faire", qui: "marc" },
-        { titre: "Paquets SCORM des modules", lot: "L2", statut: "a_faire", qui: "marc" },
-        { titre: "Recette : fonctionnement, pédagogie, accessibilité", lot: "L7", statut: "a_faire", qui: "marc", valide: "mnb", echeance: "Janvier 2027" }
+        { titre: "Relevé des contraintes LIANE : version de Moodle, thème, droits, affichage mobile", lot: "L2", statut: "a_faire", qui: "marc", valide: "si" },
+        { titre: "Test technique SCORM dans LIANE", lot: "J-TECH", statut: "a_faire", qui: "marc", valide: "si", echeance: "Novembre 2026", note: "Lancement, complétion, reprise, traces. Condition avant de produire les modules 2 à 5 en série." },
+        { titre: "Structure du cours DINA : accueil, positionnement, prologue, 5 modules, bilan, ressources, aide", lot: "L2", statut: "a_faire", qui: "marc" },
+        { titre: "Page d'accueil DINA (tableau de bord de l'agent)", lot: "L2", statut: "a_faire", qui: "marc", note: "Avec les composants Moodle disponibles, sans format de cours dédié." },
+        { titre: "Intégration du positionnement et de sa restitution", lot: "L2", statut: "a_faire", qui: "marc", note: "Le positionnement ne peut pas être rejoué." },
+        { titre: "Paquets SCORM : prologue, 5 modules, bilan", lot: "L2", statut: "a_faire", qui: "marc" },
+        { titre: "Tests Moodle d'évaluation et banques de questions", lot: "L6", statut: "a_faire", qui: "marc", note: "Situations différentes à chaque passage. Résultat enregistré dans Moodle." },
+        { titre: "Règles de complétion et de progression", lot: "L2", statut: "a_faire", qui: "marc", note: "Activité, module, parcours." },
+        { titre: "Reprise de parcours là où l'agent s'est arrêté", lot: "L2", statut: "a_faire", qui: "marc" },
+        { titre: "Badges Moodle : critères et attribution", lot: "L6", statut: "a_faire", qui: "marc" },
+        { titre: "Espace « Mes ressources » : fiches outils téléchargeables", lot: "L5", statut: "a_faire", qui: "marc" },
+        { titre: "Rubrique d'aide et FAQ dans le cours", lot: "L2", statut: "a_faire", qui: "marc" },
+        { titre: "Rôles et droits : agent, IFAP, employeur", lot: "L8", statut: "a_faire", qui: "marc", valide: "si" },
+        { titre: "Espace de test pour le test interne et le pilote", lot: "L7", statut: "a_faire", qui: "marc" },
+        { titre: "Recette : fonctionnement, pédagogie, accessibilité, mobile", lot: "L7", statut: "a_faire", qui: "marc", valide: "mnb", echeance: "Janvier 2027" }
       ] },
 
     { code: "suivi", titre: "Suivi du pilote", texte: "Inscrire, suivre, tirer le bilan.",

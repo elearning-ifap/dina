@@ -23,6 +23,14 @@
   function nom(cle) { return D.personnes[cle] ? D.personnes[cle].nom : cle; }
   function puce(statut) { return '<span class="puce s-' + statut + '">' + esc(LIBELLE[statut] || statut) + "</span>"; }
   function $(id) { return document.getElementById(id); }
+  function fr(x) { return String(Math.round(x * 100) / 100).replace(".", ","); }
+  function duree(liste) {
+    var total = 0, estimes = 0;
+    liste.forEach(function (l) { if (l.duree != null) { total += l.duree; estimes++; } });
+    var manque = liste.length - estimes;
+    return { total: total, estimes: estimes, manque: manque,
+      texte: estimes ? "Durée prévue : " + fr(total) + "\u00a0j" + (manque ? " (" + manque + " à estimer)" : "") : "Durées à estimer" };
+  }
 
   var tous = [];
   D.categories.forEach(function (c) { c.livrables.forEach(function (l) { tous.push(l); }); });
@@ -53,7 +61,6 @@
     var avance = unites.length ? Math.round(100 * somme / unites.length) : 0;
 
     function jours(d) { var m = String(d || "").split("-"); return m.length === 3 ? Date.UTC(+m[2], +m[1] - 1, +m[0]) / 864e5 : 0; }
-    function fr(x) { return String(Math.round(x * 100) / 100).replace(".", ","); }
     function jauge(pc, couleur) {
       return '<div class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + Math.min(pc, 100) + "%;--c:" + couleur + '"></span></div>';
     }
@@ -71,6 +78,13 @@
         '<p class="comparaison ' + (ecart > 10 ? "c-alerte" : "c-ok") + '">' +
         (ecart > 10 ? "Le temps consommé dépasse l'avancement de " + ecart + " points."
                     : "L'avancement (" + avance + "\u00a0%) est en phase ou en avance sur le temps consommé (" + conso + "\u00a0%).") + "</p>" +
+        (function () {
+          var du = duree(tous.concat(D.parcours)), nb = tous.length + D.parcours.length;
+          if (!du.estimes) return '<p class="explication">Durées de production des livrables : à estimer.</p>';
+          var depasse = du.total > T.prevuJours;
+          return '<p class="comparaison ' + (depasse ? "c-alerte" : "c-ok") + '">Durée prévue des livrables : ' + fr(du.total) + "\u00a0j pour " + du.estimes + " éléments estimés sur " + nb +
+            (depasse ? ", au-delà des " + fr(T.prevuJours) + "\u00a0j annoncés." : ".") + "</p>";
+        })() +
         (jours(D.miseAJour) - jours(T.arreteAu) > 3 ? '<p class="explication">Saisie du temps antérieure à la mise à jour des statuts : la comparaison est à prendre avec prudence.</p>' : "") + "</article>";
     }
     $("indicateurs").innerHTML = html;
@@ -135,7 +149,8 @@
     var entete = '<div class="m-entete" aria-hidden="true"><div>Étape du parcours</div>' + D.etapesFabrication.map(function (e) { return "<div>" + esc(e) + "</div>"; }).join("") + "</div>";
     $("matrice").innerHTML = entete + D.parcours.map(function (p) {
       return '<div class="m-ligne"><div class="m-titre"><span class="code">' + esc(p.code) + "</span><strong>" + esc(p.titre) + "</strong>" +
-        (p.sousTitre ? "<small>" + esc(p.sousTitre) + "</small>" : "") + (p.note ? "<small>" + esc(p.note) + "</small>" : "") + "</div>" +
+        (p.sousTitre ? "<small>" + esc(p.sousTitre) + "</small>" : "") + (p.note ? "<small>" + esc(p.note) + "</small>" : "") +
+        "<small>" + (p.duree != null ? "Durée prévue : " + fr(p.duree) + "\u00a0j" : '<span class="a-estimer">Durée à estimer</span>') + "</small></div>" +
         p.etats.map(function (s, i) {
           return '<div class="m-cell"><span class="etiquette-mobile" aria-hidden="true">' + esc(COURT[i] || D.etapesFabrication[i]) + "</span>" + pastille(s, D.etapesFabrication[i]) + "</div>";
         }).join("") + "</div>";
@@ -145,14 +160,15 @@
   /* Livrables par catégorie + filtres */
   (function () {
     $("categories").innerHTML = D.categories.map(function (c, ic) {
-      var n = compter(c.livrables), faits = n.valide + n.livre;
+      var n = compter(c.livrables), faits = n.valide + n.livre, du = duree(c.livrables);
       return '<details class="categorie" data-cat="' + ic + '"' + (ic < 1 ? "" : "") + ">" +
         '<summary><div class="cat-texte"><h3>' + esc(c.titre) + "</h3><p>" + esc(c.texte) + "</p></div>" +
-        '<div class="mini-barre">' + barre(n, c.livrables.length) + "<small>" + faits + " / " + c.livrables.length + " validés ou livrés</small></div></summary>" +
+        '<div class="mini-barre">' + barre(n, c.livrables.length) + "<small>" + faits + " / " + c.livrables.length + " validés ou livrés</small><small>" + du.texte + "</small></div></summary>" +
         '<ul class="liste">' + c.livrables.map(function (l) {
           var meta = ['<span class="lot">' + esc(l.lot) + "</span>", "Responsable : " + esc(nom(l.qui))];
           if (l.valide) meta.push("Validation : " + esc(nom(l.valide)));
           if (l.echeance) meta.push("Échéance : " + esc(l.echeance));
+          meta.push(l.duree != null ? "Durée prévue : " + fr(l.duree) + "\u00a0j" : '<span class="a-estimer">Durée à estimer</span>');
           return '<li class="livrable" data-statut="' + l.statut + '"><span class="livrable-titre">' + esc(l.titre) + "</span>" + puce(l.statut) +
             '<div class="livrable-meta">' + meta.join("<span aria-hidden=\"true\">·</span>") + "</div>" +
             (l.note ? '<p class="livrable-note">' + esc(l.note) + "</p>" : "") + "</li>";
