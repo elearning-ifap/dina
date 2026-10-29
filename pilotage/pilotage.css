@@ -37,6 +37,20 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
 .s-livre      { background: var(--vert); color: #fff; }
 .s-sans_objet { background: transparent; color: var(--gris); }
 
+/* ---- Indicateurs ---- */
+.indicateurs { margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.indicateur { background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); box-shadow: var(--ombre); padding: 1.25rem; }
+.indicateur h3 { font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; color: var(--texte-2); }
+.grand { margin: .35rem 0 .7rem; font: 800 2.75rem/1 var(--police-titre); color: var(--anthracite); }
+.grand small { font: 700 1rem var(--police-texte); color: var(--texte-2); }
+.jauge { height: 14px; border-radius: 999px; background: var(--gris-clair); overflow: hidden; }
+.jauge > span { display: block; height: 100%; border-radius: 999px; background: var(--c); }
+.explication { margin: .6rem 0 0; font-size: .8125rem; line-height: 1.45; color: var(--texte-2); }
+.comparaison { margin: .6rem 0 0; font-size: .875rem; font-weight: 700; padding: .4rem .7rem; border-radius: var(--rayon-compact); }
+.c-ok { background: var(--bleu-clair); color: var(--bleu); }
+.c-alerte { background: var(--corail-clair); color: var(--corail-texte); }
+.synthese { margin-top: 1rem; }
+
 /* ---- Synthèse ---- */
 .synthese { margin-top: 1.5rem; background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); box-shadow: var(--ombre); padding: 1.25rem; }
 .synthese-chiffres { display: grid; grid-template-columns: repeat(5, 1fr); gap: .75rem; }
@@ -141,6 +155,8 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
   .logo-dina { height: 34px; }
   .logo-ifap { height: 30px; }
   .synthese-chiffres { grid-template-columns: repeat(3, 1fr); row-gap: 1rem; }
+  .indicateurs { grid-template-columns: 1fr; }
+  .grand { font-size: 2.25rem; }
   .chiffre strong { font-size: 1.6rem; }
 
   /* Jalons en frise verticale */

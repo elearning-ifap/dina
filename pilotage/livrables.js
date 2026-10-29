@@ -11,6 +11,17 @@ window.DINA_PILOTAGE = {
   miseAJour: "29-10-2026",
   avertissement: "Statuts de départ établis le 29-10 à partir du coffre de projet, à confirmer par Marc Rolland.",
 
+  /* Temps de travail, en jours temps plein. Reprendre les chiffres de « Suivi du temps DINA » (coffre Obsidian). */
+  temps: {
+    prevuJours: 32,          /* charge annoncée à la direction */
+    passeJours: 7.05,        /* cumul saisi */
+    arreteAu: "22-10-2026"   /* date de la dernière saisie */
+  },
+
+  /* Avancement global : chaque livrable et chaque case de la matrice du parcours comptent pour une unité.
+     Part réalisée selon le statut ci-dessous. */
+  ponderation: { a_faire: 0, en_cours: 0.5, a_valider: 0.8, valide: 1, livre: 1 },
+
   personnes: {
     marc:       { nom: "Marc Rolland",          role: "Conception et production" },
     mnb:        { nom: "Marie-Noëlle Blanck",   role: "Cheffe de projet, employeurs et stagiaires" },

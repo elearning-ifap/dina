@@ -43,6 +43,39 @@
   $("maj").textContent = "Mis à jour le " + D.miseAJour + ".";
   if (D.avertissement) { $("avertissement").textContent = D.avertissement; $("avertissement").hidden = false; }
 
+  /* Indicateurs : avancement global et temps passé */
+  (function () {
+    var P = D.ponderation || { a_faire: 0, en_cours: 0.5, a_valider: 0.8, valide: 1, livre: 1 };
+    var unites = [];
+    tous.forEach(function (l) { unites.push(l.statut); });
+    D.parcours.forEach(function (p) { p.etats.forEach(function (e) { if (e !== "sans_objet") unites.push(e); }); });
+    var somme = unites.reduce(function (a, e) { return a + (P[e] || 0); }, 0);
+    var avance = unites.length ? Math.round(100 * somme / unites.length) : 0;
+
+    function jours(d) { var m = String(d || "").split("-"); return m.length === 3 ? Date.UTC(+m[2], +m[1] - 1, +m[0]) / 864e5 : 0; }
+    function fr(x) { return String(Math.round(x * 100) / 100).replace(".", ","); }
+    function jauge(pc, couleur) {
+      return '<div class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + Math.min(pc, 100) + "%;--c:" + couleur + '"></span></div>';
+    }
+    var html = '<article class="indicateur"><h3>Avancement global</h3><p class="grand">' + avance + "<small> %</small></p>" + jauge(avance, "var(--turquoise)") +
+      '<p class="explication">Calculé sur ' + unites.length + " unités : les " + tous.length + " livrables et les " + (unites.length - tous.length) +
+      " étapes de fabrication des modules. À faire 0\u00a0%, en cours " + Math.round(100 * P.en_cours) + "\u00a0%, à valider " + Math.round(100 * P.a_valider) + "\u00a0%, validé ou livré 100\u00a0%.</p></article>";
+
+    var T = D.temps;
+    if (T && T.prevuJours) {
+      var conso = Math.round(100 * T.passeJours / T.prevuJours), reste = T.prevuJours - T.passeJours;
+      var ecart = conso - avance;
+      html += '<article class="indicateur"><h3>Temps passé</h3><p class="grand">' + fr(T.passeJours) + "<small> j sur " + fr(T.prevuJours) + " j prévus</small></p>" +
+        jauge(conso, conso > 100 ? "var(--rouge)" : "var(--bleu-progression)") +
+        '<p class="explication">' + conso + "\u00a0% de la charge consommée, " + fr(reste) + " j restants. Jours temps plein, dernière saisie le " + esc(T.arreteAu) + ".</p>" +
+        '<p class="comparaison ' + (ecart > 10 ? "c-alerte" : "c-ok") + '">' +
+        (ecart > 10 ? "Le temps consommé dépasse l'avancement de " + ecart + " points."
+                    : "L'avancement (" + avance + "\u00a0%) est en phase ou en avance sur le temps consommé (" + conso + "\u00a0%).") + "</p>" +
+        (jours(D.miseAJour) - jours(T.arreteAu) > 3 ? '<p class="explication">Saisie du temps antérieure à la mise à jour des statuts : la comparaison est à prendre avec prudence.</p>' : "") + "</article>";
+    }
+    $("indicateurs").innerHTML = html;
+  })();
+
   /* Synthèse */
   (function () {
     var n = compter(tous), total = tous.length, faits = n.valide + n.livre;
