@@ -8,7 +8,7 @@
    Ne rien écrire ici sur le temps passé, les noms des experts ou des testeurs, ni les remarques internes. */
 
 window.DINA_PILOTAGE = {
-  miseAJour: "30-10-2026",
+  miseAJour: "31-10-2026",
   avertissement: "Statuts de départ établis le 29-10 à partir du coffre de projet, à confirmer par Marc Rolland.",
 
   /* Temps de travail, en jours temps plein. Reprendre les chiffres de « Suivi du temps DINA » (coffre Obsidian). */
@@ -164,6 +164,51 @@ window.DINA_PILOTAGE = {
         { titre: "Visuels des 5 badges", lot: "L6", statut: "a_faire", qui: "marc" }
       ] }
   ],
+
+  /* Évolutions du moteur e-learning et des gabarits (outil de production).
+     Ne compte pas dans l'avancement global. Priorité : p1, p2, p3 (voir « priorites »).
+     Champs : titre, priorite, statut, duree (jours, estimation), lie (livrable ou action concernés), qui, note, lien. */
+  backlog: {
+    texte: "Les évolutions du moteur e-learning et des gabarits d'écran. L'ordre suit le calendrier : d'abord ce qui conditionne le test interne et le passage dans LIANE. Durées estimées, à confirmer.",
+    priorites: [
+      { code: "p1", titre: "Avant le test interne", echeance: "D'ici janvier 2027", texte: "Indispensable pour tester dans de bonnes conditions et passer dans LIANE." },
+      { code: "p2", titre: "Selon les retours", echeance: "Février – mars 2027", texte: "À engager seulement si le test interne ou le pilote le confirme." },
+      { code: "p3", titre: "Après l'ouverture", echeance: "À partir d'avril 2027", texte: "Pistes d'évolution, sans engagement." }
+    ],
+    items: [
+      { priorite: "p1", titre: "Catalogue des gabarits", statut: "livre", duree: 1, qui: "marc", lien: "../gabarits.html",
+        note: "25 gabarits jouables dans le vrai moteur, avec les champs du storyboard. Se met à jour seul à chaque publication." },
+      { priorite: "p1", titre: "Vérifier que la reprise tient dans la limite SCORM 1.2", statut: "a_faire", duree: 0.5, qui: "marc", valide: "si", lie: "Test technique SCORM dans LIANE",
+        note: "La sauvegarde de reprise est limitée à 4 096 caractères. À mesurer sur un module complet. Si la limite est dépassée : alléger l'état sauvegardé ou passer en SCORM 2004." },
+      { priorite: "p1", titre: "Réduire les clics : dialogue affiché d'un coup, écrans courts regroupés", statut: "a_faire", duree: 1, qui: "marc", valide: "mnb", lie: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics" },
+      { priorite: "p1", titre: "Profil de positionnement imprimable", statut: "a_faire", duree: 0.5, qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable",
+        note: "Marges, en-tête DINA, radar lisible, réponse de réflexion mise en forme." },
+      { priorite: "p1", titre: "Fiches outils en PDF A4 téléchargeables", statut: "a_faire", duree: 1, qui: "marc", lie: "Espace « Mes ressources » : fiches outils téléchargeables",
+        note: "Une source unique pour l'écran et le PDF. Remplace le carnet unique, abandonné." },
+      { priorite: "p1", titre: "Éprouver les quatre gabarits encore jamais testés", statut: "a_faire", duree: 0.5, qui: "marc",
+        note: "Choix multiple, remise en ordre, boîte de réception, semaine à organiser. À faire lors de la reprise du module 2." },
+      { priorite: "p1", titre: "Figer la version du moteur pour le test interne", statut: "a_faire", duree: 0.25, qui: "marc",
+        note: "Version étiquetée sur GitHub : les retours restent rattachés à une version. Toute évolution suivante passe par cette liste." },
+
+      { priorite: "p2", titre: "Écran « Où en est le dossier Passerelles »", statut: "a_faire", duree: 1.5, qui: "marc",
+        note: "Montre l'état du fil rouge entre deux modules et s'enrichit à chaque module." },
+      { priorite: "p2", titre: "Gabarit « document à annoter »", statut: "a_faire", duree: 1, qui: "marc",
+        note: "Zones cliquables sur un vrai document : courrier, arrêté, organigramme. Prolonge l'image cliquable." },
+      { priorite: "p2", titre: "Règle d'usage des infographies", statut: "a_faire", duree: 0.5, qui: "marc",
+        note: "À trancher : tout apport de plus de trois notions passe par une infographie, une image cliquable ou des cartes." },
+      { priorite: "p2", titre: "Mesurer l'usage de chaque gabarit", statut: "a_faire", duree: 1, qui: "marc", valide: "si",
+        note: "Temps passé, écrans abandonnés. Pour savoir quels gabarits retravailler. Dépend des traces disponibles dans LIANE." },
+      { priorite: "p2", titre: "Audit d'accessibilité complet du moteur", statut: "a_faire", duree: 2, qui: "marc", lie: "Recette : fonctionnement, pédagogie, accessibilité, mobile",
+        note: "Clavier, lecteur d'écran, zoom à 200 %, contrastes, sur chaque gabarit." },
+
+      { priorite: "p3", titre: "Audio et vidéo dans les modules", statut: "a_faire", qui: "marc",
+        note: "Exclus du pilote (décision du 28-10)." },
+      { priorite: "p3", titre: "Relire mes repères hors parcours", statut: "a_faire", qui: "marc",
+        note: "Accès direct aux apports et aux fiches d'un module terminé, sans rejouer les situations." },
+      { priorite: "p3", titre: "Un moteur pour d'autres formations LIANE", statut: "a_faire", qui: "marc",
+        note: "Réutiliser le moteur et le catalogue pour d'autres modules de l'IFAP." }
+    ]
+  },
 
   /* Actions qui ne sont pas des livrables mais qui bloquent l'avancée. Elles s'ajoutent à « En attente de ». */
   actions: [

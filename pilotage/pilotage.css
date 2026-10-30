@@ -146,6 +146,29 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
 .pied p { margin: 0 0 .4rem; }
 
 /* ---- Tablette ---- */
+/* ---- Évolutions du moteur et des gabarits ---- */
+.backlog-texte { margin: 0 0 1rem; max-width: 52rem; color: var(--texte-2); }
+.backlog { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+.bk-col { background: var(--carte); border: 1px solid var(--bordure); border-top: 4px solid var(--gris); border-radius: var(--rayon); box-shadow: var(--ombre); padding: 1rem 1.1rem; }
+.bk-p1 { border-top-color: var(--jaune); }
+.bk-p2 { border-top-color: var(--turquoise); }
+.bk-tete { display: flex; align-items: center; gap: .7rem; }
+.bk-rang { flex: none; width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; font: 800 1rem var(--police-titre); background: var(--gris-clair); color: var(--anthracite); }
+.bk-p1 .bk-rang { background: var(--jaune); }
+.bk-p2 .bk-rang { background: var(--bleu-clair); color: var(--bleu); }
+.bk-tete h3 { margin: 0; font-size: 1.05rem; }
+.bk-echeance { font-size: .8125rem; font-weight: 700; color: var(--bleu); }
+.bk-texte { margin: .6rem 0 .3rem; font-size: .875rem; color: var(--texte-2); line-height: 1.45; }
+.bk-total { margin: 0 0 .75rem; font-size: .8125rem; font-weight: 700; color: var(--anthracite); }
+.bk-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.bk-item { border: 1px solid var(--bordure); border-radius: var(--rayon-petit); padding: .65rem .75rem; display: grid; gap: .3rem; }
+.bk-item[data-statut="livre"] { background: var(--vert-clair); border-color: transparent; }
+.bk-ligne { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.bk-titre { font-weight: 700; line-height: 1.35; }
+.bk-note, .bk-lie { margin: 0; font-size: .875rem; line-height: 1.45; }
+.bk-lie { color: var(--texte-2); font-size: .8125rem; }
+@media (max-width: 960px) { .backlog { grid-template-columns: 1fr; } }
+
 @media (max-width: 960px) {
   .jalons { grid-template-columns: repeat(4, 1fr); row-gap: 1.5rem; }
   .jalons::before { display: none; }

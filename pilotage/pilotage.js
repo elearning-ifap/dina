@@ -157,6 +157,33 @@
     }).join("");
   })();
 
+  /* Évolutions du moteur et des gabarits : trois priorités en colonnes. Hors avancement global. */
+  (function () {
+    var B = D.backlog;
+    if (!B || !B.items || !B.items.length) return;
+    $("backlog-section").hidden = false;
+    $("backlog-texte").textContent = B.texte || "";
+    $("backlog").innerHTML = B.priorites.map(function (p, ip) {
+      var items = B.items.filter(function (x) { return x.priorite === p.code; });
+      var faits = items.filter(function (x) { return x.statut === "livre" || x.statut === "valide"; }).length;
+      var du = duree(items.filter(function (x) { return x.statut !== "livre" && x.statut !== "valide"; }));
+      return '<div class="bk-col bk-' + esc(p.code) + '">' +
+        '<div class="bk-tete"><span class="bk-rang">' + (ip + 1) + "</span><div><h3>" + esc(p.titre) + '</h3><span class="bk-echeance">' + esc(p.echeance) + "</span></div></div>" +
+        '<p class="bk-texte">' + esc(p.texte) + "</p>" +
+        '<p class="bk-total">' + faits + " / " + items.length + " fait" + (faits > 1 ? "s" : "") + " · reste " + (du.estimes ? fr(du.total) + " j estimés" : "à estimer") + "</p>" +
+        '<ol class="bk-liste">' + items.map(function (x) {
+          var meta = [];
+          meta.push(x.duree != null ? fr(x.duree) + " j" : '<span class="a-estimer">Durée à estimer</span>');
+          if (x.valide) meta.push("Validation : " + esc(nom(x.valide)));
+          return '<li class="bk-item" data-statut="' + esc(x.statut) + '"><div class="bk-ligne"><span class="bk-titre">' +
+            (x.lien ? '<a href="' + esc(x.lien) + '">' + esc(x.titre) + "</a>" : esc(x.titre)) + "</span>" + puce(x.statut) + "</div>" +
+            (x.note ? '<p class="bk-note">' + esc(x.note) + "</p>" : "") +
+            (x.lie ? '<p class="bk-lie">Lié à : ' + esc(x.lie) + "</p>" : "") +
+            '<div class="livrable-meta">' + meta.join('<span aria-hidden="true">·</span>') + "</div></li>";
+        }).join("") + "</ol></div>";
+    }).join("");
+  })();
+
   /* Livrables par catégorie + filtres */
   (function () {
     $("categories").innerHTML = D.categories.map(function (c, ic) {
