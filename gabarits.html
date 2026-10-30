@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Catalogue des gabarits DINA</title>
+<link rel="icon" href="assets/logo/picto-dina.svg">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/catalogue.css">
+</head>
+<body>
+<!-- Catalogue vivant des gabarits (CAN-GAB-01 § 14, remplace la démonstration v0.1 du 04-10).
+     Chaque gabarit se joue dans le vrai moteur (gabarit-essai.html) sur un écran réel des modules.
+     Les occurrences et les champs du storyboard sont recalculés à chaque ouverture depuis data/*.js.
+     Les textes d'usage et les règles se modifient dans js/catalogue.js. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-lecture" viewBox="0 0 24 24"><path d="m6 4 14 8-14 8z"/></symbol>
+  <symbol id="i-recommencer" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="i-ouvrir" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+  <symbol id="i-attention" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+</svg>
+
+<a class="lien-evitement" href="#detail">Aller au gabarit</a>
+
+<header class="entete">
+  <div class="entete-int">
+    <img class="logo" src="assets/logo/logo-dina.svg" alt="DINA — Mes repères pour agir">
+    <div class="entete-titre">
+      <span class="surtitre">Outil de production</span>
+      <h1>Catalogue des gabarits</h1>
+    </div>
+    <div class="chiffres" id="chiffres" aria-live="polite"></div>
+  </div>
+</header>
+
+<div class="cadre">
+  <nav class="nav" id="nav" aria-label="Gabarits">
+    <label class="nav-filtre"><span class="sr-only">Filtrer les gabarits</span>
+      <input type="search" id="filtre" placeholder="Filtrer : décision, carte, M2…" autocomplete="off">
+    </label>
+    <div id="nav-liste"></div>
+  </nav>
+
+  <main class="detail" id="detail" tabindex="-1">
+    <p class="chargement" id="chargement">Lecture des modules…</p>
+  </main>
+</div>
+
+<section class="vigilance" id="vigilance" aria-labelledby="vig-titre" hidden>
+  <div class="vig-int">
+    <h2 id="vig-titre"><svg class="icone"><use href="#i-attention"/></svg> Points d'attention, recalculés à chaque ouverture</h2>
+    <ul id="vig-liste"></ul>
+  </div>
+</section>
+
+<footer class="pied">
+  <p>Catalogue vivant · les exemples sont des écrans réels des modules, joués dans le moteur du démonstrateur. Le jeu n'enregistre aucune progression du parcours. Référence : CAN-GAB-01 v1.1 § 14.</p>
+</footer>
+
+<script src="js/catalogue.js"></script>
+</body>
+</html>
