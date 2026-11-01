@@ -72,6 +72,11 @@
       regles: ["Pattern H : à quoi sert la ressource, quand l'utiliser, limite éventuelle."],
       essais: [{ lib: "Ressources de M1", src: "m1", e: "M1-SOR-RES" }] },
 
+    { id: "simulation", famille: "activites", nom: "Simulation de dialogue", types: [], prototype: true,
+      usage: "L'apprenant mène une conversation : le personnage parle, l'apprenant choisit sa réplique, le personnage réagit à ce qu'il vient d'entendre. Deux jauges cachées (relation, justesse) changent le ton de la suite et la fin. Bilan, puis relecture annotée réplique par réplique.",
+      regles: ["Prototype du 01-11, hors moteur : à intégrer à engine.js comme type « simulation » après validation.", "5 à 7 nœuds, 3 répliques par nœud, toutes plausibles ; aucune n'est ridicule.", "Les jauges restent cachées pendant l'échange : le visage et le ton du personnage suffisent.", "Chaque réplique porte un verdict et une annotation ; la relecture montre aussi les réponses non choisies.", "Aucun délai imposé : la frappe du personnage est un effet, coupé si le poste demande moins de mouvement."],
+      champs_liste: ["personnage", "role", "intro.texte", "intro.consigne", "jauges[].depart", "noeuds.N.repliques[].si", "noeuds.N.repliques[].humeur", "noeuds.N.choix[].effets", "noeuds.N.choix[].verdict", "noeuds.N.choix[].annotation", "noeuds.N.raccroche", "noeuds.N.question", "fins[].si", "a_retenir"],
+      essais: [{ lib: "L'appel de Joël (M3)", src: "proto", url: "simulation.html" }] },
     { id: "choix", famille: "activites", nom: "Décision", types: ["choix"],
       usage: "Fait exercer un jugement dans une situation crédible : récit à gauche, consigne et réponses à droite, retour en code feu tricolore.",
       regles: ["La dernière question du texte devient la consigne ; forcer avec question.", "2 à 4 options, au moins deux plausibles ; la mauvaise n'est pas ridicule (pattern B).", "Retour en trois temps : ce qui est pertinent ou risqué, le raisonnement, que faire maintenant (pattern C)."],
@@ -160,6 +165,7 @@
   /* Champs du storyboard : fréquence de chaque champ sur toutes les occurrences */
   var TECHNIQUES = ["id", "suite"];
   function champs(g, occ) {
+    if (g.champs_liste) return g.champs_liste.map(function (c) { return [c, 1, 1]; });
     if (g.champs_module) return [["sections[].jour", 1, 1], ["sections[].titre", 1, 1], ["sections[].savoir", 1, 1], ["sections[].accroche", 1, 1], ["sections[].duree", 1, 1], ["sections[].debut", 1, 1], ["dossier.visible_des", 1, 1], ["intro", 1, 1], ["duree", 1, 1]];
     var n = 0, f = {};
     Object.keys(occ).forEach(function (k) {
@@ -185,6 +191,7 @@
       if (!items.length) return "";
       return '<div class="nav-famille"><h2>' + esc(f.nom) + "</h2><ul>" + items.map(function (g) {
         var o = OCC[g.id], prod = g.champs_module ? "—" : enProduction(o), tot = g.champs_module ? "" : total(o);
+        if (g.prototype) return '<li><a href="#' + g.id + '" class="nav-lien' + (g.id === courant ? " actif" : "") + '"' + (g.id === courant ? ' aria-current="page"' : "") + '><span class="nav-nom">' + esc(g.nom) + '</span><span class="nav-compte nav-compte--proto" title="Prototype, pas encore dans le moteur">proto</span></a></li>';
         var etat = g.champs_module ? "" : (prod === 0 ? (tot ? "hors-demo" : "inutilise") : "");
         return '<li><a href="#' + g.id + '" class="nav-lien' + (g.id === courant ? " actif" : "") + '"' + (g.id === courant ? ' aria-current="page"' : "") + ">" +
           '<span class="nav-nom">' + esc(g.nom) + "</span>" +
@@ -197,6 +204,7 @@
 
   /* ---------- Détail d'un gabarit ---------- */
   function urlEssai(x) {
+    if (x.url) return x.url;
     return "gabarit-essai.html?src=" + encodeURIComponent(x.src) + (x.menu ? "&menu=1" : "&e=" + encodeURIComponent(x.e)) + (x.chaine ? "&chaine=1" : "");
   }
   function rendreDetail(g, iEssai) {
@@ -214,20 +222,20 @@
     var ch = champs(g, occ);
     var champsHtml = ch.length ? '<ul class="champs">' + ch.map(function (c) {
       var part = c[1] / c[2], cls = part === 1 ? "toujours" : (part >= .5 ? "souvent" : "parfois");
-      return '<li class="champ champ--' + cls + '" title="Présent dans ' + c[1] + " écran(s) sur " + c[2] + '"><code>' + esc(c[0]) + "</code>" + (g.champs_module ? "" : '<span>' + c[1] + "/" + c[2] + "</span>") + "</li>";
+      return '<li class="champ champ--' + cls + '" title="Présent dans ' + c[1] + " écran(s) sur " + c[2] + '"><code>' + esc(c[0]) + "</code>" + (g.champs_module || g.prototype ? "" : '<span>' + c[1] + "/" + c[2] + "</span>") + "</li>";
     }).join("") + "</ul>" : '<p class="occ-vide">Aucun écran de ce type pour l\'instant.</p>';
 
     $("detail").innerHTML =
       '<div class="d-tete">' +
         '<span class="surtitre">' + esc(fam.nom) + "</span>" +
         "<h2 id=\"d-titre\">" + esc(g.nom) + "</h2>" +
-        (g.types.length ? '<p class="types">' + g.types.map(function (t) { return '<code>type: ' + esc(t) + "</code>"; }).join(" ") + (g.filtre ? ' <span class="note">avec ' + (g.id === "dialogue" ? "répliques" : "sans répliques") + "</span>" : "") + "</p>" : '<p class="types"><code>module.sections</code></p>') +
+        (g.types.length ? '<p class="types">' + g.types.map(function (t) { return '<code>type: ' + esc(t) + "</code>"; }).join(" ") + (g.filtre ? ' <span class="note">avec ' + (g.id === "dialogue" ? "répliques" : "sans répliques") + "</span>" : "") + "</p>" : (g.prototype ? '<p class="types"><code>type: simulation</code> <span class="note">proposé, pas encore dans le moteur</span></p>' : '<p class="types"><code>module.sections</code></p>')) +
         '<p class="usage">' + esc(g.usage) + "</p>" +
       "</div>" +
       '<section class="joueur" aria-label="Exemple jouable">' +
         '<div class="joueur-barre">' +
           '<div class="variantes" role="group" aria-label="Exemples">' + g.essais.map(function (x, i) {
-            return '<button type="button" class="variante" data-i="' + i + '" aria-pressed="' + (i === (iEssai || 0)) + '">' + esc(x.lib) + '<span class="src">' + esc(x.src === "positionnement" ? "Pos." : x.src === "prologue" ? "Prol." : x.src.toUpperCase()) + "</span></button>";
+            return '<button type="button" class="variante" data-i="' + i + '" aria-pressed="' + (i === (iEssai || 0)) + '">' + esc(x.lib) + '<span class="src">' + esc(x.src === "proto" ? "Proto" : x.src === "positionnement" ? "Pos." : x.src === "prologue" ? "Prol." : x.src.toUpperCase()) + "</span></button>";
           }).join("") + "</div>" +
           '<div class="joueur-actions">' +
             '<button type="button" class="btn-lien" id="rejouer">' + ic("i-recommencer") + " Rejouer</button>" +
@@ -239,8 +247,9 @@
       '<div class="d-grille">' +
         '<section class="bloc"><h3>Règles</h3><ul class="regles">' + g.regles.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ul></section>" +
         '<section class="bloc"><h3>Champs du storyboard</h3>' + champsHtml +
-          (g.champs_module ? "" : '<p class="legende"><span class="champ champ--toujours"><span>toujours</span></span><span class="champ champ--souvent"><span>souvent</span></span><span class="champ champ--parfois"><span>parfois</span></span> · nombre d\'écrans qui utilisent le champ</p>') + "</section>" +
-        (g.champs_module ? "" : '<section class="bloc bloc--large"><h3>Dans le parcours</h3><p class="aide">Cliquez un identifiant pour le jouer ci-dessus.</p><table class="occ"><tbody>' + lignesOcc + "</tbody></table></section>") +
+          (g.champs_module || g.prototype ? "" : '<p class="legende"><span class="champ champ--toujours"><span>toujours</span></span><span class="champ champ--souvent"><span>souvent</span></span><span class="champ champ--parfois"><span>parfois</span></span> · nombre d\'écrans qui utilisent le champ</p>') + "</section>" +
+        (g.prototype ? '<section class="bloc bloc--large bloc--proto"><h3>Statut</h3><p>Prototype jouable, hors moteur. Il ne compte dans aucun module tant qu\'il n\'est pas validé puis intégré à engine.js. Les données du scénario sont dans <code>data/sim-joel.js</code>.</p></section>' : "") +
+        (g.champs_module || g.prototype ? "" : '<section class="bloc bloc--large"><h3>Dans le parcours</h3><p class="aide">Cliquez un identifiant pour le jouer ci-dessus.</p><table class="occ"><tbody>' + lignesOcc + "</tbody></table></section>") +
       "</div>";
 
     $("detail").querySelectorAll(".variante").forEach(function (b) {

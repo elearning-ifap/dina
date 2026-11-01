@@ -1,0 +1,124 @@
+/* DINA — prototype « simulation de dialogue ». S'appuie sur module.css et components.css (bulles, options, verdicts).
+   Couleurs : tokens.css uniquement. */
+
+/* ---- Contexte : le téléphone sonne ---- */
+.sim-intro-corps { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; align-items: center; }
+.sim-sonnerie { position: relative; width: 132px; height: 132px; display: grid; place-items: center; margin: 0 1rem; }
+.sim-sonnerie .avatar { position: relative; z-index: 1; }
+.sim-onde { position: absolute; inset: 10px; border-radius: 50%; border: 3px solid var(--turquoise); opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .sim-onde { animation: sim-onde 1.8s ease-out infinite; }
+  .sim-onde--2 { animation-delay: .9s; }
+}
+@keyframes sim-onde { from { transform: scale(.85); opacity: .7; } to { transform: scale(1.35); opacity: 0; } }
+.sim-mention { margin-top: 1rem; font-size: var(--taille-petit); color: var(--texte-2); }
+
+/* ---- Appel : carte du correspondant + conversation ---- */
+.ecran--sim { padding: 1.25rem; }
+.sim { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: 1.5rem; max-width: 64rem; margin: 0 auto; align-items: start; }
+.sim-carte { position: sticky; top: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: .3rem; padding: 1.25rem 1rem; background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); box-shadow: var(--ombre); }
+.sim-portrait { border-radius: 50%; padding: 5px; background: var(--gris-clair); transition: background .4s; }
+.sim-portrait .avatar--xl, .sim-sonnerie .avatar--xl { width: 112px; height: 112px; font-size: 2.4rem; }
+.humeur--neutre  { background: var(--gris); }
+.humeur--agace   { background: var(--corail); }
+.humeur--ferme   { background: var(--rouge); }
+.humeur--presse  { background: var(--jaune); }
+.humeur--content { background: var(--bleu-progression); }
+.humeur--rassure { background: var(--vert); }
+.sim-nom { margin-top: .5rem; font: 800 1.2rem/1.2 var(--police-titre); color: var(--anthracite); }
+.sim-role { font-size: var(--taille-petit); color: var(--texte-2); line-height: 1.35; }
+.sim-statut { margin-top: .6rem; display: inline-flex; align-items: center; gap: .35rem; font-size: var(--taille-petit); font-weight: 700; color: var(--vert-texte); background: var(--vert-clair); border-radius: 999px; padding: .25rem .75rem; }
+.sim-statut time { font-variant-numeric: tabular-nums; }
+.sim-statut--fin { color: var(--texte-2); background: var(--gris-clair); }
+.sim-humeur { margin: .6rem 0 0; display: inline-flex; align-items: center; gap: .4rem; font-size: var(--taille-petit); color: var(--texte); }
+.sim-pastille { width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+.humeur-txt--neutre .sim-pastille { background: var(--gris); }
+.humeur-txt--agace .sim-pastille { background: var(--corail); }
+.humeur-txt--ferme .sim-pastille { background: var(--rouge); }
+.humeur-txt--presse .sim-pastille { background: var(--jaune-fonce); }
+.humeur-txt--content .sim-pastille { background: var(--bleu-progression); }
+.humeur-txt--rassure .sim-pastille { background: var(--vert); }
+
+.sim-transcript { list-style: none; margin: 0; padding: 0; display: grid; gap: .8rem; }
+.sim-msg { display: flex; gap: .6rem; align-items: flex-start; }
+.sim-msg .avatar { width: 40px; height: 40px; flex: none; }
+.sim-msg-corps { min-width: 0; max-width: 36rem; }
+.sim-qui { display: block; font-size: .8125rem; font-weight: 700; color: var(--texte-2); margin-bottom: .15rem; }
+.sim-msg--noa { flex-direction: row-reverse; }
+.sim-msg--noa .sim-msg-corps { text-align: left; }
+.sim-msg--noa .sim-qui { text-align: right; }
+.sim-msg--noa .bulle--oral { background: var(--jaune-pale); border-top-left-radius: var(--rayon); border-top-right-radius: 4px; }
+.sim-msg--joel .bulle--oral { border-top-left-radius: 4px; }
+.sim-msg--action { justify-content: flex-start; flex-direction: row; }
+.sim-msg--action .sim-qui { text-align: left; }
+.sim-msg--systeme { justify-content: center; }
+.sim-systeme { display: inline-flex; align-items: center; gap: .4rem; font-size: .8125rem; color: var(--texte-2); background: var(--gris-clair); border-radius: 999px; padding: .2rem .8rem; }
+.sim-frappe { display: inline-flex; gap: 5px; padding: .85rem 1rem; background: var(--bleu-clair); border-radius: 4px var(--rayon) var(--rayon) var(--rayon); margin-left: 46px; }
+.sim-frappe i { width: 8px; height: 8px; border-radius: 50%; background: var(--bleu); opacity: .35; }
+@media (prefers-reduced-motion: no-preference) {
+  .sim-frappe i { animation: sim-point 1s infinite; }
+  .sim-frappe i:nth-child(2) { animation-delay: .15s; }
+  .sim-frappe i:nth-child(3) { animation-delay: .3s; }
+  .sim-msg--entree { animation: sim-entree .3s ease-out both; }
+  .sim-choix--entree { animation: sim-entree .35s ease-out both; }
+}
+@keyframes sim-point { 50% { opacity: 1; transform: translateY(-3px); } }
+@keyframes sim-entree { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.sim-choix { margin-top: 1.25rem; }
+.sim-choix:empty { display: none; }
+.sim-consigne { margin-bottom: .75rem; }
+.cz-label:focus { outline: none; }
+.sim-options { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.sim-option { width: 100%; text-align: left; font: inherit; color: var(--texte); }
+.sim-option:hover { border-color: var(--turquoise); background: var(--bleu-clair); }
+.sim-option:focus-visible { outline: none; box-shadow: var(--focus); }
+
+/* ---- Bilan ---- */
+.sim-bilan-tete { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1rem; }
+.sim-bilan-tete h1 { margin: .2rem 0 .5rem; }
+.sim-sous { display: flex; align-items: center; gap: .5rem; margin: 1.75rem 0 .75rem; font: 800 1.15rem/1.2 var(--police-titre); color: var(--anthracite); }
+.sim-jauges { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.sim-jauge { background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); padding: .9rem 1rem; }
+.sim-jauge-tete { display: flex; justify-content: space-between; gap: .5rem; margin-bottom: .5rem; }
+.sim-jauge-tete span { font-weight: 700; font-variant-numeric: tabular-nums; }
+.sim-jauge-barre { position: relative; height: 14px; border-radius: 999px; background: var(--gris-clair); }
+.sim-jauge-barre span { display: block; height: 100%; border-radius: 999px; background: var(--c, var(--gris)); }
+.sim-jauge-barre i { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--anthracite); }
+.sim-jauge--haut { --c: var(--vert); }
+.sim-jauge--moyen { --c: var(--jaune); }
+.sim-jauge--bas { --c: var(--corail); }
+.sim-jauge small { display: block; margin-top: .5rem; color: var(--texte-2); font-size: .8125rem; line-height: 1.4; }
+.sim-aide { color: var(--texte-2); font-size: var(--taille-petit); }
+.sim-relire { margin-top: 1.5rem; }
+
+/* ---- Relecture annotée ---- */
+.sim-transcript--relue { gap: 1.1rem; margin-top: 1rem; }
+.sim-note { margin-top: .5rem; padding: .7rem .85rem; border-radius: var(--rayon-petit); border-left: 4px solid; background: var(--carte); }
+.sim-note p { margin: .4rem 0 0; font-size: .9375rem; }
+.sim-note--adapte { border-color: var(--vert); background: var(--vert-clair); }
+.sim-note--partiel { border-color: var(--orange); background: var(--jaune-pale); }
+.sim-note--risque { border-color: var(--corail); background: var(--corail-clair); }
+.sim-note--inadapte { border-color: var(--rouge); background: var(--rouge-clair); }
+.sim-note details { margin-top: .6rem; }
+.sim-note summary { cursor: pointer; font-size: var(--taille-petit); font-weight: 700; color: var(--bleu); }
+.sim-note details ul { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .6rem; }
+.sim-note details li { background: var(--carte); border-radius: var(--rayon-compact); padding: .55rem .7rem; }
+.sim-note q { display: block; margin-top: .35rem; font-style: italic; }
+.sim-note details li p { font-size: .875rem; color: var(--texte-2); }
+
+/* ---- Téléphone ---- */
+@media (max-width: 760px) {
+  .ecran--sim { padding: .75rem; }
+  .sim { grid-template-columns: 1fr; gap: .75rem; }
+  .sim-carte { position: sticky; top: 0; z-index: 2; flex-direction: row; flex-wrap: wrap; text-align: left; gap: .2rem .75rem; padding: .6rem .8rem; }
+  .sim-portrait { padding: 3px; }
+  .sim-portrait .avatar--xl { width: 52px; height: 52px; font-size: 1.3rem; }
+  .sim-nom { margin: 0; font-size: 1rem; }
+  .sim-role { display: none; }
+  .sim-statut, .sim-humeur { margin: 0; font-size: .75rem; }
+  .sim-intro-corps { grid-template-columns: 1fr; }
+  .sim-sonnerie { display: none; }
+  .sim-jauges { grid-template-columns: 1fr; }
+  .sim-bilan-tete .sim-portrait .avatar--xl { width: 72px; height: 72px; }
+}

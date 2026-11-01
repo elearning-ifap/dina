@@ -190,6 +190,8 @@ window.DINA_PILOTAGE = {
       { priorite: "p1", titre: "Figer la version du moteur pour le test interne", statut: "a_faire", duree: 0.25, qui: "marc",
         note: "Version étiquetée sur GitHub : les retours restent rattachés à une version. Toute évolution suivante passe par cette liste." },
 
+      { priorite: "p2", titre: "Gabarit « simulation de dialogue »", statut: "a_valider", duree: 1, qui: "marc", valide: "mnb", lien: "../simulation.html",
+        note: "Prototype jouable : l'appel de Joël (M3). Le personnage réagit aux répliques choisies ; bilan et relecture annotée. Reste à l'intégrer au moteur après validation." },
       { priorite: "p2", titre: "Écran « Où en est le dossier Passerelles »", statut: "a_faire", duree: 1.5, qui: "marc",
         note: "Montre l'état du fil rouge entre deux modules et s'enrichit à chaque module." },
       { priorite: "p2", titre: "Gabarit « document à annoter »", statut: "a_faire", duree: 1, qui: "marc",
