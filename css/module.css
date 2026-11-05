@@ -517,6 +517,20 @@ a.btn { text-decoration: none; }
 .chm-lib { fill: var(--texte-2); font: 700 15px var(--police-texte); text-anchor: middle; paint-order: stroke; stroke: #F1F8F8; stroke-width: 5px; stroke-linejoin: round; }
 .chm-repere--cours .chm-lib, .chm-repere--fait .chm-lib { fill: var(--bleu-sombre); }
 .chemin--compacte .chm-lib { font-size: 17px; }
+/* 30-10 : étiquette du repère = jour (petit, capitales) + savoir travaillé */
+.chm-jour { font: 800 11.5px var(--police-titre); letter-spacing: .08em; text-transform: uppercase; fill: var(--texte-2); }
+.chm-repere--fait .chm-jour, .chm-repere--cours .chm-jour { fill: var(--teinte); }
+.chm-sav { font: 700 14.5px var(--police-texte); }
+.chemin--compacte .chm-jour { font-size: 13px; }
+.chemin--compacte .chm-sav { font-size: 15.5px; }
+.chm-repere--attente .chm-sav { font-weight: 500; }
+/* Fil rouge : le récit du dossier coiffe le chemin, dans la même carte */
+.fil-rouge { display: flex; gap: .7rem; align-items: flex-start; margin: 1rem 0 0; padding: .7rem 1rem; background: var(--carte); border: 1px solid #D5EBEC; border-bottom: 0; border-top: 4px solid var(--jaune); border-radius: var(--rayon) var(--rayon) 0 0; }
+.fil-rouge + .chemin { margin-top: 0; border-radius: 0 0 var(--rayon) var(--rayon); }
+.fil-rouge-picto { flex: none; width: 2rem; height: 2rem; padding: .38rem; border-radius: 50%; background: var(--jaune-clair); color: var(--jaune-fonce); }
+.fil-rouge p { margin: 0; font-size: var(--taille-petit); color: var(--texte-2); line-height: 1.45; }
+.fil-rouge .surtitre { display: block; margin-bottom: .1rem; }
+.fil-rouge strong { color: var(--bleu-sombre); font-size: 1rem; }
 .menu-tete { margin-bottom: .6rem; }
 .menu-legende { margin: .2rem 0 1.2rem; }
 .fin--large .chemin--compacte { margin: -2rem -2.2rem 1.4rem; border-radius: var(--rayon) var(--rayon) 0 0; border-width: 0 0 1px; }
@@ -586,6 +600,9 @@ a.btn { text-decoration: none; }
   .chm-lib { font-size: 28px; stroke-width: 7px; }
   .chm-point { stroke-width: 3.5; }
   .chemin--long .chm-repere--attente .chm-lib { display: none; }  /* 5 étapes et plus : seuls les repères atteints sont nommés */
+  .chm-sav { display: none; }   /* téléphone : le jour seul ; le savoir est dans la liste des étapes */
+  .chm-jour { font: 700 28px var(--police-texte); letter-spacing: 0; text-transform: none; }
+  .fil-rouge-picto { display: none; }
   .fin--large .chemin--compacte { margin: -1.4rem -1.1rem 1rem; }
   .badge-tete strong { font-size: 1.3rem; }
 }
@@ -1133,3 +1150,7 @@ a.btn { text-decoration: none; }
   .fin--journee .fin-tete .pastille { display: none; }
   .fin--journee .fin-tete h1 { font-size: 1.55rem; }
 }
+
+/* Positionnement — « En clair » sous le message (D120, 06-11) */
+.pos-clair-ligne { margin: .5rem 0 0; }
+.pos-clair { margin: .45rem 0 .9rem; }
