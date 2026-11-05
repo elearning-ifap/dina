@@ -8,7 +8,7 @@
    Ne rien écrire ici sur le temps passé, les noms des experts ou des testeurs, ni les remarques internes. */
 
 window.DINA_PILOTAGE = {
-  miseAJour: "31-10-2026",
+  miseAJour: "06-11-2026",
   avertissement: "Statuts de départ établis le 29-10 à partir du coffre de projet, à confirmer par Marc Rolland.",
 
   /* Temps de travail, en jours temps plein. Reprendre les chiffres de « Suivi du temps DINA » (coffre Obsidian). */
@@ -53,7 +53,7 @@ window.DINA_PILOTAGE = {
   parcours: [
     { code: "POS", titre: "Positionnement", sousTitre: "Votre première semaine",
       etats: ["sans_objet", "valide", "en_cours", "sans_objet", "livre", "sans_objet", "a_faire"],
-      note: "Prototype en ligne (v0.1). Storyboard v0.5 en cours : restitution visuelle et imprimable." },
+      note: "Prototype en ligne (v0.1). Storyboard v0.5 en cours : accueil qui rassure (pas de note, pas d'échec, répondre spontanément), restitution visuelle et imprimable, page de fin qui présente DINA et ce qu'il apporte." },
     { code: "PRO", titre: "Prologue", sousTitre: "Bienvenue à l'ÉLAN",
       etats: ["sans_objet", "valide", "en_cours", "livre", "livre", "sans_objet", "a_faire"],
       note: "Prototype en ligne (v0.1). Storyboard v0.3 en cours : arrivée de Noa, message de fin." },
@@ -90,7 +90,9 @@ window.DINA_PILOTAGE = {
         { titre: "Fil rouge : le dossier Passerelles", lot: "L1", statut: "valide", qui: "marc" },
         { titre: "Logo DINA et signature « Mes repères pour agir »", lot: "L1", statut: "valide", qui: "marc", valide: "mfp" },
         { titre: "Charte graphique DINA (couleurs, typographie, règles visuelles)", lot: "L1", statut: "a_valider", qui: "marc", valide: "mfp", attente: "mfp" },
-        { titre: "Récit adapté à l'agent déjà en poste", lot: "L1", statut: "a_faire", qui: "marc", note: "L'agent ne suit pas DINA le jour de sa prise de poste. Le récit doit rejoindre les situations professionnelles qu'il vit déjà." }
+        { titre: "Récit adapté à l'agent déjà en poste", lot: "L1", statut: "a_faire", qui: "marc", note: "L'agent ne suit pas DINA le jour de sa prise de poste. Le récit doit rejoindre les situations professionnelles qu'il vit déjà. Piste : se souvenir de son propre premier jour et le comparer à celui de Noa. À rediscuter après l'échange avec la province Sud." },
+        { titre: "Décisions issues de la démonstration du 28-10", lot: "L1", statut: "valide", qui: "marc", valide: "mnb", note: "Validées le 06-11 : DINA 100 % en ligne, pilote sans vidéo ni audio, vocabulaire à deux étages, positionnement rassurant, infographies, mise en situation tournante, interface présentée dès le webinaire, temps de formation organisé par l'employeur." },
+        { titre: "Mise en situation tournante", lot: "L1", statut: "valide", qui: "marc", valide: "mnb", note: "Noa reste le fil rouge. Ses collègues, dont des agents de catégorie C et d'autres filières, vivent aussi des situations. Le personnage est imposé : on ne le choisit pas." }
       ] },
 
     { code: "ressources", titre: "Ressources et évaluations", texte: "Ce que l'agent garde, ce qui valide ses acquis.",
@@ -100,7 +102,8 @@ window.DINA_PILOTAGE = {
         { titre: "Badges des 5 modules", lot: "L6", statut: "en_cours", qui: "marc", note: "Un badge par module, au nom du module. Délivré en cas de réussite." },
         { titre: "Fiches outils du module 1", lot: "L5", statut: "en_cours", qui: "marc", note: "Présentées le 28-10, à reprendre." },
         { titre: "Fiches outils des modules 2 à 5", lot: "L5", statut: "a_faire", qui: "marc" },
-        { titre: "Contenus de l'espace « Mes ressources »", lot: "L5", statut: "a_faire", qui: "marc" }
+        { titre: "Contenus de l'espace « Mes ressources »", lot: "L5", statut: "a_faire", qui: "marc" },
+        { titre: "Sélection de vidéos existantes (statut, règles de la fonction publique)", lot: "L5", statut: "a_faire", qui: "marc", note: "En ressources complémentaires, hors de l'histoire de Noa. Aucune vidéo produite pour le pilote." }
       ] },
 
     { code: "plateforme", titre: "Plateforme LIANE", texte: "Le parcours installé dans Moodle. La partie la plus complexe : LIANE s'utilise telle quelle, sans plugin.",
@@ -141,16 +144,16 @@ window.DINA_PILOTAGE = {
         { titre: "Présentation aux employeurs", lot: "L9", statut: "livre", qui: "marc", valide: "mnb", note: "Version courte du 28-10." },
         { titre: "Livret de test et annexe « DINA en bref »", lot: "L9", statut: "livre", qui: "marc", valide: "mnb", note: "Séance du 28-10." },
         { titre: "Prototype en ligne", lot: "L9", statut: "livre", qui: "marc", note: "Lien unique et QR code." },
-        { titre: "Fiche argumentaire employeurs", lot: "L9", statut: "a_faire", qui: "mnb", valide: "mfp", note: "Inclure le message sur le temps de formation organisé par l'employeur." },
+        { titre: "Fiche argumentaire employeurs", lot: "L9", statut: "a_faire", qui: "mnb", valide: "mfp", note: "Inclure le message sur le temps de formation : l'employeur l'organise ou laisse l'agent le prendre sur son temps de travail. DINA n'est pas obligatoire ; il peut le devenir si la DRHFPNC ou l'employeur le décide." },
         { titre: "Visuels de lancement (affiches, bannières, écrans)", lot: "L9", statut: "a_valider", qui: "marc", valide: "mfp", attente: "mfp", note: "Version 0.1." },
         { titre: "Vidéo de présentation", lot: "L9", statut: "en_cours", qui: "marc", valide: "mfp", note: "Maquette 0.2." },
         { titre: "Kit d'invitation des agents", lot: "L9", statut: "a_faire", qui: "mnb", valide: "mfp", echeance: "Janvier 2027" },
         { titre: "Guide des correspondants RH", lot: "L9", statut: "a_faire", qui: "mnb", echeance: "Janvier 2027" },
         { titre: "Fiche pour l'encadrant de proximité", lot: "L9", statut: "a_faire", qui: "mnb", echeance: "Janvier 2027" },
-        { titre: "FAQ sur la plateforme", lot: "L9", statut: "a_valider", qui: "marc", valide: "mnb", attente: "mnb", note: "Version 0.1, page Moodle prête." },
+        { titre: "FAQ sur la plateforme", lot: "L9", statut: "a_valider", qui: "marc", valide: "mnb", attente: "mnb", note: "Version 0.1, page Moodle prête. À aligner : durée estimée à 8 h, DINA non obligatoire." },
         { titre: "Fiche réflexe d'assistance", lot: "L9", statut: "a_faire", qui: "mnb", note: "Premier niveau : pôle stagiaires et coordonnateurs." },
         { titre: "Relances et messages de soutien", lot: "L9", statut: "a_faire", qui: "mnb", echeance: "Février 2027" },
-        { titre: "Webinaire d'accueil des agents", lot: "L9", statut: "a_faire", qui: "mnb", note: "Présente la boîte à outils, le carnet et les badges dès le départ." },
+        { titre: "Webinaire d'accueil des agents", lot: "L9", statut: "a_faire", qui: "mnb", note: "Présente dès le départ la boîte à outils, les fiches outils et les badges. À annoncer aussi dans les supports de communication." },
         { titre: "Page DINA sur ifap.nc", lot: "L9", statut: "a_faire", qui: "mfp", note: "Après le pilote." }
       ] },
 
@@ -158,7 +161,7 @@ window.DINA_PILOTAGE = {
       livrables: [
         { titre: "Planches des personnages et des lieux", lot: "L1", statut: "livre", qui: "marc" },
         { titre: "Illustrations du module 1", lot: "L4", statut: "livre", qui: "marc" },
-        { titre: "Infographies du module 1", lot: "L4", statut: "en_cours", qui: "marc", note: "Prompts prêts, première infographie produite." },
+        { titre: "Infographies du module 1", lot: "L4", statut: "en_cours", qui: "marc", note: "Cinq infographies produites, deux à corriger avant intégration." },
         { titre: "Illustrations du module 2", lot: "L4", statut: "en_cours", qui: "marc", note: "Prompts prêts." },
         { titre: "Illustrations des modules 3 à 5", lot: "L4", statut: "a_faire", qui: "marc" },
         { titre: "Visuels des 5 badges", lot: "L6", statut: "a_faire", qui: "marc" }
@@ -180,7 +183,12 @@ window.DINA_PILOTAGE = {
         note: "25 gabarits jouables dans le vrai moteur, avec les champs du storyboard. Se met à jour seul à chaque publication." },
       { priorite: "p1", titre: "Vérifier que la reprise tient dans la limite SCORM 1.2", statut: "a_faire", duree: 0.5, qui: "marc", valide: "si", lie: "Test technique SCORM dans LIANE",
         note: "La sauvegarde de reprise est limitée à 4 096 caractères. À mesurer sur un module complet. Si la limite est dépassée : alléger l'état sauvegardé ou passer en SCORM 2004." },
-      { priorite: "p1", titre: "Réduire les clics : dialogue affiché d'un coup, écrans courts regroupés", statut: "a_faire", duree: 1, qui: "marc", valide: "mnb", lie: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics" },
+      { priorite: "p1", titre: "Réduire les clics : prototype en pages qu'on fait défiler", statut: "a_faire", qui: "marc", valide: "mnb", lie: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics",
+        note: "Le principe « une information par écran » est remis en question. Un autre prototype est à faire sur un épisode de M1 avant de généraliser. Durée à réestimer." },
+      { priorite: "p1", titre: "Rubrique « Aller plus loin » en fin de journée", statut: "a_faire", duree: 0.5, qui: "marc",
+        note: "Vocabulaire à deux étages : le bouton « En clair » reformule à la demande, « Aller plus loin » propose des contenus plus soutenus et des liens vers les textes." },
+      { priorite: "p1", titre: "Accueil et page de fin du positionnement", statut: "a_faire", duree: 0.5, qui: "marc", valide: "mnb", lie: "Restitution du positionnement, visuelle et imprimable",
+        note: "L'accueil présente DINA (l'histoire de Noa ne commence pas encore) et rassure. La fin présente le dispositif : accompagnement, erreurs expliquées, réussites reconnues par des badges." },
       { priorite: "p1", titre: "Profil de positionnement imprimable", statut: "a_faire", duree: 0.5, qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable",
         note: "Marges, en-tête DINA, radar lisible, réponse de réflexion mise en forme." },
       { priorite: "p1", titre: "Fiches outils en PDF A4 téléchargeables", statut: "a_faire", duree: 1, qui: "marc", lie: "Espace « Mes ressources » : fiches outils téléchargeables",
@@ -204,7 +212,7 @@ window.DINA_PILOTAGE = {
         note: "Clavier, lecteur d'écran, zoom à 200 %, contrastes, sur chaque gabarit." },
 
       { priorite: "p3", titre: "Audio et vidéo dans les modules", statut: "a_faire", qui: "marc",
-        note: "Exclus du pilote (décision du 28-10)." },
+        note: "Exclus du pilote (décision du 28-10, confirmée le 06-11). Rien n'est produit tant que l'apport n'est pas démontré." },
       { priorite: "p3", titre: "Relire mes repères hors parcours", statut: "a_faire", qui: "marc",
         note: "Accès direct aux apports et aux fiches d'un module terminé, sans rejouer les situations." },
       { priorite: "p3", titre: "Un moteur pour d'autres formations LIANE", statut: "a_faire", qui: "marc",
@@ -216,9 +224,9 @@ window.DINA_PILOTAGE = {
   actions: [
     { attente: "employeurs", titre: "Faire tester le prototype par 2 ou 3 agents aux profils variés", echeance: "Début nov. 2026" },
     { attente: "employeurs", titre: "Désigner un ou deux référents par module pour valider le fond", note: "Indispensable : sans référents, pas de pilote." },
-    { attente: ["marc", "mnb"], titre: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics" },
-    { attente: "marc", titre: "Adapter le récit à l'agent déjà en poste depuis quelques semaines" },
-    { attente: ["marc", "mnb"], titre: "Rediscuter du prérequis numérique avant l'inscription" },
+    { attente: ["marc", "mnb"], titre: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics", note: "Un autre prototype, avec des pages qu'on fait défiler." },
+    { attente: "marc", titre: "Adapter le récit à l'agent déjà en poste depuis quelques semaines", note: "À rediscuter après l'échange avec la province Sud (06-11)." },
+    { attente: ["marc", "mnb"], titre: "Rediscuter du prérequis numérique avant l'inscription", note: "Abordé avec la province Sud le 06-11." },
     { attente: ["marc", "mnb"], titre: "Choisir les testeurs internes de l'IFAP" }
   ]
 };
