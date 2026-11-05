@@ -1,11 +1,11 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — positionnement v0.5.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — positionnement v0.6.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "POS",
   "type": "module",
   "code": "Positionnement",
   "titre": "Votre première semaine",
-  "duree": "15 à 20 min",
+  "duree": "15 à 20 min environ",
   "sans_menu": true,
   "hub": {
    "href": "index.html",
@@ -17,7 +17,7 @@ window.DINA_DATA = {
     "libelle": "Positionnement",
     "titre": "Votre première semaine",
     "debut": "POS-INTRO",
-    "duree": "15 à 20 min"
+    "duree": "15 à 20 min environ"
    }
   ]
  },
@@ -27,7 +27,7 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Positionnement",
    "titre": "Votre première semaine commence",
-   "texte": "Lundi, 8 h. Vous prenez votre poste dans un service public calédonien. Messages, appels, accueil, collègues : la semaine va vite.\nÀ chaque moment, choisissez ce que vous feriez et découvrez ce qui se passe. Pas de note. À la fin, vous voyez où vous en êtes.\nVos réponses ne sont vues que par vous.\n",
+   "texte": "Lundi, 8 h. Vous prenez votre poste dans un service public calédonien. Déjà en poste ? Repensez à vos premiers jours.\n15 moments vous attendent. Choisissez ce que vous feriez vraiment, sans chercher la bonne réponse, puis voyez ce qui se passe.\nPas de note, pas d'échec. Une seule passe : votre premier réflexe compte. Vos réponses ne sont vues que par vous.\n",
    "a_retenir": "Version de démonstration : contenus non validés par un expert, réponses non enregistrées.",
    "suite": "POS-S01"
   },
@@ -183,11 +183,11 @@ window.DINA_DATA = {
     },
     {
      "id": "D",
-     "libelle": "Vous déclinez : ce n'est pas à vous de signer. Vous l'orientez vers la personne habilitée.",
+     "libelle": "Vous déclinez : ce n'est pas à vous de signer. Vous l'orientez vers la personne qui a le droit de signer.",
      "verdicts": {
       "C03": "adapte"
      },
-     "consequence": "La personne habilitée signe le lendemain. Le courrier part, en règle."
+     "consequence": "La personne qui a le droit de signer le fait le lendemain. Le courrier part, en règle."
     }
    ],
    "suite": "POS-S04"
@@ -439,7 +439,7 @@ window.DINA_DATA = {
     },
     {
      "id": "B",
-     "libelle": "Vous l'écoutez et l'encouragez à en parler à son responsable ou à la médecine de prévention.",
+     "libelle": "Vous l'écoutez et l'encouragez à en parler à son responsable ou au médecin de prévention.",
      "verdicts": {
       "C12": "adapte"
      },
@@ -482,6 +482,7 @@ window.DINA_DATA = {
     "C10"
    ],
    "texte": "« Colle le tableau des usagers dans un outil d'IA gratuit en ligne, il te fait la synthèse en deux minutes. »\nLe tableau contient des noms et des adresses.\n",
+   "en_clair": "Une donnée personnelle, c'est toute information qui permet de reconnaître une personne, directement ou non : nom, adresse, téléphone, numéro de dossier…",
    "enjeu": "Protéger les données personnelles des usagers, quel que soit l'outil.",
    "options": [
     {
@@ -590,7 +591,8 @@ window.DINA_DATA = {
    "vigilance": [
     "C09"
    ],
-   "texte": "On vous demande de signer l'attestation de service fait d'une prestation que vous n'avez pas constatée. Le prestataire insiste : sa facture doit partir aujourd'hui.\n",
+   "texte": "On vous demande de signer l'attestation de service fait pour une prestation que vous n'avez pas vue vous-même. Le prestataire insiste : sa facture doit partir aujourd'hui.\n",
+   "en_clair": "L'attestation de service fait est le document signé qui permet de payer une facture. Elle porte sur une prestation : un travail, une livraison, une intervention.",
    "enjeu": "Ce que votre signature atteste : elle engage de l'argent public.",
    "options": [
     {
@@ -702,7 +704,7 @@ window.DINA_DATA = {
     "C14"
    ],
    "texte": "Parmi les demandes à traiter ce matin, vous reconnaissez celle de votre cousine. C'est vous qui devez la traiter.\n",
-   "enjeu": "L'impartialité : personne ne doit pouvoir douter d'une décision.",
+   "enjeu": "Personne ne doit pouvoir douter d'une décision : c'est ce qu'on appelle l'impartialité.",
    "options": [
     {
      "id": "A",
@@ -874,7 +876,7 @@ window.DINA_DATA = {
    "type": "pos-profil",
    "etape": "Positionnement",
    "titre": "Où vous en êtes",
-   "texte": "Voici ce que montrent vos choix de la semaine, domaine par domaine. Ce n'est pas une note : quelques situations ne disent pas tout de vos compétences.\nVous suivrez tous les modules, dans l'ordre.\n",
+   "texte": "Voici ce que montrent vos choix de la semaine, domaine par domaine. Ce n'est pas une note : quelques situations ne disent pas tout de vos compétences.\nVous suivrez tous les modules, dans l'ordre. Ce positionnement ne se refait pas : imprimez-le si vous voulez le garder.\n",
    "niveaux": {
     "present": "Repères présents",
     "approfondir": "À approfondir",
@@ -882,7 +884,7 @@ window.DINA_DATA = {
    },
    "vigilance": "**Point de vigilance.** Sur un sujet sensible, vous avez choisi une conduite qui comporte un risque. Le module indiqué vous donne les repères à connaître avant d'agir.\n",
    "mention": "Ce résultat n'est vu que par vous. Votre employeur n'y a pas accès.",
-   "transition": "Dans quelques minutes, vous rencontrez Noa, qui vient d'être recruté. Sa première semaine commence par le premier domaine : se repérer.",
+   "transition": "Dans DINA, vous n'êtes pas seul : une assistance répond à vos questions, chaque erreur est expliquée et chaque module réussi vous vaut un badge. Dans quelques minutes, vous entrez à l'ÉLAN avec Noa, qui vient d'être recruté, et ses collègues. Leur semaine commence par le premier domaine : se repérer.",
    "sans_vigilance": "Aucun point de vigilance sur les sujets sensibles de la semaine.",
    "blocs": [
     {
@@ -977,5 +979,5 @@ window.DINA_DATA = {
  },
  "fiches": {},
  "illustrations": {},
- "source": "Storyboard — positionnement v0.5.md"
+ "source": "Storyboard — positionnement v0.6.md"
 };
