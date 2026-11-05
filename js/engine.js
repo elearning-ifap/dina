@@ -130,9 +130,26 @@
     });
     return '<g class="chm-relief">' + html + "</g>";
   }
+  function couper(txt, max, lignes) {
+    var mots = String(txt || "").split(/\s+/), res = [], cour = "";
+    mots.forEach(function (m) {
+      if (cour && (cour + " " + m).length > max) { res.push(cour); cour = m; } else cour = cour ? cour + " " + m : m;
+    });
+    if (cour) res.push(cour);
+    if (res.length > lignes) { res = res.slice(0, lignes); res[lignes - 1] = res[lignes - 1].replace(/\s*\S*$/, "") + "…"; }
+    return res;
+  }
+  function etiquette(s, y, larg) {
+    var jour = libelleSection(s), sav = s.savoir && s.savoir !== jour ? s.savoir : "";
+    var max = Math.max(10, Math.floor(larg / 6.6));
+    return '<text y="' + y + '" class="chm-lib"><tspan x="0" class="chm-jour">' + esc(jour) + "</tspan>" +
+      couper(sav, max, 3).map(function (l, i) { return '<tspan x="0" dy="' + (i ? 17 : 19) + '" class="chm-sav">' + esc(l) + "</tspan>"; }).join("") + "</text>";
+  }
   function chemin(opts) {
     opts = opts || {};
-    var n = SECTIONS.length, W = 1000, H = opts.compacte ? 120 : 170, marge = n < 5 ? 180 : 80;
+    /* 30-10 : sous chaque repère, le jour en petit puis le savoir travaillé (le jour seul n'apprenait rien) */
+    var n = SECTIONS.length, W = 1000, H = opts.compacte ? 175 : 205, marge = n < 5 ? 180 : 80;
+    var larg = n > 1 ? (W - 2 * marge) / (n - 1) : W / 2;
     var pts = SECTIONS.map(function (s, i) {
       var x = n === 1 ? W / 2 : marge + i * (W - 2 * marge) / (n - 1);
       var y = H * (opts.compacte ? .40 : .38) + Math.sin(i * 1.9 + .6) * H * .17;
@@ -155,7 +172,7 @@
         (etatC === "cours" ? '<circle r="17" class="chm-halo"/>' : "") +
         '<circle r="' + (etatC === "attente" ? 7 : 11) + '" class="chm-point"/>' +
         (etatC === "fait" ? '<path d="M-4.5 0.5 L-1.2 3.8 L5 -3" class="chm-coche"/>' : "") +
-        '<text y="' + (opts.compacte ? 36 : 40) + '" class="chm-lib">' + esc(libelleSection(p.s)) + "</text></g></g>";
+        etiquette(p.s, opts.compacte ? 34 : 36, larg) + "</g></g>";
     }).join("");
     var faites = pts.filter(function (p) { return p.fait; }).length;
     /* Carte cliquable (D113, 27-10) : un bouton par étape, posé sur son repère, avec une info-bulle */
@@ -340,6 +357,15 @@
       (opts.texte ? '<p class="dossier-texte">' + inline(opts.texte) + "</p>" : "") + "</section>";
   }
 
+  /* 30-10 : au sommaire, le dossier n'est plus un encart à jalons (doublon du chemin) mais le récit qui coiffe le chemin */
+  function filRouge() {
+    var D = M.dossier;
+    if (!D || (D.visible_des && etat.faites.indexOf(D.visible_des) < 0)) return "";
+    var fini = D.jalons && D.jalons.length && D.jalons.every(function (j) { return etat.faites.indexOf(j.section) >= 0; });
+    return '<div class="fil-rouge">' + ic("i-projet", "fil-rouge-picto") + '<p><span class="surtitre">' + (fini ? "Le dossier en fin de semaine" : "Le fil rouge de la semaine") + "</span>" +
+      "<strong>" + esc(D.titre || "Dossier") + "</strong> " + inline(D.objet || "") + "</p></div>";
+  }
+
   /* ---------- Sommaire du module ---------- */
   function rendreMenu() {
     majBandeau(null);
@@ -362,7 +388,7 @@
     }).join("");
     zone.innerHTML = '<div class="menu">' +
       '<div class="menu-tete"><span class="surtitre">' + esc(libModule()) + " · " + esc(M.duree || "") + "</span><h1>" + esc(M.titre) + "</h1>" + (M.sous_titre ? '<p class="menu-sous">' + esc(M.sous_titre) + "</p>" : "") + md(M.intro) +
-      "</div>" + dossierSuivi({ compact: true }) + chemin({ interactif: true }) +
+      "</div>" + filRouge() + chemin({ interactif: true }) +
       '<p class="menu-legende">' + (!faites ? "Chaque étape terminée trace un bout du chemin de Noa." : faites === SECTIONS.length ? "Toutes les étapes sont faites : le chemin de Noa est tracé." : faites + " étape" + (faites > 1 ? "s" : "") + " sur " + SECTIONS.length + " : le chemin de Noa se dessine.") + "</p>" +
       '<ol class="sections sections--liste">' + cartes + "</ol></div>";
     zone.querySelectorAll("[data-section]").forEach(function (b) {
@@ -1536,7 +1562,10 @@
       : (mo ? '<span class="pos-de">' + ic(C.icone) + "<span>" + esc(C.libelle) + "</span></span>" : "");
     /* Arrivée du message (22-10) : notification pour le courriel et l'appel, « en train d'écrire » pour le SMS et la messagerie */
     var arrivee = mo && !deja.c && !POS_VUS[e.id] ? ({ courriel: "notif", appel: "notif", sms: "ecrit", messagerie: "ecrit" }[mo.canal] || null) : null;
-    var corps = '<div id="pos-msg"' + (arrivee ? " hidden" : "") + ">" + posMessage(e, mo) + "</div>" + (arrivee ? posArrivee(arrivee, mo) : "");
+    /* D120 (06-11) : « En clair » reformule à la demande un terme du message, sans donner la conduite attendue */
+    var clair = e.en_clair ? '<p class="pos-clair-ligne"><button type="button" class="off-btn" aria-expanded="false" aria-controls="pos-clair">En clair</button></p>' +
+      '<div class="off-clair pos-clair" id="pos-clair" hidden><p>' + inline(e.en_clair) + "</p></div>" : "";
+    var corps = '<div id="pos-msg"' + (arrivee ? " hidden" : "") + ">" + posMessage(e, mo) + clair + "</div>" + (arrivee ? posArrivee(arrivee, mo) : "");
     zone.innerHTML = '<div class="colonne">' + posSemaine(mo && mo.jour) +
       '<div class="pos-tete">' + (e.rebond ? '<span class="pos-rebond">La suite…</span>' : "") + '<span class="surtitre">' + esc(sur) + "</span>" +
       '<h1 id="titre-q">' + esc(e.titre || "") + "</h1>" + qui + "</div>" + corps +
@@ -1680,8 +1709,8 @@
       '<h2 class="fin-sous">Vos six domaines</h2>' + consigneZone(null, "Retournez une carte pour voir où le domaine sera travaillé.") + '<ul class="cartes pos-cartes">' + cartes + "</ul>" +
       (refl.length ? '<div class="pos-reflexion"><h2 class="fin-sous">Votre réponse de fin de semaine</h2>' + refl.map(function (x) { return "<p><em>" + inline(x.q) + "</em></p><blockquote>" + esc(x.r) + "</blockquote>"; }).join("") + "</div>" : "") +
       '<p class="rl-mention">' + ic("i-cadenas") + "<span>" + esc(e.mention || "") + "</span></p>" +
-      '<p class="pos-actions-profil"><button type="button" class="btn btn-secondaire btn-petit" id="pos-imprimer">' + ic("i-imprimer") + " Imprimer mon positionnement</button>" +
-      '<button type="button" class="lien" id="pos-refaire">' + ic("i-recommencer") + " Refaire le positionnement</button></p>" +
+      /* D126 : le positionnement ne se rejoue pas — plus de bouton « Refaire » (réinitialisation réservée au mode présentation, touche P) */
+      '<p class="pos-actions-profil"><button type="button" class="btn btn-secondaire btn-petit" id="pos-imprimer">' + ic("i-imprimer") + " Imprimer mon positionnement</button></p>" +
       '<p class="sr-only" id="annonce" aria-live="polite"></p></div>';
     zone.querySelector(".pos-cartes").addEventListener("click", function (ev) {
       var b = ev.target.closest(".carte-ret"); if (!b) return;
@@ -1691,11 +1720,6 @@
       $("annonce").textContent = retournee ? v.textContent : r.textContent;
     });
     $("pos-imprimer").addEventListener("click", function () { document.body.classList.add("impression-profil"); window.print(); setTimeout(function () { document.body.classList.remove("impression-profil"); }, 500); });
-    $("pos-refaire").addEventListener("click", function () {
-      posItems().forEach(function (id) { delete etat.reponses[id]; });
-      etat.faites = []; etat.historique = []; sauver();
-      aller(SECTIONS[0].debut, true);
-    });
     boutonFin(function () { principal("", null); });
   }
 
