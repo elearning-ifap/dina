@@ -6,8 +6,8 @@
    Les crochets [ ] signalent une information à confirmer : ils s'affichent en surligné tant qu'ils restent. */
 window.DINA_VERSION = {
   actuelle: {
-    numero: "0.1",
-    date: "28-10-2026",
+    numero: "0.2",
+    date: "06-11-2026",
     statut: "Prototype — contenus en cours de relecture",
     caracteristiques: [
       "Trois étapes à suivre dans l'ordre : positionnement, prologue, puis module 1 « Je me repère ».",
@@ -17,14 +17,19 @@ window.DINA_VERSION = {
       "Le dossier Passerelles sert de fil rouge d'un module à l'autre.",
       "Fonctionne sur ordinateur (Chrome ou Edge) et sur téléphone."
     ],
-    evolutions: []  /* Première présentation : rien à lister. À remplir à partir de la version suivante. */
+    evolutions: [
+      "Positionnement : accueil qui rassure (pas de note, pas d'échec, répondre spontanément) ; il ne se fait qu'une fois.",
+      "Positionnement : bouton « En clair » sur deux termes (données personnelles, attestation de service fait) ; vocabulaire simplifié.",
+      "Positionnement : la fin présente le dispositif (assistance, erreurs expliquées, badges) et annonce Noa et ses collègues.",
+      "Module 1 : le sommaire indique sous chaque jour ce qui y est travaillé ; le dossier Passerelles coiffe le chemin."
+    ]
   },
 
   /* Ordre fixé par D84. "fichier" est relatif à cette page. */
   etapes: [
     { code: "pos", fichier: "positionnement.html", cle: "dina-positionnement", titre: "Test de positionnement",
       texte: "Votre première semaine dans un service public : quinze situations, et ce qui se passe après chacun de vos choix. Vous voyez où vous en êtes, domaine par domaine.",
-      duree: "environ 15 min", disponible: true },
+      duree: "15 à 20 min environ", disponible: true },
     { code: "prologue", fichier: "prologue.html", cle: "dina-prologue", titre: "Prologue « Bienvenue à l'ÉLAN »",
       texte: "Vous rencontrez Noa, ses collègues et l'organisation où il prend son poste.",
       duree: "environ 10 min", disponible: true },
@@ -43,7 +48,6 @@ window.DINA_VERSION = {
   contact: "Contact : IFAP",
 
   historique: [
-    /* Exemple pour la prochaine publication :
-    { numero: "0.1", date: "28-10-2026", lien: "v0.1/index.html", resume: "Version présentée aux employeurs le 28-10." } */
+    { numero: "0.1", date: "28-10-2026", lien: "v0.1/index.html", resume: "Version présentée aux employeurs le 28-10." }
   ]
 };
