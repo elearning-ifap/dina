@@ -166,7 +166,7 @@ window.DINA_PILOTAGE = {
         { titre: "Planches des personnages et des lieux", lot: "L1", statut: "livre", qui: "marc" },
         { titre: "Illustrations du module 1", lot: "L4", statut: "livre", qui: "marc" },
         { titre: "Infographies du module 1", lot: "L4", statut: "en_cours", qui: "marc", note: "Cinq infographies produites, deux à corriger avant intégration." },
-        { titre: "Illustration de l'épisode « Qui fait quoi au pays ? » (accueil de l'ÉLAN)", lot: "L4", statut: "a_faire", qui: "marc", duree: 0.25, note: "Prompt prêt (ILL-QFQ1). Emplacement visible dans le prototype tant que l'image manque." },
+        { titre: "Illustration de l'épisode « Qui fait quoi au pays ? » (accueil de l'ÉLAN)", lot: "L4", statut: "a_faire", qui: "marc", duree: 0.25, note: "Prompt prêt (ILL-N09). Emplacement visible dans le prototype tant que l'image manque." },
         { titre: "Illustrations du module 2", lot: "L4", statut: "en_cours", qui: "marc", note: "Prompts prêts." },
         { titre: "Illustrations des modules 3 à 5", lot: "L4", statut: "a_faire", qui: "marc" },
         { titre: "Visuels des 5 badges", lot: "L6", statut: "a_faire", qui: "marc" }
@@ -189,7 +189,7 @@ window.DINA_PILOTAGE = {
       { priorite: "p1", titre: "Vérifier que la reprise tient dans la limite SCORM 1.2", statut: "a_faire", duree: 0.5, qui: "marc", valide: "si", lie: "Test technique SCORM dans LIANE",
         note: "La sauvegarde de reprise est limitée à 4 096 caractères. À mesurer sur un module complet. Si la limite est dépassée : alléger l'état sauvegardé ou passer en SCORM 2004." },
       { priorite: "p1", titre: "Réduire les clics : prototype en pages qu'on fait défiler", statut: "a_valider", duree: 1.5, qui: "marc", valide: "mnb", attente: "mnb", lie: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics", lien: "../qui-fait-quoi.html",
-        note: "Fait le 06-11 sur l'épisode « Qui fait quoi au pays ? » : nouveau type d'écran « page » dans le moteur (blocs situation, apport, application, liste). Une seule page au lieu de six écrans, les réponses ouvrent la suite, la compétence est affichée. Ajouts du 06-11 au soir : trois demandes de transfert et le bouton « En clair ». Testé à 390 px et sur ordinateur. Reste : retours de Marie-Noëlle et des testeurs avant de généraliser, report dans le storyboard et build.py." },
+        note: "Fait le 06-11 sur l'épisode « Qui fait quoi au pays ? » : nouveau type d'écran « page » dans le moteur (blocs situation, apport, application, liste). Une seule page au lieu de six écrans, les réponses ouvrent la suite, la compétence est affichée. Ajouts du 06-11 au soir : trois demandes de transfert et le bouton « En clair ». Testé à 390 px et sur ordinateur. Storyboard « M1 Qui fait quoi (page) v0.1 » dans le coffre et build.py à jour (type « page » contrôlé). Reste : retours de Marie-Noëlle et des testeurs avant de généraliser." },
       { priorite: "p1", titre: "Afficher la compétence travaillée sur chaque écran", statut: "a_faire", qui: "marc",
         note: "Demande unanime de la province Sud (06-11), avec une présentation des 21 compétences au départ. À arbitrer." },
       { priorite: "p1", titre: "Bilan du positionnement en deux écrans", statut: "a_faire", duree: 0.5, qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable",

@@ -1,11 +1,9 @@
-/* DINA — M1, épisode 1 « Qui fait quoi au pays ? » en page qui défile (prototype du 06-11-2026).
-   Écrit à la main pour le prototype : à reporter dans le storyboard M1 (dina-prod) avant la prochaine génération par build.py.
-   Contenu juridique NON VALIDÉ : chaque item porte « valider » tant que les référents employeurs ne l'ont pas relu. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 Qui fait quoi (page) v0.1.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
-  "id": "M1",
-  "cle": "m1-qfq",
+  "id": "M1-QFQ",
   "type": "module",
+  "cle": "m1-qfq",
   "titre": "Je me repère",
   "code": "M1",
   "duree": "15 min",
@@ -38,30 +36,6 @@ window.DINA_DATA = {
      "jour": "Épisode 1",
      "libelle": "Savoir qui est compétent",
      "section": "ep1"
-    },
-    {
-     "id": "decide",
-     "jour": "Épisode 2",
-     "libelle": "Savoir qui décide à l'ÉLAN",
-     "section": "ep2"
-    },
-    {
-     "id": "source",
-     "jour": "Épisode 3",
-     "libelle": "Savoir vérifier une source",
-     "section": "ep3"
-    },
-    {
-     "id": "appel",
-     "jour": "Défi",
-     "libelle": "Premier appel de Joël",
-     "section": "defi"
-    },
-    {
-     "id": "ne",
-     "jour": "Bilan",
-     "libelle": "Un dossier est né",
-     "section": "sortie"
     }
    ]
   },
@@ -183,7 +157,7 @@ window.DINA_DATA = {
      "libelle": "« J'ai appelé la gendarmerie hier soir : personne n'est venu. »",
      "court": "La gendarmerie n'est pas intervenue",
      "attendu": "etat",
-     "feedback": "L'ordre public et la gendarmerie relèvent de l'État, représenté en Nouvelle-Calédonie par le haut-commissaire.",
+     "feedback": "Le maintien de l'ordre et la gendarmerie relèvent de l'État, représenté en Nouvelle-Calédonie par le haut-commissaire.",
      "guichet": "La brigade de gendarmerie ; en urgence, le 17",
      "ref": "Loi organique, art. 21",
      "valider": "La police municipale relève, elle, du maire."
@@ -235,7 +209,7 @@ window.DINA_DATA = {
      "type": "recit",
      "phase": "situation",
      "titre": "Huit demandes sur le cahier d'accueil",
-     "illustration": "ILL-QFQ1",
+     "illustration": "ILL-N09",
      "texte": "Fin de matinée, à l'accueil de l'ÉLAN. Cédric tient le cahier des visites et des appels. Huit habitants sont passés ou ont téléphoné. Aucune de leurs demandes n'est pour l'ÉLAN : il faut leur dire où aller.",
      "repliques": [
       {
@@ -297,7 +271,7 @@ window.DINA_DATA = {
         "titre": "L'État",
         "exemples": [
          "la justice",
-         "l'ordre public et la gendarmerie",
+         "le maintien de l'ordre et la gendarmerie",
          "la défense",
          "la monnaie"
         ],
@@ -439,10 +413,13 @@ window.DINA_DATA = {
    "suite": "MENU"
   }
  },
+ "fiches": {},
  "illustrations": {
-  "ILL-QFQ1": {
+  "ILL-N09": {
+   "scene": "L'accueil de l'ÉLAN en fin de matinée",
+   "personnages": "Cédric, Noa",
    "alt": "L'accueil de l'ÉLAN en fin de matinée : Cédric, derrière le comptoir, montre le cahier d'accueil à Noa."
   }
  },
- "fiches": {}
+ "source": "Storyboard — M1 Qui fait quoi (page) v0.1.md"
 };
