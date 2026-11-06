@@ -60,7 +60,7 @@ window.DINA_PILOTAGE = {
       note: "Prototype en ligne (v0.1). Storyboard v0.3 en cours : arrivée de Noa, message de fin." },
     { code: "M1", titre: "Je me repère", sousTitre: "Comprendre mon environnement",
       etats: ["en_cours", "valide", "livre", "en_cours", "en_cours", "a_faire", "a_faire"],
-      note: "Prototype en ligne (v0.1). Version 0.2 en cours : jours de la semaine, infographies, retours du 28-10. Épisode « Qui fait quoi au pays ? » refait en page qui défile (06-11), à valider : situation, apport, application, liste Passerelles." },
+      note: "Prototype en ligne (v0.1). Version 0.2 en cours : jours de la semaine, infographies, retours du 28-10. Épisode « Qui fait quoi au pays ? » refait en page qui défile (06-11), à valider : situation, apport, application, transfert, liste Passerelles." },
     { code: "M2", titre: "Je trouve ma place", sousTitre: "",
       etats: ["en_cours", "valide", "livre", "en_cours", "en_cours", "a_faire", "a_faire"],
       note: "Storyboard v0.4 prêt. E-learning v0.1 à reprendre sur le modèle de M1." },
@@ -95,7 +95,7 @@ window.DINA_PILOTAGE = {
         { titre: "Décisions issues de la démonstration du 28-10", lot: "L1", statut: "valide", qui: "marc", valide: "mnb", note: "Validées le 06-11 : DINA 100 % en ligne, pilote sans vidéo ni audio, vocabulaire à deux étages, positionnement rassurant, infographies, mise en situation tournante, interface présentée dès le webinaire, temps de formation organisé par l'employeur." },
         { titre: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA", lot: "L1", statut: "en_cours", qui: "mnb", valide: "valerie", note: "Les règles changent souvent. Proposition : des experts des DRH valident le corpus avant production, puis le mettent à jour chaque année. Demande à la direction en préparation." },
         { titre: "Validation juridique de l'épisode « Qui fait quoi au pays ? »", lot: "L1", statut: "a_valider", qui: "marc", valide: "employeurs", attente: "employeurs", duree: 0.5,
-          note: "Huit situations et la règle de l'article 20. Points à confirmer : guichets (tribunal, aide à l'entreprise), collecte des ordures et syndicats de communes, bâtiments des écoles primaires, durée du travail des agents publics." },
+          note: "Onze situations (dont trois de transfert) et la règle de l'article 20. Fiche de validation prête, à envoyer aux référents. Points à confirmer : guichets (tribunal, aide à l'entreprise), collecte des ordures et syndicats de communes, bâtiments des écoles primaires, durée du travail des agents publics." },
         { titre: "Mise en situation tournante", lot: "L1", statut: "valide", qui: "marc", valide: "mnb", note: "Noa reste le fil rouge. Ses collègues, dont des agents de catégorie C et d'autres filières, vivent aussi des situations. Le personnage est imposé : on ne le choisit pas." }
       ] },
 
@@ -189,7 +189,7 @@ window.DINA_PILOTAGE = {
       { priorite: "p1", titre: "Vérifier que la reprise tient dans la limite SCORM 1.2", statut: "a_faire", duree: 0.5, qui: "marc", valide: "si", lie: "Test technique SCORM dans LIANE",
         note: "La sauvegarde de reprise est limitée à 4 096 caractères. À mesurer sur un module complet. Si la limite est dépassée : alléger l'état sauvegardé ou passer en SCORM 2004." },
       { priorite: "p1", titre: "Réduire les clics : prototype en pages qu'on fait défiler", statut: "a_valider", duree: 1.5, qui: "marc", valide: "mnb", attente: "mnb", lie: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics", lien: "../qui-fait-quoi.html",
-        note: "Fait le 06-11 sur l'épisode « Qui fait quoi au pays ? » : nouveau type d'écran « page » dans le moteur (blocs situation, apport, application, liste). Une seule page au lieu de six écrans, les réponses ouvrent la suite, la compétence est affichée. Testé à 390 px et sur ordinateur. Reste : retours de Marie-Noëlle et des testeurs avant de généraliser, report dans le storyboard et build.py." },
+        note: "Fait le 06-11 sur l'épisode « Qui fait quoi au pays ? » : nouveau type d'écran « page » dans le moteur (blocs situation, apport, application, liste). Une seule page au lieu de six écrans, les réponses ouvrent la suite, la compétence est affichée. Ajouts du 06-11 au soir : trois demandes de transfert et le bouton « En clair ». Testé à 390 px et sur ordinateur. Reste : retours de Marie-Noëlle et des testeurs avant de généraliser, report dans le storyboard et build.py." },
       { priorite: "p1", titre: "Afficher la compétence travaillée sur chaque écran", statut: "a_faire", qui: "marc",
         note: "Demande unanime de la province Sud (06-11), avec une présentation des 21 compétences au départ. À arbitrer." },
       { priorite: "p1", titre: "Bilan du positionnement en deux écrans", statut: "a_faire", duree: 0.5, qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable",

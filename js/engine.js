@@ -1753,6 +1753,13 @@
       return '<div class="pg-repere"><span class="pg-phase pg-phase--' + esc(b.phase) + '">' + esc(PHASES_PAGE[b.phase] || b.phase) + "</span>" + comp + "</div>" +
         (b.titre ? '<h2 class="pg-titre" id="pg-t' + n + '">' + inline(b.titre) + "</h2>" : "");
     }
+    /* « En clair » (D120) : reformulation à la demande, fermée par défaut ; ouverte par le gestionnaire commun des .off-btn */
+    var nClair = 0;
+    function enClair(txt) {
+      if (!txt) return "";
+      var id = "pg-clair-" + (nClair++);
+      return '<p class="pg-clair-ligne"><button type="button" class="off-btn" aria-expanded="false" aria-controls="' + id + '">En clair</button></p><div class="pg-clair" id="' + id + '" hidden>' + md(txt) + "</div>";
+    }
     function blocRecit(b) {
       var h = b.illustration ? illustration(b.illustration, "pg-illu") : "";
       if (b.texte) h += '<div class="texte recit">' + md(b.texte) + "</div>";
@@ -1762,7 +1769,7 @@
     }
     function blocApport(b) {
       var h = b.texte ? '<div class="texte">' + md(b.texte) + "</div>" : "";
-      if (b.regle) h += '<p class="pg-regle">' + inline(b.regle) + (b.regle_ref ? '<span class="pg-ref">' + esc(b.regle_ref) + "</span>" : "") + "</p>";
+      if (b.regle) h += '<p class="pg-regle">' + inline(b.regle) + (b.regle_ref ? '<span class="pg-ref">' + esc(b.regle_ref) + "</span>" : "") + "</p>" + enClair(b.regle_clair);
       if (b.carte) {
         var c = b.carte;
         h += '<figure class="pg-carte" aria-labelledby="pg-carte-leg"><figcaption id="pg-carte-leg" class="sr-only">' + esc(c.legende || "") + "</figcaption>" +
@@ -1801,7 +1808,7 @@
             return '<label class="pg-opt' + att + '"><input type="radio" name="pg-' + esc(b.id) + "-" + esc(it.id) + '" value="' + esc(c.id) + '"' + (choix === c.id ? " checked" : "") + (verrou ? " disabled" : "") +
               ' data-bloc="' + esc(b.id) + '" data-item="' + esc(it.id) + '"><span>' + inline(c.court || c.libelle) + "</span></label>";
           }).join("") + "</div>" + marque +
-          (montrer ? '<div class="pg-fb"><p>' + inline(it.feedback) + "</p>" + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + "</div>" : "") +
+          (montrer ? '<div class="pg-fb"><p>' + inline(it.feedback) + "</p>" + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + enClair(it.clair) + "</div>" : "") +
           "</fieldset></li>";
       }).join("") + "</ol>" + replie;
       if (!fait) {
@@ -1819,7 +1826,7 @@
       var src = st.r[b.depuis] || {};
       var h = b.texte ? '<div class="texte recit">' + md(b.texte) + "</div>" : "";
       h += '<div class="pg-liste" role="table" aria-label="' + esc(b.titre || "Liste") + '"><div class="pg-ligne pg-ligne--tete" role="row"><span role="columnheader">Demande</span><span role="columnheader">Compétent</span><span role="columnheader">Où s\'adresser</span></div>' +
-        e.items.map(function (it) {
+        itemsDe(b).map(function (it) {
           return '<div class="pg-ligne" role="row"><span role="cell" class="pg-l-dem">' + inline(it.court || it.libelle) + '</span><span role="cell" class="pg-l-qui"><span class="pg-cat pg-cat--' + esc(it.attendu) + '">' + esc(libCat(it.attendu)) + '</span></span><span role="cell" class="pg-l-ou">' + inline(it.guichet || "") + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + "</span></div>";
         }).join("") + "</div>";
       if (b.mention) h += '<p class="pg-mention">' + inline(b.mention) + "</p>";
