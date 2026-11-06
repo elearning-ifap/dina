@@ -119,7 +119,7 @@
 .pg-ligne { display: grid; gap: .3rem; padding: .85rem 1rem; border: 1px solid var(--bordure); border-radius: var(--rayon-petit); }
 .pg-ligne--tete { display: none; }
 .pg-l-dem { font-weight: 700; color: var(--anthracite); }
-.pg-cat { display: inline-block; padding: .1rem .55rem; border-radius: 99px; font-size: 1rem; font-weight: 700; }
+.pg-cat { display: inline-block; padding: .1rem .55rem; border-radius: var(--rayon-compact); font-size: 1rem; font-weight: 700; }
 .pg-cat--etat { background: var(--gris-clair); color: var(--anthracite); }
 .pg-cat--nc { background: var(--bleu-progression-clair); color: var(--bleu-progression-texte); }
 .pg-cat--province { background: var(--bleu-clair); color: var(--bleu); }
@@ -160,3 +160,30 @@
 .pg-clair-ligne { margin: .6rem 0 0; }
 .pg-clair { margin-top: .5rem; padding: .8rem 1rem; border-radius: var(--rayon-petit); background: var(--bleu-clair); color: var(--anthracite); }
 .pg-clair p:last-child { margin-bottom: 0; }
+
+/* 06-11 (épisode 2) : six réponses, organigramme dans le récit, grille des rôles */
+.pg-cat { background: var(--gris-clair); color: var(--anthracite); }
+@container lecteur (min-width: 760px) { .pg-choix--6 { grid-template-columns: repeat(3, 1fr); } }
+.pg-orga { margin: 1.25rem 0 0; }
+.pg-arbre, .pg-arbre ul { list-style: none; margin: 0; padding: 0; }
+.pg-arbre ul { margin-left: .9rem; padding-left: .9rem; border-left: 2px solid var(--gris); }
+.pg-arbre li { position: relative; margin-top: .5rem; }
+.pg-arbre ul > li::before { content: ""; position: absolute; left: -.9rem; top: 1.4rem; width: .9rem; border-top: 2px solid var(--gris); }
+.pg-arbre ul > li:last-child::after { content: ""; position: absolute; left: calc(-.9rem - 2px); top: 1.55rem; bottom: 0; border-left: 2px solid var(--carte); }
+.pg-o-case { display: inline-flex; flex-direction: column; padding: .5rem .8rem; border: 1px solid var(--bordure); border-radius: var(--rayon-petit); background: var(--fond); }
+.pg-o-case strong { color: var(--anthracite); }
+.pg-o-case span { font-size: 1rem; color: var(--texte-2); }
+.pg-o-case--moi { border: 2px solid var(--marque-sarcelle); background: var(--bleu-clair); }
+.pg-o-moi { font-style: normal; font-weight: 700; color: var(--bleu); }
+.pg-o-leg, .pg-orga .orga-partenaires { font-size: 1rem; color: var(--texte-2); margin-top: .8rem; }
+.pg-grille { display: grid; gap: .6rem; margin: .5rem 0 .25rem; }
+.pg-g-ligne { display: grid; gap: .25rem; padding: .8rem 1rem; border-radius: var(--rayon-petit); background: var(--fond); }
+.pg-g-ligne strong { font: 800 1.05rem var(--police-titre); color: var(--anthracite); }
+.pg-g-tete { display: none; }
+.pg-g-lib { font-style: normal; font-weight: 700; color: var(--texte-2); }
+@container lecteur (min-width: 760px) {
+  .pg-grille { gap: 0; }
+  .pg-g-ligne { grid-template-columns: 1.1fr 1fr 1fr 1.2fr; gap: 1rem; background: none; border-radius: 0; border-bottom: 1px solid var(--bordure); padding: .7rem .25rem; }
+  .pg-g-tete { display: grid; font-weight: 700; color: var(--texte-2); }
+  .pg-g-lib { display: none; }
+}

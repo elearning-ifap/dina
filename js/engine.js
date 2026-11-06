@@ -1733,7 +1733,9 @@
     zone.classList.add("ecran--page");
     var st = reponse(e.id) || {};
     st.r = st.r || {}; st.v = st.v || {};
-    var cats = {}; (e.categories || []).forEach(function (c) { cats[c.id] = c; });
+    var cats = {};
+    (e.categories || []).concat.apply(e.categories || [], (e.blocs || []).map(function (b) { return b.categories || []; })).forEach(function (c) { if (!cats[c.id]) cats[c.id] = c; });
+    function catsDe(b) { return b.categories || e.categories || []; }
     var phases = e.phases || ["situation", "apport", "application"];
     function sauverPage() { memoriser(e.id, st); }
     function libCat(id) { return cats[id] ? cats[id].libelle : ""; }
@@ -1760,10 +1762,29 @@
       var id = "pg-clair-" + (nClair++);
       return '<p class="pg-clair-ligne"><button type="button" class="off-btn" aria-expanded="false" aria-controls="' + id + '">En clair</button></p><div class="pg-clair" id="' + id + '" hidden>' + md(txt) + "</div>";
     }
+    /* Organigramme en arbre : les liens hiérarchiques restent lisibles à 390 px (une liste imbriquée, pas des cases empilées) */
+    function orgaHtml(b) {
+      function noeud(n) {
+        return '<li><span class="pg-o-case' + (n.moi ? " pg-o-case--moi" : "") + '"><strong>' + esc(n.nom) + "</strong>" + (n.role ? "<span>" + esc(n.role) + "</span>" : "") + "</span>" +
+          (n.enfants && n.enfants.length ? "<ul>" + n.enfants.map(noeud).join("") + "</ul>" : "") + "</li>";
+      }
+      var titre = b.organigramme_titre || "Organigramme simplifié";
+      return '<section class="pg-orga" aria-label="' + esc(titre) + '"><h3 class="pg-sous">' + esc(titre) + '</h3><ul class="pg-arbre">' + noeud(b.organigramme) + "</ul>" +
+        (b.organigramme_legende ? '<p class="pg-o-leg">' + inline(b.organigramme_legende) + "</p>" : "") +
+        (b.partenaires ? '<p class="orga-partenaires">' + inline(b.partenaires) + "</p>" : "") + "</section>";
+    }
+    /* Grille « qui délibère / qui dirige / qui exécute » : tableau sur grand écran, fiches sur téléphone */
+    function grilleHtml(g) {
+      return '<div class="pg-grille" role="table" aria-label="' + esc(g.legende || "") + '"><div class="pg-g-ligne pg-g-tete" role="row"><span role="columnheader"></span>' + g.colonnes.map(function (c) { return '<span role="columnheader">' + esc(c) + "</span>"; }).join("") + "</div>" +
+        g.lignes.map(function (l) {
+          return '<div class="pg-g-ligne" role="row"><strong role="rowheader">' + inline(l.titre) + "</strong>" + l.cellules.map(function (c, k) { return '<span role="cell"><em class="pg-g-lib">' + esc(g.colonnes[k]) + " : </em>" + inline(c) + "</span>"; }).join("") + "</div>";
+        }).join("") + "</div>" + (g.ref ? '<span class="pg-ref">' + esc(g.ref) + "</span>" : "");
+    }
     function blocRecit(b) {
       var h = b.illustration ? illustration(b.illustration, "pg-illu") : "";
       if (b.texte) h += '<div class="texte recit">' + md(b.texte) + "</div>";
       if (b.repliques) h += repliquesHtml(b, false);
+      if (b.organigramme) h += orgaHtml(b);
       if (b.et_vous) h += '<aside class="pg-vous"><strong>Et vous ?</strong> ' + inline(b.et_vous) + "</aside>";
       return h;
     }
@@ -1780,6 +1801,7 @@
               (x.exemples ? "<p>" + x.exemples.map(inline).join(", ") + "</p>" : "") + '<span class="pg-ref">' + esc(x.ref || "") + "</span></div></li>";
           }).join("") + "</ul></div></figure>";
       }
+      if (b.grille) h += (b.grille.titre ? '<h3 class="pg-sous">' + esc(b.grille.titre) + "</h3>" : "") + grilleHtml(b.grille);
       if (b.methode) h += '<h3 class="pg-sous">' + esc(b.methode_titre || "La méthode") + '</h3><ol class="pg-methode">' + b.methode.map(function (m) { return "<li>" + inline(m) + "</li>"; }).join("") + "</ol>";
       if (b.guichet) h += '<p class="pg-guichet">' + ic("i-mairie") + "<span>" + inline(b.guichet) + "</span></p>";
       if (b.plus_loin) h += '<details class="pg-plus"><summary>' + esc(b.plus_loin.titre || "Aller plus loin") + "</summary>" + md(b.plus_loin.texte) + "</details>";
@@ -1803,7 +1825,7 @@
         }
         var rappel = prec && !acquis && prec[it.id] && !fait ? '<p class="pg-rappel">Votre premier choix : ' + esc(libCat(prec[it.id])) + "</p>" : "";
         return '<li class="' + cls + '"><fieldset><legend><span class="pg-num" aria-hidden="true">' + (n + 1) + "</span><span>" + inline(it.libelle) + "</span></legend>" + rappel +
-          '<div class="pg-choix">' + e.categories.map(function (c) {
+          '<div class="pg-choix' + (catsDe(b).length > 4 ? " pg-choix--6" : "") + '">' + catsDe(b).map(function (c) {
             var att = verrou && montrer && c.id === it.attendu ? " pg-opt--attendu" : "";
             return '<label class="pg-opt' + att + '"><input type="radio" name="pg-' + esc(b.id) + "-" + esc(it.id) + '" value="' + esc(c.id) + '"' + (choix === c.id ? " checked" : "") + (verrou ? " disabled" : "") +
               ' data-bloc="' + esc(b.id) + '" data-item="' + esc(it.id) + '"><span>' + inline(c.court || c.libelle) + "</span></label>";
@@ -1825,7 +1847,7 @@
     function blocListe(b) {
       var src = st.r[b.depuis] || {};
       var h = b.texte ? '<div class="texte recit">' + md(b.texte) + "</div>" : "";
-      h += '<div class="pg-liste" role="table" aria-label="' + esc(b.titre || "Liste") + '"><div class="pg-ligne pg-ligne--tete" role="row"><span role="columnheader">Demande</span><span role="columnheader">Compétent</span><span role="columnheader">Où s\'adresser</span></div>' +
+      h += '<div class="pg-liste" role="table" aria-label="' + esc(b.titre || "Liste") + '"><div class="pg-ligne pg-ligne--tete" role="row">' + (b.entetes || ["Demande", "Compétent", "Où s'adresser"]).map(function (t) { return '<span role="columnheader">' + esc(t) + "</span>"; }).join("") + "</div>" +
         itemsDe(b).map(function (it) {
           return '<div class="pg-ligne" role="row"><span role="cell" class="pg-l-dem">' + inline(it.court || it.libelle) + '</span><span role="cell" class="pg-l-qui"><span class="pg-cat pg-cat--' + esc(it.attendu) + '">' + esc(libCat(it.attendu)) + '</span></span><span role="cell" class="pg-l-ou">' + inline(it.guichet || "") + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + "</span></div>";
         }).join("") + "</div>";
