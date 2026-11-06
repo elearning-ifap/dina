@@ -39,6 +39,7 @@ window.DINA_PILOTAGE = {
     { date: "15-09-2026", titre: "COPIL employeurs", texte: "Lancement de la démarche", etat: "franchi" },
     { date: "10-10-2026", titre: "Environnement de production", texte: "Règles, gabarits et outils prêts (J-ENV)", etat: "franchi" },
     { date: "28-10-2026", titre: "Démonstration du prototype", texte: "Positionnement, prologue et module 1 testés par les employeurs (J-PROT). Retours recueillis, provinces Nord et des Îles comprises", etat: "franchi" },
+    { date: "06-11-2026", titre: "Échange avec la DRH de la province Sud", texte: "Retours sur le prototype : repères de compétences, forme des questions, suivi juridique du contenu", etat: "franchi" },
     { date: "Début nov. 2026", titre: "Retours des agents testeurs", texte: "2 ou 3 agents par employeur testent le prototype, retours sous 10 jours", etat: "prochain" },
     { date: "Novembre 2026", titre: "Validation technique", texte: "Un module en SCORM fonctionne dans LIANE : lancement, reprise, traces (J-TECH). Date à fixer", etat: "a_venir" },
     { date: "Décembre 2026", titre: "Pause de production", texte: "Trois semaines sans production", etat: "a_venir", pause: true },
@@ -90,8 +91,9 @@ window.DINA_PILOTAGE = {
         { titre: "Fil rouge : le dossier Passerelles", lot: "L1", statut: "valide", qui: "marc" },
         { titre: "Logo DINA et signature « Mes repères pour agir »", lot: "L1", statut: "valide", qui: "marc", valide: "mfp" },
         { titre: "Charte graphique DINA (couleurs, typographie, règles visuelles)", lot: "L1", statut: "a_valider", qui: "marc", valide: "mfp", attente: "mfp" },
-        { titre: "Récit adapté à l'agent déjà en poste", lot: "L1", statut: "a_faire", qui: "marc", note: "L'agent ne suit pas DINA le jour de sa prise de poste. Le récit doit rejoindre les situations professionnelles qu'il vit déjà. Piste : se souvenir de son propre premier jour et le comparer à celui de Noa. À rediscuter après l'échange avec la province Sud." },
+        { titre: "Récit adapté à l'agent déjà en poste", lot: "L1", statut: "a_faire", qui: "marc", note: "L'agent ne suit pas DINA le jour de sa prise de poste. Le récit doit rejoindre les situations professionnelles qu'il vit déjà. Piste : se souvenir de son propre premier jour et le comparer à celui de Noa. Province Sud (06-11) : DINA suivi peu après la prise de poste. Piste à trancher." },
         { titre: "Décisions issues de la démonstration du 28-10", lot: "L1", statut: "valide", qui: "marc", valide: "mnb", note: "Validées le 06-11 : DINA 100 % en ligne, pilote sans vidéo ni audio, vocabulaire à deux étages, positionnement rassurant, infographies, mise en situation tournante, interface présentée dès le webinaire, temps de formation organisé par l'employeur." },
+        { titre: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA", lot: "L1", statut: "en_cours", qui: "mnb", valide: "valerie", note: "Les règles changent souvent. Proposition : des experts des DRH valident le corpus avant production, puis le mettent à jour chaque année. Demande à la direction en préparation." },
         { titre: "Mise en situation tournante", lot: "L1", statut: "valide", qui: "marc", valide: "mnb", note: "Noa reste le fil rouge. Ses collègues, dont des agents de catégorie C et d'autres filières, vivent aussi des situations. Le personnage est imposé : on ne le choisit pas." }
       ] },
 
@@ -100,7 +102,7 @@ window.DINA_PILOTAGE = {
         { titre: "Restitution du positionnement, visuelle et imprimable", lot: "L6", statut: "en_cours", qui: "marc" },
         { titre: "Évaluations des modules, différentes à chaque passage", lot: "L6", statut: "en_cours", qui: "marc", note: "Jouables pour M1 et M2." },
         { titre: "Badges des 5 modules", lot: "L6", statut: "en_cours", qui: "marc", note: "Un badge par module, au nom du module. Délivré en cas de réussite." },
-        { titre: "Fiches outils du module 1", lot: "L5", statut: "en_cours", qui: "marc", note: "Présentées le 28-10, à reprendre." },
+        { titre: "Fiches outils du module 1", lot: "L5", statut: "en_cours", qui: "marc", note: "Présentées le 28-10, à reprendre. Piste du 06-11 : des « repères à garder », une page A4 par thème." },
         { titre: "Fiches outils des modules 2 à 5", lot: "L5", statut: "a_faire", qui: "marc" },
         { titre: "Contenus de l'espace « Mes ressources »", lot: "L5", statut: "a_faire", qui: "marc" },
         { titre: "Sélection de vidéos existantes (statut, règles de la fonction publique)", lot: "L5", statut: "a_faire", qui: "marc", note: "En ressources complémentaires, hors de l'histoire de Noa. Aucune vidéo produite pour le pilote." }
@@ -184,7 +186,11 @@ window.DINA_PILOTAGE = {
       { priorite: "p1", titre: "Vérifier que la reprise tient dans la limite SCORM 1.2", statut: "a_faire", duree: 0.5, qui: "marc", valide: "si", lie: "Test technique SCORM dans LIANE",
         note: "La sauvegarde de reprise est limitée à 4 096 caractères. À mesurer sur un module complet. Si la limite est dépassée : alléger l'état sauvegardé ou passer en SCORM 2004." },
       { priorite: "p1", titre: "Réduire les clics : prototype en pages qu'on fait défiler", statut: "a_faire", qui: "marc", valide: "mnb", lie: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics",
-        note: "Le principe « une information par écran » est remis en question. Un autre prototype est à faire sur un épisode de M1 avant de généraliser. Durée à réestimer." },
+        note: "Le principe « une information par écran » est remis en question. Un autre prototype est à faire sur un épisode de M1 avant de généraliser. Durée à réestimer. Province Sud (06-11) : ergonomie jugée intuitive ; le défilement ne doit rien cacher sous le bouton « suivant »." },
+      { priorite: "p1", titre: "Afficher la compétence travaillée sur chaque écran", statut: "a_faire", qui: "marc",
+        note: "Demande unanime de la province Sud (06-11), avec une présentation des 21 compétences au départ. À arbitrer." },
+      { priorite: "p1", titre: "Bilan du positionnement en deux écrans", statut: "a_faire", duree: 0.5, qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable",
+        note: "La présentation des modules passe sous le bouton « suivant ». Piste : un écran pour le bilan, un écran pour les perspectives de formation. À arbitrer." },
       { priorite: "p1", titre: "Rubrique « Aller plus loin » en fin de journée", statut: "a_faire", duree: 0.5, qui: "marc",
         note: "Vocabulaire à deux étages : le bouton « En clair » reformule à la demande, « Aller plus loin » propose des contenus plus soutenus et des liens vers les textes." },
       { priorite: "p1", titre: "Accueil et page de fin du positionnement", statut: "a_valider", duree: 0.5, qui: "marc", valide: "mnb", lie: "Restitution du positionnement, visuelle et imprimable",
@@ -226,7 +232,8 @@ window.DINA_PILOTAGE = {
     { attente: "employeurs", titre: "Désigner un ou deux référents par module pour valider le fond", note: "Indispensable : sans référents, pas de pilote." },
     { attente: ["marc", "mnb"], titre: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics", note: "Un autre prototype, avec des pages qu'on fait défiler." },
     { attente: "marc", titre: "Adapter le récit à l'agent déjà en poste depuis quelques semaines", note: "À rediscuter après l'échange avec la province Sud (06-11)." },
-    { attente: ["marc", "mnb"], titre: "Rediscuter du prérequis numérique avant l'inscription", note: "Abordé avec la province Sud le 06-11." },
+    { attente: ["marc", "mnb"], titre: "Rediscuter du prérequis numérique avant l'inscription", note: "Non abordé avec la province Sud le 06-11." },
+    { attente: "valerie", titre: "Arbitrer le recours à des experts en vacation et un budget propre à DINA", note: "Demande préparée après l'échange avec la province Sud (06-11)." },
     { attente: ["marc", "mnb"], titre: "Choisir les testeurs internes de l'IFAP" }
   ]
 };
