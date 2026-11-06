@@ -1154,3 +1154,6 @@ a.btn { text-decoration: none; }
 /* Positionnement — « En clair » sous le message (D120, 06-11) */
 .pos-clair-ligne { margin: .5rem 0 0; }
 .pos-clair { margin: .45rem 0 .9rem; }
+
+/* 06-11 : sur téléphone, le lecteur occupe toute la largeur (la limite à 88vw laissait des marges à 390 px) */
+@media (max-width: 480px) { .dina-player { max-width: none; } }

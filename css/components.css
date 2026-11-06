@@ -128,7 +128,7 @@ p { margin: 0 0 .8em; }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: 0 1.4rem; border-radius: var(--rayon-petit); font: 600 1rem var(--police-texte); cursor: pointer; border: 2px solid transparent; }
 [hidden].btn { display: none; }
 .btn-principal { background: var(--bleu); color: #fff; }
-.btn-principal:hover { background: var(--bleu-sombre); }
+.btn-principal:hover { background: var(--bleu-survol); }
 .btn-principal:disabled { background: var(--gris); cursor: not-allowed; }
 .btn-secondaire { background: transparent; color: var(--bleu); border-color: var(--bordure); }
 .btn-secondaire:hover { background: var(--bleu-clair); }

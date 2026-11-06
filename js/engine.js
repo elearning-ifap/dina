@@ -10,7 +10,7 @@
   var SCORM = window.DINA_SCORM;
   var M = D.module, E = D.ecrans, F = D.fiches;
   var SECTIONS = M.sections;
-  var CLE = "dina-" + (M.code || M.id).toLowerCase() + "-v02";
+  var CLE = "dina-" + (M.cle || M.code || M.id).toLowerCase() + "-v02";   /* M.cle : prototype isolé (ex. page qui défile) sans écraser la progression du module */
 
   var VERDICTS = {
     adapte:   { libelle: "Conduite adaptée",   icone: "i-check-cercle" },
@@ -206,6 +206,7 @@
 
   /* ---------- Carnet de Noa (D37) : documents, apports et fiches rencontrés ---------- */
   function ajouterCarnet(type, id) {
+    if (M.sans_carnet) return;   /* D-30-10 : pas de carnet unique sur LIANE */
     if (etat.carnet.some(function (c) { return c.type === type && c.id === id; })) return;
     etat.carnet.push({ type: type, id: id }); sauver(); majCarnet();
   }
@@ -1723,6 +1724,190 @@
     boutonFin(function () { principal("", null); });
   }
 
+  /* ---------- Page qui défile (06-11, backlog p1 « réduire les clics ») ----------
+     Un écran = une page en blocs : situation, apport, application, synthèse.
+     Un bloc d'activité verrouille la suite tant qu'il n'est pas fait ; la page s'allonge au fil des réponses.
+     Champs : e.blocs[], e.categories[], e.items[] (attendu, feedback, guichet, ref), e.phases[], e.competences[]. */
+  var PHASES_PAGE = { situation: "Situation", apport: "Apport", application: "Application", synthese: "Synthèse" };
+  function rendrePage(e) {
+    zone.classList.add("ecran--page");
+    var st = reponse(e.id) || {};
+    st.r = st.r || {}; st.v = st.v || {};
+    var cats = {}; (e.categories || []).forEach(function (c) { cats[c.id] = c; });
+    var phases = e.phases || ["situation", "apport", "application"];
+    function sauverPage() { memoriser(e.id, st); }
+    function libCat(id) { return cats[id] ? cats[id].libelle : ""; }
+    function itemsDe(b) { return (b.items || e.items.map(function (it) { return it.id; })).map(function (id) { return e.items.filter(function (it) { return it.id === id; })[0]; }).filter(Boolean); }
+    /* bonne réponse au premier tri (bloc repris) */
+    function bienAvant(b, it) { return b.reprend && st.r[b.reprend] && st.r[b.reprend][it.id] === it.attendu; }
+    function complet(b) { var r = st.r[b.id] || {}; return itemsDe(b).every(function (it) { return bienAvant(b, it) || r[it.id]; }); }
+    /* Blocs visibles : jusqu'au premier tri non vérifié, inclus */
+    function visibles() {
+      var res = [];
+      for (var i = 0; i < e.blocs.length; i++) { res.push(i); if (e.blocs[i].type === "tri" && !st.v[e.blocs[i].id]) break; }
+      return res;
+    }
+
+    function enTete(b, n) {
+      var comp = (b.competences || []).map(function (c) { return '<span class="pg-comp">' + esc(c) + "</span>"; }).join("");
+      return '<div class="pg-repere"><span class="pg-phase pg-phase--' + esc(b.phase) + '">' + esc(PHASES_PAGE[b.phase] || b.phase) + "</span>" + comp + "</div>" +
+        (b.titre ? '<h2 class="pg-titre" id="pg-t' + n + '">' + inline(b.titre) + "</h2>" : "");
+    }
+    function blocRecit(b) {
+      var h = b.illustration ? illustration(b.illustration, "pg-illu") : "";
+      if (b.texte) h += '<div class="texte recit">' + md(b.texte) + "</div>";
+      if (b.repliques) h += repliquesHtml(b, false);
+      if (b.et_vous) h += '<aside class="pg-vous"><strong>Et vous ?</strong> ' + inline(b.et_vous) + "</aside>";
+      return h;
+    }
+    function blocApport(b) {
+      var h = b.texte ? '<div class="texte">' + md(b.texte) + "</div>" : "";
+      if (b.regle) h += '<p class="pg-regle">' + inline(b.regle) + (b.regle_ref ? '<span class="pg-ref">' + esc(b.regle_ref) + "</span>" : "") + "</p>";
+      if (b.carte) {
+        var c = b.carte;
+        h += '<figure class="pg-carte" aria-labelledby="pg-carte-leg"><figcaption id="pg-carte-leg" class="sr-only">' + esc(c.legende || "") + "</figcaption>" +
+          '<div class="pg-fond">' + '<div class="pg-fond-tete">' + ic("i-lieu") + "<div><strong>" + inline(c.fond.titre) + "</strong><p>" + inline(c.fond.texte) + '</p><span class="pg-ref">' + esc(c.fond.ref || "") + "</span></div></div>" +
+          '<p class="pg-sauf">' + inline(c.sauf || "Sauf dans les domaines attribués à :") + "</p>" +
+          '<ul class="pg-exceptions">' + c.exceptions.map(function (x) {
+            return '<li class="pg-exc">' + ic(x.icone || "i-batiment") + "<div><strong>" + inline(x.titre) + "</strong>" +
+              (x.exemples ? "<p>" + x.exemples.map(inline).join(", ") + "</p>" : "") + '<span class="pg-ref">' + esc(x.ref || "") + "</span></div></li>";
+          }).join("") + "</ul></div></figure>";
+      }
+      if (b.methode) h += '<h3 class="pg-sous">' + esc(b.methode_titre || "La méthode") + '</h3><ol class="pg-methode">' + b.methode.map(function (m) { return "<li>" + inline(m) + "</li>"; }).join("") + "</ol>";
+      if (b.guichet) h += '<p class="pg-guichet">' + ic("i-mairie") + "<span>" + inline(b.guichet) + "</span></p>";
+      if (b.plus_loin) h += '<details class="pg-plus"><summary>' + esc(b.plus_loin.titre || "Aller plus loin") + "</summary>" + md(b.plus_loin.texte) + "</details>";
+      return h;
+    }
+    function blocTri(b) {
+      var r = st.r[b.id] || {}, fait = !!st.v[b.id], prec = b.reprend ? (st.r[b.reprend] || {}) : null;
+      var h = b.consigne ? '<p class="pg-consigne">' + inline(b.consigne) + "</p>" : "";
+      /* Bloc repris : les demandes déjà justes sont repliées en bas, les demandes à revoir passent en tête */
+      var aRevoir = itemsDe(b).filter(function (it) { return !bienAvant(b, it); }), justes = itemsDe(b).filter(function (it) { return bienAvant(b, it); });
+      var replie = b.reprend && justes.length ? '<details class="pg-justes"><summary>' + ic("i-check-cercle") + justes.length + (justes.length > 1 ? " demandes déjà justes" : " demande déjà juste") + " : revoir l'explication</summary><ul>" +
+        justes.map(function (it) { return '<li><strong>' + inline(it.court || it.libelle) + '</strong> <span class="pg-cat pg-cat--' + esc(it.attendu) + '">' + esc(libCat(it.attendu)) + "</span><p>" + inline(it.feedback) + "</p>" + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + "</li>"; }).join("") + "</ul></details>" : "";
+      h += '<ol class="pg-tri">' + (b.reprend ? aRevoir : itemsDe(b)).map(function (it, n) {
+        var acquis = bienAvant(b, it), choix = acquis ? prec[it.id] : r[it.id], ok = choix === it.attendu;
+        var verrou = fait || acquis, montrer = (fait || acquis) && b.retour !== "differe";
+        var cls = "pg-item" + (fait || acquis ? (ok ? " pg-item--ok" : " pg-item--ko") : "");
+        var marque = "";
+        if (fait || acquis) {
+          if (b.retour === "differe") marque = ok ? '<span class="pg-marque pg-marque--ok">' + ic("i-check-cercle") + "Juste</span>" : '<span class="pg-marque pg-marque--ko">' + ic("i-croix") + "À revoir</span>";
+          else marque = ok ? '<span class="pg-marque pg-marque--ok">' + ic("i-check-cercle") + (acquis ? "Déjà juste au premier tri" : "Juste") + "</span>" : '<span class="pg-marque pg-marque--ko">' + ic("i-moitie") + "Attendu : " + esc(libCat(it.attendu)) + "</span>";
+        }
+        var rappel = prec && !acquis && prec[it.id] && !fait ? '<p class="pg-rappel">Votre premier choix : ' + esc(libCat(prec[it.id])) + "</p>" : "";
+        return '<li class="' + cls + '"><fieldset><legend><span class="pg-num" aria-hidden="true">' + (n + 1) + "</span><span>" + inline(it.libelle) + "</span></legend>" + rappel +
+          '<div class="pg-choix">' + e.categories.map(function (c) {
+            var att = verrou && montrer && c.id === it.attendu ? " pg-opt--attendu" : "";
+            return '<label class="pg-opt' + att + '"><input type="radio" name="pg-' + esc(b.id) + "-" + esc(it.id) + '" value="' + esc(c.id) + '"' + (choix === c.id ? " checked" : "") + (verrou ? " disabled" : "") +
+              ' data-bloc="' + esc(b.id) + '" data-item="' + esc(it.id) + '"><span>' + inline(c.court || c.libelle) + "</span></label>";
+          }).join("") + "</div>" + marque +
+          (montrer ? '<div class="pg-fb"><p>' + inline(it.feedback) + "</p>" + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + "</div>" : "") +
+          "</fieldset></li>";
+      }).join("") + "</ol>" + replie;
+      if (!fait) {
+        var reste = itemsDe(b).filter(function (it) { return !(bienAvant(b, it) || r[it.id]); }).length;
+        h += '<div class="pg-action"><button type="button" class="btn btn-principal pg-verifier" data-verifier="' + esc(b.id) + '"' + (reste ? " disabled" : "") + ">" + esc(b.reprend && !aRevoir.length ? (b.bouton_rien || "Continuer") : (b.bouton || "Vérifier")) + " " + ic("i-check") + "</button>" +
+          '<span class="pg-reste" aria-live="polite">' + (reste ? reste + (reste > 1 ? " demandes à classer" : " demande à classer") : (b.reprend && !aRevoir.length ? "Rien à reprendre : tout était juste" : "Tout est classé")) + "</span></div>";
+      } else {
+        var bons = itemsDe(b).filter(function (it) { var c = bienAvant(b, it) ? prec[it.id] : r[it.id]; return c === it.attendu; }).length, tous = itemsDe(b).length;
+        var txt = bons === tous ? (b.bilan_tout || b.bilan) : b.bilan;
+        h += '<div class="pg-bilan pg-bilan--' + (bons === tous ? "ok" : "partiel") + '" aria-live="polite"><p><strong>' + bons + " sur " + tous + ".</strong> " + inline(txt || "") + "</p></div>";
+      }
+      return h;
+    }
+    function blocListe(b) {
+      var src = st.r[b.depuis] || {};
+      var h = b.texte ? '<div class="texte recit">' + md(b.texte) + "</div>" : "";
+      h += '<div class="pg-liste" role="table" aria-label="' + esc(b.titre || "Liste") + '"><div class="pg-ligne pg-ligne--tete" role="row"><span role="columnheader">Demande</span><span role="columnheader">Compétent</span><span role="columnheader">Où s\'adresser</span></div>' +
+        e.items.map(function (it) {
+          return '<div class="pg-ligne" role="row"><span role="cell" class="pg-l-dem">' + inline(it.court || it.libelle) + '</span><span role="cell" class="pg-l-qui"><span class="pg-cat pg-cat--' + esc(it.attendu) + '">' + esc(libCat(it.attendu)) + '</span></span><span role="cell" class="pg-l-ou">' + inline(it.guichet || "") + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + "</span></div>";
+        }).join("") + "</div>";
+      if (b.mention) h += '<p class="pg-mention">' + inline(b.mention) + "</p>";
+      if (b.a_retenir) h += '<div class="a-retenir">' + ic("i-ampoule") + "<span><strong>À retenir</strong> — " + inline(b.a_retenir) + "</span></div>";
+      if (b.sources) h += '<p class="sources"><strong>Sources :</strong> ' + esc(b.sources) + "</p>";
+      return h;
+    }
+    var RENDUS_BLOC = { recit: blocRecit, apport: blocApport, tri: blocTri, liste: blocListe };
+
+    var fini = false;
+    /* Étape affichée dans la barre : celle du bloc en haut de l'écran (la page défile, la barre suit) */
+    function etapesHtml(iCour) {
+      return phases.map(function (p, k) {
+        var s = fini || k < iCour ? "fait" : k === iCour ? "encours" : "avenir";
+        return '<li class="pg-et pg-et--' + s + '"' + (s === "encours" ? ' aria-current="step"' : "") + '><span class="pg-et-point">' + (s === "fait" ? ic("i-check") : k + 1) + "</span>" + esc(PHASES_PAGE[p] || p) +
+          '<span class="sr-only"> — ' + (s === "fait" ? "fait" : s === "encours" ? "en cours" : "à venir") + "</span></li>";
+      }).join("");
+    }
+    var iAffiche = -1;
+    function suivreEtape() {
+      var barre = zone.querySelector(".pg-barre"); if (!barre) return;
+      var limite = barre.getBoundingClientRect().bottom + 24, i = 0;
+      zone.querySelectorAll(".pg-bloc").forEach(function (b) { if (b.getBoundingClientRect().top <= limite) i = Math.max(i, phases.indexOf(e.blocs[+b.dataset.n].phase)); });
+      if (zone.scrollTop + zone.clientHeight >= zone.scrollHeight - 4) { var der = zone.querySelectorAll(".pg-bloc"); i = Math.max(i, phases.indexOf(e.blocs[+der[der.length - 1].dataset.n].phase)); }
+      if (i === iAffiche) return;
+      iAffiche = i;
+      barre.querySelector(".pg-etapes").innerHTML = etapesHtml(i);
+      if (!fini) compteur.textContent = "Étape " + (i + 1) + " sur " + phases.length + " : " + (PHASES_PAGE[phases[i]] || phases[i]);
+    }
+    function dessiner(nouveau) {
+      var vis = visibles();
+      fini = vis.length === e.blocs.length && e.blocs.every(function (b) { return b.type !== "tri" || st.v[b.id]; });
+      iAffiche = -1;
+      var etapes = '<ol class="pg-etapes" aria-label="Étapes de l\'épisode">' + etapesHtml(0) + "</ol>";
+      var comp = (e.competences_lib || []).map(function (c) { return '<li><span class="pg-comp">' + esc(c.code) + "</span>" + inline(c.libelle) + "</li>"; }).join("");
+      var html = '<div class="page-defil">' + '<header class="pg-entete"><span class="surtitre">' + esc(libelleEtape(e)) + "</span><h1>" + inline(e.titre) + "</h1>" +
+        (e.chapeau ? '<p class="pg-chapeau">' + inline(e.chapeau) + "</p>" : "") + (comp ? '<ul class="pg-competences" aria-label="Compétences travaillées">' + comp + "</ul>" : "") + "</header>" +
+        '<div class="pg-barre">' + etapes + "</div>" +
+        vis.map(function (i) { var b = e.blocs[i]; return '<section class="pg-bloc pg-bloc--' + esc(b.type) + '" data-n="' + i + '" aria-labelledby="pg-t' + i + '">' + enTete(b, i) + RENDUS_BLOC[b.type](b) + "</section>"; }).join("") + "</div>";
+      zone.innerHTML = html;
+      brancherImages(zone);
+      compteur.textContent = fini ? "Page terminée" : "";
+      principal(e.bouton_fin || "Terminer", function () { suivant(e); }, { desactive: !fini });
+      if (nouveau != null) {
+        /* on montre le bilan du tri qui vient d'être vérifié ; le bloc qui s'ouvre apparaît juste dessous */
+        var verifie = zone.querySelector('.pg-bloc[data-n="' + nouveau.fait + '"] .pg-bilan'), cible = zone.querySelector('.pg-bloc[data-n="' + nouveau.ouvert + '"]');
+        if (cible && nouveau.ouvert !== nouveau.fait) cible.classList.add("pg-bloc--nouveau");
+        if (verifie) {
+          verifie.setAttribute("tabindex", "-1");
+          verifie.scrollIntoView({ block: "start", behavior: MOUVEMENT ? "smooth" : "auto" });
+          verifie.focus({ preventScroll: true });
+        }
+      }
+      suivreEtape();
+      if (MOUVEMENT && nouveau != null) setTimeout(suivreEtape, 700);   /* après le défilement doux */
+    }
+    /* un seul jeu d'écouteurs par page affichée (retour arrière : pas de doublon) */
+    if (zone._pg) { zone.removeEventListener("change", zone._pg.change); zone.removeEventListener("click", zone._pg.click); zone.removeEventListener("scroll", zone._pg.scroll); }
+    function onChange(ev) {
+      if (!zone.classList.contains("ecran--page")) return;
+      var i = ev.target; if (!i.dataset || !i.dataset.bloc) return;
+      st.r[i.dataset.bloc] = st.r[i.dataset.bloc] || {};
+      st.r[i.dataset.bloc][i.dataset.item] = i.value;
+      sauverPage();
+      var b = e.blocs.filter(function (x) { return x.id === i.dataset.bloc; })[0], r = st.r[b.id];
+      var reste = itemsDe(b).filter(function (it) { return !(bienAvant(b, it) || r[it.id]); }).length;
+      var btn = zone.querySelector('[data-verifier="' + b.id + '"]'), lib = zone.querySelector(".pg-reste");
+      if (btn) btn.disabled = !!reste;
+      if (lib) lib.textContent = reste ? reste + (reste > 1 ? " demandes à classer" : " demande à classer") : "Tout est classé";
+    }
+    function onClick(ev) {
+      if (!zone.classList.contains("ecran--page")) return;
+      var v = ev.target.closest("[data-verifier]"); if (!v || v.disabled) return;
+      var id = v.dataset.verifier, b = e.blocs.filter(function (x) { return x.id === id; })[0];
+      if (!complet(b)) return;
+      st.v[id] = true; sauverPage();
+      var n = e.blocs.indexOf(b);
+      /* la suite s'affiche ; on amène le lecteur au bilan du tri, puis au bloc suivant s'il existe */
+      dessiner({ fait: n, ouvert: n + 1 < e.blocs.length ? n + 1 : n });
+    }
+    function onScroll() { if (zone.classList.contains("ecran--page")) suivreEtape(); }
+    zone._pg = { change: onChange, click: onClick, scroll: onScroll };
+    zone.addEventListener("scroll", onScroll, { passive: true });
+    zone.addEventListener("change", onChange);
+    zone.addEventListener("click", onClick);
+    dessiner(null);
+  }
+
   var RENDUS = {
     narration: rendreScene, message: rendreScene, apport: rendreLecture, document: rendreDocument,
     choix: rendreChoix, "choix-multiple": function (e) { rendreMultiple(e, false); }, ordre: function (e) { rendreOrdre(e, false); },
@@ -1730,7 +1915,7 @@
     "eval-item": rendreEvalItem, "eval-resultat": rendreEvalResultat, "auto-positionnement": rendreAuto,
     ressources: rendreRessources, "fin-section": rendreFin, fin: rendreFin,
     hotspot: rendreHotspot, planning: rendrePlanning, cartes: rendreCartes, "reponse-libre": rendreReponseLibre, recherche: rendreRecherche,
-    "pos-item": rendrePosItem, "pos-profil": rendrePosProfil, sources: rendreSources
+    "pos-item": rendrePosItem, "pos-profil": rendrePosProfil, sources: rendreSources, page: rendrePage
   };
   /* Écran « Sources » (27-10) : les textes cités, regroupés en fin d'épisode ou de module, avec leur lien */
   function rendreSources(e) {
@@ -1832,7 +2017,7 @@
   }
   function telechargerCarnet() {
     var G = elementsCarnet();
-    var html = '<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Mon carnet DINA — ' + esc(M.code) + "</title><style>body{font:16px/1.5 system-ui,sans-serif;max-width:46rem;margin:2rem auto;padding:0 1rem;color:#2D3748}h1,h2,h3{color:#103F41}h2{border-bottom:2px solid #1F767A;padding-bottom:.2rem;margin-top:2rem}section{margin:1rem 0 1.6rem}.doc-bloc{border-left:4px solid #1F767A;padding:.2rem .8rem;margin:.6rem 0}.orga-niveau{display:flex;gap:.6rem;flex-wrap:wrap}.orga-case{border:1px solid #ccc;border-radius:8px;padding:.3rem .6rem}svg{display:none}</style></head><body>" +
+    var html = '<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Mon carnet DINA — ' + esc(M.code) + "</title><style>body{font:16px/1.5 system-ui,sans-serif;max-width:46rem;margin:2rem auto;padding:0 1rem;color:#2D3748}h1,h2,h3{color:#3C3C3B}h2{border-bottom:2px solid #1F767A;padding-bottom:.2rem;margin-top:2rem}section{margin:1rem 0 1.6rem}.doc-bloc{border-left:4px solid #1F767A;padding:.2rem .8rem;margin:.6rem 0}.orga-niveau{display:flex;gap:.6rem;flex-wrap:wrap}.orga-case{border:1px solid #ccc;border-radius:8px;padding:.3rem .6rem}svg{display:none}</style></head><body>" +
       "<h1>Mon carnet DINA</h1><p>" + esc(libModule()) + " — " + esc(M.titre) + "</p>" +
       G.map(function (g) { return "<h2>" + esc(g.groupe) + "</h2>" + g.items.map(function (it) { return "<section><h3>" + esc(it.titre) + "</h3>" + it.corps + "</section>"; }).join(""); }).join("") + "</body></html>";
     var a = document.createElement("a");
@@ -1841,6 +2026,7 @@
     document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   }
   if ($("btn-carnet")) { $("btn-carnet").addEventListener("click", ouvrirCarnet); majCarnet(); }
+  if (M.sans_carnet && $("btn-carnet")) $("btn-carnet").hidden = true;
   if (M.sans_menu) { ["btn-sommaire", "btn-carnet"].forEach(function (id) { if ($(id)) $(id).hidden = true; }); }
 
   /* ---------- Plein écran ---------- */

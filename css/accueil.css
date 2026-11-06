@@ -55,7 +55,7 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
 .puce--attente { background: var(--orange-clair); color: var(--orange-texte); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: 0 1.3rem; border-radius: var(--rayon-petit); font: 600 1rem var(--police-texte); cursor: pointer; border: 2px solid transparent; text-decoration: none; }
 .btn-principal { background: var(--bleu); color: #fff; }
-.btn-principal:hover { background: var(--bleu-sombre); }
+.btn-principal:hover { background: var(--bleu-survol); }
 .btn-secondaire { background: var(--carte); color: var(--bleu); border-color: var(--bordure); }
 .btn-secondaire:hover { background: var(--bleu-clair); }
 .btn[aria-disabled="true"] { background: var(--gris-clair); color: var(--texte-2); cursor: not-allowed; }
