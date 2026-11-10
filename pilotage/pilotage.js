@@ -113,7 +113,7 @@
     var parPersonne = {};
     Object.keys(D.personnes).forEach(function (k) { parPersonne[k] = []; });
     tous.forEach(function (l) {
-      if (l.attente && parPersonne[l.attente]) parPersonne[l.attente].push({ titre: (l.statut === "a_valider" ? "Valider : " : "") + l.titre, detail: l.note });
+      if (l.attente && parPersonne[l.attente]) parPersonne[l.attente].push({ titre: (l.statut === "a_valider" ? "Valider : " : "") + l.titre, detail: l.note, lien: l.lien, lienTexte: l.lienTexte });
     });
     (D.actions || []).forEach(function (a) {
       var qui = [].concat(a.attente), avec = function (k) { return qui.filter(function (x) { return x !== k; }).map(nom); };
@@ -131,7 +131,7 @@
       return '<article class="personne"><div class="personne-tete"><span class="initiales" aria-hidden="true">' + esc(init) + "</span>" +
         "<div><h3>" + esc(p.nom) + '</h3><p class="personne-role">' + esc(p.role) + "</p></div>" +
         '<span class="compteur' + (items.length ? "" : " compteur--zero") + '" aria-label="' + items.length + ' en attente">' + items.length + "</span></div>" +
-        (items.length ? "<ul>" + items.map(function (i) { return "<li>" + esc(i.titre) + (i.detail ? "<small>" + esc(i.detail) + "</small>" : "") + "</li>"; }).join("") + "</ul>"
+        (items.length ? "<ul>" + items.map(function (i) { return "<li>" + esc(i.titre) + (i.lien ? ' <a class="lien-doc" href="' + esc(i.lien) + '" target="_blank" rel="noopener">' + esc(i.lienTexte || "Ouvrir le document") + "</a>" : "") + (i.detail ? "<small>" + esc(i.detail) + "</small>" : "") + "</li>"; }).join("") + "</ul>"
                       : '<p class="rien">Rien en attente pour l\'instant.</p>') + "</article>";
     }).join("");
   })();
@@ -196,7 +196,7 @@
           var meta = ['<span class="lot">' + esc(l.lot) + "</span>", "Responsable : " + esc(nom(l.qui))];
           if (l.valide) meta.push("Validation : " + esc(nom(l.valide)));
           if (l.echeance) meta.push("Échéance : " + esc(l.echeance));
-          if (l.lien) meta.push('<a href="' + esc(l.lien) + '" target="_blank" rel="noopener">' + esc(l.lienTexte || "Ouvrir le document") + "</a>");
+          if (l.lien) meta.push('<a class="lien-doc" href="' + esc(l.lien) + '" target="_blank" rel="noopener">' + esc(l.lienTexte || "Ouvrir le document") + "</a>");
           meta.push(l.duree != null ? "Durée prévue : " + fr(l.duree) + "\u00a0j" : '<span class="a-estimer">Durée à estimer</span>');
           return '<li class="livrable" data-statut="' + l.statut + '"><span class="livrable-titre">' + esc(l.titre) + "</span>" + puce(l.statut) +
             '<div class="livrable-meta">' + meta.join("<span aria-hidden=\"true\">·</span>") + "</div>" +

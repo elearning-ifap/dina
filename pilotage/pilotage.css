@@ -210,3 +210,8 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
   .categorie { break-inside: avoid; box-shadow: none; }
   body { background: #fff; }
 }
+
+/* Lien direct vers un document (Google Drive) */
+.lien-doc { display: inline-flex; align-items: center; gap: .3rem; padding: .1rem .55rem; border: 1px solid var(--bleu); border-radius: 999px; color: var(--bleu); font-weight: 600; font-size: .8125rem; text-decoration: none; white-space: nowrap; }
+.lien-doc::before { content: "↗"; }
+.lien-doc:hover, .lien-doc:focus-visible { background: var(--bleu); color: #fff; }
