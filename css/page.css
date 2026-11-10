@@ -199,3 +199,43 @@
 .pg-fiches li { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; justify-content: space-between; }
 .pg-fiches li strong { display: block; }
 .pg-fiche-type { font-size: var(--taille-petit); color: var(--texte-2); }
+
+/* ---------- 10-11 : blocs « explorer », « recherche », « message » ---------- */
+.pg-exp { display: grid; gap: 1rem; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; margin-top: .6rem; }
+.pg-exp-image { position: relative; border-radius: var(--rayon); overflow: hidden; border: 1px solid var(--bordure); }
+.pg-exp-image img { display: block; width: 100%; height: auto; }
+.pg-exp-point { position: absolute; transform: translate(-50%, -50%); width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 3px solid #fff; background: var(--bleu); color: #fff; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+.pg-exp-point--vu { background: var(--vert); }
+.pg-exp-point--ouvert { outline: 3px solid var(--jaune); outline-offset: 2px; }
+.pg-exp-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+.pg-exp-lien { display: flex; gap: .55rem; align-items: center; width: 100%; text-align: left; padding: .55rem .7rem; border: 1px solid var(--bordure); border-radius: var(--rayon-petit, 8px); background: var(--carte); cursor: pointer; font: inherit; color: var(--texte); }
+.pg-exp-lien .icone { margin-left: auto; color: var(--vert); }
+.pg-exp-lien--ouvert { border-color: var(--bleu); box-shadow: inset 3px 0 0 var(--bleu); }
+.pg-exp-detail { margin-top: .8rem; padding: .8rem 1rem; border-radius: var(--rayon); background: var(--bleu-clair); min-height: 5rem; }
+.pg-exp-detail h3 { margin: 0 0 .3rem; font-size: 1rem; }
+.pg-exp-repere { display: flex; gap: .45rem; font-weight: 600; margin: .4rem 0 0; }
+.pg-exp-vide { color: var(--texte-2); margin: 0; }
+@media (max-width: 760px) { .pg-exp { grid-template-columns: 1fr; } }
+.pg-brief { display: flex; gap: .5rem; align-items: flex-start; padding: .6rem .8rem; border-radius: var(--rayon-petit, 8px); background: var(--jaune-pale); font-size: .95rem; }
+.pg-rch { margin: .8rem 0; padding: .9rem 1rem; border: 1px solid var(--bordure); border-radius: var(--rayon); background: var(--carte); }
+.pg-rch label { display: flex; gap: .4rem; align-items: center; font-weight: 700; margin-bottom: .45rem; }
+.pg-rch-ligne { display: flex; gap: .5rem; flex-wrap: wrap; }
+.pg-rch-ligne input { flex: 1 1 14rem; min-width: 0; padding: .6rem .75rem; border: 1px solid var(--gris); border-radius: 8px; font: inherit; }
+.pg-rch-ex { margin: .5rem 0 0; font-size: var(--taille-petit); color: var(--texte-2); }
+.pg-rch-nb, .pg-rch-rien { color: var(--texte-2); font-size: .95rem; display: flex; gap: .45rem; }
+.pg-rch-docs { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .55rem; }
+.pg-rch-doc > label { display: flex; gap: .65rem; align-items: flex-start; padding: .7rem .85rem; border: 1px solid var(--bordure); border-radius: var(--rayon-petit, 8px); background: var(--carte); cursor: pointer; }
+.pg-rch-doc--choisi > label { border-color: var(--bleu); box-shadow: inset 3px 0 0 var(--bleu); }
+.pg-rch-doc-corps { display: flex; gap: .55rem; align-items: flex-start; }
+.pg-rch-doc-corps strong { display: block; }
+.pg-rch-doc-corps small { display: block; color: var(--texte-2); }
+.pg-rch-doc-corps em { display: block; margin-top: .2rem; font-size: .92rem; }
+.pg-rch-doc .feedback { margin: .4rem 0 0; }
+.pg-msg { display: grid; gap: 1rem; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; }
+.pg-msg-apercu { position: sticky; top: 4.5rem; border: 1px solid var(--bordure); border-radius: var(--rayon); background: #fff; overflow: hidden; }
+.pg-msg-tete { display: grid; gap: .2rem; padding: .6rem .85rem; background: var(--gris-clair); font-size: .92rem; }
+.pg-msg-tete .icone { color: var(--bleu); }
+.pg-msg-corps { padding: .7rem .9rem; font-size: .95rem; }
+.pg-msg-corps p { margin: 0 0 .55rem; }
+.pg-msg-vide { color: var(--texte-2); font-style: italic; }
+@media (max-width: 760px) { .pg-msg { grid-template-columns: 1fr; } .pg-msg-apercu { position: static; } }

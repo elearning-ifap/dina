@@ -6,7 +6,7 @@ window.DINA_DATA = {
   "cle": "m1-pages",
   "titre": "Je me repère",
   "code": "M1",
-  "duree": "1 h environ",
+  "duree": "1 h 05 environ",
   "sous_titre": "Comprendre mon environnement",
   "intro": "Prototype du module 1 en pages qui défilent. Chaque épisode tient sur une page : une situation, un apport, une application. Puis un défi, l'évaluation et le bilan. Aidez Noa et ses collègues de l'ÉLAN.",
   "sections": [
@@ -37,7 +37,7 @@ window.DINA_DATA = {
     "savoir": "Vérifier une information",
     "titre": "Une information sûre",
     "debut": "QFQ-E3",
-    "duree": "15 min",
+    "duree": "20 min",
     "accroche": "Quatre documents, un délai. Lequel croire ?"
    },
    {
@@ -932,7 +932,7 @@ window.DINA_DATA = {
    "type": "page",
    "etape": "Épisode 3",
    "titre": "Une information sûre",
-   "chapeau": "Une ligne de la liste à compléter, quatre documents qui ne disent pas tous la même chose. Vous triez d'abord avec vos repères, vous découvrez les trois vérifications, puis vous décidez.",
+   "chapeau": "Une ligne de la liste à compléter. Vous cherchez la source, vous triez les documents, vous découvrez les trois vérifications, puis vous décidez et demandez un appui.",
    "competences": [
     "C17",
     "C18"
@@ -1052,6 +1052,180 @@ window.DINA_DATA = {
       }
      ],
      "et_vous": "Quand vous transmettez une règle ou un délai, savez-vous d'où vient l'information ?"
+    },
+    {
+     "type": "explorer",
+     "id": "sources",
+     "phase": "situation",
+     "titre": "Où chercher avant de demander ?",
+     "competences": [
+      "C17"
+     ],
+     "illustration": "ILL-14",
+     "texte": "Avant d'ouvrir les documents, Noa regarde ce qu'il a sous la main. Sur son bureau, quatre sources d'information.",
+     "consigne": "Ouvrez au moins deux sources : sur l'image ou dans la liste.",
+     "minimum": 2,
+     "bouton": "Continuer",
+     "zones": [
+      {
+       "id": "fiche",
+       "x": 32,
+       "y": 30,
+       "titre": "Ma fiche de poste et la consigne reçue",
+       "texte": "Elles disent ce que j'ai à faire. Je commence toujours par là.",
+       "repere": "Si la réponse n'y est pas, je ne l'invente pas."
+      },
+      {
+       "id": "intranet",
+       "x": 75,
+       "y": 26,
+       "titre": "L'intranet de mon employeur",
+       "texte": "Les procédures et notes internes : congés, accès, circuits de validation.",
+       "repere": "Je vérifie la date : une procédure peut avoir changé."
+      },
+      {
+       "id": "officiel",
+       "x": 77,
+       "y": 76,
+       "titre": "Les sources officielles",
+       "texte": "Leginova (anciennement Juridoc) pour les textes calédoniens en vigueur ; le Journal officiel de la Nouvelle-Calédonie ; Légifrance pour les textes nationaux, dont la loi organique ; le site de la DRHFPNC pour les règles RH.",
+       "repere": "Je prends la version consolidée et je note la référence du texte."
+      },
+      {
+       "id": "producteur",
+       "x": 22,
+       "y": 76,
+       "titre": "Le service qui produit l'information",
+       "texte": "Pour une règle de couverture sociale, c'est la CAFAT. Pour un chiffre, le service qui le produit.",
+       "repere": "Je dis ce que j'ai déjà cherché, et je pose une question précise."
+      }
+     ],
+     "bandeau_final": "La meilleure source dépend de la question : le texte officiel pour la règle, la page institutionnelle pour l'explication pratique, l'intranet pour une procédure interne."
+    },
+    {
+     "type": "recherche",
+     "id": "recherche",
+     "phase": "situation",
+     "titre": "Noa cherche la règle",
+     "competences": [
+      "C17"
+     ],
+     "texte": "Noa cherche la règle d'affiliation après une embauche. Lancez une recherche, puis choisissez le document à utiliser.",
+     "brief": "La ligne servira à l'accueil pour répondre aux habitants. Une erreur serait répétée à chaque appel.",
+     "bouton": "Vérifier mon choix",
+     "moteur": "Base documentaire du pôle (moteur fictif)",
+     "placeholder": "Par exemple : affiliation embauche",
+     "exemples": [
+      "délai",
+      "affiliation embauche"
+     ],
+     "consigne_choix": "Choisissez le document que Noa utilise pour la liste.",
+     "conseil_mots": "Aucun document ne correspond. Essayez des mots précis : la démarche et la situation, par exemple « affiliation embauche ».",
+     "mots_cles": [
+      {
+       "si": [
+        "affiliation",
+        "affilier",
+        "affilie",
+        "embauche",
+        "embaucher",
+        "cafat",
+        "couverture",
+        "sociale"
+       ],
+       "resultats": "R1"
+      },
+      {
+       "si": [
+        "delai",
+        "delais"
+       ],
+       "resultats": "R2"
+      },
+      {
+       "sinon": "R0"
+      }
+     ],
+     "jeux": {
+      "R0": [],
+      "R1": [
+       {
+        "id": "guide",
+        "icone": "i-fichier",
+        "titre": "Guide d'orientation — fiche « Couverture sociale » (PDF)",
+        "auteur": "L'ÉLAN, pôle études et projets",
+        "date": "2019",
+        "statut": "Jamais mis à jour",
+        "extrait": "Dans le dossier partagé du pôle.",
+        "verdict": "risque",
+        "feedback": "Facile à trouver ne veut pas dire à jour. Une règle a pu changer depuis 2019."
+       },
+       {
+        "id": "presse",
+        "icone": "i-informer",
+        "titre": "« Embauche : ce qui change » — article de presse",
+        "auteur": "Un journal local",
+        "date": "La semaine dernière",
+        "statut": "Article d'information",
+        "verdict": "partiel",
+        "feedback": "Utile pour être alerté d'un changement, mais ce n'est pas la source de la règle. Noa remonte à la source officielle."
+       },
+       {
+        "id": "officiel",
+        "icone": "i-batiment",
+        "titre": "S'affilier après une embauche",
+        "auteur": "CAFAT, site officiel",
+        "date": "Mis à jour le mois dernier",
+        "statut": "Page officielle à jour",
+        "extrait": "Qui fait la démarche, dans quel délai, avec quelles pièces.",
+        "verdict": "adapte",
+        "feedback": "Auteur connu, date récente, source officielle : c'est le meilleur point de départ pour une explication pratique."
+       },
+       {
+        "id": "capture",
+        "icone": "i-image",
+        "titre": "Capture d'écran « délai affiliation »",
+        "auteur": "Inconnu (transférée par un collègue)",
+        "date": "Sans date",
+        "statut": "Inconnu",
+        "verdict": "inadapte",
+        "feedback": "Sans auteur ni date, impossible de savoir d'où elle vient ni si elle est juste."
+       }
+      ],
+      "R2": [
+       {
+        "id": "paiement",
+        "icone": "i-fichier",
+        "titre": "Délais de paiement des fournisseurs",
+        "auteur": "L'ÉLAN, service administratif",
+        "date": "2024",
+        "statut": "Note de service",
+        "verdict": "inadapte",
+        "feedback": "Hors sujet. Le mot « délai » seul ramène tout ce qui parle de délais : précisez la démarche."
+       },
+       {
+        "id": "recours",
+        "icone": "i-balance",
+        "titre": "Les délais de recours contre une décision administrative",
+        "auteur": "Fiche pratique d'un site officiel",
+        "date": "2025",
+        "statut": "En vigueur",
+        "verdict": "inadapte",
+        "feedback": "Fiable, mais hors sujet. Précisez la démarche : affiliation, embauche."
+       },
+       {
+        "id": "guide2",
+        "icone": "i-fichier",
+        "titre": "Guide d'orientation — fiche « Couverture sociale » (PDF)",
+        "auteur": "L'ÉLAN, pôle études et projets",
+        "date": "2019",
+        "statut": "Jamais mis à jour",
+        "verdict": "risque",
+        "feedback": "Le bon sujet, mais un document de 2019 : la règle a pu changer. Cherchez avec des mots plus précis pour trouver la source à jour."
+       }
+      ]
+     },
+     "synthese": "Qui l'a produit, de quand il date, quel est son statut : trois vérifications avant d'utiliser un document."
     },
     {
      "type": "tri",
@@ -1204,6 +1378,114 @@ window.DINA_DATA = {
      "bilan": "Relisez l'explication : dans le doute, on ne choisit pas seul.",
      "bilan_tout": "Malia confirme le délai auprès de la CAFAT. La ligne peut être complétée.",
      "qcu": true
+    },
+    {
+     "type": "message",
+     "id": "malia",
+     "phase": "application",
+     "titre": "Le message de Noa à Malia",
+     "competences": [
+      "C18",
+      "C17"
+     ],
+     "texte": "Noa écrit à Malia. Composez son message : choisissez une phrase pour chaque partie.",
+     "brief": "Malia doit pouvoir répondre en deux minutes. Noa la tutoie.",
+     "destinataire": "Malia",
+     "objet": "Liste d'orientation : un délai à vérifier",
+     "salutation": "Bonjour Malia,",
+     "signature": "Merci !\nNoa",
+     "synthese": "Une question précise, ce qui a été vérifié, les sources datées, ce qui reste incertain, l'aide attendue.",
+     "bouton": "Vérifier mon message",
+     "parties": [
+      {
+       "id": "question",
+       "libelle": "Ma question",
+       "options": [
+        {
+         "id": "A",
+         "texte": "Quel est le délai d'affiliation après une embauche, pour la ligne « couverture sociale » de la liste d'orientation ?",
+         "verdict": "adapte"
+        },
+        {
+         "id": "B",
+         "texte": "Le délai, c'est combien ?",
+         "verdict": "risque"
+        },
+        {
+         "id": "C",
+         "texte": "Je n'arrive pas à faire la liste.",
+         "verdict": "inadapte"
+        }
+       ],
+       "feedback": "Une question précise dit ce qu'on cherche et à quoi cela servira."
+      },
+      {
+       "id": "sources",
+       "libelle": "Ce que j'ai vérifié",
+       "options": [
+        {
+         "id": "A",
+         "texte": "Le site officiel (mis à jour le mois dernier) et une seconde source officielle donnent un délai ; le guide de 2019 en donne un autre.",
+         "verdict": "adapte"
+        },
+        {
+         "id": "B",
+         "texte": "J'ai tout lu, rien ne concorde.",
+         "verdict": "partiel"
+        },
+        {
+         "id": "C",
+         "texte": "Je te copie les trois documents en entier ci-dessous.",
+         "verdict": "risque"
+        }
+       ],
+       "feedback": "Citer les sources avec leur date évite à Malia de refaire la recherche."
+      },
+      {
+       "id": "incertain",
+       "libelle": "Ce qui reste incertain",
+       "options": [
+        {
+         "id": "A",
+         "texte": "Je ne sais pas si la règle a changé depuis 2019 ou si le guide contenait une erreur.",
+         "verdict": "adapte"
+        },
+        {
+         "id": "B",
+         "texte": "Je pense que c'est trente jours, c'est sûr.",
+         "verdict": "inadapte"
+        },
+        {
+         "id": "C",
+         "texte": "(Rien.)",
+         "verdict": "partiel"
+        }
+       ],
+       "feedback": "Dire ce qui reste incertain montre à Malia exactement où est le doute."
+      },
+      {
+       "id": "aide",
+       "libelle": "L'aide que j'attends",
+       "options": [
+        {
+         "id": "A",
+         "texte": "Peux-tu me dire quelle source fait foi ? Je ne modifie pas la liste avant ta réponse.",
+         "verdict": "adapte"
+        },
+        {
+         "id": "B",
+         "texte": "Tu peux compléter la ligne à ma place ?",
+         "verdict": "inadapte"
+        },
+        {
+         "id": "C",
+         "texte": "Dis-moi quand tu as le temps.",
+         "verdict": "partiel"
+        }
+       ],
+       "feedback": "Demander une aide précise, ce n'est pas faire faire le travail."
+      }
+     ]
     },
     {
      "type": "tri",
@@ -2203,6 +2485,11 @@ window.DINA_DATA = {
    "scene": "Noa en fin de première semaine",
    "personnages": "Noa",
    "alt": "Vendredi après-midi. Noa, à son bureau, relit ses notes de la semaine, détendu."
+  },
+  "ILL-14": {
+   "scene": "Bureau de Noa vu du dessus, quatre objets",
+   "personnages": "—",
+   "alt": "Bureau de Noa vu du dessus. Quatre objets représentent quatre sources d'information : une fiche de poste imprimée, un ordinateur ouvert sur l'intranet, une tablette ouverte sur un site officiel, un téléphone posé près d'un carnet."
   }
  },
  "source": "Storyboard — M1 en pages v0.3.md"

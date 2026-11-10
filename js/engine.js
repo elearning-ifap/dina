@@ -1789,11 +1789,43 @@
     /* bonne réponse au premier tri (bloc repris) */
     function bienAvant(b, it) { return b.reprend && st.r[b.reprend] && st.r[b.reprend][it.id] === it.attendu; }
     function complet(b) { var r = st.r[b.id] || {}; return itemsDe(b).every(function (it) { return bienAvant(b, it) || r[it.id]; }); }
-    /* Blocs visibles : jusqu'au premier tri non vérifié, inclus */
+    /* Blocs qui demandent une action avant la suite (D128 : la suite s'affiche quand l'activité est terminée) */
+    var BLOQUANTS = { tri: 1, explorer: 1, recherche: 1, message: 1 };
+    /* Blocs visibles : jusqu'au premier bloc bloquant non terminé, inclus */
     function visibles() {
       var res = [];
-      for (var i = 0; i < e.blocs.length; i++) { res.push(i); if (e.blocs[i].type === "tri" && !st.v[e.blocs[i].id]) break; }
+      for (var i = 0; i < e.blocs.length; i++) { res.push(i); if (BLOQUANTS[e.blocs[i].type] && !st.v[e.blocs[i].id]) break; }
       return res;
+    }
+    function blocParId(id) { return e.blocs.filter(function (x) { return x.id === id; })[0]; }
+    /* Prêt à valider ? (le tri garde sa propre règle : toutes les demandes classées) */
+    function blocPret(b) {
+      var r = st.r[b.id] || {};
+      if (b.type === "explorer") return (r.vus || []).length >= Math.min(b.minimum || (b.zones || []).length, (b.zones || []).length);
+      if (b.type === "recherche") return !!r.choix;
+      if (b.type === "message") return (b.parties || []).every(function (p) { return r[p.id]; });
+      return complet(b);
+    }
+    function resteTexte(b) {
+      var r = st.r[b.id] || {};
+      if (b.type === "explorer") { var n = Math.min(b.minimum || (b.zones || []).length, (b.zones || []).length) - (r.vus || []).length; return n > 0 ? "Encore " + n + (n > 1 ? " sources à ouvrir" : " source à ouvrir") : "Vous pouvez continuer"; }
+      if (b.type === "recherche") return r.choix ? "Document choisi" : r.jeu ? "Choisissez un document" : "Lancez une recherche";
+      if (b.type === "message") { var m = (b.parties || []).filter(function (p) { return !r[p.id]; }).length; return m ? "Encore " + m + (m > 1 ? " parties à choisir" : " partie à choisir") : "Message prêt"; }
+      return "";
+    }
+    function actionHtml(b) {
+      return '<div class="pg-action"><button type="button" class="btn btn-principal pg-verifier" data-verifier="' + esc(b.id) + '"' + (blocPret(b) ? "" : " disabled") + ">" + esc(b.bouton || "Vérifier") + " " + ic("i-check") + "</button>" +
+        '<span class="pg-reste" aria-live="polite">' + esc(resteTexte(b)) + "</span></div>";
+    }
+    function majAction(b) {
+      var sec = zone.querySelector('.pg-bloc[data-n="' + e.blocs.indexOf(b) + '"]'); if (!sec) return;
+      var btn = sec.querySelector("[data-verifier]"), lib = sec.querySelector(".pg-reste");
+      if (btn) btn.disabled = !blocPret(b);
+      if (lib) lib.textContent = resteTexte(b);
+    }
+    function redessinerBloc(b) {
+      var n = e.blocs.indexOf(b), sec = zone.querySelector('.pg-bloc[data-n="' + n + '"]'); if (!sec) return;
+      sec.innerHTML = enTete(b, n) + RENDUS_BLOC[b.type](b); brancherImages(sec);
     }
 
     function enTete(b, n) {
@@ -1902,7 +1934,90 @@
       if (b.sources) h += '<p class="sources"><strong>Sources :</strong> ' + esc(b.sources) + "</p>";
       return h;
     }
-    var RENDUS_BLOC = { recit: blocRecit, apport: blocApport, tri: blocTri, liste: blocListe };
+    /* ---------- 10-11 : bureau à explorer (repris du hotspot « découverte ») ---------- */
+    function detailZone(b, id) {
+      var z = (b.zones || []).filter(function (x) { return x.id === id; })[0];
+      if (!z) return '<p class="pg-exp-vide">' + inline(b.invite || "Choisissez une source pour la découvrir.") + "</p>";
+      return "<h3>" + inline(z.titre) + "</h3><p>" + inline(z.texte) + "</p>" + (z.repere ? '<p class="pg-exp-repere">' + ic("i-ampoule") + "<span>" + inline(z.repere) + "</span></p>" : "");
+    }
+    function blocExplorer(b) {
+      var r = st.r[b.id] || {}, vus = r.vus || [], fait = !!st.v[b.id], info = D.illustrations[b.illustration] || {};
+      function vu(z) { return vus.indexOf(z.id) >= 0; }
+      var h = (b.texte ? '<div class="texte recit">' + md(b.texte) + "</div>" : "") + (b.consigne ? '<p class="pg-consigne">' + inline(b.consigne) + "</p>" : "");
+      h += '<div class="pg-exp">' + (b.illustration ? '<div class="pg-exp-image"><img src="assets/img/' + esc(b.illustration) + '.jpg" alt="' + esc(b.alt || info.alt || "") + '">' +
+        (b.zones || []).map(function (z, n) { return '<button type="button" class="pg-exp-point' + (vu(z) ? " pg-exp-point--vu" : "") + (r.ouvert === z.id ? " pg-exp-point--ouvert" : "") + '" style="left:' + (+z.x) + "%;top:" + (+z.y) + '%" data-bloc-zone="' + esc(b.id) + '" data-zone="' + esc(z.id) + '" aria-label="' + esc(z.titre) + '">' + (n + 1) + "</button>"; }).join("") + "</div>" : "") +
+        '<div class="pg-exp-cote"><ol class="pg-exp-liste">' + (b.zones || []).map(function (z, n) {
+          return '<li><button type="button" class="pg-exp-lien' + (vu(z) ? " pg-exp-lien--vu" : "") + (r.ouvert === z.id ? " pg-exp-lien--ouvert" : "") + '" data-bloc-zone="' + esc(b.id) + '" data-zone="' + esc(z.id) + '" aria-pressed="' + (r.ouvert === z.id) + '"><span class="pg-num" aria-hidden="true">' + (n + 1) + "</span><span>" + inline(z.titre) + "</span>" + (vu(z) ? ic("i-check") : "") + "</button></li>";
+        }).join("") + '</ol><div class="pg-exp-detail" aria-live="polite">' + detailZone(b, r.ouvert) + "</div></div></div>";
+      h += fait ? (b.bandeau_final ? '<div class="pg-bilan pg-bilan--ok"><p>' + inline(b.bandeau_final) + "</p></div>" : "") : actionHtml(b);
+      return h;
+    }
+    /* ---------- 10-11 : recherche simulée (reprise de l'écran « recherche ») ---------- */
+    function sansAcc(t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+    function jeuRecherche(b, q) {
+      var mots = sansAcc(q).split(/[^a-z0-9]+/).filter(Boolean);
+      for (var k = 0; k < (b.mots_cles || []).length; k++) {
+        var m = b.mots_cles[k];
+        if (m.sinon) return m.sinon;
+        if ((m.si || []).some(function (s) { return mots.indexOf(sansAcc(s)) >= 0; })) return m.resultats;
+      }
+      return null;
+    }
+    function docsRecherche(b) { var r = st.r[b.id] || {}; return r.jeu ? ((b.jeux || {})[r.jeu] || []) : []; }
+    function resultatsRecherche(b) {
+      var r = st.r[b.id] || {}, fait = !!st.v[b.id], docs = docsRecherche(b);
+      if (!r.jeu) return "";
+      if (!docs.length) return '<p class="pg-rch-rien">' + ic("i-loupe") + "<span>" + inline(b.conseil_mots || "Aucun document ne correspond. Essayez d'autres mots.") + "</span></p>";
+      return '<p class="pg-rch-nb">' + docs.length + (docs.length > 1 ? " résultats" : " résultat") + " pour « " + esc(r.q) + " »</p>" + (b.consigne_choix && !fait ? '<p class="pg-consigne">' + inline(b.consigne_choix) + "</p>" : "") +
+        '<ul class="pg-rch-docs">' + docs.map(function (d) {
+          var choisi = r.choix === d.id, montrer = fait && (choisi || d.verdict === "adapte");
+          return '<li class="pg-rch-doc' + (choisi ? " pg-rch-doc--choisi" : "") + '"><label><input type="radio" name="pg-rch-' + esc(b.id) + '" value="' + esc(d.id) + '" data-bloc="' + esc(b.id) + '" data-item="choix"' + (choisi ? " checked" : "") + (fait ? " disabled" : "") + ">" +
+            '<span class="pg-rch-doc-corps">' + ic(d.icone || "i-fichier") + "<span><strong>" + inline(d.titre) + "</strong><small>" + esc([d.auteur, d.date, d.statut].filter(Boolean).join(" · ")) + "</small>" + (d.extrait ? "<em>" + inline(d.extrait) + "</em>" : "") + "</span></span></label>" +
+            (montrer ? '<div class="feedback feedback--' + esc(d.verdict) + '">' + badge(d.verdict) + "<p>" + inline(d.feedback || "") + "</p></div>" : "") + "</li>";
+        }).join("") + "</ul>";
+    }
+    function blocRecherche(b) {
+      var r = st.r[b.id] || {}, fait = !!st.v[b.id], dis = fait ? " disabled" : "";
+      var h = (b.texte ? '<div class="texte recit">' + md(b.texte) + "</div>" : "") + (b.brief ? '<p class="pg-brief">' + ic("i-ampoule") + "<span>" + inline(b.brief) + "</span></p>" : "");
+      h += '<form class="pg-rch" data-chercher="' + esc(b.id) + '" role="search"><label for="pg-rch-q-' + esc(b.id) + '">' + ic("i-loupe") + esc(b.moteur || "Rechercher") + "</label>" +
+        '<div class="pg-rch-ligne"><input type="search" id="pg-rch-q-' + esc(b.id) + '" value="' + esc(r.q || "") + '" placeholder="' + esc(b.placeholder || "") + '" autocomplete="off"' + dis + '><button type="submit" class="btn btn-secondaire"' + dis + ">Rechercher</button></div>" +
+        (b.exemples && !fait ? '<p class="pg-rch-ex">Exemples : ' + b.exemples.map(function (x) { return '<button type="button" class="lien" data-exemple="' + esc(x) + '" data-bloc-rch="' + esc(b.id) + '">' + esc(x) + "</button>"; }).join(" · ") + "</p>" : "") + "</form>";
+      h += '<div class="pg-rch-res" aria-live="polite">' + resultatsRecherche(b) + "</div>";
+      if (!fait) h += actionHtml(b);
+      else {
+        var d = docsRecherche(b).filter(function (x) { return x.id === r.choix; })[0], ok = d && d.verdict === "adapte";
+        h += '<div class="pg-bilan pg-bilan--' + (ok ? "ok" : "partiel") + '"><p><strong>' + (ok ? "Bonne source." : "Pas la meilleure source.") + "</strong> " + inline(b.synthese || "") + "</p></div>";
+      }
+      return h;
+    }
+    /* ---------- 10-11 : message à composer (repris de l'écran « assemblage ») ---------- */
+    function corpsMessage(b) {
+      var r = st.r[b.id] || {};
+      return (b.salutation ? "<p>" + esc(b.salutation) + "</p>" : "") + (b.parties || []).map(function (p) {
+        var o = (p.options || []).filter(function (x) { return x.id === r[p.id]; })[0];
+        return o ? "<p>" + inline(o.texte) + "</p>" : '<p class="pg-msg-vide">[' + esc(p.libelle) + "]</p>";
+      }).join("") + (b.signature ? "<p>" + esc(b.signature).replace(/\n/g, "<br>") + "</p>" : "");
+    }
+    function blocMessage(b) {
+      var r = st.r[b.id] || {}, fait = !!st.v[b.id];
+      var h = (b.texte ? '<div class="texte recit">' + md(b.texte) + "</div>" : "") + (b.brief ? '<p class="pg-brief">' + ic("i-ampoule") + "<span>" + inline(b.brief) + "</span></p>" : "");
+      h += '<div class="pg-msg"><ol class="pg-tri pg-msg-parties">' + (b.parties || []).map(function (p, n) {
+        var o = (p.options || []).filter(function (x) { return x.id === r[p.id]; })[0], ok = o && o.verdict === "adapte";
+        return '<li class="pg-item' + (fait ? (ok ? " pg-item--ok" : " pg-item--ko") : "") + '"><fieldset><legend><span class="pg-num" aria-hidden="true">' + (n + 1) + "</span><span>" + inline(p.libelle) + "</span></legend>" +
+          '<div class="pg-choix pg-choix--qcu">' + (p.options || []).map(function (x) {
+            return '<label class="pg-opt' + (fait && x.verdict === "adapte" ? " pg-opt--attendu" : "") + '"><input type="radio" name="pg-' + esc(b.id) + "-" + esc(p.id) + '" value="' + esc(x.id) + '" data-bloc="' + esc(b.id) + '" data-item="' + esc(p.id) + '"' + (r[p.id] === x.id ? " checked" : "") + (fait ? " disabled" : "") + "><span>" + inline(x.texte) + "</span></label>";
+          }).join("") + "</div>" + (fait && o ? '<div class="pg-fb">' + badge(o.verdict) + "<p>" + inline(p.feedback || "") + "</p></div>" : "") + "</fieldset></li>";
+      }).join("") + "</ol>" +
+        '<aside class="pg-msg-apercu" aria-label="Aperçu du message">' + '<div class="pg-msg-tete">' + ic("i-courriel") + "<span><strong>À :</strong> " + esc(b.destinataire || "") + "</span><span><strong>Objet :</strong> " + esc(b.objet || "") + "</span></div>" +
+        '<div class="pg-msg-corps">' + corpsMessage(b) + "</div></aside></div>";
+      if (!fait) h += actionHtml(b);
+      else {
+        var bons = (b.parties || []).filter(function (p) { var o = (p.options || []).filter(function (x) { return x.id === r[p.id]; })[0]; return o && o.verdict === "adapte"; }).length, tous = (b.parties || []).length;
+        h += '<div class="pg-bilan pg-bilan--' + (bons === tous ? "ok" : "partiel") + '"><p><strong>' + bons + " sur " + tous + ".</strong> " + inline(b.synthese || "") + "</p></div>";
+      }
+      return h;
+    }
+    var RENDUS_BLOC = { recit: blocRecit, apport: blocApport, tri: blocTri, liste: blocListe, explorer: blocExplorer, recherche: blocRecherche, message: blocMessage };
     /* D132 : un carnet par module. La page terminée débloque ses fiches : elles rejoignent le carnet du module. */
     function fichesPage() {
       var ids = (e.fiches || []).filter(function (id) { return F[id]; });
@@ -1936,7 +2051,7 @@
     }
     function dessiner(nouveau) {
       var vis = visibles();
-      fini = vis.length === e.blocs.length && e.blocs.every(function (b) { return b.type !== "tri" || st.v[b.id]; });
+      fini = vis.length === e.blocs.length && e.blocs.every(function (b) { return !BLOQUANTS[b.type] || st.v[b.id]; });
       iAffiche = -1;
       var etapes = '<ol class="pg-etapes" aria-label="Étapes de l\'épisode">' + etapesHtml(0) + "</ol>";
       var comp = (e.competences_lib || []).map(function (c) { return '<li><span class="pg-comp">' + esc(c.code) + "</span>" + inline(c.libelle) + "</li>"; }).join("");
@@ -1964,7 +2079,7 @@
       if (MOUVEMENT && nouveau != null) setTimeout(suivreEtape, 700);   /* après le défilement doux */
     }
     /* un seul jeu d'écouteurs par page affichée (retour arrière : pas de doublon) */
-    if (zone._pg) { zone.removeEventListener("change", zone._pg.change); zone.removeEventListener("click", zone._pg.click); zone.removeEventListener("scroll", zone._pg.scroll); }
+    if (zone._pg) { zone.removeEventListener("change", zone._pg.change); zone.removeEventListener("click", zone._pg.click); zone.removeEventListener("scroll", zone._pg.scroll); zone.removeEventListener("submit", zone._pg.submit); }
     function onChange(ev) {
       if (!zone.classList.contains("ecran--page")) return;
       var i = ev.target; if (!i.dataset || !i.dataset.bloc) return;
@@ -1972,23 +2087,51 @@
       st.r[i.dataset.bloc][i.dataset.item] = i.value;
       sauverPage();
       var b = e.blocs.filter(function (x) { return x.id === i.dataset.bloc; })[0], r = st.r[b.id];
+      if (b.type !== "tri") {   /* recherche, message : le bouton suit l'avancement ; l'aperçu du message se met à jour */
+        majAction(b);
+        if (b.type === "message") { var ap = i.closest(".pg-bloc").querySelector(".pg-msg-corps"); if (ap) ap.innerHTML = corpsMessage(b); }
+        return;
+      }
       var reste = itemsDe(b).filter(function (it) { return !(bienAvant(b, it) || r[it.id]); }).length;
       var btn = zone.querySelector('[data-verifier="' + b.id + '"]'), lib = zone.querySelector(".pg-reste");
       if (btn) btn.disabled = !!reste;
       if (lib) lib.textContent = reste ? reste + (reste > 1 ? " demandes à classer" : " demande à classer") : "Tout est classé";
     }
+    function chercher(b, q) {
+      var r = st.r[b.id] = st.r[b.id] || {};
+      r.q = String(q || "").trim(); r.jeu = r.q ? jeuRecherche(b, r.q) : null; r.choix = null; sauverPage();
+      var sec = zone.querySelector('.pg-bloc[data-n="' + e.blocs.indexOf(b) + '"]');
+      if (sec) { sec.querySelector(".pg-rch-res").innerHTML = resultatsRecherche(b); majAction(b); }
+    }
+    function onSubmit(ev) {
+      if (!zone.classList.contains("ecran--page")) return;
+      var f = ev.target.closest("[data-chercher]"); if (!f) return;
+      ev.preventDefault();
+      chercher(blocParId(f.dataset.chercher), f.querySelector("input").value);
+    }
     function onClick(ev) {
       if (!zone.classList.contains("ecran--page")) return;
+      var zb = ev.target.closest("[data-zone]");
+      if (zb && !zb.disabled) {
+        var bz = blocParId(zb.dataset.blocZone), rz = st.r[bz.id] = st.r[bz.id] || {};
+        rz.vus = rz.vus || []; if (rz.vus.indexOf(zb.dataset.zone) < 0) rz.vus.push(zb.dataset.zone);
+        rz.ouvert = zb.dataset.zone; sauverPage(); redessinerBloc(bz);
+        var cible = zone.querySelector('.pg-bloc[data-n="' + e.blocs.indexOf(bz) + '"] [data-zone="' + zb.dataset.zone + '"].pg-exp-lien'); if (cible) cible.focus({ preventScroll: true });
+        return;
+      }
+      var ex = ev.target.closest("[data-exemple]");
+      if (ex) { var br = blocParId(ex.dataset.blocRch), inp = zone.querySelector("#pg-rch-q-" + br.id); if (inp) inp.value = ex.dataset.exemple; chercher(br, ex.dataset.exemple); return; }
       var v = ev.target.closest("[data-verifier]"); if (!v || v.disabled) return;
       var id = v.dataset.verifier, b = e.blocs.filter(function (x) { return x.id === id; })[0];
-      if (!complet(b)) return;
+      if (!blocPret(b)) return;
       st.v[id] = true; sauverPage();
       var n = e.blocs.indexOf(b);
       /* la suite s'affiche ; on amène le lecteur au bilan du tri, puis au bloc suivant s'il existe */
       dessiner({ fait: n, ouvert: n + 1 < e.blocs.length ? n + 1 : n });
     }
     function onScroll() { if (zone.classList.contains("ecran--page")) suivreEtape(); }
-    zone._pg = { change: onChange, click: onClick, scroll: onScroll };
+    zone._pg = { change: onChange, click: onClick, scroll: onScroll, submit: onSubmit };
+    zone.addEventListener("submit", onSubmit);
     zone.addEventListener("scroll", onScroll, { passive: true });
     zone.addEventListener("change", onChange);
     zone.addEventListener("click", onClick);
