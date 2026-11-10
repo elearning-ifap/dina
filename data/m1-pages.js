@@ -9,7 +9,6 @@ window.DINA_DATA = {
   "duree": "1 h environ",
   "sous_titre": "Comprendre mon environnement",
   "intro": "Prototype du module 1 en pages qui défilent. Chaque épisode tient sur une page : une situation, un apport, une application. Puis un défi, l'évaluation et le bilan. Aidez Noa et ses collègues de l'ÉLAN.",
-  "sans_carnet": true,
   "sections": [
    {
     "id": "ep1",
@@ -461,7 +460,10 @@ window.DINA_DATA = {
     }
    ],
    "note_expert": "Contenu juridique à faire valider par les référents employeurs (voir le champ « valider » de chaque item).",
-   "suite": "QFQ-FIN"
+   "suite": "QFQ-FIN",
+   "fiches": [
+    "FICHE-M1-E1"
+   ]
   },
   "QFQ-FIN": {
    "id": "QFQ-FIN",
@@ -897,7 +899,10 @@ window.DINA_DATA = {
     }
    ],
    "note_expert": "Grille « délibère, dirige, exécute » à faire valider par les référents (reprise de M1-E2-APP1).",
-   "suite": "QFQ-E2-FIN"
+   "suite": "QFQ-E2-FIN",
+   "fiches": [
+    "FICHE-M1-E2"
+   ]
   },
   "QFQ-E2-FIN": {
    "id": "QFQ-E2-FIN",
@@ -1281,7 +1286,10 @@ window.DINA_DATA = {
     }
    ],
    "note_expert": "Types de textes et autorités (grille de l'apport) à faire valider par les référents ; repris de M1-E3-APP1 (M1 v0.2).",
-   "suite": "QFQ-E3-FIN"
+   "suite": "QFQ-E3-FIN",
+   "fiches": [
+    "FICHE-M1-E3"
+   ]
   },
   "QFQ-E3-FIN": {
    "id": "QFQ-E3-FIN",
@@ -1726,16 +1734,19 @@ window.DINA_DATA = {
    },
    "texte_reussi": "Évaluation réussie. Vous savez qui fait quoi, à qui vous adresser, et comment vérifier une information avant de l'utiliser.\n",
    "texte_echec": "Certains repères sont encore à consolider. Une nouvelle tentative vous est proposée, sur d'autres situations.\n",
-   "texte_echec_final": "Certains repères restent à consolider. Relisez la règle des épisodes concernés et revoyez-les. Quand vous vous sentez prêt, repassez l'évaluation depuis le sommaire : les situations ne seront pas les mêmes.\n",
+   "texte_echec_final": "Certains repères restent à consolider. Les fiches indiquées ci-dessus sont dans votre carnet : relisez-les et revoyez les épisodes concernés. Quand vous vous sentez prêt, repassez l'évaluation depuis le sommaire : les situations ne seront pas les mêmes.\n",
    "consolider": {
     "E1": {
-     "texte": "Je cherche qui a la compétence, pas qui est le plus proche. Dans le doute, je vérifie avant de répondre."
+     "texte": "Je cherche qui a la compétence, pas qui est le plus proche. Dans le doute, je vérifie avant de répondre.",
+     "fiche": "FICHE-M1-E1"
     },
     "E2": {
-     "texte": "Je transmets ce qui engage mon employeur à celui qui décide, et je m'adresse au service qui gère le sujet."
+     "texte": "Je transmets ce qui engage mon employeur à celui qui décide, et je m'adresse au service qui gère le sujet.",
+     "fiche": "FICHE-M1-E2"
     },
     "E3": {
-     "texte": "Avant d'utiliser une information : qui l'a produite, de quand elle date, si elle est définitive."
+     "texte": "Avant d'utiliser une information : qui l'a produite, de quand elle date, si elle est définitive.",
+     "fiche": "FICHE-M1-E3"
     }
    },
    "rappel": [
@@ -1945,6 +1956,19 @@ window.DINA_DATA = {
    "titre": "Chez mon employeur",
    "question": "Une question que je poserai la semaine prochaine pour mieux me repérer chez mon employeur :",
    "apres": "Notez-la : vous la poserez la semaine prochaine.",
+   "suite": "M1-SOR-RES"
+  },
+  "M1-SOR-RES": {
+   "id": "M1-SOR-RES",
+   "type": "ressources",
+   "etape": "Bilan",
+   "titre": "Mes ressources",
+   "texte": "Les trois fiches du module sont rangées dans votre carnet. Ouvrez-les pour les imprimer ou les enregistrer en PDF.",
+   "fiches": [
+    "FICHE-M1-E1",
+    "FICHE-M1-E2",
+    "FICHE-M1-E3"
+   ],
    "suite": "M1-FIN"
   },
   "M1-FIN": {
@@ -1980,7 +2004,180 @@ window.DINA_DATA = {
    "suite": "MENU"
   }
  },
- "fiches": {},
+ "fiches": {
+  "FICHE-M1-E1": {
+   "id": "FICHE-M1-E1",
+   "type": "fiche",
+   "code": "M1-E1-03",
+   "modele": "aide-memoire",
+   "categorie": "connaissance",
+   "titre": "Qui fait quoi en Nouvelle-Calédonie ?",
+   "quand": "Une demande arrive et elle ne semble pas pour vous : avant de l'orienter.",
+   "definition": "Une administration est **compétente** lorsqu'un texte lui attribue la responsabilité d'un domaine ou d'une mission.",
+   "etapes": [
+    {
+     "titre": "1. Je comprends la demande",
+     "texte": "La personne a-t-elle besoin d'une information, d'un document, d'une aide, d'une autorisation… ?"
+    },
+    {
+     "titre": "2. J'identifie l'administration compétente",
+     "texte": "L'État, la Nouvelle-Calédonie, une province, une commune, un établissement public…"
+    },
+    {
+     "titre": "3. Je vérifie en cas de doute",
+     "texte": "Je consulte une source officielle ou je demande confirmation à mon responsable."
+    },
+    {
+     "titre": "4. J'oriente",
+     "texte": "J'indique à la personne le service à contacter et comment le joindre. Si je peux, je dis aussi pourquoi ce service est compétent : la personne comprend mieux."
+    }
+   ],
+   "titre_types": "Qui est compétent ? Quelques exemples (liste non exhaustive)",
+   "types": [
+    {
+     "titre": "L'État",
+     "texte": "La justice, la police et la gendarmerie nationales (porter plainte), la défense."
+    },
+    {
+     "titre": "La Nouvelle-Calédonie",
+     "texte": "Les impôts, la protection sociale, le permis de conduire."
+    },
+    {
+     "titre": "La province",
+     "texte": "Le développement économique, l'aide sociale, l'environnement, les collèges."
+    },
+    {
+     "titre": "La commune",
+     "texte": "La voirie, la police municipale, les écoles primaires, le guichet de l'état civil."
+    }
+   ],
+   "exemple": "« Déposer plainte après un vol : la justice et le maintien de l'ordre relèvent de l'**État**. La plainte se dépose au **commissariat de police ou à la gendarmerie**. La police municipale, elle, dépend de la commune. »",
+   "a_retenir": "Ce n'est pas parce qu'une demande arrive dans mon service que celui-ci est compétent. Je vérifie avant de l'orienter.",
+   "reperes": [
+    "Loi organique n° 99-209, art. 20 à 22 (Légifrance)",
+    "La personne qui confirme une orientation dans mon service",
+    "Les services vers lesquels j'oriente souvent et leurs coordonnées (vous pouvez vous constituer une liste)"
+   ],
+   "competences": [
+    "C01"
+   ],
+   "version": "0.3"
+  },
+  "FICHE-M1-E2": {
+   "id": "FICHE-M1-E2",
+   "type": "fiche",
+   "code": "M1-E2-03",
+   "modele": "formulaire",
+   "categorie": "outil",
+   "titre": "Mon employeur et mes interlocuteurs",
+   "quand": "Dans vos premières semaines, avec l'organigramme de votre employeur. Ce n'est pas un annuaire : notez pour quoi vous solliciterez chaque interlocuteur.",
+   "mention": "À compléter avec votre responsable (N+1) si besoin.",
+   "sections": [
+    {
+     "titre": "Mon employeur",
+     "champs": [
+      "Son nom et son statut (exemple : l'IFAP, établissement public)",
+      "Qui prend les grandes décisions ?",
+      "Qui dirige les services ?"
+     ]
+    },
+    {
+     "titre": "Mon service",
+     "champs": [
+      "Mon service et ma direction",
+      "Mon responsable",
+      "Le responsable de mon responsable"
+     ]
+    },
+    {
+     "titre": "Quand je sollicite qui",
+     "champs": [
+      "Mon responsable : une décision à prendre, une priorité à arbitrer, une difficulté que je ne peux pas régler seul",
+      "Un collègue : une pratique du service, un outil, un document"
+     ]
+    },
+    {
+     "titre": "Mes autres interlocuteurs",
+     "champs": [
+      "Les ressources humaines : ma carrière, mes congés, ma paie",
+      "Le support informatique : un accès, un matériel",
+      "La logistique : locaux, véhicules, fournitures",
+      "Autre interlocuteur utile, et pour quoi"
+     ]
+    }
+   ],
+   "a_retenir": "Je connais mon périmètre d'action. Quand je ne suis pas habilité à décider, je transmets à la personne compétente.",
+   "competences": [
+    "C02"
+   ],
+   "version": "0.3"
+  },
+  "FICHE-M1-E3": {
+   "id": "FICHE-M1-E3",
+   "type": "fiche",
+   "code": "M1-E3-03",
+   "modele": "aide-memoire",
+   "categorie": "outil",
+   "titre": "Trouver une information fiable",
+   "quand": "Avant de transmettre une règle, un délai ou un chiffre, ou de rédiger un document qui s'appuie sur une règle.",
+   "etapes": [
+    {
+     "titre": "1. Je clarifie mon besoin",
+     "texte": "Une règle ? Une explication pratique ? Une procédure interne ?"
+    },
+    {
+     "titre": "2. Je choisis la source",
+     "texte": "Le texte officiel pour la règle ; la page institutionnelle pour l'explication ; l'intranet pour une procédure interne."
+    },
+    {
+     "titre": "3. Je vérifie",
+     "texte": "Qui l'a produite ? De quand date-t-elle ? Est-elle en vigueur ? La version consolidée donne la règle actuelle, le JONC sa date."
+    },
+    {
+     "titre": "4. Je garde la référence",
+     "texte": "Titre, auteur, date, lien, date de consultation."
+    },
+    {
+     "titre": "5. Si deux sources se contredisent",
+     "texte": "Je ne choisis pas au hasard : je demande un appui, avec mes sources datées."
+    }
+   ],
+   "titre_types": "Où chercher ?",
+   "types": [
+    {
+     "titre": "Leginova",
+     "lien": "https://leginova.gouv.nc",
+     "texte": "Les textes calédoniens en vigueur (versions consolidées) et le Journal officiel. Anciennement Juridoc."
+    },
+    {
+     "titre": "JONC",
+     "texte": "Le Journal officiel de la Nouvelle-Calédonie : la publication officielle des textes, avec leur date. Consultable sur Leginova."
+    },
+    {
+     "titre": "Légifrance",
+     "lien": "https://www.legifrance.gouv.fr",
+     "texte": "Les textes nationaux, dont la loi organique de 1999."
+    },
+    {
+     "titre": "DRHFPNC",
+     "lien": "https://drhfpnc.gouv.nc",
+     "texte": "Les règles et procédures RH de la fonction publique calédonienne."
+    }
+   ],
+   "exemple": "« Pour préparer une réponse, je trouve deux délais différents : l'un sur une page d'information non datée, l'autre dans le texte en vigueur sur Leginova. Je retiens le texte en vigueur, je note sa référence et je signale l'écart à mon responsable. »",
+   "a_retenir": "Facile à trouver ne veut pas dire à jour. Je vérifie avant de transmettre.",
+   "reperes": [
+    "Le site de mon employeur",
+    "L'intranet ou le dossier des procédures internes (s'il existe)",
+    "La personne à qui je demande confirmation"
+   ],
+   "competences": [
+    "C17",
+    "C18"
+   ],
+   "version": "0.3"
+  }
+ },
  "illustrations": {
   "ILL-N03": {
    "scene": "Le comité de direction de l'ÉLAN",

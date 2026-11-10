@@ -1903,6 +1903,16 @@
       return h;
     }
     var RENDUS_BLOC = { recit: blocRecit, apport: blocApport, tri: blocTri, liste: blocListe };
+    /* D132 : un carnet par module. La page terminée débloque ses fiches : elles rejoignent le carnet du module. */
+    function fichesPage() {
+      var ids = (e.fiches || []).filter(function (id) { return F[id]; });
+      if (!ids.length || M.sans_carnet) return "";
+      ids.forEach(function (id) { ajouterCarnet("fiche", id); });
+      return '<section class="pg-fiches" aria-label="Fiches débloquées"><h2 class="pg-fiches-titre">' + ic("i-carnet") + (ids.length > 1 ? "Fiches ajoutées à votre carnet" : "Fiche ajoutée à votre carnet") + "</h2><ul>" +
+        ids.map(function (id) { var f = F[id]; return "<li><span><strong>" + esc(f.titre) + "</strong>" + (GROUPES_FICHES[f.categorie] ? '<span class="pg-fiche-type">' + esc(GROUPES_FICHES[f.categorie].replace(/s(?= |$)/g, "")) + "</span>" : "") + "</span>" +
+          '<a class="btn btn-secondaire btn-petit" href="fiche.html?id=' + esc(id) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Version à imprimer</a></li>"; }).join("") +
+        '</ul><p><button type="button" class="lien pg-fiches-carnet">' + ic("i-carnet") + " Ouvrir mon carnet</button></p></section>";
+    }
 
     var fini = false;
     /* Étape affichée dans la barre : celle du bloc en haut de l'écran (la page défile, la barre suit) */
@@ -1933,8 +1943,10 @@
       var html = '<div class="page-defil">' + '<header class="pg-entete"><span class="surtitre">' + esc(libelleEtape(e)) + "</span><h1>" + inline(e.titre) + "</h1>" +
         (e.chapeau ? '<p class="pg-chapeau">' + inline(e.chapeau) + "</p>" : "") + (comp ? '<ul class="pg-competences" aria-label="Compétences travaillées">' + comp + "</ul>" : "") + "</header>" +
         '<div class="pg-barre">' + etapes + "</div>" +
-        vis.map(function (i) { var b = e.blocs[i]; return '<section class="pg-bloc pg-bloc--' + esc(b.type) + '" data-n="' + i + '" aria-labelledby="pg-t' + i + '">' + enTete(b, i) + RENDUS_BLOC[b.type](b) + "</section>"; }).join("") + "</div>";
+        vis.map(function (i) { var b = e.blocs[i]; return '<section class="pg-bloc pg-bloc--' + esc(b.type) + '" data-n="' + i + '" aria-labelledby="pg-t' + i + '">' + enTete(b, i) + RENDUS_BLOC[b.type](b) + "</section>"; }).join("") +
+        (fini ? fichesPage() : "") + "</div>";
       zone.innerHTML = html;
+      var oc = zone.querySelector(".pg-fiches-carnet"); if (oc) oc.addEventListener("click", ouvrirCarnet);
       brancherImages(zone);
       compteur.textContent = fini ? "Page terminée" : "";
       principal(e.bouton_fin || "Terminer", function () { suivant(e); }, { desactive: !fini });
@@ -2036,9 +2048,9 @@
   }
 
   /* ---------- Carnet de Noa (D37) ---------- */
-  var GROUPES_FICHES = { outil: "Fiches outils", apport: "Fiches apports", ressource: "Ressources", "plus-loin": "Pour aller plus loin" };
+  var GROUPES_FICHES = { outil: "Fiches outils", connaissance: "Fiches de connaissances", apport: "Fiches apports", ressource: "Ressources", "plus-loin": "Pour aller plus loin" };   /* D131 : fiches de connaissances */
   function elementsCarnet() {
-    var groupes = {}, ordre = ["Documents", "Apports", "Fiches outils", "Fiches apports", "Ressources", "Pour aller plus loin"];
+    var groupes = {}, ordre = ["Documents", "Apports", "Fiches de connaissances", "Fiches outils", "Fiches apports", "Ressources", "Pour aller plus loin"];
     etat.carnet.forEach(function (c) {
       var g, titre, corps, extra = "";
       if (c.type === "ecran") {

@@ -191,3 +191,11 @@
 /* Choix à une seule réponse (bloc tri à un item, M1 en pages v0.3) : une réponse par ligne, texte aligné à gauche */
 .pg-choix--qcu { display: grid; grid-template-columns: 1fr; gap: .5rem; }
 .pg-choix--qcu button, .pg-choix--qcu label { text-align: left; justify-content: flex-start; width: 100%; }
+
+/* D132 : fiches débloquées en fin de page, rangées dans le carnet du module */
+.pg-fiches { margin: 2rem 0 1rem; padding: 1.1rem 1.2rem; border: 1px solid var(--bordure); border-left: 4px solid var(--marque-sarcelle); border-radius: var(--rayon); background: var(--carte); }
+.pg-fiches-titre { display: flex; gap: .5rem; align-items: center; margin: 0 0 .7rem; font-size: 1.1rem; color: var(--bleu-sombre); }
+.pg-fiches ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.pg-fiches li { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; justify-content: space-between; }
+.pg-fiches li strong { display: block; }
+.pg-fiche-type { font-size: var(--taille-petit); color: var(--texte-2); }
