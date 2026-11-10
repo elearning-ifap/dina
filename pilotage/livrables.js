@@ -127,7 +127,7 @@ window.DINA_PILOTAGE = {
         { titre: "Page d'accueil DINA (tableau de bord de l'agent)", lot: "L2", statut: "a_faire", qui: "marc", note: "Avec les composants Moodle disponibles, sans format de cours dédié." },
         { titre: "Intégration du positionnement et de sa restitution", lot: "L2", statut: "a_faire", qui: "marc", note: "Le positionnement ne peut pas être rejoué." },
         { titre: "Paquets SCORM : prologue, 5 modules, bilan", lot: "L2", statut: "a_faire", qui: "marc" },
-        { titre: "Tests Moodle d'évaluation et banques de questions", lot: "L6", statut: "a_faire", qui: "marc", note: "Situations différentes à chaque passage. Résultat enregistré dans Moodle." },
+        { titre: "Évaluation dans le SCORM, score transmis à Moodle", lot: "L6", statut: "a_faire", qui: "marc", note: "D142 : l'évaluation se fait dans le module, avec les situations du récit, différentes à chaque passage. Le score et le statut « réussi » partent dans Moodle, qui délivre le badge. Transmission du score à tester dans LIANE avec un module évalué." },
         { titre: "Règles de complétion et de progression", lot: "L2", statut: "a_faire", qui: "marc", note: "Activité, module, parcours." },
         { titre: "Reprise de parcours là où l'agent s'est arrêté", lot: "L2", statut: "a_faire", qui: "marc" },
         { titre: "Badges Moodle : critères et attribution", lot: "L6", statut: "a_faire", qui: "marc" },
