@@ -122,7 +122,7 @@ window.DINA_PILOTAGE = {
     { code: "plateforme", titre: "Plateforme LIANE", texte: "Le parcours installé dans Moodle. La partie la plus complexe : LIANE s'utilise telle quelle, sans plugin.",
       livrables: [
         { titre: "Relevé des contraintes LIANE : version de Moodle, thème, droits, affichage mobile", lot: "L2", statut: "a_faire", qui: "marc", valide: "si" },
-        { titre: "Test technique SCORM dans LIANE", lot: "J-TECH", statut: "a_faire", qui: "marc", valide: "si", echeance: "Novembre 2026", note: "Lancement, complétion, reprise, traces. Condition avant de produire les modules 2 à 5 en série." },
+        { titre: "Test technique SCORM dans LIANE", lot: "J-TECH", statut: "en_cours", qui: "marc", valide: "si", echeance: "Novembre 2026", note: "Lancement, complétion, reprise, traces. Condition avant de produire les modules 2 à 5 en série. 10-11 : moteur branché en SCORM 1.2 et paquet de test de M1 en pages prêt, avec panneau de diagnostic. Validé dans un LMS simulé. Reste : le dépôt dans un cours de test LIANE." },
         { titre: "Structure du cours DINA : accueil, positionnement, prologue, 5 modules, bilan, ressources, aide", lot: "L2", statut: "a_faire", qui: "marc" },
         { titre: "Page d'accueil DINA (tableau de bord de l'agent)", lot: "L2", statut: "a_faire", qui: "marc", note: "Avec les composants Moodle disponibles, sans format de cours dédié." },
         { titre: "Intégration du positionnement et de sa restitution", lot: "L2", statut: "a_faire", qui: "marc", note: "Le positionnement ne peut pas être rejoué." },
@@ -196,8 +196,8 @@ window.DINA_PILOTAGE = {
     items: [
       { priorite: "p1", titre: "Catalogue des gabarits", statut: "livre", duree: 1, qui: "marc", lien: "../gabarits.html",
         note: "25 gabarits jouables dans le vrai moteur, avec les champs du storyboard. Se met à jour seul à chaque publication." },
-      { priorite: "p1", titre: "Vérifier que la reprise tient dans la limite SCORM 1.2", statut: "a_faire", duree: 0.5, qui: "marc", valide: "si", lie: "Test technique SCORM dans LIANE",
-        note: "La sauvegarde de reprise est limitée à 4 096 caractères. À mesurer sur un module complet. Si la limite est dépassée : alléger l'état sauvegardé ou passer en SCORM 2004." },
+      { priorite: "p1", titre: "Vérifier que la reprise tient dans la limite SCORM 1.2", statut: "en_cours", duree: 0.5, qui: "marc", valide: "si", lie: "Test technique SCORM dans LIANE",
+        note: "La sauvegarde de reprise est limitée à 4 096 caractères. À mesurer sur un module complet. Si la limite est dépassée : alléger l'état sauvegardé ou passer en SCORM 2004. 10-11 : M1 en pages, deux épisodes, environ 840 caractères (20 % de la limite). Un module de cinq jours devrait tenir, à confirmer." },
       { priorite: "p1", titre: "Réduire les clics : prototype en pages qu'on fait défiler", statut: "valide", duree: 2.5, qui: "marc", valide: "mnb", lie: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics", lien: "../m1-pages.html",
         note: "Fait le 06-11 sur l'épisode « Qui fait quoi au pays ? » : nouveau type d'écran « page » dans le moteur (blocs situation, apport, application, liste). Une seule page au lieu de six écrans, les réponses ouvrent la suite, la compétence est affichée. Ajouts du 06-11 au soir : trois demandes de transfert et le bouton « En clair ». Testé à 390 px et sur ordinateur. Épisode 2 « Qui décide à l'ÉLAN ? » ajouté le 06-11 au soir : M1 en pages (m1-pages.html), storyboard « M1 en pages v0.2 » dans le coffre, build.py à jour. Validé le 10-11 par Marie-Noëlle Blanck : on généralise à tout le parcours, la suite s'affiche quand l'activité est terminée." },
       { priorite: "p1", titre: "Afficher la compétence travaillée sur chaque écran", statut: "a_faire", qui: "marc",

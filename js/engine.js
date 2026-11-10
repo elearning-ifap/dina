@@ -210,8 +210,16 @@
     if (etat.carnet.some(function (c) { return c.type === type && c.id === id; })) return;
     etat.carnet.push({ type: type, id: id }); sauver(); majCarnet();
   }
-  function charger() { try { var s = localStorage.getItem(CLE); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
-  function sauver() { try { localStorage.setItem(CLE, JSON.stringify(etat)); } catch (e) { /* stockage indisponible : l'état reste en mémoire */ } }
+  /* J-TECH : dans LIANE, l'état part dans cmi.suspend_data (SCORM 1.2) ; hors LIANE, dans le navigateur */
+  function charger() {
+    if (SCORM.actif && SCORM.actif()) return SCORM.lireEtat();
+    try { var s = localStorage.getItem(CLE); return s ? JSON.parse(s) : null; } catch (e) { return null; }
+  }
+  function sauver() {
+    var json = JSON.stringify(etat);
+    if (SCORM.actif && SCORM.actif()) SCORM.ecrireEtat(json);
+    try { localStorage.setItem(CLE, json); } catch (e) { /* stockage indisponible : l'état reste en mémoire */ }
+  }
 
   /* ---------- Sections : ordre des écrans par traversée des « suite » ---------- */
   var ORDRE = {};
@@ -620,7 +628,9 @@
     var sec = sectionDe(e.id);
     if (sec && etat.faites.indexOf(sec.id) < 0) { etat.faites.push(sec.id); sauver(); majBandeau(sec); }
     var dernier = e.type === "fin";
-    if (dernier) { SCORM.finish(); return rendreFinModule(e); }
+    /* J-TECH : le module est terminé dès que toutes ses étapes le sont, même sans écran de fin de module */
+    if (dernier || SECTIONS.every(function (s) { return etat.faites.indexOf(s.id) >= 0; })) SCORM.finish();
+    if (dernier) return rendreFinModule(e);
     var i = SECTIONS.indexOf(sec), apres = i >= 0 ? SECTIONS[i + 1] : null;
     var acquis = e.acquis ? '<h2 class="fin-sous">' + esc(e.acquis_titre || "Ce que vous avez fait") + '</h2><ul class="acquis">' + e.acquis.map(function (a) {
       if (typeof a === "string") a = { titre: a };
