@@ -187,3 +187,7 @@
   .pg-g-tete { display: grid; font-weight: 700; color: var(--texte-2); }
   .pg-g-lib { display: none; }
 }
+
+/* Choix à une seule réponse (bloc tri à un item, M1 en pages v0.3) : une réponse par ligne, texte aligné à gauche */
+.pg-choix--qcu { display: grid; grid-template-columns: 1fr; gap: .5rem; }
+.pg-choix--qcu button, .pg-choix--qcu label { text-align: left; justify-content: flex-start; width: 100%; }

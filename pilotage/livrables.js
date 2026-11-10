@@ -65,7 +65,7 @@ window.DINA_PILOTAGE = {
       note: "Storyboard v0.4 en ligne le 10-11, à relire : Noa est à l'ÉLAN depuis quelques semaines (D130), plus de premier jour ni de badge provisoire ; étape « Arrivée » renommée « Début » ; collègues de toutes catégories annoncés ; un carnet par module. Seul composant à présenter l'ÉLAN, l'équipe et la règle du jeu (D142). Reste en écrans pour l'instant.", lien: "../prologue.html" },
     { code: "M1", titre: "Je me repère", sousTitre: "Comprendre mon environnement",
       etats: ["en_cours", "a_faire", "valide", "livre", "en_cours", "en_cours", "a_faire"],
-      note: "Prototype en ligne (v0.1). Version 0.2 en cours : jours de la semaine, infographies, retours du 28-10. Prototype « M1 en pages » (06-11) : épisodes 1 « Qui fait quoi au pays ? » et 2 « Qui décide à l'ÉLAN ? », chacun en une page (situation, apport, application, transfert, liste). Le 10-11, les pages qui défilent sont retenues pour tout le parcours." },
+      note: "M1 en pages v0.3 en ligne le 10-11, à relire : module complet (épisodes 1 à 3, défi « Le premier appel de Joël », évaluation, bilan). Épisode 3 « Une information sûre » et défi repris de M1 en écrans, avec Cédric qui vit aussi une situation. M1 en écrans devient une réserve de contenus (D128). À valider : grille des documents administratifs (épisode 3), cinq demandes du défi.", lien: "../m1-pages.html" },
     { code: "M2", titre: "Je trouve ma place", sousTitre: "",
       etats: ["en_cours", "a_faire", "valide", "en_cours", "en_cours", "en_cours", "a_faire"],
       note: "Storyboard v0.4 à reprendre : M1 a beaucoup changé (pages qui défilent, récit, mise en situation tournante). E-learning v0.1 à reprendre sur le modèle de M1." },

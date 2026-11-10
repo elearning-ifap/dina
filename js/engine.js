@@ -1871,7 +1871,7 @@
         }
         var rappel = prec && !acquis && prec[it.id] && !fait ? '<p class="pg-rappel">Votre premier choix : ' + esc(libCat(prec[it.id])) + "</p>" : "";
         return '<li class="' + cls + '"><fieldset><legend><span class="pg-num" aria-hidden="true">' + (n + 1) + "</span><span>" + inline(it.libelle) + "</span></legend>" + rappel +
-          '<div class="pg-choix' + (catsDe(b).length > 4 ? " pg-choix--6" : "") + '">' + catsDe(b).map(function (c) {
+          '<div class="pg-choix' + (catsDe(b).length > 4 ? " pg-choix--6" : "") + (b.qcu ? " pg-choix--qcu" : "") + '">' + catsDe(b).map(function (c) {
             var att = verrou && montrer && c.id === it.attendu ? " pg-opt--attendu" : "";
             return '<label class="pg-opt' + att + '"><input type="radio" name="pg-' + esc(b.id) + "-" + esc(it.id) + '" value="' + esc(c.id) + '"' + (choix === c.id ? " checked" : "") + (verrou ? " disabled" : "") +
               ' data-bloc="' + esc(b.id) + '" data-item="' + esc(it.id) + '"><span>' + inline(c.court || c.libelle) + "</span></label>";
@@ -1882,7 +1882,7 @@
       if (!fait) {
         var reste = itemsDe(b).filter(function (it) { return !(bienAvant(b, it) || r[it.id]); }).length;
         h += '<div class="pg-action"><button type="button" class="btn btn-principal pg-verifier" data-verifier="' + esc(b.id) + '"' + (reste ? " disabled" : "") + ">" + esc(b.reprend && !aRevoir.length ? (b.bouton_rien || "Continuer") : (b.bouton || "Vérifier")) + " " + ic("i-check") + "</button>" +
-          '<span class="pg-reste" aria-live="polite">' + (reste ? reste + (reste > 1 ? " demandes à classer" : " demande à classer") : (b.reprend && !aRevoir.length ? "Rien à reprendre : tout était juste" : "Tout est classé")) + "</span></div>";
+          '<span class="pg-reste" aria-live="polite">' + (reste ? (b.qcu ? "Choisissez une réponse" : reste + (reste > 1 ? " demandes à classer" : " demande à classer")) : (b.reprend && !aRevoir.length ? "Rien à reprendre : tout était juste" : "Tout est classé")) + "</span></div>";
       } else {
         var bons = itemsDe(b).filter(function (it) { var c = bienAvant(b, it) ? prec[it.id] : r[it.id]; return c === it.attendu; }).length, tous = itemsDe(b).length;
         var txt = bons === tous ? (b.bilan_tout || b.bilan) : b.bilan;
