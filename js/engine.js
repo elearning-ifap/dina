@@ -1754,7 +1754,7 @@
     var etapes = (e.parcours || []).map(function (p, n) {
       var niv = p.bloc ? R.niveaux[p.bloc] : null, vig = p.bloc && R.vigilances.indexOf(p.bloc) >= 0;
       return '<li class="psu-etape"><span class="psu-num">' + (n + 1) + '</span><div><span class="surtitre">' + esc(p.code) + "</span><strong>" + esc(p.titre) + "</strong>" + (p.texte ? "<p>" + inline(p.texte) + "</p>" : "") +
-        (niv ? '<span class="pos-niveau pos-niveau--' + niv + '">Vos repères : ' + esc((N[niv] || niv).toLowerCase()) + "</span>" : "") +
+        (niv && N[niv] ? '<span class="pos-niveau pos-niveau--' + niv + '">' + esc(N[niv]) + "</span>" : "") +
         (vig ? '<span class="pos-carte-vig">' + ic("i-attention") + "Point de vigilance</span>" : "") + "</div></li>";
     }).join("");
     zone.innerHTML = '<div class="colonne colonne--large pos-suite-ecran">' + entete(e, "Bilan du positionnement") + '<div class="texte">' + md(e.texte) + "</div>" +

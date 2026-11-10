@@ -1002,9 +1002,8 @@ window.DINA_DATA = {
    "id": "POS-SUITE",
    "type": "pos-suite",
    "etape": "Positionnement",
-   "titre": "Votre parcours commence",
-   "texte": "Vous allez suivre **Noa** et ses collègues à l'**ÉLAN**, un établissement public calédonien imaginaire installé à Koné. Noa y travaille depuis quelques semaines, comme vous peut-être.\nLeurs situations ressemblent aux vôtres : des demandes d'usagers, des courriels, des réunions, des règles à respecter. Vous les aidez, et vous gardez les repères pour votre propre poste.\n",
-   "illustration": "ILL-P3",
+   "titre": "Votre parcours",
+   "texte": "Vous allez maintenant suivre **Noa** et ses collègues à l'**ÉLAN**. Leurs situations ressemblent aux vôtres : vous les aidez, et vous gardez les repères pour votre propre poste.\n",
    "parcours_titre": "Votre parcours, étape par étape",
    "parcours_texte": "Vous suivez toutes les étapes, dans l'ordre. Pour chaque module, votre résultat du positionnement dans le domaine qu'il travaille.",
    "parcours": [
@@ -1050,37 +1049,10 @@ window.DINA_DATA = {
      "bloc": "B6"
     }
    ],
-   "duree_totale": "8 h environ au total, en séquences de 15 à 20 minutes, sur trois mois environ.",
-   "dispositif_titre": "Ce que DINA vous propose",
-   "dispositif": [
-    {
-     "titre": "Des situations proches des vôtres",
-     "texte": "Vous décidez, vous voyez ce qui se passe, puis vous apprenez la règle."
-    },
-    {
-     "titre": "Des erreurs expliquées",
-     "texte": "Chaque réponse a son explication. Se tromper fait partie de l'apprentissage."
-    },
-    {
-     "titre": "Des fiches à garder",
-     "texte": "Les repères de chaque module vous attendent dans son carnet, à télécharger."
-    },
-    {
-     "titre": "Un badge par module",
-     "texte": "Il vous est délivré quand vous réussissez l'évaluation du module."
-    }
-   ],
-   "aide": "Une question sur la plateforme ? Le bouton d'aide est en haut de chaque écran.",
    "suite": "ACCUEIL"
   }
  },
  "fiches": {},
- "illustrations": {
-  "ILL-P3": {
-   "scene": "Organigramme illustré des dix personnages (reprise du prologue)",
-   "personnages": "Les dix personnages",
-   "alt": "Organigramme de l'ÉLAN. En haut, Ariane, directrice. Pôle études et projets : Samuel, responsable du pôle, puis Noa, chargé d'études et d'appui aux projets, et Malia, chargée d'études et d'évaluation, marraine de Noa. Pôle ressources et administration : Ana, développement des compétences, et Cédric, accueil et logistique. En bas, les partenaires, qui ne dépendent pas de l'ÉLAN : Joël et Teiva, association Passerelles ; Léna, administration provinciale ; Élise, une commune."
-  }
- },
+ "illustrations": {},
  "source": "Storyboard — positionnement v0.7.md"
 };
