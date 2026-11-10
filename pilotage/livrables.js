@@ -13,9 +13,11 @@ window.DINA_PILOTAGE = {
   avertissement: "",   /* statuts confirmés par Marc Rolland le 06-11 ; texte affiché en tête de page si renseigné */
 
   /* Temps de travail, en jours temps plein. Reprendre les chiffres de « Suivi du temps DINA » (coffre Obsidian). */
+  /* Les 32 jours couvrent la production seule. Réunions et concertation (équipe projet, employeurs) viennent en plus. */
   temps: {
-    prevuJours: 32,          /* charge annoncée à la direction */
-    passeJours: 10.53,       /* cumul saisi */
+    prevuJours: 32,          /* charge de production annoncée à la direction */
+    passeJours: 8.8,         /* production : cumul saisi */
+    concertationJours: 1.73, /* réunions et concertation : cumul saisi, hors des 32 j */
     arreteAu: "10-11-2026"   /* date de la dernière saisie */
   },
 

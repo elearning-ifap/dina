@@ -72,9 +72,10 @@
     if (T && T.prevuJours) {
       var conso = Math.round(100 * T.passeJours / T.prevuJours), reste = T.prevuJours - T.passeJours;
       var ecart = conso - avance;
-      html += '<article class="indicateur"><h3>Temps passé</h3><p class="grand">' + fr(T.passeJours) + "<small> j sur " + fr(T.prevuJours) + " j prévus</small></p>" +
+      html += '<article class="indicateur"><h3>Temps de production</h3><p class="grand">' + fr(T.passeJours) + "<small> j sur " + fr(T.prevuJours) + " j prévus</small></p>" +
         jauge(conso, conso > 100 ? "var(--rouge)" : "var(--bleu-progression)") +
         '<p class="explication">' + conso + "\u00a0% de la charge consommée, " + fr(reste) + " j restants. Jours temps plein, dernière saisie le " + esc(T.arreteAu) + ".</p>" +
+        (T.concertationJours != null ? '<p class="explication">En plus de la production : ' + fr(T.concertationJours) + " j de réunions et de concertation (équipe projet, employeurs), hors des " + fr(T.prevuJours) + " j.</p>" : "") +
         '<p class="comparaison ' + (ecart > 10 ? "c-alerte" : "c-ok") + '">' +
         (ecart > 10 ? "Le temps consommé dépasse l'avancement de " + ecart + " points."
                     : "L'avancement (" + avance + "\u00a0%) est en phase ou en avance sur le temps consommé (" + conso + "\u00a0%).") + "</p>" +
