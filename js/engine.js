@@ -1491,12 +1491,13 @@
   function rendreReponseLibre(e) {
     zone.classList.add("ecran--lecture");
     if (e.agenda) zone.classList.add("ecran--visuel");
-    zone.innerHTML = '<div class="colonne' + (e.agenda ? " colonne--large" : "") + '">' + entete(e, libelleEtape(e)) + (e.texte ? '<div class="texte">' + md(e.texte) + "</div>" : "") +
+    zone.innerHTML = '<div class="colonne' + (e.agenda ? " colonne--large" : "") + '">' + (e.illustration ? illustration(e.illustration, "illu-bandeau") : "") + entete(e, libelleEtape(e)) + (e.texte ? '<div class="texte">' + md(e.texte) + "</div>" : "") +
       (e.agenda ? '<h2 class="fin-sous">' + esc(e.agenda_titre || "Votre semaine") + "</h2>" + posAgenda() : "") +
       '<label class="rl-question" for="rl-saisie">' + inline(e.question) + "</label>" +
       '<textarea id="rl-saisie" class="rl-saisie" rows="5" autocomplete="off"></textarea>' +
       '<p class="rl-mention">' + ic("i-cadenas") + "<span>" + esc(e.mention || "Votre réponse reste sur cet écran. Elle n'est transmise à personne.") + "</span></p>" +
       '<div class="feedback feedback--adapte" id="feedback" hidden aria-live="polite"></div></div>';
+    if (e.illustration) brancherImages(zone);
     var ta = $("rl-saisie");
     function montrer() { var fb = $("feedback"); fb.innerHTML = md(e.apres); fb.hidden = false; fb.scrollIntoView({ block: "nearest", behavior: "smooth" });
       if (e.garder) memoriser(e.id, ta.value.trim());   /* gardée sur cet appareil, pour l'impression du profil (D117) */

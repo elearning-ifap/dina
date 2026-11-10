@@ -50,6 +50,7 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Positionnement",
    "titre": "Une semaine de travail",
+   "illustration": "ILL-POS1",
    "texte": "Vous travaillez dans un service public calédonien depuis quelques jours ou quelques mois. Voici une semaine ordinaire : 15 moments, du lundi au vendredi.\nChoisissez ce que vous feriez vraiment, sans chercher la bonne réponse. À la fin, vous verrez où vous en êtes sur les compétences du socle DINA.\nPas de note, pas d'échec. Une seule passe : votre premier réflexe compte. Vos réponses restent privées.\n",
    "a_retenir": "Version de démonstration : contenus non validés par un expert, réponses non enregistrées.",
    "suite": "POS-S01"
@@ -881,6 +882,7 @@ window.DINA_DATA = {
   "POS-S16": {
    "id": "POS-S16",
    "type": "reponse-libre",
+   "illustration": "ILL-POS2",
    "etape": "Positionnement",
    "titre": "Votre semaine se termine",
    "texte": "Vendredi, 17 h. Voici ce que vous avez vécu cette semaine.",
@@ -1053,6 +1055,17 @@ window.DINA_DATA = {
   }
  },
  "fiches": {},
- "illustrations": {},
+ "illustrations": {
+  "ILL-POS1": {
+   "scene": "Lundi 7 h 45, un bureau de service public calédonien avant l'arrivée de l'agent (scène)",
+   "personnages": "—",
+   "alt": "Lundi matin, un bureau dans un service public calédonien. Personne encore : un café fume, l'ordinateur est allumé, l'agenda de la semaine est ouvert, un flamboyant en fleurs derrière les nacos."
+  },
+  "ILL-POS2": {
+   "scene": "Vendredi 17 h, le même bureau rangé (bandeau)",
+   "personnages": "—",
+   "alt": "Vendredi en fin d'après-midi, le même bureau rangé. L'ordinateur est fermé, l'agenda montre une semaine remplie, le sac est prêt."
+  }
+ },
  "source": "Storyboard — positionnement v0.7.md"
 };
