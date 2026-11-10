@@ -1,12 +1,35 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — positionnement v0.6.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — positionnement v0.7.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "POS",
   "type": "module",
   "code": "Positionnement",
-  "titre": "Votre première semaine",
+  "titre": "Une semaine de travail",
   "duree": "15 à 20 min environ",
   "sans_menu": true,
+  "competences_lib": {
+   "C01": "Je sais quelle institution fait quoi",
+   "C02": "Je trouve le bon interlocuteur",
+   "C03": "Je connais mon statut, mes missions et mes limites",
+   "C04": "J'agis dans le cadre hiérarchique",
+   "C05": "J'organise mon activité et mes priorités",
+   "C06": "Je communique de façon adaptée",
+   "C07": "Je coopère avec d'autres services et organisations",
+   "C08": "Je gère une situation relationnelle simple",
+   "C09": "J'identifie et j'applique les règles",
+   "C10": "Je protège les données et mes usages numériques",
+   "C11": "J'utilise les moyens publics à bon escient",
+   "C12": "Je veille à la santé et à la sécurité au travail",
+   "C13": "J'applique les principes du service public",
+   "C14": "Je fais preuve de discernement dans une situation sensible",
+   "C15": "Je veille à la qualité du service rendu",
+   "C16": "Je soigne la relation avec l'usager",
+   "C17": "Je recherche, je vérifie et j'actualise une information",
+   "C18": "J'agis en autonomie et je demande appui au bon moment",
+   "C19": "Je m'adapte aux évolutions",
+   "C20": "Je contribue à améliorer le service",
+   "C21": "Je prends du recul sur ma pratique"
+  },
   "hub": {
    "href": "index.html",
    "libelle": "Retour à l'accueil du prototype"
@@ -15,7 +38,7 @@ window.DINA_DATA = {
    {
     "id": "pos",
     "libelle": "Positionnement",
-    "titre": "Votre première semaine",
+    "titre": "Une semaine de travail",
     "debut": "POS-INTRO",
     "duree": "15 à 20 min environ"
    }
@@ -26,8 +49,8 @@ window.DINA_DATA = {
    "id": "POS-INTRO",
    "type": "narration",
    "etape": "Positionnement",
-   "titre": "Votre première semaine commence",
-   "texte": "Lundi, 8 h. Vous prenez votre poste dans un service public calédonien. Déjà en poste ? Repensez à vos premiers jours.\n15 moments vous attendent. Choisissez ce que vous feriez vraiment, sans chercher la bonne réponse, puis voyez ce qui se passe.\nPas de note, pas d'échec. Une seule passe : votre premier réflexe compte. Vos réponses ne sont vues que par vous.\n",
+   "titre": "Une semaine de travail",
+   "texte": "Vous travaillez dans un service public calédonien depuis quelques jours ou quelques mois. Voici une semaine ordinaire : 15 moments, du lundi au vendredi.\nChoisissez ce que vous feriez vraiment, sans chercher la bonne réponse. À la fin, vous verrez où vous en êtes sur les compétences du socle DINA.\nPas de note, pas d'échec. Une seule passe : votre premier réflexe compte. Vos réponses restent privées.\n",
    "a_retenir": "Version de démonstration : contenus non validés par un expert, réponses non enregistrées.",
    "suite": "POS-S01"
   },
@@ -884,7 +907,6 @@ window.DINA_DATA = {
    },
    "vigilance": "**Point de vigilance.** Sur un sujet sensible, vous avez choisi une conduite qui comporte un risque. Le module indiqué vous donne les repères à connaître avant d'agir.\n",
    "mention": "Ce résultat n'est vu que par vous. Votre employeur n'y a pas accès.",
-   "transition": "Dans DINA, vous n'êtes pas seul : une assistance répond à vos questions, chaque erreur est expliquée et chaque module réussi vous vaut un badge. Dans quelques minutes, vous entrez à l'ÉLAN avec Noa, qui vient d'être recruté, et ses collègues. Leur semaine commence par le premier domaine : se repérer.",
    "sans_vigilance": "Aucun point de vigilance sur les sujets sensibles de la semaine.",
    "blocs": [
     {
@@ -974,10 +996,91 @@ window.DINA_DATA = {
      "decouvrir": "Ces réflexes d'autonomie se construisent dans chaque module. Le bilan de fin de parcours vous aidera à mesurer vos progrès."
     }
    ],
+   "suite": "POS-SUITE"
+  },
+  "POS-SUITE": {
+   "id": "POS-SUITE",
+   "type": "pos-suite",
+   "etape": "Positionnement",
+   "titre": "Votre parcours commence",
+   "texte": "Vous allez suivre **Noa** et ses collègues à l'**ÉLAN**, un établissement public calédonien imaginaire installé à Koné. Noa y travaille depuis quelques semaines, comme vous peut-être.\nLeurs situations ressemblent aux vôtres : des demandes d'usagers, des courriels, des réunions, des règles à respecter. Vous les aidez, et vous gardez les repères pour votre propre poste.\n",
+   "illustration": "ILL-P3",
+   "parcours_titre": "Votre parcours, étape par étape",
+   "parcours_texte": "Vous suivez toutes les étapes, dans l'ordre. Pour chaque module, votre résultat du positionnement dans le domaine qu'il travaille.",
+   "parcours": [
+    {
+     "code": "Prologue",
+     "titre": "Bienvenue à l'ÉLAN",
+     "texte": "Vous faites connaissance avec Noa et ses collègues."
+    },
+    {
+     "code": "M1",
+     "titre": "Je me repère",
+     "texte": "Comprendre mon environnement : qui fait quoi au pays, qui décide dans mon organisation.",
+     "bloc": "B1"
+    },
+    {
+     "code": "M2",
+     "titre": "Je trouve ma place",
+     "texte": "Mon rôle, mes limites, mes priorités.",
+     "bloc": "B2"
+    },
+    {
+     "code": "M3",
+     "titre": "Je travaille avec les autres",
+     "texte": "Communiquer et coopérer, y compris quand la relation se tend.",
+     "bloc": "B3"
+    },
+    {
+     "code": "M4",
+     "titre": "J'agis dans un cadre sécurisé",
+     "texte": "Les règles, les données, les moyens publics, la santé et la sécurité.",
+     "bloc": "B4"
+    },
+    {
+     "code": "M5",
+     "titre": "J'incarne le service public",
+     "texte": "Les principes du service public dans les gestes du quotidien.",
+     "bloc": "B5"
+    },
+    {
+     "code": "Bilan",
+     "titre": "Bilan de parcours",
+     "texte": "Vous mesurez le chemin parcouru et retrouvez votre réponse de fin de semaine.",
+     "bloc": "B6"
+    }
+   ],
+   "duree_totale": "8 h environ au total, en séquences de 15 à 20 minutes, sur trois mois environ.",
+   "dispositif_titre": "Ce que DINA vous propose",
+   "dispositif": [
+    {
+     "titre": "Des situations proches des vôtres",
+     "texte": "Vous décidez, vous voyez ce qui se passe, puis vous apprenez la règle."
+    },
+    {
+     "titre": "Des erreurs expliquées",
+     "texte": "Chaque réponse a son explication. Se tromper fait partie de l'apprentissage."
+    },
+    {
+     "titre": "Des fiches à garder",
+     "texte": "Les repères de chaque module vous attendent dans son carnet, à télécharger."
+    },
+    {
+     "titre": "Un badge par module",
+     "texte": "Il vous est délivré quand vous réussissez l'évaluation du module."
+    }
+   ],
+   "aide": "Une question sur la plateforme ? Le bouton d'aide est en haut de chaque écran.",
    "suite": "ACCUEIL"
   }
  },
  "fiches": {},
- "illustrations": {},
- "source": "Storyboard — positionnement v0.6.md"
+ "illustrations": {
+  "ILL-P3": {
+   "scene": "Organigramme illustré des dix personnages (reprise du prologue)",
+   "personnages": "Les dix personnages",
+   "alt": "Organigramme de l'ÉLAN. En haut, Ariane, directrice. Pôle études et projets : Samuel, responsable du pôle, puis Noa, chargé d'études et d'appui aux projets, et Malia, chargée d'études et d'évaluation, marraine de Noa. Pôle ressources et administration : Ana, développement des compétences, et Cédric, accueil et logistique. En bas, les partenaires, qui ne dépendent pas de l'ÉLAN : Joël et Teiva, association Passerelles ; Léna, administration provinciale ; Élise, une commune."
+  }
+ },
+ "source": "Storyboard — positionnement v0.7.md"
 };

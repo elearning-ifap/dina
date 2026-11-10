@@ -1157,3 +1157,27 @@ a.btn { text-decoration: none; }
 
 /* 06-11 : sur téléphone, le lecteur occupe toute la largeur (la limite à 88vw laissait des marges à 390 px) */
 @media (max-width: 480px) { .dina-player { max-width: none; } }
+
+/* Positionnement v0.7 (10-11) : compétences en jeu, affichées après le choix */
+.pos-comps { margin-top: .9rem; padding: .8rem 1rem; border: 1px dashed var(--bordure); border-radius: var(--rayon); background: var(--carte); }
+.pos-comps-tete { display: block; font-size: var(--taille-petit); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--texte-2); margin-bottom: .4rem; }
+.pos-comps ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.pos-comps li { display: flex; gap: .55rem; align-items: baseline; }
+.pos-comps .pg-comp { flex: none; padding: .05rem .5rem; border-radius: .4rem; background: var(--fond); color: var(--bleu); font-weight: 700; font-size: var(--taille-petit); }
+
+/* D133 (10-11) : second écran du bilan — votre parcours commence */
+.pos-suite-ecran .psu-illu { margin: 1.2rem 0; }
+.psu-equipe { list-style: none; margin: .8rem 0 0; padding: 0; display: grid; gap: .8rem; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+.psu-perso { display: flex; gap: .8rem; align-items: center; padding: .7rem .9rem; background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); }
+.psu-perso strong { display: block; font-family: var(--police-titre); color: var(--bleu-sombre); }
+.psu-perso span span, .psu-perso > span:last-child { font-size: .95rem; }
+.psu-partenaires { margin-top: .8rem; color: var(--texte-2); }
+.psu-parcours { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: .7rem; }
+.psu-etape { display: flex; gap: .9rem; align-items: flex-start; padding: .9rem 1.1rem; background: var(--carte); border: 1px solid var(--bordure); border-left: 4px solid var(--marque-sarcelle); border-radius: var(--rayon); }
+.psu-num { flex: none; width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; background: var(--bleu); color: #fff; font-weight: 700; }
+.psu-etape .surtitre { margin: 0; }
+.psu-etape strong { display: block; font-family: var(--police-titre); font-size: 1.08rem; color: var(--bleu-sombre); }
+.psu-etape p { margin: .25rem 0 .45rem; }
+.psu-etape .pos-niveau, .psu-etape .pos-carte-vig { display: inline-flex; margin-right: .5rem; margin-top: .2rem; }
+.psu-duree { display: flex; gap: .5rem; align-items: center; margin-top: .9rem; color: var(--texte-2); }
+.pos-suite-ecran .psu-illu { max-width: 46rem; margin-left: auto; margin-right: auto; }

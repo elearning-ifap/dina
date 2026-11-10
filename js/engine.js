@@ -1609,7 +1609,7 @@
       var o = e.options.filter(function (x) { return x.id === c; })[0];
       /* v0.5 (D117) : la conséquence arrive comme une scène (picto du canal), suivie de ce qui se joue — sans verdict */
       suite.innerHTML = '<div class="pos-csq"><span class="pos-csq-ico">' + ic(C ? C.icone : "i-lecture") + '</span><div><span class="pos-suite-tete">Ce qui se passe ensuite</span><p>' + inline(o.consequence) + "</p></div></div>" +
-        (e.enjeu ? '<p class="pos-enjeu">' + ic("i-ampoule") + "<span><strong>Ce qui se joue</strong> — " + inline(e.enjeu) + "</span></p>" : "");
+        (e.enjeu ? '<p class="pos-enjeu">' + ic("i-ampoule") + "<span><strong>Ce qui se joue</strong> — " + inline(e.enjeu) + "</span></p>" : "") + posCompetences(e);
       suite.hidden = false; suite.classList.toggle("pos-suite--pop", !restaure);
       if (!restaure) suite.scrollIntoView({ block: "nearest", behavior: "smooth" });
       principal("Continuer", function () { suivant(e); });
@@ -1664,6 +1664,13 @@
     return '<figure class="pos-radar"><svg viewBox="-80 -6 580 362" role="img" aria-label="' + esc("Votre profil par domaine. " + desc) + '">' + grille + axes +
       '<polygon class="rd-forme" points="' + forme + '"/>' + points + libs + "</svg></figure>";
   }
+  /* v0.7 (10-11) : compétences en jeu, affichées après le choix (avant, elles orienteraient la réponse) */
+  function posCompetences(e) {
+    var L = M.competences_lib || {}, cs = (e.competences || []).filter(function (c) { return L[c]; });
+    if (!cs.length) return "";
+    return '<div class="pos-comps"><span class="pos-comps-tete">' + (cs.length > 1 ? "Compétences en jeu" : "Compétence en jeu") + '</span><ul>' +
+      cs.map(function (c) { return '<li><span class="pg-comp">' + esc(c) + "</span>" + inline(L[c]) + "</li>"; }).join("") + "</ul></div>";
+  }
   function rendrePosProfil(e) {
     zone.classList.add("ecran--lecture", "ecran--visuel");
     var sec = sectionDe(e.id);
@@ -1708,6 +1715,8 @@
         '<span class="cr-verso" hidden><span class="pos-carte-titre">' + esc(b.titre) + "</span>" + (niveau ? "<span>" + inline(b[niveau]) + "</span>" : "") + '<span class="pos-carte-module">' + ic("i-chemin") + "<strong>" + esc(b.module) + "</strong></span>" +
         '<span class="pos-carte-ex"><em>Par exemple :</em> ' + inline(b.exemple) + "</span></span></button></li>";
     }).join("");
+    /* D133 : résultat gardé pour l'écran suivant (votre parcours, module par module) */
+    etat.auto.pos = { niveaux: niveaux, vigilances: vigilances.map(function (x) { return x.bloc.id; }) }; sauver();
     var vig = vigilances.length ? '<section class="pos-vigilance" aria-label="Points de vigilance">' + ic("i-attention") + "<div>" + md(e.vigilance) +
       '<ul class="pos-vig-liste">' + vigilances.map(function (x) { return "<li><strong>" + esc(x.item.titre) + "</strong><span>" + esc(x.bloc.module) + "</span></li>"; }).join("") + "</ul></div></section>"
       : '<section class="pos-vigilance pos-vigilance--ok">' + ic("i-check-cercle") + "<div><p>" + esc(e.sans_vigilance || "Aucun point de vigilance sur les sujets sensibles de la semaine.") + "</p></div></section>";
@@ -1731,6 +1740,32 @@
       $("annonce").textContent = retournee ? v.textContent : r.textContent;
     });
     $("pos-imprimer").addEventListener("click", function () { document.body.classList.add("impression-profil"); window.print(); setTimeout(function () { document.body.classList.remove("impression-profil"); }, 500); });
+    /* D133 : le bilan tient en deux écrans ; le second présente l'univers de Noa et la suite */
+    if (E[e.suite]) principal("Découvrir la suite de votre parcours", function () { suivant(e); });
+    else boutonFin(function () { principal("", null); });
+  }
+
+  /* D133 (10-11) : second écran du bilan — l'ÉLAN, Noa et ses collègues, le parcours module par module, ce que DINA propose */
+  function rendrePosSuite(e) {
+    zone.classList.add("ecran--lecture", "ecran--visuel");
+    var R = etat.auto.pos || { niveaux: {}, vigilances: [] }, N = {}, prof = Object.keys(E).filter(function (id) { return E[id].type === "pos-profil"; })[0];
+    if (prof) N = E[prof].niveaux || {};
+    var equipe = (e.equipe || []).map(function (p) { return '<li class="psu-perso">' + avatar(p.nom, "avatar--grand") + "<span><strong>" + esc(p.nom) + "</strong>" + esc(p.role) + "</span></li>"; }).join("");
+    var etapes = (e.parcours || []).map(function (p, n) {
+      var niv = p.bloc ? R.niveaux[p.bloc] : null, vig = p.bloc && R.vigilances.indexOf(p.bloc) >= 0;
+      return '<li class="psu-etape"><span class="psu-num">' + (n + 1) + '</span><div><span class="surtitre">' + esc(p.code) + "</span><strong>" + esc(p.titre) + "</strong>" + (p.texte ? "<p>" + inline(p.texte) + "</p>" : "") +
+        (niv ? '<span class="pos-niveau pos-niveau--' + niv + '">Vos repères : ' + esc((N[niv] || niv).toLowerCase()) + "</span>" : "") +
+        (vig ? '<span class="pos-carte-vig">' + ic("i-attention") + "Point de vigilance</span>" : "") + "</div></li>";
+    }).join("");
+    zone.innerHTML = '<div class="colonne colonne--large pos-suite-ecran">' + entete(e, "Bilan du positionnement") + '<div class="texte">' + md(e.texte) + "</div>" +
+      (e.illustration ? illustration(e.illustration, "psu-illu") : "") +
+      (equipe ? '<h2 class="fin-sous">' + esc(e.equipe_titre || "L'équipe") + '</h2><ul class="psu-equipe">' + equipe + "</ul>" : "") +
+      (e.partenaires ? '<p class="psu-partenaires">' + inline(e.partenaires) + "</p>" : "") +
+      '<h2 class="fin-sous">' + esc(e.parcours_titre || "Votre parcours") + "</h2>" + (e.parcours_texte ? "<p>" + inline(e.parcours_texte) + "</p>" : "") +
+      '<ol class="psu-parcours">' + etapes + "</ol>" + (e.duree_totale ? '<p class="psu-duree">' + ic("i-semaine") + "<span>" + inline(e.duree_totale) + "</span></p>" : "") +
+      (e.dispositif ? '<h2 class="fin-sous">' + esc(e.dispositif_titre || "Ce que DINA vous propose") + "</h2>" + points(e.dispositif) : "") +
+      (e.aide ? '<p class="revenir">' + ic("i-aide") + "<span>" + inline(e.aide) + "</span></p>" : "") + "</div>";
+    brancherImages(zone);
     boutonFin(function () { principal("", null); });
   }
 
@@ -1954,7 +1989,7 @@
     "eval-item": rendreEvalItem, "eval-resultat": rendreEvalResultat, "auto-positionnement": rendreAuto,
     ressources: rendreRessources, "fin-section": rendreFin, fin: rendreFin,
     hotspot: rendreHotspot, planning: rendrePlanning, cartes: rendreCartes, "reponse-libre": rendreReponseLibre, recherche: rendreRecherche,
-    "pos-item": rendrePosItem, "pos-profil": rendrePosProfil, sources: rendreSources, page: rendrePage
+    "pos-item": rendrePosItem, "pos-profil": rendrePosProfil, "pos-suite": rendrePosSuite, sources: rendreSources, page: rendrePage
   };
   /* Écran « Sources » (27-10) : les textes cités, regroupés en fin d'épisode ou de module, avec leur lien */
   function rendreSources(e) {
