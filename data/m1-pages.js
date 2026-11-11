@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.3.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.4.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M1-PAGES",
@@ -13,7 +13,7 @@ window.DINA_DATA = {
    {
     "id": "ep1",
     "libelle": "Épisode 1",
-    "jour": "Épisode 1",
+    "jour": "Lundi",
     "savoir": "Savoir qui est compétent",
     "titre": "Qui fait quoi au pays ?",
     "debut": "QFQ-PAGE",
@@ -23,7 +23,7 @@ window.DINA_DATA = {
    {
     "id": "ep2",
     "libelle": "Épisode 2",
-    "jour": "Épisode 2",
+    "jour": "Mardi",
     "savoir": "Savoir à qui s'adresser",
     "titre": "Qui décide à l'ÉLAN ?",
     "debut": "QFQ-E2",
@@ -33,7 +33,7 @@ window.DINA_DATA = {
    {
     "id": "ep3",
     "libelle": "Épisode 3",
-    "jour": "Épisode 3",
+    "jour": "Mercredi",
     "savoir": "Vérifier une information",
     "titre": "Une information sûre",
     "debut": "QFQ-E3",
@@ -43,7 +43,7 @@ window.DINA_DATA = {
    {
     "id": "defi",
     "libelle": "Défi",
-    "jour": "Défi",
+    "jour": "Jeudi",
     "savoir": "Le défi : le premier appel de Joël",
     "titre": "Le premier appel de Joël",
     "debut": "QFQ-DEF",
@@ -53,7 +53,7 @@ window.DINA_DATA = {
    {
     "id": "eval",
     "libelle": "Évaluation",
-    "jour": "Évaluation",
+    "jour": "Vendredi",
     "savoir": "L'évaluation du module",
     "titre": "L'évaluation",
     "debut": "M1-EVA-INTRO",
@@ -83,25 +83,25 @@ window.DINA_DATA = {
    "jalons": [
     {
      "id": "competent",
-     "jour": "Épisode 1",
+     "jour": "Lundi",
      "libelle": "Savoir qui est compétent",
      "section": "ep1"
     },
     {
      "id": "decide",
-     "jour": "Épisode 2",
+     "jour": "Mardi",
      "libelle": "Savoir qui signe pour l'ÉLAN",
      "section": "ep2"
     },
     {
      "id": "verifie",
-     "jour": "Épisode 3",
+     "jour": "Mercredi",
      "libelle": "Vérifier la liste ligne par ligne",
      "section": "ep3"
     },
     {
      "id": "appel",
-     "jour": "Défi",
+     "jour": "Jeudi",
      "libelle": "Répondre à Passerelles sans promettre",
      "section": "defi"
     }
@@ -283,7 +283,7 @@ window.DINA_DATA = {
      "phase": "situation",
      "titre": "Huit demandes sur le cahier d'accueil",
      "illustration": "ILL-N09",
-     "texte": "Fin de matinée, à l'accueil de l'ÉLAN. Cédric tient le cahier des visites et des appels. Huit habitants sont passés ou ont téléphoné. Aucune de leurs demandes n'est pour l'ÉLAN : il faut leur dire où aller.",
+     "texte": "Lundi, fin de matinée, à l'accueil de l'ÉLAN. Cédric tient le cahier des visites et des appels. Huit habitants sont passés ou ont téléphoné. Aucune de leurs demandes n'est pour l'ÉLAN : il faut leur dire où aller.",
      "repliques": [
       {
        "personnage": "Cédric",
@@ -643,7 +643,7 @@ window.DINA_DATA = {
      "phase": "situation",
      "titre": "Le comité de direction",
      "illustration": "ILL-N03",
-     "texte": "Ce matin, Noa assiste au comité de direction de l'ÉLAN pour se présenter. Ariane ouvre la séance.",
+     "texte": "Mardi matin, Noa assiste au comité de direction de l'ÉLAN pour se présenter. Ariane ouvre la séance.",
      "repliques": [
       {
        "personnage": "Ariane",
@@ -1040,7 +1040,7 @@ window.DINA_DATA = {
      "phase": "situation",
      "titre": "Une ligne à compléter",
      "illustration": "ILL-N04",
-     "texte": "Joël a remis la liste d'orientation aux bénévoles de Passerelles. Malia la relit avec Noa : « Pour la couverture sociale, il faudrait ajouter le délai pour s'affilier après une embauche. L'accueil le donnera au téléphone. »",
+     "texte": "Mercredi. Joël a remis la liste d'orientation aux bénévoles de Passerelles. Malia la relit avec Noa : « Pour la couverture sociale, il faudrait ajouter le délai pour s'affilier après une embauche. L'accueil le donnera au téléphone. »",
      "repliques": [
       {
        "personnage": "Malia",
@@ -1601,7 +1601,7 @@ window.DINA_DATA = {
    "type": "page",
    "etape": "Défi",
    "titre": "Le premier appel de Joël",
-   "chapeau": "Noa est seul au pôle. Un partenaire appelle et demande plus que ce que Noa peut accorder. Vous répondez, vous découvrez ce qui est à lui et ce qui engage l'ÉLAN, puis vous rendez compte.",
+   "chapeau": "Noa est seul au pôle. Un partenaire appelle et demande plus que ce que Noa peut accorder. Vous répondez, vous découvrez comment transmettre au bon interlocuteur, avec le contexte, puis vous rendez compte.",
    "competences": [
     "C02",
     "C18"
@@ -1629,14 +1629,14 @@ window.DINA_DATA = {
      "court": "Noa le fait"
     },
     {
+     "id": "oriente",
+     "libelle": "Noa oriente vers un autre service",
+     "court": "Noa oriente vers un autre service"
+    },
+    {
      "id": "transmet",
      "libelle": "Noa transmet à Samuel",
      "court": "Noa transmet à Samuel"
-    },
-    {
-     "id": "non",
-     "libelle": "Noa ne le fait pas",
-     "court": "Noa ne le fait pas"
     }
    ],
    "items": [
@@ -1661,15 +1661,15 @@ window.DINA_DATA = {
      "court": "Promettre l'appui de l'ÉLAN",
      "attendu": "transmet",
      "feedback": "Un appui de l'établissement se décide à la direction : Noa transmet la demande, il ne promet rien.",
-     "guichet": "Ça engage l'ÉLAN : la direction décide"
+     "guichet": "Un appui de l'ÉLAN : Samuel, avec le contexte"
     },
     {
      "id": "P3",
      "libelle": "Donner à Joël les coordonnées du pôle liaison territoriale, pour la salle que propose la commune.",
      "court": "Orienter vers le pôle liaison",
-     "attendu": "moi",
-     "feedback": "Orienter vers le bon service n'engage rien : Noa peut le faire.",
-     "guichet": "Orienter n'engage rien"
+     "attendu": "oriente",
+     "feedback": "La salle relève de la commune ; c'est le pôle liaison territoriale qui suit les relations avec elle : Noa donne ses coordonnées.",
+     "guichet": "Le service qui suit la question"
     },
     {
      "id": "P4",
@@ -1677,15 +1677,15 @@ window.DINA_DATA = {
      "court": "Fixer une réunion avec la directrice",
      "attendu": "transmet",
      "feedback": "L'agenda de la direction ne se fixe pas sans elle : Noa transmet la demande à Samuel.",
-     "guichet": "L'agenda de la direction"
+     "guichet": "L'agenda de la direction : Samuel"
     },
     {
      "id": "P5",
-     "libelle": "Envoyer à Joël le compte rendu interne du dernier comité de direction.",
-     "court": "Envoyer un document interne",
-     "attendu": "non",
-     "feedback": "Un document interne ne sort pas sans accord : Noa ne l'envoie pas, et il ne le propose pas.",
-     "guichet": "Un document interne ne sort pas"
+     "libelle": "Savoir quelles aides la province accorde aux associations pour ce type de projet.",
+     "court": "Les aides de la province",
+     "attendu": "oriente",
+     "feedback": "Ce n'est ni à Noa ni à l'ÉLAN de répondre : Noa oriente Joël vers le service de la province chargé des associations, sans rien affirmer à sa place.",
+     "guichet": "La province répond sur ses propres aides"
     },
     {
      "id": "S",
@@ -1701,7 +1701,7 @@ window.DINA_DATA = {
      "phase": "situation",
      "titre": "Seul au pôle",
      "illustration": "ILL-N05",
-     "texte": "Samuel est en rendez-vous jusqu'à 11 h 30, Malia en déplacement toute la journée. Noa est seul au pôle. Le téléphone sonne : c'est Joël, de l'association Passerelles.",
+     "texte": "Jeudi matin. Samuel est en rendez-vous jusqu'à 11 h 30, Malia en déplacement toute la journée. Noa est seul au pôle. Le téléphone sonne : c'est Joël, de l'association Passerelles.",
      "repliques": [
       {
        "personnage": "Joël",
@@ -1753,14 +1753,14 @@ window.DINA_DATA = {
     {
      "type": "apport",
      "phase": "apport",
-     "titre": "Ce qui est à moi, ce qui engage l'ÉLAN",
+     "titre": "Transmettre au bon interlocuteur, avec le contexte",
      "competences": [
       "C02",
       "C18"
      ],
-     "texte": "En fin de matinée, Samuel résume : « Tu fais ce qui est à toi. Ce qui engage l'ÉLAN, tu me le transmets, avec le contexte. »",
-     "regle": "Je fais ce qui relève de mon rôle. Ce qui engage mon employeur, je le transmets à mon responsable, avec le contexte.",
-     "regle_clair": "Engager l'employeur, c'est signer, promettre, dépenser ou parler en son nom. Transmettre avec le contexte, c'est dire qui demande quoi, ce que j'ai déjà fait et ce qui reste à décider.",
+     "texte": "En fin de matinée, Samuel résume : « Ce qui est à toi, tu le fais. Ce qui relève d'un autre service, tu orientes. Ce qui engage l'ÉLAN, tu me le transmets, avec le contexte. »",
+     "regle": "Quand une demande ne relève pas de moi, je la transmets à la bonne personne, avec le contexte : qui demande quoi, ce que j'ai déjà fait, ce qui reste à décider.",
+     "regle_clair": "Transmettre avec le contexte, c'est permettre à l'autre d'agir sans tout redemander. Ce qui engage l'ÉLAN (signer, promettre, dépenser) se décide plus haut : vous verrez au module 2 jusqu'où va la marge de Noa.",
      "methode_titre": "Un message qui se lit en une fois",
      "methode": [
       "Qui a appelé, et quand.",
@@ -1790,7 +1790,7 @@ window.DINA_DATA = {
      "retour": "immediat",
      "bouton": "Vérifier",
      "bilan": "Relisez l'explication des demandes à revoir.",
-     "bilan_tout": "Noa sait ce qui est à lui, ce qu'il transmet et ce qu'il ne fait pas."
+     "bilan_tout": "Noa sait ce qu'il fait, vers qui il oriente et ce qu'il transmet à Samuel."
     },
     {
      "type": "tri",
@@ -1835,7 +1835,7 @@ window.DINA_DATA = {
     {
      "type": "liste",
      "phase": "application",
-     "titre": "Ce que Noa fait, ce qu'il transmet",
+     "titre": "Ce que Noa fait, oriente, transmet",
      "depuis": "role",
      "competences": [
       "C02"
@@ -1850,11 +1850,11 @@ window.DINA_DATA = {
      "texte": "Noa garde ce repère pour les prochains appels.",
      "entetes": [
       "Demande",
-      "Qui",
+      "Noa",
       "Pourquoi"
      ],
      "mention": "Pour le dossier Passerelles : Joël a reçu la liste vérifiée ; sa demande d'appui est chez Samuel.",
-     "a_retenir": "Je fais ce qui relève de mon rôle. Ce qui engage mon employeur, je le transmets à mon responsable, avec le contexte : qui, quoi, ce que j'ai fait, ce qui reste à décider."
+     "a_retenir": "Je fais ce qui relève de mon rôle ; j'oriente vers le bon service ; je transmets à mon responsable ce qui engage mon employeur, avec le contexte : qui, quoi, ce que j'ai fait, ce qui reste à décider."
     }
    ],
    "suite": "QFQ-DEF-FIN"
@@ -1868,15 +1868,15 @@ window.DINA_DATA = {
    "acquis": [
     {
      "titre": "Répondre sans promettre",
-     "texte": "La liste tout de suite, l'appui de l'ÉLAN transmis à Samuel."
+     "texte": "La liste tout de suite, la demande d'appui transmise à Samuel."
     },
     {
-     "titre": "Savoir ce qui est à soi",
-     "texte": "Orienter, informer : oui. Engager l'ÉLAN, diffuser un document interne : non."
+     "titre": "Orienter ou transmettre",
+     "texte": "Vers le bon service, ou vers Samuel quand cela engage l'ÉLAN."
     },
     {
-     "titre": "Rendre compte",
-     "texte": "Un message qui se lit en une fois : qui, quoi, ce qui est fait, ce qui reste à décider."
+     "titre": "Transmettre avec le contexte",
+     "texte": "Qui, quoi, ce qui est fait, ce qui reste à décider."
     }
    ],
    "dossier": "Joël a reçu la liste vérifiée. Sa demande d'appui est chez Samuel.",
@@ -2170,7 +2170,7 @@ window.DINA_DATA = {
    "illustration": "ILL-N06",
    "etape": "Bilan",
    "titre": "Ce que Noa a appris cette semaine",
-   "texte": "Noa relit ses notes. Voici ce qu'il sait faire maintenant.",
+   "texte": "Vendredi, en fin de journée. Noa relit ses notes. Voici ce qu'il sait faire maintenant.",
    "points": [
     {
      "titre": "Je sais qui fait quoi",
@@ -2188,8 +2188,8 @@ window.DINA_DATA = {
      "competence": "C17 — Rechercher, vérifier, actualiser une information"
     },
     {
-     "titre": "Je fais ce qui est à moi",
-     "texte": "Ce qui engage l'ÉLAN, je le transmets à Samuel, avec le contexte.",
+     "titre": "Je transmets avec le contexte",
+     "texte": "Ce qui ne relève pas de moi, je l'oriente ou je le transmets à Samuel : qui, quoi, ce que j'ai fait, ce qui reste à décider.",
      "competence": "C18 — Autonomie et appui"
     }
    ],
@@ -2258,7 +2258,7 @@ window.DINA_DATA = {
    "type": "fin",
    "etape": "Bilan",
    "titre": "Bravo, la semaine de Noa est terminée",
-   "texte": "Vous avez accompagné Noa pendant une semaine à l'ÉLAN. Il sait qui fait quoi, à qui s'adresser, comment vérifier une information, et ce qui est à lui ou engage son employeur.\n",
+   "texte": "Vous avez accompagné Noa pendant une semaine à l'ÉLAN. Il sait qui fait quoi, à qui s'adresser, comment vérifier une information, et comment transmettre une demande avec le contexte.\n",
    "points_titre": "Ce que vous avez appris",
    "points": [
     {
@@ -2274,8 +2274,8 @@ window.DINA_DATA = {
      "texte": "Une source officielle, datée, en vigueur ; la référence notée."
     },
     {
-     "titre": "Faire ce qui est à vous",
-     "texte": "Et transmettre ce qui engage votre employeur, avec le contexte."
+     "titre": "Transmettre avec le contexte",
+     "texte": "Au bon interlocuteur : qui demande quoi, ce qui est fait, ce qui reste à décider."
     }
    ],
    "dossier": "Le fil rouge de la semaine : la liste d'orientation, vérifiée et datée, a servi à répondre à Joël. Samuel parle de la demande de Passerelles à Ariane : le dossier avance.",
@@ -2492,5 +2492,5 @@ window.DINA_DATA = {
    "alt": "Bureau de Noa vu du dessus. Quatre objets représentent quatre sources d'information : une fiche de poste imprimée, un ordinateur ouvert sur l'intranet, une tablette ouverte sur un site officiel, un téléphone posé près d'un carnet."
   }
  },
- "source": "Storyboard — M1 en pages v0.3.md"
+ "source": "Storyboard — M1 en pages v0.4.md"
 };

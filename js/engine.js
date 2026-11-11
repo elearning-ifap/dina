@@ -1784,13 +1784,16 @@
     function catsDe(b) { return b.categories || e.categories || []; }
     var phases = e.phases || ["situation", "apport", "application"];
     function sauverPage() { memoriser(e.id, st); }
-    function libCat(id) { return cats[id] ? cats[id].libelle : ""; }
+    function libCat(id) { return [].concat(id).map(function (x) { return cats[x] ? cats[x].libelle : ""; }).join(" ou "); }
+    /* 11-11 : une réponse attendue peut en admettre plusieurs (planning : « mardi ou mercredi ») */
+    function juste(it, c) { return [].concat(it.attendu).indexOf(c) >= 0; }
+    function attenduCls(it) { return [].concat(it.attendu)[0]; }
     function itemsDe(b) { return (b.items || e.items.map(function (it) { return it.id; })).map(function (id) { return e.items.filter(function (it) { return it.id === id; })[0]; }).filter(Boolean); }
     /* bonne réponse au premier tri (bloc repris) */
-    function bienAvant(b, it) { return b.reprend && st.r[b.reprend] && st.r[b.reprend][it.id] === it.attendu; }
+    function bienAvant(b, it) { return b.reprend && st.r[b.reprend] && juste(it, st.r[b.reprend][it.id]); }
     function complet(b) { var r = st.r[b.id] || {}; return itemsDe(b).every(function (it) { return bienAvant(b, it) || r[it.id]; }); }
     /* Blocs qui demandent une action avant la suite (D128 : la suite s'affiche quand l'activité est terminée) */
-    var BLOQUANTS = { tri: 1, explorer: 1, recherche: 1, message: 1 };
+    var BLOQUANTS = { tri: 1, explorer: 1, recherche: 1, message: 1, ordre: 1 };
     /* Blocs visibles : jusqu'au premier bloc bloquant non terminé, inclus */
     function visibles() {
       var res = [];
@@ -1804,6 +1807,7 @@
       if (b.type === "explorer") return (r.vus || []).length >= Math.min(b.minimum || (b.zones || []).length, (b.zones || []).length);
       if (b.type === "recherche") return !!r.choix;
       if (b.type === "message") return (b.parties || []).every(function (p) { return r[p.id]; });
+      if (b.type === "ordre") return true;
       return complet(b);
     }
     function resteTexte(b) {
@@ -1811,6 +1815,7 @@
       if (b.type === "explorer") { var n = Math.min(b.minimum || (b.zones || []).length, (b.zones || []).length) - (r.vus || []).length; return n > 0 ? "Encore " + n + (n > 1 ? " sources à ouvrir" : " source à ouvrir") : "Vous pouvez continuer"; }
       if (b.type === "recherche") return r.choix ? "Document choisi" : r.jeu ? "Choisissez un document" : "Lancez une recherche";
       if (b.type === "message") { var m = (b.parties || []).filter(function (p) { return !r[p.id]; }).length; return m ? "Encore " + m + (m > 1 ? " parties à choisir" : " partie à choisir") : "Message prêt"; }
+      if (b.type === "ordre") return "Utilisez les flèches pour changer l'ordre";
       return "";
     }
     function actionHtml(b) {
@@ -1879,10 +1884,47 @@
               (x.exemples ? "<p>" + x.exemples.map(inline).join(", ") + "</p>" : "") + '<span class="pg-ref">' + esc(x.ref || "") + "</span></div></li>";
           }).join("") + "</ul></div></figure>";
       }
+      if (b.colonnes) h += colonnes(b.colonnes);
+      if (b.points) h += (b.points_titre ? '<h3 class="pg-sous">' + esc(b.points_titre) + "</h3>" : "") + points(b.points);
       if (b.grille) h += (b.grille.titre ? '<h3 class="pg-sous">' + esc(b.grille.titre) + "</h3>" : "") + grilleHtml(b.grille);
       if (b.methode) h += '<h3 class="pg-sous">' + esc(b.methode_titre || "La méthode") + '</h3><ol class="pg-methode">' + b.methode.map(function (m) { return "<li>" + inline(m) + "</li>"; }).join("") + "</ol>";
       if (b.guichet) h += '<p class="pg-guichet">' + ic("i-mairie") + "<span>" + inline(b.guichet) + "</span></p>";
+      if (b.encadre) h += '<p class="pg-encadre">' + inline(b.encadre) + "</p>";
+      if (b.a_retenir) h += '<div class="a-retenir">' + ic("i-ampoule") + "<span><strong>À retenir</strong> — " + inline(b.a_retenir) + "</span></div>";
       if (b.plus_loin) h += '<details class="pg-plus"><summary>' + esc(b.plus_loin.titre || "Aller plus loin") + "</summary>" + md(b.plus_loin.texte) + "</details>";
+      if (b.sources) h += '<p class="sources"><strong>Sources :</strong> ' + esc(b.sources) + "</p>";
+      return h;
+    }
+    /* ---------- 11-11 : document à lire dans la page (fiche de poste de M2) ; non bloquant ---------- */
+    function blocDocument(b) {
+      var h = b.texte ? '<div class="texte recit">' + md(b.texte) + "</div>" : "";
+      h += '<article class="pg-doc"><header class="pg-doc-tete">' + ic("i-fichier") + "<strong>" + inline(b.doc_titre || b.titre || "") + "</strong></header>" +
+        docHtml({ intro: b.intro, blocs: b.sections || [] }) + (b.organigramme ? orgaHtml(b) : "") + "</article>";
+      return h;
+    }
+    /* ---------- 11-11 : remettre dans l'ordre (repris de l'écran « ordre ») ---------- */
+    function ordreDe(b) {
+      var r = st.r[b.id] = st.r[b.id] || {};
+      if (!r.ordre) { r.ordre = b.depart ? b.depart.slice() : melanger((b.options || []).map(function (o) { return o.id; }), b.attendu); }
+      return r.ordre;
+    }
+    function blocOrdre(b) {
+      var fait = !!st.v[b.id], ids = ordreDe(b), lib = {};
+      (b.options || []).forEach(function (o) { lib[o.id] = o.libelle; });
+      var ok = egal(ids, b.attendu);
+      var h = (b.texte ? '<div class="texte recit">' + md(b.texte) + "</div>" : "") + (b.brief ? '<p class="pg-brief">' + ic("i-ampoule") + "<span>" + inline(b.brief) + "</span></p>" : "") +
+        (b.consigne && !fait ? '<p class="pg-consigne">' + inline(b.consigne) + "</p>" : "");
+      h += '<ol class="ordre pg-ordre">' + ids.map(function (id, i) {
+        var bien = fait && b.attendu[i] === id;
+        return '<li class="ordre-item' + (fait ? (bien ? " pg-ordre--ok" : " pg-ordre--ko") : "") + '" data-id="' + esc(id) + '"><span class="ordre-num">' + (i + 1) + '</span><span class="ordre-lib">' + inline(lib[id]) + "</span>" +
+          (fait ? (bien ? '<span class="pg-marque pg-marque--ok">' + ic("i-check-cercle") + "Bien placé</span>" : '<span class="pg-marque pg-marque--ko">' + ic("i-moitie") + "Attendu en " + (b.attendu.indexOf(id) + 1) + "</span>") :
+            '<span class="ordre-btns"><button type="button" class="btn-fleche" data-ordre="' + esc(b.id) + '" data-sens="-1" aria-label="Monter : ' + esc(lib[id]) + '"' + (i === 0 ? " disabled" : "") + ">" + ic("i-haut") + '</button><button type="button" class="btn-fleche" data-ordre="' + esc(b.id) + '" data-sens="1" aria-label="Descendre : ' + esc(lib[id]) + '"' + (i === ids.length - 1 ? " disabled" : "") + ">" + ic("i-bas") + "</button></span>") + "</li>";
+      }).join("") + "</ol>";
+      if (!fait) h += actionHtml(b);
+      else {
+        h += '<div class="pg-bilan pg-bilan--' + (ok ? "ok" : "partiel") + '"><p><strong>' + (ok ? "Bon ordre." : "Ordre à revoir.") + "</strong> " + inline(ok ? b.feedback_ok : b.feedback_ko) + "</p>" +
+          (ok ? "" : '<p class="pg-ordre-titre">L\'ordre attendu :</p><ol class="pg-ordre-attendu">' + b.attendu.map(function (id) { return "<li>" + inline(lib[id]) + "</li>"; }).join("") + "</ol>") + "</div>";
+      }
       return h;
     }
     function blocTri(b) {
@@ -1891,9 +1933,9 @@
       /* Bloc repris : les demandes déjà justes sont repliées en bas, les demandes à revoir passent en tête */
       var aRevoir = itemsDe(b).filter(function (it) { return !bienAvant(b, it); }), justes = itemsDe(b).filter(function (it) { return bienAvant(b, it); });
       var replie = b.reprend && justes.length ? '<details class="pg-justes"><summary>' + ic("i-check-cercle") + justes.length + (justes.length > 1 ? " demandes déjà justes" : " demande déjà juste") + " : revoir l'explication</summary><ul>" +
-        justes.map(function (it) { return '<li><strong>' + inline(it.court || it.libelle) + '</strong> <span class="pg-cat pg-cat--' + esc(it.attendu) + '">' + esc(libCat(it.attendu)) + "</span><p>" + inline(it.feedback) + "</p>" + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + "</li>"; }).join("") + "</ul></details>" : "";
+        justes.map(function (it) { return '<li><strong>' + inline(it.court || it.libelle) + '</strong> <span class="pg-cat pg-cat--' + esc(attenduCls(it)) + '">' + esc(libCat(it.attendu)) + "</span><p>" + inline(it.feedback) + "</p>" + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + "</li>"; }).join("") + "</ul></details>" : "";
       h += '<ol class="pg-tri">' + (b.reprend ? aRevoir : itemsDe(b)).map(function (it, n) {
-        var acquis = bienAvant(b, it), choix = acquis ? prec[it.id] : r[it.id], ok = choix === it.attendu;
+        var acquis = bienAvant(b, it), choix = acquis ? prec[it.id] : r[it.id], ok = juste(it, choix);
         var verrou = fait || acquis, montrer = (fait || acquis) && b.retour !== "differe";
         var cls = "pg-item" + (fait || acquis ? (ok ? " pg-item--ok" : " pg-item--ko") : "");
         var marque = "";
@@ -1904,7 +1946,7 @@
         var rappel = prec && !acquis && prec[it.id] && !fait ? '<p class="pg-rappel">Votre premier choix : ' + esc(libCat(prec[it.id])) + "</p>" : "";
         return '<li class="' + cls + '"><fieldset><legend><span class="pg-num" aria-hidden="true">' + (n + 1) + "</span><span>" + inline(it.libelle) + "</span></legend>" + rappel +
           '<div class="pg-choix' + (catsDe(b).length > 4 ? " pg-choix--6" : "") + (b.qcu ? " pg-choix--qcu" : "") + '">' + catsDe(b).map(function (c) {
-            var att = verrou && montrer && c.id === it.attendu ? " pg-opt--attendu" : "";
+            var att = verrou && montrer && juste(it, c.id) ? " pg-opt--attendu" : "";
             return '<label class="pg-opt' + att + '"><input type="radio" name="pg-' + esc(b.id) + "-" + esc(it.id) + '" value="' + esc(c.id) + '"' + (choix === c.id ? " checked" : "") + (verrou ? " disabled" : "") +
               ' data-bloc="' + esc(b.id) + '" data-item="' + esc(it.id) + '"><span>' + inline(c.court || c.libelle) + "</span></label>";
           }).join("") + "</div>" + marque +
@@ -1916,7 +1958,7 @@
         h += '<div class="pg-action"><button type="button" class="btn btn-principal pg-verifier" data-verifier="' + esc(b.id) + '"' + (reste ? " disabled" : "") + ">" + esc(b.reprend && !aRevoir.length ? (b.bouton_rien || "Continuer") : (b.bouton || "Vérifier")) + " " + ic("i-check") + "</button>" +
           '<span class="pg-reste" aria-live="polite">' + (reste ? (b.qcu ? "Choisissez une réponse" : reste + (reste > 1 ? " demandes à classer" : " demande à classer")) : (b.reprend && !aRevoir.length ? "Rien à reprendre : tout était juste" : "Tout est classé")) + "</span></div>";
       } else {
-        var bons = itemsDe(b).filter(function (it) { var c = bienAvant(b, it) ? prec[it.id] : r[it.id]; return c === it.attendu; }).length, tous = itemsDe(b).length;
+        var bons = itemsDe(b).filter(function (it) { var c = bienAvant(b, it) ? prec[it.id] : r[it.id]; return juste(it, c); }).length, tous = itemsDe(b).length;
         var txt = bons === tous ? (b.bilan_tout || b.bilan) : b.bilan;
         h += '<div class="pg-bilan pg-bilan--' + (bons === tous ? "ok" : "partiel") + '" aria-live="polite"><p><strong>' + bons + " sur " + tous + ".</strong> " + inline(txt || "") + "</p></div>";
       }
@@ -1927,7 +1969,7 @@
       var h = b.texte ? '<div class="texte recit">' + md(b.texte) + "</div>" : "";
       h += '<div class="pg-liste" role="table" aria-label="' + esc(b.titre || "Liste") + '"><div class="pg-ligne pg-ligne--tete" role="row">' + (b.entetes || ["Demande", "Compétent", "Où s'adresser"]).map(function (t) { return '<span role="columnheader">' + esc(t) + "</span>"; }).join("") + "</div>" +
         itemsDe(b).map(function (it) {
-          return '<div class="pg-ligne" role="row"><span role="cell" class="pg-l-dem">' + inline(it.court || it.libelle) + '</span><span role="cell" class="pg-l-qui"><span class="pg-cat pg-cat--' + esc(it.attendu) + '">' + esc(libCat(it.attendu)) + '</span></span><span role="cell" class="pg-l-ou">' + inline(it.guichet || "") + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + "</span></div>";
+          return '<div class="pg-ligne" role="row"><span role="cell" class="pg-l-dem">' + inline(it.court || it.libelle) + '</span><span role="cell" class="pg-l-qui"><span class="pg-cat pg-cat--' + esc(attenduCls(it)) + '">' + esc(libCat(it.attendu)) + '</span></span><span role="cell" class="pg-l-ou">' + inline(it.guichet || "") + (it.ref ? '<span class="pg-ref">' + esc(it.ref) + "</span>" : "") + "</span></div>";
         }).join("") + "</div>";
       if (b.mention) h += '<p class="pg-mention">' + inline(b.mention) + "</p>";
       if (b.a_retenir) h += '<div class="a-retenir">' + ic("i-ampoule") + "<span><strong>À retenir</strong> — " + inline(b.a_retenir) + "</span></div>";
@@ -1993,7 +2035,7 @@
     /* ---------- 10-11 : message à composer (repris de l'écran « assemblage ») ---------- */
     function corpsMessage(b) {
       var r = st.r[b.id] || {};
-      return (b.salutation ? "<p>" + esc(b.salutation) + "</p>" : "") + (b.parties || []).map(function (p) {
+      return (b.salutation ? "<p>" + esc(b.salutation) + "</p>" : "") + (b.parties || []).filter(function (p) { return p.champ !== "copie"; }).map(function (p) {
         var o = (p.options || []).filter(function (x) { return x.id === r[p.id]; })[0];
         return o ? "<p>" + inline(o.texte) + "</p>" : '<p class="pg-msg-vide">[' + esc(p.libelle) + "]</p>";
       }).join("") + (b.signature ? "<p>" + esc(b.signature).replace(/\n/g, "<br>") + "</p>" : "");
@@ -2008,16 +2050,23 @@
             return '<label class="pg-opt' + (fait && x.verdict === "adapte" ? " pg-opt--attendu" : "") + '"><input type="radio" name="pg-' + esc(b.id) + "-" + esc(p.id) + '" value="' + esc(x.id) + '" data-bloc="' + esc(b.id) + '" data-item="' + esc(p.id) + '"' + (r[p.id] === x.id ? " checked" : "") + (fait ? " disabled" : "") + "><span>" + inline(x.texte) + "</span></label>";
           }).join("") + "</div>" + (fait && o ? '<div class="pg-fb">' + badge(o.verdict) + "<p>" + inline(p.feedback || "") + "</p></div>" : "") + "</fieldset></li>";
       }).join("") + "</ol>" +
-        '<aside class="pg-msg-apercu" aria-label="Aperçu du message">' + '<div class="pg-msg-tete">' + ic("i-courriel") + "<span><strong>À :</strong> " + esc(b.destinataire || "") + "</span><span><strong>Objet :</strong> " + esc(b.objet || "") + "</span></div>" +
+        '<aside class="pg-msg-apercu" aria-label="Aperçu du message">' + '<div class="pg-msg-tete">' + ic(b.canal === "sms" ? "i-telephone" : "i-courriel") + "<span><strong>À :</strong> " + esc(b.destinataire || "") + "</span>" + copieMessage(b) + (b.objet ? "<span><strong>Objet :</strong> " + esc(b.objet) + "</span>" : "") + "</div>" +
         '<div class="pg-msg-corps">' + corpsMessage(b) + "</div></aside></div>";
       if (!fait) h += actionHtml(b);
       else {
         var bons = (b.parties || []).filter(function (p) { var o = (p.options || []).filter(function (x) { return x.id === r[p.id]; })[0]; return o && o.verdict === "adapte"; }).length, tous = (b.parties || []).length;
         h += '<div class="pg-bilan pg-bilan--' + (bons === tous ? "ok" : "partiel") + '"><p><strong>' + bons + " sur " + tous + ".</strong> " + inline(b.synthese || "") + "</p></div>";
+        var rep = b.reponse && (bons === tous ? b.reponse.adapte : b.reponse.partiel);
+        if (rep) h += '<div class="pg-msg-reponse">' + repliquesHtml({ repliques: [{ personnage: b.reponse.personnage || b.destinataire, texte: rep }] }, false) + "</div>";
       }
       return h;
     }
-    var RENDUS_BLOC = { recit: blocRecit, apport: blocApport, tri: blocTri, liste: blocListe, explorer: blocExplorer, recherche: blocRecherche, message: blocMessage };
+    function copieMessage(b) {
+      var p = (b.parties || []).filter(function (x) { return x.champ === "copie"; })[0]; if (!p) return "";
+      var o = (p.options || []).filter(function (x) { return x.id === (st.r[b.id] || {})[p.id]; })[0];
+      return '<span class="pg-msg-cc"><strong>Copie :</strong> ' + (o ? esc(o.texte) : '<span class="pg-msg-vide">[à choisir]</span>') + "</span>";
+    }
+    var RENDUS_BLOC = { recit: blocRecit, apport: blocApport, tri: blocTri, liste: blocListe, explorer: blocExplorer, recherche: blocRecherche, message: blocMessage, document: blocDocument, ordre: blocOrdre };
     /* D132 : un carnet par module. La page terminée débloque ses fiches : elles rejoignent le carnet du module. */
     function fichesPage() {
       var ids = (e.fiches || []).filter(function (id) { return F[id]; });
@@ -2089,7 +2138,7 @@
       var b = e.blocs.filter(function (x) { return x.id === i.dataset.bloc; })[0], r = st.r[b.id];
       if (b.type !== "tri") {   /* recherche, message : le bouton suit l'avancement ; l'aperçu du message se met à jour */
         majAction(b);
-        if (b.type === "message") { var ap = i.closest(".pg-bloc").querySelector(".pg-msg-corps"); if (ap) ap.innerHTML = corpsMessage(b); }
+        if (b.type === "message") { var sec = i.closest(".pg-bloc"), ap = sec.querySelector(".pg-msg-corps"), cc = sec.querySelector(".pg-msg-cc"); if (ap) ap.innerHTML = corpsMessage(b); if (cc) cc.outerHTML = copieMessage(b); }
         return;
       }
       var reste = itemsDe(b).filter(function (it) { return !(bienAvant(b, it) || r[it.id]); }).length;
@@ -2117,6 +2166,14 @@
         rz.vus = rz.vus || []; if (rz.vus.indexOf(zb.dataset.zone) < 0) rz.vus.push(zb.dataset.zone);
         rz.ouvert = zb.dataset.zone; sauverPage(); redessinerBloc(bz);
         var cible = zone.querySelector('.pg-bloc[data-n="' + e.blocs.indexOf(bz) + '"] [data-zone="' + zb.dataset.zone + '"].pg-exp-lien'); if (cible) cible.focus({ preventScroll: true });
+        return;
+      }
+      var fl = ev.target.closest("[data-ordre]");
+      if (fl && !fl.disabled) {
+        var bo = blocParId(fl.dataset.ordre), ids = ordreDe(bo), id = fl.closest("li").dataset.id, k = ids.indexOf(id), j = k + (+fl.dataset.sens);
+        if (j >= 0 && j < ids.length) { ids.splice(k, 1); ids.splice(j, 0, id); sauverPage(); redessinerBloc(bo);
+          var f2 = zone.querySelector('.pg-bloc[data-n="' + e.blocs.indexOf(bo) + '"] [data-id="' + id + '"] [data-sens="' + fl.dataset.sens + '"]') || zone.querySelector('.pg-bloc[data-n="' + e.blocs.indexOf(bo) + '"] [data-id="' + id + '"] .btn-fleche:not([disabled])');
+          if (f2) f2.focus({ preventScroll: true }); }
         return;
       }
       var ex = ev.target.closest("[data-exemple]");

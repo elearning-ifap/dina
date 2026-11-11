@@ -239,3 +239,25 @@
 .pg-msg-corps p { margin: 0 0 .55rem; }
 .pg-msg-vide { color: var(--texte-2); font-style: italic; }
 @media (max-width: 760px) { .pg-msg { grid-template-columns: 1fr; } .pg-msg-apercu { position: static; } }
+
+/* 11-11 : blocs de M2 — encadré, document, ordre, copie et réponse du message */
+.pg-encadre { margin: 1rem 0 0; padding: .8rem 1rem; border-left: 4px solid var(--anthracite); background: var(--gris-clair); border-radius: 0 var(--rayon-petit) var(--rayon-petit) 0; color: var(--anthracite); }
+.page-defil .duo { margin-top: 1rem; }
+.page-defil .points { margin-top: .5rem; }
+.pg-doc { margin: 1rem 0 0; border: 1px solid var(--bordure); border-radius: var(--rayon); background: #fff; overflow: hidden; }
+.pg-doc-tete { display: flex; gap: .5rem; align-items: center; padding: .7rem 1rem; background: var(--gris-clair); color: var(--anthracite); }
+.pg-doc .intro { margin: .8rem 1rem 0; font-size: .95rem; color: var(--texte-2); }
+.pg-doc .document { padding: 0 1rem .6rem; }
+.pg-doc .pg-orga { margin: 0 1rem 1rem; }
+.pg-ordre { margin-top: .8rem; }
+.pg-ordre .ordre-item { cursor: default; flex-wrap: wrap; }
+.pg-ordre .ordre-lib { flex: 1 1 12rem; }
+.pg-ordre--ok { border-color: var(--vert); }
+.pg-ordre--ok .ordre-num { background: var(--vert); }
+.pg-ordre--ko { border-color: var(--orange); }
+.pg-ordre--ko .ordre-num { background: var(--orange-texte); }
+.pg-ordre .pg-marque { margin-left: auto; }
+.pg-ordre-titre { margin: .6rem 0 .2rem; font-weight: 700; }
+.pg-ordre-attendu { margin: 0; padding-left: 1.4rem; }
+.pg-msg-cc .pg-msg-vide { font-style: italic; }
+.pg-msg-reponse { margin-top: 1rem; }
