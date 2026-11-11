@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DINA — Identité visuelle v0.1</title>
+<link rel="icon" href="assets/logo/picto-dina.svg">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/components.css">
+<style>
+  body { background: var(--fond); }
+  .page { max-width: 1100px; margin: 0 auto; padding: 2rem 1.2rem 4rem; }
+  .entete { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; border-bottom: 2px solid var(--bordure); padding-bottom: 1.2rem; margin-bottom: 2rem; }
+  .entete h1 { font-size: 2rem; margin: 0; }
+  .entete p { margin: 0; color: var(--texte-2); }
+  section { margin: 0 0 2.6rem; }
+  section > h2 { font-size: 1.35rem; display: flex; align-items: center; gap: .6rem; }
+  section > h2 .n { display: inline-grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--bleu); color: #fff; font-size: .95rem; }
+  .grille { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .carte { background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.3rem; }
+  .carte h3 { font-size: 1rem; margin-bottom: .3rem; }
+  .carte p, .carte li { font-size: .92rem; }
+  .plan { display: grid; place-items: center; min-height: 190px; border-radius: var(--rayon-petit); background: #fff; border: 1px solid var(--bordure); margin-bottom: .8rem; padding: 1.2rem; }
+  .plan.sombre { background: var(--bleu-sombre); border-color: var(--bleu-sombre); }
+  .plan.photo { background: url("assets/img/prov-noa-malia.jpg") center/cover; }
+  .plan img { max-height: 140px; }
+  .large .plan img { max-height: 170px; }
+  .protection { position: relative; display: inline-block; padding: 26px; outline: 2px dashed var(--marque-corail); outline-offset: -2px; background: repeating-linear-gradient(45deg, #fff, #fff 6px, #FBEDE8 6px, #FBEDE8 8px); }
+  .protection img { display: block; height: 110px; background: #fff; }
+  .nuancier { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: .7rem; }
+  .nuance { border-radius: var(--rayon-petit); overflow: hidden; border: 1px solid var(--bordure); background: #fff; font-size: .8rem; }
+  .nuance i { display: block; height: 64px; }
+  .nuance span { display: block; padding: .45rem .6rem; }
+  .nuance b { display: block; color: var(--bleu-sombre); }
+  .interdits { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .8rem; }
+  .interdit { background: #fff; border: 1px solid var(--bordure); border-radius: var(--rayon-petit); padding: .9rem; text-align: center; font-size: .85rem; }
+  .interdit .x { color: var(--corail-texte); font-weight: 700; display: block; margin-top: .5rem; }
+  .interdit img { height: 56px; margin: 0 auto; }
+  .carte p.typo { font-size: 2.2rem; line-height: 1.1; margin-bottom: .4rem; }
+  .cobrand { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
+  .cobrand .sep { width: 1px; height: 70px; background: var(--bordure); }
+  .ifap-place { display: grid; place-items: center; width: 210px; height: 70px; border: 2px dashed var(--gris); border-radius: var(--rayon-compact); color: var(--texte-2); font-size: .8rem; text-align: center; }
+  .statut { display: inline-flex; gap: .4rem; align-items: center; padding: .25rem .7rem; border-radius: 999px; background: var(--orange-clair); color: var(--orange-texte); font-size: .85rem; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="entete">
+    <div>
+      <img src="assets/logo/logo-dina.svg" alt="DINA — mes repères pour agir" style="height:92px;margin-bottom:.8rem">
+      <h1>Identité visuelle DINA</h1>
+      <p>Déclinaison du logo IFAP — version 0.2 du 14-10-2026</p>
+    </div>
+    <span class="statut">À valider · communication IFAP</span>
+  </header>
+
+  <section>
+    <h2><span class="n">1</span>Le logo</h2>
+    <div class="grille">
+      <div class="carte large"><div class="plan"><img src="assets/logo/logo-dina.svg" alt="Logo DINA complet"></div><h3>Logo complet</h3><p>Avec la signature « mes repères pour agir ». Écran d'accueil, fiches, documents, communication.</p></div>
+      <div class="carte"><div class="plan"><img src="assets/logo/logo-dina-compact.svg" alt="Logo DINA compact" style="max-height:80px"></div><h3>Logo compact</h3><p>Sans signature. Bandeau des écrans, en-têtes, petits formats.</p></div>
+      <div class="carte"><div class="plan sombre"><img src="assets/logo/logo-dina-blanc.svg" alt="Logo DINA en blanc"></div><h3>Version blanche</h3><p>Sur fond bleu sombre ou sur photo assombrie.</p></div>
+      <div class="carte"><div class="plan"><img src="assets/logo/picto-dina.svg" alt="Pictogramme DINA" style="max-height:110px"></div><h3>Pictogramme</h3><p>Icône d'onglet, avatar, tampon des fiches. Jamais à la place du logo sur un premier écran.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span>Ce que dit le logo</h2>
+    <div class="grille">
+      <div class="carte"><h3>La filiation IFAP</h3><p>Même écriture : lettres grises arrondies et réseau de points colorés reliés par des arcs. DINA se lit immédiatement comme un dispositif de l'IFAP, sans le copier.</p></div>
+      <div class="carte"><h3>Les repères</h3><p>Cinq points colorés autour d'un point central : les cinq blocs de compétences (C1 à C5) autour de l'agent. Les arcs sont les liens entre ces repères : le parcours.</p></div>
+      <div class="carte"><h3>La signature</h3><p>« mes repères pour agir » : la promesse faite à l'agent. Elle parle à la première personne, comme l'agent.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span>Zone de protection et tailles minimales</h2>
+    <div class="grille">
+      <div class="carte"><div class="plan"><span class="protection"><img src="assets/logo/logo-dina.svg" alt="Zone de protection autour du logo"></span></div><p>Autour du logo, garder un espace vide au moins égal à la hauteur de la lettre « D » divisée par deux. Rien n'entre dans la zone hachurée.</p></div>
+      <div class="carte"><h3>Tailles minimales</h3><ul><li>Logo complet : 120 px de large à l'écran, 30 mm à l'impression.</li><li>Logo compact : 80 px, 20 mm.</li><li>Pictogramme : 16 px.</li></ul><p>En dessous, la signature et les petits points deviennent illisibles.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span>Couleurs</h2>
+    <div class="carte">
+      <h3>Couleurs de marque — couleurs officielles IFAP</h3>
+      <p>Logo, pictogramme, repères graphiques, illustrations de données. Jamais pour du texte courant ni pour un bouton. Adoucir par transparence si besoin.</p>
+      <div class="nuancier">
+        <div class="nuance"><i style="background:#878787"></i><span><b>Gris</b>#878787 · lettres, comme « Ifap »</span></div>
+        <div class="nuance"><i style="background:#00B2B8"></i><span><b>Bleu-vert</b>#00B2B8 · couleur IFAP prioritaire</span></div>
+        <div class="nuance"><i style="background:#FFCB00"></i><span><b>Jaune</b>#FFCB00 · couleur IFAP prioritaire</span></div>
+        <div class="nuance"><i style="background:#63B8E8"></i><span><b>Bleu</b>#63B8E8 · point central</span></div>
+        <div class="nuance"><i style="background:#7C6EAF"></i><span><b>Violet</b>#7C6EAF</span></div>
+        <div class="nuance"><i style="background:#ED9C89"></i><span><b>Saumon</b>#ED9C89</span></div>
+        <div class="nuance"><i style="background:#A59FCE"></i><span><b>Lilas</b>#A59FCE</span></div>
+      </div>
+    </div>
+    <div class="carte" style="margin-top:1rem">
+      <h3>Couleurs d'interface — CAN-VIS-01</h3>
+      <p>Pour les boutons, les titres, les états et les feedbacks. Elles dérivent des couleurs IFAP, assombries pour les contrastes d'accessibilité ; les feedbacks suivent un code feu tricolore (vert, jaune, orange, rouge).</p>
+      <div class="nuancier">
+        <div class="nuance"><i style="background:#1F767A"></i><span><b>Bleu-vert foncé</b>#1F767A · actions</span></div>
+        <div class="nuance"><i style="background:#103F41"></i><span><b>Bleu-vert sombre</b>#103F41 · titres</span></div>
+        <div class="nuance"><i style="background:#FFF6D1"></i><span><b>Jaune adouci</b>#FFF6D1 · mise en avant</span></div>
+        <div class="nuance"><i style="background:#00B2B8"></i><span><b>Bleu-vert IFAP</b>#00B2B8 · filets, progression</span></div>
+        <div class="nuance"><i style="background:#1A7BB2"></i><span><b>Bleu</b>#1A7BB2 · en cours</span></div>
+        <div class="nuance"><i style="background:#FFF2BF"></i><span><b>Jaune vigilance</b>#FFF2BF · fond, texte #705900</span></div>
+        <div class="nuance"><i style="background:#2E7D32"></i><span><b>Vert</b>#2E7D32 · adaptée</span></div>
+        <div class="nuance"><i style="background:#B85000"></i><span><b>Orange</b>#B85000 · risquée</span></div>
+        <div class="nuance"><i style="background:#C62828"></i><span><b>Rouge</b>#C62828 · inadaptée</span></div>
+        <div class="nuance"><i style="background:#F7F5F2"></i><span><b>Fond</b>#F7F5F2</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span>Typographie</h2>
+    <div class="grille">
+      <div class="carte"><p class="typo" style="font-family:var(--police-titre);font-weight:800;color:var(--bleu-sombre)">Nunito 800</p><p>Titres. Arrondie, en écho aux lettres du logo.</p></div>
+      <div class="carte"><p class="typo" style="font-family:var(--police-texte);font-weight:400">Lato</p><p>Textes, boutons, signature du logo. Sobre et très lisible ; rappel de l'identité IFAP.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">6</span>Avec le logo IFAP</h2>
+    <div class="carte">
+      <div class="cobrand">
+        <img src="assets/logo/logo-dina.svg" alt="Logo DINA" style="height:80px">
+        <span class="sep" aria-hidden="true"></span>
+        <img src="assets/logo/logo-ifap.png" alt="IFAP — Institut de formation à l'administration publique" style="height:96px">
+      </div>
+      <p style="margin-top:1rem">DINA à gauche, IFAP à droite, séparés par un filet gris, à hauteurs visuelles égales. Sur les écrans du module, le logo IFAP n'apparaît que sur l'écran d'accueil et l'écran de fin ; LIANE reste l'environnement principal.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">7</span>À ne pas faire</h2>
+    <div class="interdits">
+      <div class="interdit"><img src="assets/logo/logo-dina.svg" alt="" style="transform:scaleX(1.5)"><span class="x">Déformer</span></div>
+      <div class="interdit"><img src="assets/logo/logo-dina.svg" alt="" style="filter:hue-rotate(160deg)"><span class="x">Changer les couleurs</span></div>
+      <div class="interdit"><img src="assets/logo/logo-dina.svg" alt="" style="filter:drop-shadow(3px 4px 3px rgba(0,0,0,.45))"><span class="x">Ajouter une ombre ou un effet</span></div>
+      <div class="interdit" style="background:url('assets/img/prov-noa-malia.jpg') center/cover"><img src="assets/logo/logo-dina.svg" alt=""><span class="x" style="background:#fff;border-radius:4px">Poser sur une photo chargée</span></div>
+      <div class="interdit"><img src="assets/logo/picto-dina.svg" alt="" style="height:40px"> <span style="font:800 1.4rem var(--police-titre);color:#878787">DINA</span><span class="x">Recomposer avec une autre police</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">8</span>Applications</h2>
+    <div class="grille">
+      <div class="carte"><h3>Bandeau des écrans</h3><p>Logo compact, 34 px de haut, à gauche.</p><p><a href="gabarits.html">Voir le gabarit d'écran</a></p></div>
+      <div class="carte"><h3>Fiche outil A4</h3><p>Logo complet en en-tête, « Un dispositif de l'IFAP » en pied de page.</p><p><a href="fiche-outil.html">Voir la fiche outil</a></p></div>
+      <div class="carte"><h3>Onglet du navigateur</h3><p>Pictogramme en icône d'onglet sur toutes les pages DINA.</p></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

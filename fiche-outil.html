@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DINA — Fiche outil v0.1 : Jusqu'où puis-je agir seul ?</title>
+<link rel="icon" href="assets/logo/picto-dina.svg">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/fiche.css">
+<style>
+  .revue { max-width: 1200px; margin: 1.2rem auto .9rem; padding: 0 1rem; display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; align-items: center; }
+  .revue h2 { font-size: 1.05rem; margin: 0; }
+  .revue p { margin: 0; font-size: .85rem; color: var(--texte-2); }
+  .revue .onglets { display: flex; gap: .3rem; }
+  .revue button { font: 500 .85rem var(--police-texte); padding: .45rem .8rem; border-radius: var(--rayon-compact); border: 1px solid var(--bordure); background: var(--carte); color: var(--bleu-sombre); cursor: pointer; }
+  .revue button[aria-pressed="true"] { background: var(--bleu-sombre); color: #fff; border-color: var(--bleu-sombre); }
+  .cadre { padding: 0 1rem 2rem; }
+  .vue[hidden] { display: none; }
+  @media print { .vue-ecran { display: none !important; } .vue-fiche { display: block !important; } .cadre { padding: 0; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-agir" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-informer" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-valider" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+  <symbol id="i-alerter" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-boussole" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.3-6.3 2.1 2.1-6.3z"/></symbol>
+  <symbol id="i-ampoule" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2z"/></symbol>
+  <symbol id="i-plein" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+  <symbol id="i-sortir-plein" viewBox="0 0 24 24"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></symbol>
+  <symbol id="i-aide" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-gauche" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-droite" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-imprimer" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></symbol>
+  <symbol id="i-recommencer" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+</svg>
+
+<div class="revue ne-pas-imprimer">
+  <div>
+    <h2>Fiche outil DINA — v0.1 · M2-E2-03</h2>
+    <p>À valider le 08-10. Formulation des questions et des conduites à valider par l'expert.</p>
+  </div>
+  <div class="onglets" role="group" aria-label="Version affichée">
+    <button type="button" data-vue="ecran" aria-pressed="true">Écran dans le module</button>
+    <button type="button" data-vue="fiche" aria-pressed="false">Version imprimable A4</button>
+  </div>
+  <button type="button" onclick="window.print()"><svg class="icone" style="vertical-align:-3px"><use href="#i-imprimer"/></svg> Imprimer / PDF</button>
+</div>
+
+<!-- ===================== ÉCRAN ===================== -->
+<div class="cadre vue vue-ecran" id="vue-ecran">
+<div class="dina-player" id="player">
+  <header class="bandeau">
+    <div class="marque"><img class="logo-bandeau" src="assets/logo/logo-dina-compact.svg" alt="DINA"></div>
+    <div class="contexte"><span class="module">M2 · Trouver sa place</span><span class="episode">Épisode 2 · Outil</span></div>
+    <nav class="fil" aria-label="Progression dans le module">
+      <ol>
+        <li class="fait" aria-label="Entrée : terminé"><span class="point"><svg class="icone"><use href="#i-check"/></svg></span><span class="libelle">Entrée</span></li>
+        <li class="encours" aria-current="step" aria-label="Épisode 2 : en cours"><span class="point"></span><span class="libelle">Épisode 2</span></li>
+        <li aria-label="Évaluation : à venir"><span class="point"></span><span class="libelle">Évaluation</span></li>
+        <li aria-label="Sortie : à venir"><span class="point"></span><span class="libelle">Sortie</span></li>
+      </ol>
+    </nav>
+    <div class="outils">
+      <button type="button" class="btn-outil" title="Besoin d'aide"><svg class="icone"><use href="#i-aide"/></svg><span class="libelle">Aide</span></button>
+      <button type="button" class="btn-outil" id="btn-plein" aria-pressed="false" title="Plein écran (touche F)"><svg class="icone"><use href="#i-plein"/></svg><span class="libelle">Plein écran</span></button>
+    </div>
+  </header>
+
+  <main class="ecran ecran--lecture">
+    <div class="colonne">
+      <span class="surtitre">Outil · à garder</span>
+      <h1>Jusqu'où puis-je agir seul ?</h1>
+      <div class="outil-intro"><svg class="icone"><use href="#i-boussole"/></svg><span><strong>Quand l'utiliser ?</strong> Avant d'agir sur une demande qui vous laisse un doute. Répondez aux questions dans l'ordre.</span></div>
+
+      <ol class="chemin" id="chemin"></ol>
+
+      <div class="conduite" id="conduite" hidden aria-live="polite"></div>
+
+      <div class="alerte-permanente"><svg class="icone"><use href="#i-alerter"/></svg><span><strong>À tout moment :</strong> un risque pour des personnes, un risque juridique ou financier, ou un délai impossible à tenir ? <strong>J'alerte</strong> mon responsable sans attendre.</span></div>
+
+      <div class="a-retenir"><svg class="icone"><use href="#i-ampoule"/></svg><span><strong>À retenir</strong> — J'avance dans ma marge, je fais valider ce qui engage le service.</span></div>
+
+      <div class="liens-outil">
+        <button type="button" class="btn btn-secondaire" id="recommencer"><svg class="icone"><use href="#i-recommencer"/></svg> Recommencer</button>
+        <button type="button" class="btn btn-secondaire" data-vue="fiche"><svg class="icone"><use href="#i-imprimer"/></svg> Voir la fiche à imprimer</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="actions">
+    <button type="button" class="btn btn-secondaire"><svg class="icone"><use href="#i-gauche"/></svg> Retour</button>
+    <span class="compteur">Écran 15 / 28</span>
+    <button type="button" class="btn btn-principal">Continuer <svg class="icone"><use href="#i-droite"/></svg></button>
+  </footer>
+</div>
+</div>
+
+<!-- ===================== FICHE A4 ===================== -->
+<div class="cadre vue vue-fiche" id="vue-fiche" hidden>
+<article class="fiche" aria-label="Fiche outil imprimable">
+  <div class="fiche-bandeau">
+    <img src="assets/logo/logo-dina.svg" alt="DINA — mes repères pour agir" style="height:17mm">
+    <span class="type">OUTIL</span>
+  </div>
+
+  <h1>Jusqu'où puis-je agir seul ?</h1>
+  <p class="quand"><strong>Quand l'utiliser ?</strong> Avant d'agir sur une demande qui vous laisse un doute.</p>
+
+  <h2>Quatre questions, dans l'ordre</h2>
+  <ol class="fiche-chemin">
+    <li><span class="num">1</span><span class="q">Est-ce dans ma mission ?</span><span class="si">Si <strong>non</strong> → J'informe</span></li>
+    <li><span class="num">2</span><span class="q">L'information est-elle suffisamment fiable ?</span><span class="si">Si <strong>non</strong> → J'informe</span></li>
+    <li><span class="num">3</span><span class="q">Mon action est-elle réversible ?</span><span class="si">Si <strong>non</strong> → Je fais valider</span></li>
+    <li><span class="num">4</span><span class="q">Engage-t-elle une décision ou une position qui dépasse mon rôle ?</span><span class="si">Si <strong>oui</strong> → Je fais valider<br>Si <strong>non</strong> → J'agis</span></li>
+  </ol>
+
+  <h2>Ma conduite</h2>
+  <div class="fiche-conduites">
+    <div class="c-agir"><strong><svg class="icone"><use href="#i-agir"/></svg>J'agis</strong>C'est dans ma marge. J'avance et je rends compte si c'est utile.</div>
+    <div class="c-informer"><strong><svg class="icone"><use href="#i-informer"/></svg>J'informe</strong>Je préviens la bonne personne de ce que je fais ou de ce qui reste incertain.</div>
+    <div class="c-valider"><strong><svg class="icone"><use href="#i-valider"/></svg>Je fais valider</strong>Je prépare une proposition et je la soumets avant d'agir.</div>
+    <div class="c-alerter"><strong><svg class="icone"><use href="#i-alerter"/></svg>J'alerte</strong>Je préviens mon responsable sans attendre.</div>
+  </div>
+  <p class="alerte"><strong>À tout moment :</strong> risque pour des personnes, risque juridique ou financier, délai impossible à tenir → <strong>j'alerte</strong>.</p>
+
+  <p class="retenir"><svg class="icone" style="color:var(--turquoise)"><use href="#i-ampoule"/></svg>J'avance dans ma marge, je fais valider ce qui engage le service.</p>
+
+  <h2>Mes repères dans mon service</h2>
+  <div class="reperes">
+    <p><span>Ce que je peux faire seul :</span></p>
+    <p><span>Ce que je fais valider, et par qui :</span></p>
+    <p><span>Qui j'alerte en cas d'urgence :</span></p>
+  </div>
+
+  <div class="fiche-pied">
+    <span>Module M2 — Trouver sa place · Compétences C2.2, CT.3<br>Source : DINA, IFAP — version 0.1 (octobre 2026)</span>
+    <span style="text-align:right">Un dispositif de l'IFAP<br>Institut de formation à l'administration publique</span>
+  </div>
+</article>
+</div>
+
+<script src="js/fiche-outil.js"></script>
+</body>
+</html>
