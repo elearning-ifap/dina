@@ -16,7 +16,7 @@ window.DINA_PILOTAGE = {
   /* Les 32 jours couvrent la production seule. Réunions et concertation (équipe projet, employeurs) viennent en plus. */
   temps: {
     prevuJours: 32,          /* charge de production annoncée à la direction */
-    passeJours: 9.05,        /* production : cumul saisi */
+    passeJours: 9.43,        /* production : cumul saisi */
     concertationJours: 1.73, /* réunions et concertation : cumul saisi, hors des 32 j */
     arreteAu: "11-11-2026"   /* date de la dernière saisie */
   },
