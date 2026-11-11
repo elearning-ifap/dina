@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.4.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.5.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M1-PAGES",
@@ -381,10 +381,11 @@ window.DINA_DATA = {
      ],
      "guichet": "Le guichet n'est pas toujours la collectivité compétente. L'état civil relève de la Nouvelle-Calédonie, mais l'usager le demande à la mairie.",
      "plus_loin": {
-      "titre": "Aller plus loin",
-      "texte": "**D'où vient cette règle ?** L'accord de Nouméa (1998) organise le transfert progressif de compétences de l'État vers la Nouvelle-Calédonie. La loi organique du 19 mars 1999 fixe les listes : article 21 pour l'État, article 22 pour la Nouvelle-Calédonie, article 20 pour les provinces.\n\n**Le mot « pays ».** On parle souvent du « pays » pour la Nouvelle-Calédonie : ses lois s'appellent des lois du pays. Face à un usager, dites plutôt « la Nouvelle-Calédonie » ou « le gouvernement de la Nouvelle-Calédonie »."
+      "titre": "Aller plus loin : quatre repères pour comprendre",
+      "texte": "**D'où vient cette répartition ?** Quatre dates suffisent pour s'y retrouver.\n\n- **1983 — Table ronde de Nainville-les-Roches.** Réunis par l'État près de Paris du 8 au 12 juillet, indépendantistes et non-indépendantistes discutent de l'avenir du territoire. La déclaration finale reconnaît le droit du peuple kanak, premier occupant, à l'indépendance, à exercer dans une autodétermination ouverte aux autres communautés dont il reconnaît la légitimité. Le RPCR ne la signe pas. Le gouvernement de la Nouvelle-Calédonie y voit une avancée historique : « la reconnaissance de la légitimité des uns et des autres ».\n- **1988-1989 — Accords de Matignon-Oudinot.** Création des trois provinces.\n- **1998-1999 — Accord de Nouméa.** Il organise le transfert progressif de compétences de l'État vers la Nouvelle-Calédonie. La loi organique du 19 mars 1999 fixe les listes : article 21 pour l'État, article 22 pour la Nouvelle-Calédonie, article 20 pour les provinces.\n- **Depuis 2000 — Les transferts de compétences.** Par exemple l'organisation de l'enseignement du second degré (2012), le droit civil et l'état civil (2013).\n\n**Le mot « pays ».** On parle souvent du « pays » pour la Nouvelle-Calédonie : ses lois s'appellent des lois du pays. Face à un usager, dites plutôt « la Nouvelle-Calédonie » ou « le gouvernement de la Nouvelle-Calédonie »."
      },
-     "regle_clair": "Par défaut, c'est la province qui s'occupe d'un sujet. L'État, la Nouvelle-Calédonie et les communes ne s'en occupent que si un texte le leur confie. On dit que la province est compétente « de droit commun »."
+     "regle_clair": "Par défaut, c'est la province qui s'occupe d'un sujet. L'État, la Nouvelle-Calédonie et les communes ne s'en occupent que si un texte le leur confie. On dit que la province est compétente « de droit commun ».",
+     "valider": "Repères historiques (D68, D89, D147) : rétablis le 12-11 (ils n'avaient pas été repris dans M1 en pages) ; Nainville-les-Roches ajouté à la demande de Marie-Ange Morvan, DRH de la province Sud. Sources : gouv.nc, communiqué des 40 ans de Nainville-les-Roches (12-07-2023) ; LARJE, Université de la Nouvelle-Calédonie. Formulation à valider par l'expert institutionnel."
     },
     {
      "type": "tri",
@@ -2492,5 +2493,5 @@ window.DINA_DATA = {
    "alt": "Bureau de Noa vu du dessus. Quatre objets représentent quatre sources d'information : une fiche de poste imprimée, un ordinateur ouvert sur l'intranet, une tablette ouverte sur un site officiel, un téléphone posé près d'un carnet."
   }
  },
- "source": "Storyboard — M1 en pages v0.4.md"
+ "source": "Storyboard — M1 en pages v0.5.md"
 };
