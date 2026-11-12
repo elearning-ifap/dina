@@ -114,7 +114,7 @@ a.btn { text-decoration: none; }
 
 /* ---------- Classement ---------- */
 .classement { display: grid; gap: .8rem; }
-.cl-item { margin: 0; padding: .9rem 1rem; background: var(--carte); border: 2px solid var(--bordure); border-radius: var(--rayon); }
+.cl-item { min-width: 0; margin: 0; padding: .9rem 1rem; background: var(--carte); border: 2px solid var(--bordure); border-radius: var(--rayon); }
 .cl-item legend { display: flex; gap: .7rem; align-items: flex-start; float: left; width: 100%; margin-bottom: .6rem; font-weight: 600; color: var(--bleu-sombre); }
 .cl-item legend .lettre { flex: none; display: grid; place-items: center; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--gris-clair); font-family: var(--police-titre); font-weight: 800; }
 .cl-cats { clear: both; display: flex; flex-wrap: wrap; gap: .45rem; }

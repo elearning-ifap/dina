@@ -25,6 +25,13 @@
 .pg-et--fait .pg-et-point { border-color: var(--vert); background: var(--vert); color: #fff; }
 .pg-et--fait + .pg-et::before, .pg-et--encours + .pg-et::before { background: var(--turquoise); }
 
+/* Téléphone : seule l'étape en cours garde son libellé visible ; les autres le gardent pour les lecteurs d'écran (sinon la barre dépasse 390 px) */
+@container lecteur (max-width: 759px) {
+  .pg-et { flex: none; }
+  .pg-et--encours { flex: 1 1 auto; }
+  .pg-et:not(.pg-et--encours) .pg-et-lib { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
 /* Blocs */
 .pg-bloc { padding: 1.75rem 0 .5rem; border-top: 1px solid var(--bordure); scroll-margin-top: 3.5rem; }
 .pg-bloc:first-of-type { border-top: 0; }

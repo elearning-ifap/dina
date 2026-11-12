@@ -2083,7 +2083,7 @@
     function etapesHtml(iCour) {
       return phases.map(function (p, k) {
         var s = fini || k < iCour ? "fait" : k === iCour ? "encours" : "avenir";
-        return '<li class="pg-et pg-et--' + s + '"' + (s === "encours" ? ' aria-current="step"' : "") + '><span class="pg-et-point">' + (s === "fait" ? ic("i-check") : k + 1) + "</span>" + esc(PHASES_PAGE[p] || p) +
+        return '<li class="pg-et pg-et--' + s + '"' + (s === "encours" ? ' aria-current="step"' : "") + '><span class="pg-et-point">' + (s === "fait" ? ic("i-check") : k + 1) + "</span>" + '<span class="pg-et-lib">' + esc(PHASES_PAGE[p] || p) + "</span>" +
           '<span class="sr-only"> — ' + (s === "fait" ? "fait" : s === "encours" ? "en cours" : "à venir") + "</span></li>";
       }).join("");
     }
