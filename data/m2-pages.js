@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.1.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.2.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M2-PAGES",
@@ -284,7 +284,7 @@ window.DINA_DATA = {
     },
     {
      "id": "T5",
-     "libelle": "Relire la note avec Malia, en visio à 8 h 30 (Noa est en télétravail ce jour-là).",
+     "libelle": "Relire la note avec Malia, en visio à 8 h 30 (Noa est autorisé à télétravailler ce jour-là).",
      "court": "Relecture avec Malia",
      "attendu": "jeudi",
      "feedback": "Jeudi tôt laisse le temps de corriger avant 11 h. Une relecture à 10 h 45 ne servirait à rien."
@@ -585,8 +585,8 @@ window.DINA_DATA = {
        "texte": "L'association sait sur quoi compter pour organiser sa permanence."
       }
      ],
-     "encadre": "Sur site ou en télétravail, l'échéance est la même. Ce qui change, ce sont les moyens de se coordonner : visio, téléphone, messagerie.",
-     "valider": "Télétravail : vérifier le cadre applicable chez les employeurs visés (relecture du 10-11, point 14)."
+     "encadre": "Sur site ou en télétravail, l'échéance est la même. Ce qui change, ce sont les moyens de se coordonner : visio, téléphone, messagerie. Chaque employeur fixe ses propres règles de télétravail.",
+     "valider": "Télétravail : texte vérifié le 11-11 (délibération 155, loi du pays 2021-3) ; autorisé par l'employeur sur demande écrite, ce n'est pas un droit. Mise en œuvre à confirmer chez les employeurs visés."
     },
     {
      "type": "tri",
@@ -1954,7 +1954,7 @@ window.DINA_DATA = {
       "Je vérifie avant d'annoncer ce qui ne dépend pas de moi."
      ],
      "encadre": "Sur site ou à distance, la règle est la même. À distance, je choisis le canal que l'autre lira tout de suite : ici, un SMS.",
-     "valider": "Télétravail et travail à distance dans la FP-NC : cadre à vérifier chez les employeurs visés (relecture du 10-11, point 14)."
+     "valider": "Télétravail et travail à distance : texte vérifié le 11-11 (délibération 155) ; autorisé par l'employeur, pas un droit. Mise en œuvre à confirmer chez les employeurs visés."
     },
     {
      "type": "tri",
@@ -2487,7 +2487,7 @@ window.DINA_DATA = {
    "competences": [
     "C05"
    ],
-   "texte": "Jeudi, en télétravail, le réseau est coupé depuis une heure. Noa a promis un document à Malia pour midi. Que fait-il ?\n",
+   "texte": "Jeudi, Noa est autorisé à télétravailler. Le réseau est coupé depuis une heure. Noa a promis un document à Malia pour midi. Que fait-il ?\n",
    "options": [
     {
      "id": "A",
@@ -2511,7 +2511,7 @@ window.DINA_DATA = {
     }
    ],
    "suite": "M2-EVA-RES",
-   "note_expert": "Télétravail : cadre à vérifier (relecture du 10-11, point 14)."
+   "note_expert": "Télétravail : texte vérifié le 11-11 (délibération 155) ; autorisé par l'employeur, pas un droit ; mise en œuvre à confirmer chez les employeurs visés."
   },
   "M2-EVA-FIN": {
    "id": "M2-EVA-FIN",
@@ -2842,7 +2842,7 @@ window.DINA_DATA = {
      "texte": "Une réponse de deux minutes ne s'inscrit pas dans le planning : je la fais."
     },
     {
-     "titre": "3. Je prévois mes jours de télétravail",
+     "titre": "3. Je prévois mes jours de télétravail, s'ils sont autorisés",
      "texte": "Ce qui demande un échange se cale en visio ou au téléphone, à une heure fixée."
     },
     {
@@ -2898,6 +2898,10 @@ window.DINA_DATA = {
      "texte": "La façon d'être recruté (concours ou contrat), le début des fonctions (un stage avant la titularisation, pour le fonctionnaire), la carrière (grade et avancement, ou durée du contrat), certaines règles de congés et de fin de fonctions."
     },
     {
+     "titre": "Le télétravail",
+     "texte": "Il est accordé par l'employeur, sur demande écrite : ce n'est pas un droit. Trois jours au plus par semaine, deux jours sur place au moins ; autorisation d'un an au plus, renouvelable ; un refus est motivé et précédé d'un entretien. Chaque employeur fixe ses propres règles."
+    },
+    {
      "titre": "Où trouver la règle",
      "texte": "Votre gestionnaire RH ; le site de la DRHFPNC ; les textes en vigueur sur Leginova."
     }
@@ -2913,10 +2917,10 @@ window.DINA_DATA = {
     },
     {
      "titre": "Disponibilité",
-     "texte": "Le fonctionnaire quitte un temps son administration. Il n'est plus payé et, sauf exception, n'acquiert plus de droits à l'avancement et à la retraite."
+     "texte": "Le fonctionnaire quitte un temps son administration. Il n'est plus payé et, sauf exception, n'acquiert plus de droits à l'avancement et à la retraite. Il conserve toutefois, jusqu'à 4 ans, ses droits pour la liquidation de sa pension (art. 91-II)."
     }
    ],
-   "a_retenir": "Ces trois positions concernent les fonctionnaires. Contractuel ? Renseignez-vous auprès de votre employeur. Sources : délibération n° 81 du 24 juillet 1990 ; arrêté n° 1065, art. 75, 90-1 et 91 ; loi du pays n° 2021-4.",
+   "a_retenir": "Ces trois positions concernent les fonctionnaires. Contractuel ? Renseignez-vous auprès de votre employeur. Sources : délibération n° 81 du 24 juillet 1990 ; arrêté n° 1065, art. 75, 90-1 et 91 ; loi du pays n° 2021-4 ; délibération n° 155 du 19 mai 2021 (télétravail).",
    "reperes": [
     "Mon statut et ma catégorie",
     "Mon gestionnaire RH",
@@ -2926,7 +2930,7 @@ window.DINA_DATA = {
     "C03"
    ],
    "version": "0.1",
-   "valider": "Nouvelle fiche (A4, 11-11), reprise de M2-E1-APP2 et M2-E1-APP2B (M2 v0.4). Contenu statutaire à faire valider (délibération 81, arrêté 1065, délibération 230, loi du pays 2021-4)."
+   "valider": "Nouvelle fiche (A4, 11-11), reprise de M2-E1-APP2 et M2-E1-APP2B (M2 v0.4). Contenu statutaire à faire valider (délibération 81, arrêté 1065, délibération 230, loi du pays 2021-4). Ajouts du 12-11 (T05), nuance de l'art. 91-II (loi du pays 2024-10) et repères du télétravail (délibération 155)."
   }
  },
  "illustrations": {
@@ -2961,5 +2965,5 @@ window.DINA_DATA = {
    "alt": "Vendredi après-midi. Noa range ses documents à son bureau, détendu, la semaine terminée."
   }
  },
- "source": "Storyboard — M2 en pages v0.1.md"
+ "source": "Storyboard — M2 en pages v0.2.md"
 };
