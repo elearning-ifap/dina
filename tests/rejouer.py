@@ -20,9 +20,7 @@ Usage (depuis la racine du dépôt) :
 """
 import argparse
 import json
-import shutil
 import sys
-import tempfile
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
@@ -106,11 +104,6 @@ JS_DEBORD = """
 
 class Echec(Exception):
     pass
-
-
-def charger_donnees(fichier):
-    s = (RACINE / "data" / (fichier + ".js")).read_text(encoding="utf-8")
-    return json.loads(s[s.index("{"): s.rindex("}") + 1])
 
 
 class Joueur:
@@ -200,7 +193,7 @@ class Joueur:
         p = self.page
         if t == "eval-item" and e.get("mode") == "ordre":
             self.ordonner(e)
-        elif t == "eval-item" and e.get("mode") == "choix-multiple":
+        elif t == "eval-item" and e.get("mode") in ("choix-multiple", "multiple"):
             self.cocher(e)
         elif t in ("choix", "eval-item"):
             self.choisir_radio(self.choisir_option(e["options"]))
@@ -346,6 +339,7 @@ class Joueur:
             bouton = self.page.locator("#ecran .pg-bloc .pg-verifier:not([disabled])")
             if bouton.count():
                 bouton.first.click(); self.page.wait_for_timeout(150); agi = True
+                self.controle("page qui défile, après un bloc")
             if not agi:
                 bouton = self.page.locator("#ecran .pg-bloc button.btn-principal:not([disabled])")
                 if not bouton.count():
@@ -357,7 +351,7 @@ class Joueur:
     # ---------- parcours ----------
     def avancer(self, avant):
         """Clique sur le bouton principal jusqu'à changer d'écran (Valider, puis Continuer)."""
-        for _ in range(4):
+        for _ in range(12):   # un dialogue peut compter plusieurs « Suite »
             etat = self.principal()
             if not etat["visible"]:
                 return False
@@ -366,6 +360,7 @@ class Joueur:
             self.cliquer_principal()
             if self.ecran() != avant:
                 return True
+            self.controle(f"{avant}, après « {etat['texte'][:20]} »")   # retour de correction, réplique suivante…
         return self.ecran() != avant
 
     def rejouer(self):
@@ -378,6 +373,7 @@ class Joueur:
                 return
             if id_ != "MENU":
                 self.jouer_ecran(id_)
+                self.controle(f"{id_}, après les réponses")
             if not self.avancer(id_):
                 raise Echec(f"bloqué sur {id_} ({self.E.get(id_, {}).get('type', 'MENU')}) : le bouton principal reste inactif")
             vus += 1
@@ -397,6 +393,41 @@ class Joueur:
             self.problemes.append("erreurs SCORM : " + " ; ".join(s["diag"]["erreurs"][-2:]))
         return plus_grande, s["derniere"]
 
+    # Types d'écrans dont la réponse est toujours gardée dans l'état (relevé sur le moteur : engine.js, memoriser)
+    MEMORISES = {"choix", "classement", "assemblage", "choix-multiple", "ordre", "planning", "recherche", "messagerie", "pos-item", "page"}
+
+    def etat_final_attendu(self):
+        """Compare la sauvegarde à ce que l'outil a réellement joué, sans repasser par le moteur."""
+        derniere = self.sauvegarde()["derniere"]
+        if not derniere:
+            return ["état final : aucune sauvegarde enregistrée dans le LMS"]
+        st = json.loads(derniere)
+        lms = self.page.evaluate("() => window.__scorm_simule.v")
+        jouees = [i for i in dict.fromkeys(self.vus) if i in self.E]
+        pb = []
+        if st.get("ecran") != self.vus[-1]:
+            pb.append(f"état final : écran {st.get('ecran')!r} au lieu de {self.vus[-1]!r}")
+        sections = [x["id"] for x in self.donnees["module"].get("sections", [])]
+        manque = [x for x in sections if x not in st.get("faites", [])]
+        if manque:
+            pb.append("état final : étapes terminées non enregistrées : " + ", ".join(manque))
+        attendues = [i for i in jouees if self.E[i]["type"] in self.MEMORISES
+                     or (self.E[i]["type"] == "hotspot" and self.E[i].get("mode") == "audit")
+                     or (self.E[i]["type"] == "reponse-libre" and self.E[i].get("garder"))]
+        perdues = [i for i in attendues if i not in st.get("reponses", {})]
+        if perdues:
+            pb.append(f"état final : {len(perdues)} réponse(s) jouée(s) absente(s) de la sauvegarde, ex. {perdues[0]}")
+        # évaluation : le résultat doit suivre les réponses données
+        if any(self.E[i]["type"] == "eval-resultat" for i in self.E):
+            statut = (st.get("eval") or {}).get("statut")
+            if self.juste:
+                if statut != "reussi" or lms.get("cmi.core.lesson_status") != "passed" or str(lms.get("cmi.core.score.raw")) != "100":
+                    pb.append(f"évaluation : avec toutes les bonnes réponses, attendu réussi/passed/100, obtenu {statut}/{lms.get('cmi.core.lesson_status')}/{lms.get('cmi.core.score.raw')}")
+            else:
+                if statut == "reussi" or lms.get("cmi.core.lesson_status") != "failed" or str(lms.get("cmi.core.score.raw")) != "0":
+                    pb.append(f"évaluation : avec toutes les mauvaises réponses, attendu non réussi/failed/0, obtenu {statut}/{lms.get('cmi.core.lesson_status')}/{lms.get('cmi.core.score.raw')}")
+        return pb
+
     def reconstruction(self):
         """Recharge la page : le moteur relit cmi.suspend_data. On force une réécriture complète de l'état
         (touche A deux fois : la pause d'animation se bascule puis revient) et on compare à la sauvegarde d'avant."""
@@ -408,8 +439,11 @@ class Joueur:
         self.page.wait_for_selector("#ecran")
         if self.ecran() != ecran_avant:
             raise Echec(f"reconstruction : écran {self.ecran()!r} au lieu de {ecran_avant!r}")
+        n_avant = len(self.sauvegarde()["ecritures"])
         self.page.evaluate("() => document.activeElement && document.activeElement.blur()")
-        self.page.keyboard.press("a"); self.page.keyboard.press("a")   # touche A : pause des animations, deux fois = état d'origine
+        self.page.keyboard.press("a"); self.page.keyboard.press("a")
+        if len(self.sauvegarde()["ecritures"]) <= n_avant:
+            raise Echec("reconstruction : la touche A n'a provoqué aucune réécriture, la comparaison ne prouve rien")   # touche A : pause des animations, deux fois = état d'origine
         apres = self.sauvegarde()["derniere"]
         if json.loads(avant) != json.loads(apres):
             ka, kb = json.loads(avant), json.loads(apres)
@@ -428,6 +462,7 @@ def jouer(navigateur, racine, module, serie, largeur, verbeux=True):
         j.rejouer()
         n = len(j.vus)
         taille, _ = j.controle_sauvegarde()
+        j.problemes.extend(j.etat_final_attendu())
         j.reconstruction()
     except Echec as e:
         erreur = str(e)
@@ -435,10 +470,11 @@ def jouer(navigateur, racine, module, serie, largeur, verbeux=True):
         erreur = f"{type(e).__name__} : {str(e).splitlines()[0][:160]} (écran {j.ecran()})"
     finally:
         j.fermer()
-    problemes = sorted(set(j.problemes))
+    problemes = sorted(set(j.problemes), key=lambda x: (not x.startswith("erreur JS"), x))
     if erreur:
-        problemes.insert(0, erreur)
-    return {"module": module, "serie": serie, "largeur": largeur, "ecrans": n, "sauvegarde": taille, "problemes": problemes}
+        problemes.insert(1 if problemes and problemes[0].startswith("erreur JS") else 0, erreur)
+    return {"module": module, "serie": serie, "largeur": largeur, "ecrans": n, "sauvegarde": taille, "problemes": problemes,
+            "vus": sorted(set(j.vus)), "tous": sorted(j.E)}
 
 
 def main(argv=None):
@@ -457,7 +493,6 @@ def main(argv=None):
 
 
 def executer(racine, modules, series, largeurs):
-    global RACINE
     resultats = []
     with sync_playwright() as p:
         nav = p.chromium.launch()
@@ -469,6 +504,15 @@ def executer(racine, modules, series, largeurs):
     return resultats
 
 
+def ecrans_jamais_joues(resultats):
+    """Un écran que ni la série juste ni la série fausse n'a affiché n'est testé par personne : on le dit."""
+    par_module, tous = {}, {}
+    for r in resultats:
+        par_module.setdefault(r["module"], set()).update(r["vus"])
+        tous[r["module"]] = set(r["tous"])
+    return {m: sorted(tous[m] - vus) for m, vus in par_module.items() if tous[m] - vus}
+
+
 def rapport(resultats):
     ko = 0
     print(f"{'module':<15}{'série':<9}{'px':<6}{'écrans':<8}{'sauvegarde':<12}résultat")
@@ -478,7 +522,12 @@ def rapport(resultats):
         print(f"{r['module']:<15}{r['serie']:<9}{r['largeur']:<6}{r['ecrans']:<8}{str(r['sauvegarde']) + ' / ' + str(LIMITE):<12}{etat}")
         for pb in r["problemes"][:6]:
             print("    -", pb)
-    print(f"\n{len(resultats) - ko}/{len(resultats)} parcours sans écart.")
+    series = {r["serie"] for r in resultats}
+    if series >= {"justes", "fausses"}:
+        for m, ids in ecrans_jamais_joues(resultats).items():
+            ko += 1
+            print(f"ÉCRANS JAMAIS JOUÉS dans {m} : {', '.join(ids)}")
+    print(f"\n{len(resultats) - ko}/{len(resultats)} contrôles sans écart.")
     return 1 if ko else 0
 
 
