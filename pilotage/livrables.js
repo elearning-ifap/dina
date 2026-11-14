@@ -180,7 +180,7 @@ window.DINA_PILOTAGE = {
         { titre: "Illustration de l'épisode « Qui fait quoi au pays ? » (accueil de l'ÉLAN)", lot: "L4", statut: "a_faire", qui: "marc", duree: 0.25, note: "Prompt prêt (ILL-N09). Emplacement visible dans le prototype tant que l'image manque." },
         { titre: "Illustrations du module 2", lot: "L4", statut: "livre", qui: "marc", note: "14-11 : les six illustrations de M2 en pages (ILL-M01, M03, M04, M05, M06, M08) sont en place et conformes au storyboard v0.4. ILL-M02 et M07 ne servaient qu'à l'ancienne version de M2. Les évaluations n'appellent pas d'image." },
         { titre: "Illustrations des modules 3 à 5", lot: "L4", statut: "a_faire", qui: "marc" },
-        { titre: "Visuels des 5 badges", lot: "L6", statut: "a_faire", qui: "marc" }
+        { titre: "Visuels des 5 badges", lot: "L6", statut: "en_cours", qui: "marc", note: "14-11 : prompts prêts (BDG-M1 à BDG-M5) : un médaillon par module, sur la carte du parcours, sans texte (Moodle affiche le nom). À confirmer : un pictogramme en design plat plutôt qu'une photographie (exception à D27)." }
       ] }
   ],
 
