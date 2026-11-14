@@ -425,7 +425,7 @@
     if (s.id === "eval") {
       /* D77 : l'agent repasse l'évaluation quand il le souhaite ; les séries alternent d'un passage à l'autre */
       var pa = etat.eval.passages || 0;
-      etat.eval = { tentative: 1, resultats: {}, statut: etat.eval.statut, passages: pa + 1, serie: pa % 2 ? "B" : "A" };
+      etat.eval = { tentative: 1, resultats: {}, statut: etat.eval.statut, acquis: !!etat.eval.acquis, passages: pa + 1, serie: pa % 2 ? "B" : "A" };
     }
     etat.historique = [];
     aller(s.debut, true);
@@ -775,7 +775,7 @@
   /* ---------- Choix multiple ---------- */
   function rendreMultiple(e, evalMode) {
     zone.classList.add("ecran--decision");
-    zone.innerHTML = '<div class="colonne">' + decision(e, evalMode ? "Évaluation" : null, CONSIGNES.multiple,
+    zone.innerHTML = '<div class="colonne">' + decision(e, evalMode ? enteteEval(e) : null, CONSIGNES.multiple,
       '<fieldset class="options options--multiple" aria-labelledby="titre-q">' + e.options.map(function (o) {
         return '<label class="option" data-id="' + esc(o.id) + '"><input type="checkbox" value="' + esc(o.id) + '"><span class="case" aria-hidden="true">' + ic("i-check") + "</span><span>" + inline(o.libelle) + "</span></label>";
       }).join("") + '</fieldset><div class="feedback" id="feedback" hidden aria-live="polite"></div>') + "</div>";
@@ -812,7 +812,7 @@
     zone.classList.add("ecran--decision");
     var ids = melanger(e.options.map(function (o) { return o.id; }), e.attendu);
     var lib = {}; e.options.forEach(function (o) { lib[o.id] = o.libelle; });
-    zone.innerHTML = '<div class="colonne">' + situation(e, evalMode ? "Évaluation" : null, e.consigne || "Remettez les étapes dans l'ordre : glissez les étiquettes ou utilisez les flèches.") +
+    zone.innerHTML = '<div class="colonne">' + situation(e, evalMode ? enteteEval(e) : null, e.consigne || "Remettez les étapes dans l'ordre : glissez les étiquettes ou utilisez les flèches.") +
       '<ol class="ordre" id="ordre"></ol>' +
       '<div class="feedback" id="feedback" hidden aria-live="polite"></div><p class="sr-only" id="annonce" aria-live="polite"></p></div>';
     var ol = $("ordre"), verrou = false, glisse = null;
@@ -1132,7 +1132,7 @@
     if (e.mode === "ordre") return rendreOrdre(e, true);
     if (e.mode === "multiple") return rendreMultiple(e, true);
     zone.classList.add("ecran--decision");
-    zone.innerHTML = '<div class="colonne">' + decision(e, "Évaluation · situation " + e.preuve.replace("E", ""), CONSIGNES.choix,
+    zone.innerHTML = '<div class="colonne">' + decision(e, enteteEval(e), CONSIGNES.choix,
       '<fieldset class="options" aria-labelledby="titre-q">' + e.options.map(function (o) {
         return '<label class="option"><input type="radio" name="ev-' + esc(e.id) + '" value="' + esc(o.id) + '"><span class="lettre">' + esc(o.id) + "</span><span>" + inline(o.libelle) + "</span></label>";
       }).join("") + "</fieldset>") + "</div>";
@@ -1143,28 +1143,45 @@
       enregistrerEval(e, o.verdict === "adapte", v);
     }, { icone: "i-check", desactive: true });
   }
+  /* « Évaluation · situation 2 sur 6 » : rang de la question dans sa série */
+  function enteteEval(e) {
+    var serie = Object.keys(E).filter(function (id) { return E[id].type === "eval-item" && E[id].variante === e.variante; });
+    var rang = Object.keys(etat.eval.resultats).filter(function (id) { return id !== e.id; }).length + 1;
+    return "Évaluation · situation " + Math.min(rang, serie.length) + " sur " + serie.length;
+  }
   function enregistrerEval(e, ok, rep) {
-    etat.eval.resultats[e.preuve] = { ok: ok, variante: e.variante, reponse: rep };
+    etat.eval.resultats[e.id] = { ok: ok, preuve: e.preuve, variante: e.variante, reponse: rep };
     sauver();
     suivant(e);
   }
   function rendreEvalResultat(e) {
     zone.classList.add("ecran--lecture");
-    var R = etat.eval.resultats, preuves = ["E1", "E2", "E3"];
-    var ok = preuves.every(function (p) { return R[p] && R[p].ok; });
+    var R = etat.eval.resultats, preuves = e.preuves ? Object.keys(e.preuves) : ["E1", "E2", "E3"];
+    /* D150 : au plus une réponse fausse, et au moins une réponse juste par compétence.
+       Avec une question par compétence, la règle revient à tout réussir (D36). */
+    var reps = Object.keys(R).map(function (k) { return R[k]; }), P = {};
+    preuves.forEach(function (p) { P[p] = { justes: 0, total: 0 }; });
+    reps.forEach(function (r) { var q = P[r.preuve]; if (q) { q.total++; if (r.ok) q.justes++; } });
+    var total = reps.length, justes = reps.filter(function (r) { return r.ok; }).length;
+    var ok = total > 0 && total - justes <= 1 && preuves.every(function (p) { return P[p].justes > 0; });
     var tent = etat.eval.tentative || 1, peutReprendre = !ok && tent < 2 && e.retentative;
-    etat.eval.statut = ok ? "reussi" : (peutReprendre ? null : "a-consolider");
+    var dejaAcquis = !ok && !!etat.eval.acquis;
+    if (ok) etat.eval.acquis = true;
+    etat.eval.statut = etat.eval.acquis ? "reussi" : (peutReprendre ? null : "a-consolider");
     sauver();
-    SCORM.setResult(ok ? "passed" : "failed", preuves.filter(function (p) { return R[p] && R[p].ok; }).length);
+    /* scorm.js ne fait jamais repasser un module réussi en « échoué » */
+    SCORM.setResult(ok ? "passed" : "failed", justes, total);
     var lignes = preuves.map(function (p) {
-      var r = R[p], bon = r && r.ok;
+      var q = P[p], bon = q.total > 0 && q.justes === q.total;
       var C = !bon && e.consolider && e.consolider[p], f = C && C.fiche && F[C.fiche];
-      return '<li class="preuve preuve--' + (bon ? "ok" : "ko") + '">' + ic(bon ? "i-check-cercle" : "i-moitie") + "<span><strong>" + (e.preuves && e.preuves[p] ? esc(e.preuves[p]) : p) + "</strong>" + (bon ? "Réussie" : "À consolider") +
+      return '<li class="preuve preuve--' + (bon ? "ok" : "ko") + '">' + ic(bon ? "i-check-cercle" : "i-moitie") + "<span><strong>" + (e.preuves && e.preuves[p] ? esc(e.preuves[p]) : p) + "</strong>" + (bon ? "Réussie" : "À consolider") + (q.total > 1 ? " · " + q.justes + " sur " + q.total : "") +
         (C ? '<span class="consolider">' + inline(C.texte) + "</span>" : "") + "</span>" +
         (f ? '<a class="btn btn-secondaire btn-petit" href="fiche.html?id=' + esc(C.fiche) + '" target="_blank" rel="noopener">' + ic("i-fichier") + " " + esc(f.titre) + "</a>" : "") + "</li>";
     }).join("");
     var texte = ok ? e.texte_reussi : (peutReprendre ? e.texte_echec : (e.texte_echec_final || e.texte_echec));
     zone.innerHTML = '<div class="colonne"><span class="surtitre">Évaluation · tentative ' + tent + "</span><h1>" + (ok ? "Évaluation réussie" : "Bilan de l'évaluation") + "</h1>" +
+      '<p class="score-eval">' + justes + " réponse" + (justes > 1 ? "s" : "") + " juste" + (justes > 1 ? "s" : "") + " sur " + total + ".</p>" +
+      (dejaAcquis ? '<p class="score-eval">Votre réussite précédente est conservée : le module reste validé.</p>' : "") +
       '<ul class="preuves">' + lignes + "</ul>" + '<div class="feedback feedback--' + (ok ? "adapte" : "partiel") + '">' + md(texte) + "</div>" +
       '<h2 class="rappel-titre">' + ic("i-ampoule") + " Les repères à garder</h2>" + (Array.isArray(e.rappel) ? points(e.rappel) : '<div class="rappel">' + md(e.rappel) + "</div>") + "</div>";
     if (peutReprendre) {

@@ -31,7 +31,7 @@ CASSES = [
      "js/engine.js", "var json = JSON.stringify(etat);", "var json = JSON.stringify(Object.assign({}, etat, { reponses: {}, faites: [] }));",
      "m1", "justes", 1366, "état final"),
     ("évaluation toujours réussie, même avec de mauvaises réponses",
-     "js/engine.js", "etat.eval.resultats[e.preuve] = { ok: ok,", "etat.eval.resultats[e.preuve] = { ok: true,",
+     "js/engine.js", "etat.eval.resultats[e.id] = { ok: ok,", "etat.eval.resultats[e.id] = { ok: true,",
      "m1", "fausses", 1366, "évaluation"),
     ("résultat SCORM inversé (réussi envoyé comme échoué)",
      "js/engine.js", 'SCORM.setResult(ok ? "passed" : "failed"', 'SCORM.setResult(ok ? "failed" : "passed"',

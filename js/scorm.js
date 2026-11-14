@@ -109,11 +109,13 @@
       ecrire("cmi.core.lesson_location", diag.location);
       valider();
     },
-    /* statut : "passed" ou "failed" ; score : preuves réussies sur 3, converti en pourcentage */
-    setResult: function (statut, score) {
-      log("résultat", statut, score);
+    /* statut : "passed" ou "failed" ; score : réponses justes sur total (3 par défaut), converti en pourcentage.
+       Un module déjà réussi ne repasse jamais en « échoué » : statut et score conservés (D150). */
+    setResult: function (statut, score, total) {
+      log("résultat", statut, score, total);
       if (!ouvert) return;
-      var pct = Math.round(100 * (Number(score) || 0) / 3);
+      var pct = Math.round(100 * (Number(score) || 0) / (Number(total) || 3));
+      if (diag.statut === "passed" && statut !== "passed") { log("module déjà réussi : statut et score conservés"); valider(); return; }
       ecrire("cmi.core.score.min", 0); ecrire("cmi.core.score.max", 100); ecrire("cmi.core.score.raw", pct);
       ecrire("cmi.core.lesson_status", statut);
       diag.statut = statut; diag.score = pct + " / 100";
