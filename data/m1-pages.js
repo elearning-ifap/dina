@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « v07.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.8.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M1-PAGES",
@@ -57,8 +57,8 @@ window.DINA_DATA = {
     "savoir": "L'évaluation du module",
     "titre": "L'évaluation",
     "debut": "M1-EVA-INTRO",
-    "duree": "6 min",
-    "accroche": "Trois situations nouvelles pour vérifier vos repères."
+    "duree": "8 min",
+    "accroche": "Six situations nouvelles pour vérifier vos repères."
    },
    {
     "id": "sortie",
@@ -1913,7 +1913,7 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Évaluation",
    "titre": "Le bilan de la semaine",
-   "texte": "Trois situations nouvelles. Pas de correction entre les questions : le bilan s'affiche à la fin.\nPour réussir, les trois situations doivent être réussies. Si ce n'est pas le cas, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez aussi repasser l'évaluation plus tard, quand vous le souhaitez.\n",
+   "texte": "Six situations nouvelles, deux par compétence. Le bilan s'affiche à la fin.\nModule validé avec 5 bonnes réponses sur 6, dont au moins une par compétence : un badge vous attend.\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nValidée ou non, vous pouvez passer au module suivant.",
    "suite": "M1-EVA-E1A"
   },
   "M1-EVA-E1A": {
@@ -1927,69 +1927,182 @@ window.DINA_DATA = {
    "competences": [
     "C01"
    ],
-   "texte": "Élise transmet trois demandes d'habitants : 1. renouveler un titre de séjour ; 2. contester un avis d'impôt sur le revenu ; 3. obtenir une aide pour développer une petite exploitation agricole. Quelle orientation est juste pour les trois ?\n",
+   "texte": "À l'accueil de la mairie, Élise note trois demandes : 1. un jeune veut s'engager dans l'armée ; 2. une patiente veut se plaindre de l'attente aux urgences du Médipôle, l'hôpital de Dumbéa ; 3. un pêcheur demande qui fixe les règles de pêche dans le lagon. Qui est compétent pour chaque demande ?",
    "options": [
     {
      "id": "A",
+     "libelle": "1. l'État · 2. la province · 3. la Nouvelle-Calédonie",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "B",
+     "libelle": "1. l'État · 2. la Nouvelle-Calédonie · 3. la Nouvelle-Calédonie",
+     "verdict": "risque"
+    },
+    {
+     "id": "C",
      "libelle": "1. l'État · 2. la Nouvelle-Calédonie · 3. la province",
      "verdict": "adapte"
     },
     {
-     "id": "B",
-     "libelle": "1. la Nouvelle-Calédonie · 2. l'État · 3. la province",
+     "id": "D",
+     "libelle": "1. la Nouvelle-Calédonie · 2. la province · 3. la commune",
      "verdict": "inadapte"
+    }
+   ],
+   "note_expert": "C01-SF2. 1. Défense nationale : l'État (loi organique n° 99-209, art. 21-I, 3°). 2. Établissements hospitaliers : la Nouvelle-Calédonie (art. 22, 24°). À confirmer : le Médipôle est le site du centre hospitalier territorial, établissement public de la Nouvelle-Calédonie. 3. Ressources naturelles des eaux intérieures, « dont celles des rades et lagons » : les provinces (art. 46) ; au large, la zone économique exclusive relève de la Nouvelle-Calédonie (art. 22, 10°). Erreurs visées : la province pour l'hôpital (proximité), la Nouvelle-Calédonie pour le lagon (« la mer, c'est le pays »), l'État par réflexe. Aucun domaine des art. 21-III, 26, 27 ; aucun fait communal.",
+   "suite": "M1-EVA-E1A2"
+  },
+  "M1-EVA-E1A2": {
+   "id": "M1-EVA-E1A2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Élise",
+   "preuve": "E1",
+   "variante": "A",
+   "mode": "choix",
+   "competences": [
+    "C01"
+   ],
+   "texte": "Un habitant attend au guichet d'Élise. Il s'agace : « Tout ce qui est public, c'est l'État. Pourquoi on m'envoie toujours à la province ? » Quelle explication simple Élise lui donne-t-elle ?",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "« La loi donne des domaines à l'État, à la Nouvelle-Calédonie et à la commune. Le reste revient à la province. »",
+     "verdict": "adapte"
+    },
+    {
+     "id": "B",
+     "libelle": "« L'État décide de tout, mais il confie aux provinces le soin d'appliquer ses décisions, au plus près de chez vous. »",
+     "verdict": "risque"
     },
     {
      "id": "C",
-     "libelle": "1. l'État · 2. la commune · 3. la Nouvelle-Calédonie",
+     "libelle": "« Depuis l'accord de Nouméa, la Nouvelle-Calédonie décide de tout, et la province fait seulement le travail sur le terrain. »",
      "verdict": "inadapte"
     },
     {
      "id": "D",
-     "libelle": "1. la province · 2. la Nouvelle-Calédonie · 3. la commune",
+     "libelle": "« Chaque année, les collectivités se partagent les sujets selon leur budget. Cette année, c'est la province qui a ce sujet. »",
      "verdict": "inadapte"
     }
    ],
+   "note_expert": "C01-SF3. Loi organique, art. 20 : « Chaque province est compétente dans toutes les matières qui ne sont pas dévolues à l'Etat ou à la Nouvelle-Calédonie par la présente loi, ou aux communes par la législation applicable en Nouvelle-Calédonie. » Listes : art. 21 (État), art. 22 (Nouvelle-Calédonie). L'item ne cite aucun domaine : il ne repose sur aucun fait contestable. Distracteurs : la déconcentration de métropole (B), « le pays décide de tout » (C), le partage au budget (D). Nuance hors écran : délégations possibles du congrès aux provinces (art. 47).",
    "suite": "M1-EVA-E2A"
   },
   "M1-EVA-E2A": {
    "id": "M1-EVA-E2A",
    "type": "eval-item",
    "etape": "Évaluation",
-   "personnage": "Noa",
+   "personnage": "Élise",
    "preuve": "E2",
    "variante": "A",
    "mode": "choix",
    "competences": [
     "C02"
    ],
-   "texte": "Dans une commune, l'agent d'accueil reçoit d'une association une demande de prêt de la salle communale pour un atelier. Que fait-il ?\n",
+   "texte": "Un nouvel agent arrive aux services techniques de la commune d'Élise, pour l'entretien des bâtiments (catégorie C). Élise lui montre l'organigramme. En haut, le maire. Sous lui, la directrice générale des services. Sous elle, le directeur des services techniques. Sous lui, deux équipes, chacune avec son chef : espaces verts, bâtiments. Un trait pointillé, qui indique un lien de travail et non d'autorité, relie l'équipe bâtiments au service des sports, pour l'entretien des stades. Selon l'organigramme, qui est le responsable direct du nouvel agent ?",
    "options": [
     {
      "id": "A",
-     "libelle": "Il accepte : il connaît le planning de la salle.",
+     "libelle": "Le directeur des services techniques.",
      "verdict": "risque"
     },
     {
      "id": "B",
-     "libelle": "Il transmet la demande au service qui gère les salles, qui la fait valider selon les règles de la commune.",
-     "verdict": "adapte"
+     "libelle": "Le responsable du service des sports.",
+     "verdict": "risque"
     },
     {
      "id": "C",
-     "libelle": "Il l'envoie au président de la province.",
+     "libelle": "La directrice générale des services.",
      "verdict": "inadapte"
     },
     {
      "id": "D",
-     "libelle": "Il répond que la commune ne prête pas ses salles.",
+     "libelle": "Le chef de l'équipe bâtiments.",
+     "verdict": "adapte"
+    }
+   ],
+   "note_expert": "C02-SF1. Organigramme fictif : aucune affirmation juridique. Repère enseigné à l'épisode 2 : le trait plein indique le lien hiérarchique. Erreurs visées : sauter un échelon (A, C), confondre le lien fonctionnel en pointillé avec le lien hiérarchique (B). En production, afficher l'organigramme (composant organigramme de l'épisode 2) plutôt que de le décrire en texte.",
+   "suite": "M1-EVA-E2A2"
+  },
+  "M1-EVA-E2A2": {
+   "id": "M1-EVA-E2A2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Élise",
+   "preuve": "E2",
+   "variante": "A",
+   "mode": "choix",
+   "competences": [
+    "C02"
+   ],
+   "texte": "Élise s'est mariée : elle change de nom. Elle vient aussi de déménager à Païta. Elle veut que son dossier d'agent et sa paie soient à jour. À qui s'adresse-t-elle ?",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "À son responsable direct, qui transmettra s'il le juge utile.",
+     "verdict": "risque"
+    },
+    {
+     "id": "B",
+     "libelle": "Au service des ressources humaines, qui tient son dossier.",
+     "verdict": "adapte"
+    },
+    {
+     "id": "C",
+     "libelle": "À la CAFAT seulement, qui préviendra son employeur.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "D",
+     "libelle": "Au service de l'état civil, qui a célébré son mariage.",
      "verdict": "inadapte"
     }
    ],
+   "note_expert": "C02-SF4. Pratique d'employeur, sans texte : la mise à jour du dossier administratif et de la paie passe par le service des ressources humaines de l'employeur (FICHE-M1-E2 : « Les ressources humaines : ma carrière, mes congés, ma paie »). Piège D : Élise travaille à la mairie, qui tient l'état civil, mais l'état civil n'est pas son service RH. À faire confirmer par un référent RH de commune : informer aussi son responsable est d'usage (A reste « risque », pas « inadapte »).",
    "suite": "M1-EVA-E3A"
   },
   "M1-EVA-E3A": {
    "id": "M1-EVA-E3A",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Malia",
+   "preuve": "E3",
+   "variante": "A",
+   "mode": "choix",
+   "competences": [
+    "C17"
+   ],
+   "texte": "Une collègue demande à Malia si elle peut télétravailler deux jours par semaine. Malia a lu sur un site national d'information : « jusqu'à trois jours par semaine ». Avant de répondre, où cherche-t-elle la règle qui s'applique à l'ÉLAN ?",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "Sur le site national qu'elle a lu : il explique la règle simplement et il est à jour.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "B",
+     "libelle": "Dans la loi du pays sur le télétravail, sur Leginova, puis dans la procédure de l'ÉLAN.",
+     "verdict": "adapte"
+    },
+    {
+     "id": "C",
+     "libelle": "Auprès des collègues qui télétravaillent déjà à l'ÉLAN : ils connaissent bien la pratique.",
+     "verdict": "risque"
+    },
+    {
+     "id": "D",
+     "libelle": "Dans un article de presse récent sur le télétravail des agents publics.",
+     "verdict": "risque"
+    }
+   ],
+   "note_expert": "C17-SF2. Loi du pays n° 2021-3 du 22 avril 2021 relative au télétravail dans le secteur public : elle s'applique à tous les employeurs publics, sauf les chambres consulaires et les établissements publics à caractère industriel et commercial (art. 2) ; le télétravail est accordé par l'employeur sur demande de l'agent (art. 3) ; une délibération fixe les modalités (art. 6 : délibération n° 155 du 19 mai 2021). Aucun nombre de jours n'est affiché. Piège A : une règle nationale importée de métropole. Hypothèse : l'ÉLAN est un établissement public administratif.",
+   "suite": "M1-EVA-E3A2"
+  },
+  "M1-EVA-E3A2": {
+   "id": "M1-EVA-E3A2",
    "type": "eval-item",
    "etape": "Évaluation",
    "personnage": "Noa",
@@ -1999,51 +2112,52 @@ window.DINA_DATA = {
    "competences": [
     "C17"
    ],
-   "texte": "Pour répondre à un usager sur un délai, Noa trouve : une note interne de 2021, une page officielle mise à jour cette année, un message transféré sans date. Que fait-il ?\n",
+   "texte": "Pour une note, Noa cite un arrêté qu'il a trouvé sur Leginova. En relisant la page, il voit en haut la mention « Texte abrogé ». Que fait-il ?",
    "options": [
     {
      "id": "A",
-     "libelle": "Il utilise la page officielle à jour, vérifie sa date et note la référence.",
-     "verdict": "adapte"
-    },
-    {
-     "id": "B",
-     "libelle": "Il utilise la note interne : c'est la référence de la maison.",
+     "libelle": "Il le cite quand même : c'est un texte officiel, publié au Journal officiel.",
      "verdict": "risque"
     },
     {
-     "id": "C",
-     "libelle": "Il utilise le message : c'est le plus récent.",
+     "id": "B",
+     "libelle": "Il le cite, en précisant entre parenthèses que le texte est abrogé.",
      "verdict": "inadapte"
     },
     {
+     "id": "C",
+     "libelle": "Il ne s'en sert plus et cherche le texte qui s'applique aujourd'hui.",
+     "verdict": "adapte"
+    },
+    {
      "id": "D",
-     "libelle": "Il donne les trois réponses à l'usager.",
+     "libelle": "Il le cite s'il date de moins de cinq ans : c'est encore récent.",
      "verdict": "inadapte"
     }
    ],
+   "note_expert": "C17-SF6 (et C17-S4, évolution des règles). Repères du module : « en vigueur » = ni supprimée ni remplacée (apport de l'épisode 3) ; « une abrogation le supprime » (Aller plus loin). Item de méthode, sans fait juridique. À vérifier : la mention exacte affichée par Leginova pour un texte abrogé (« abrogé », « version en vigueur », etc.) ; adapter le libellé de la situation à l'écran réel.",
    "suite": "M1-EVA-RES"
   },
   "M1-EVA-RES": {
    "id": "M1-EVA-RES",
    "type": "eval-resultat",
    "etape": "Évaluation",
-   "regle": "E1, E2 et E3 réussies ; aucune compensation",
+   "regle": "5 réponses justes sur 6, au moins une par compétence",
    "preuves": {
     "E1": "Orienter une demande",
     "E2": "Trouver le bon interlocuteur",
     "E3": "Vérifier une information"
    },
-   "texte_reussi": "Évaluation réussie. Vous savez qui fait quoi, à qui vous adresser, et comment vérifier une information avant de l'utiliser.\n",
-   "texte_echec": "Certains repères sont encore à consolider. Une nouvelle tentative vous est proposée, sur d'autres situations.\n",
-   "texte_echec_final": "Certains repères restent à consolider. Les fiches indiquées ci-dessus sont dans votre carnet : relisez-les et revoyez les épisodes concernés. Quand vous vous sentez prêt, repassez l'évaluation depuis le sommaire : les situations ne seront pas les mêmes.\n",
+   "texte_reussi": "Module validé : vous obtenez le badge « Je me repère ». Vous savez qui fait quoi, à qui vous adresser, et comment vérifier une information avant de l'utiliser.",
+   "texte_echec": "Pas encore validé : certains repères sont à consolider. Une nouvelle tentative vous est proposée, sur d'autres situations.",
+   "texte_echec_final": "Pas encore validé. Nous vous conseillons de relire les fiches indiquées ci-dessus, dans votre carnet, et de revoir les épisodes concernés. Vous reprendrez l'évaluation quand vous voulez, depuis le sommaire : les situations changeront. Vous pouvez aussi continuer le parcours dès maintenant : le module suivant vous est ouvert.",
    "consolider": {
     "E1": {
      "texte": "Je cherche qui a la compétence, pas qui est le plus proche. Dans le doute, je vérifie avant de répondre.",
      "fiche": "FICHE-M1-E1"
     },
     "E2": {
-     "texte": "Je transmets ce qui engage mon employeur à celui qui décide, et je m'adresse au service qui gère le sujet.",
+     "texte": "Je lis l'organigramme pour trouver mon responsable direct, et je m'adresse au service qui gère le sujet.",
      "fiche": "FICHE-M1-E2"
     },
     "E3": {
@@ -2065,6 +2179,7 @@ window.DINA_DATA = {
      "texte": "Une source officielle, datée, en vigueur ; je garde la référence."
     }
    ],
+   "note_expert": "Règle D150 : validé si au moins 5 réponses justes sur 6 et au moins une juste par compétence (E1, E2, E3). Tentatives illimitées ; séries A et B en alternance (D77). Après deux échecs, conseil de revoir le module, sans blocage du module suivant. Consolider E2 : « ce qui engage mon employeur » retiré (audit pédagogique M1-04 et X-01 : règle réservée à M2, D144).",
    "retentative": "M1-EVA-E1B",
    "suite": "M1-EVA-FIN"
   },
@@ -2072,72 +2187,148 @@ window.DINA_DATA = {
    "id": "M1-EVA-E1B",
    "type": "eval-item",
    "etape": "Évaluation",
-   "personnage": "Élise",
+   "personnage": "Cédric",
    "preuve": "E1",
    "variante": "B",
    "mode": "choix",
    "competences": [
     "C01"
    ],
-   "texte": "Élise transmet trois autres demandes : 1. passer son permis de conduire ; 2. déposer plainte après un vol ; 3. faire réparer une route communale. Quelle orientation est juste pour les trois ?\n",
+   "texte": "À l'accueil de l'ÉLAN, Cédric note trois demandes : 1. un touriste demande qui fixe la valeur du franc pacifique par rapport à l'euro ; 2. une cliente a payé un produit de première nécessité plus cher que le prix maximum fixé ; 3. un habitant de La Foa veut chasser le cerf et demande où obtenir son permis de chasse. Qui est compétent pour chaque demande ?",
    "options": [
     {
      "id": "A",
-     "libelle": "1. l'État · 2. l'État · 3. la province",
-     "verdict": "inadapte"
-    },
-    {
-     "id": "B",
-     "libelle": "1. la Nouvelle-Calédonie · 2. l'État · 3. la commune",
+     "libelle": "1. l'État · 2. la Nouvelle-Calédonie · 3. la province",
      "verdict": "adapte"
     },
     {
+     "id": "B",
+     "libelle": "1. la Nouvelle-Calédonie · 2. la Nouvelle-Calédonie · 3. la commune",
+     "verdict": "inadapte"
+    },
+    {
      "id": "C",
-     "libelle": "1. la Nouvelle-Calédonie · 2. la commune · 3. la commune",
+     "libelle": "1. l'État · 2. la province · 3. la commune",
      "verdict": "inadapte"
     },
     {
      "id": "D",
-     "libelle": "1. la province · 2. la Nouvelle-Calédonie · 3. la commune",
-     "verdict": "inadapte"
+     "libelle": "1. l'État · 2. l'État · 3. la province",
+     "verdict": "risque"
     }
    ],
+   "note_expert": "C01-SF2. 1. Monnaie, changes : l'État (loi organique, art. 21-I, 5°). 2. Réglementation des prix : la Nouvelle-Calédonie (art. 22, 20°). 3. Chasse : la province (loi organique, art. 21-III, 4° : « sous réserve des compétences des provinces en matière de chasse et d'environnement » ; art. 20). La Foa est en province Sud. Demande remplacée le 14-11 par Claude : l'agrandissement d'un magasin relève en pratique de l'Autorité de la concurrence de la Nouvelle-Calédonie (commerce de détail), la réponse « la province » aurait été discutable. À faire confirmer par l'expert : le guichet du permis de chasse en province Sud. Erreurs visées : l'État pour les prix (réflexe de métropole), la commune pour la chasse (lieu de résidence), « le franc pacifique, c'est le pays ».",
+   "suite": "M1-EVA-E1B2"
+  },
+  "M1-EVA-E1B2": {
+   "id": "M1-EVA-E1B2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Léna",
+   "preuve": "E1",
+   "variante": "B",
+   "mode": "choix",
+   "competences": [
+    "C01"
+   ],
+   "texte": "Au forum des métiers de Koné, Léna, agente de la province, présente son travail. Un lycéen lui demande : « La province, c'est le gouvernement de la Nouvelle-Calédonie en plus petit. Vous appliquez ses décisions, non ? » Que lui répond Léna ?",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "« Oui : la province applique sur son territoire les décisions du gouvernement de la Nouvelle-Calédonie. »",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "B",
+     "libelle": "« Non : la province est un service de l'État, dirigé par le haut-commissaire. »",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "C",
+     "libelle": "« Non : sur son territoire, la province décide de tout, à la place des autres collectivités. »",
+     "verdict": "risque"
+    },
+    {
+     "id": "D",
+     "libelle": "« Non : la province a ses domaines, décidés par son assemblée ; la Nouvelle-Calédonie a les siens. »",
+     "verdict": "adapte"
+    }
+   ],
+   "note_expert": "C01-SF3. Loi organique, art. 3 : provinces et communes sont des collectivités territoriales qui « s'administrent librement par des assemblées élues » ; art. 20 : compétence de la province par défaut ; art. 157 : les matières de la compétence de la province relèvent de l'assemblée de province, sauf celles attribuées à son président ; art. 2 : le haut-commissaire représente le Gouvernement (piège B). Nuance hors écran : délégations du congrès aux provinces (art. 47).",
    "suite": "M1-EVA-E2B"
   },
   "M1-EVA-E2B": {
    "id": "M1-EVA-E2B",
    "type": "eval-item",
    "etape": "Évaluation",
-   "personnage": "Noa",
+   "personnage": "Léna",
    "preuve": "E2",
    "variante": "B",
    "mode": "choix",
    "competences": [
     "C02"
    ],
-   "texte": "Dans un établissement public, une agente reçoit d'un partenaire une convention de partenariat à signer. Que fait-elle ?\n",
+   "texte": "Léna montre à une nouvelle collègue l'organigramme de sa direction, à la province. En haut, la directrice. Sous elle, deux services : études et statistiques, dirigé par une cheffe de service ; appui aux communes, dirigé par un chef de service. Dans le service études et statistiques, deux cellules, chacune avec sa responsable : enquêtes, données. La nouvelle collègue est dans la cellule données. Un trait pointillé, qui indique un lien de travail et non d'autorité, relie sa cellule au service appui aux communes, pour les tableaux de bord. Selon l'organigramme, qui est sa responsable directe ?",
    "options": [
     {
      "id": "A",
-     "libelle": "Elle la signe : elle connaît bien le dossier.",
-     "verdict": "inadapte"
+     "libelle": "La cheffe du service études et statistiques.",
+     "verdict": "risque"
     },
     {
      "id": "B",
-     "libelle": "Elle la transmet à son responsable, qui la soumettra à la direction.",
+     "libelle": "La responsable de la cellule données.",
      "verdict": "adapte"
     },
     {
      "id": "C",
-     "libelle": "Elle l'envoie directement au conseil d'administration.",
+     "libelle": "Le chef du service appui aux communes.",
      "verdict": "risque"
     },
     {
      "id": "D",
-     "libelle": "Elle la donne à un collègue d'un autre service.",
+     "libelle": "La directrice, au sommet de l'organigramme.",
      "verdict": "inadapte"
     }
    ],
+   "note_expert": "C02-SF1. Organigramme fictif : aucune affirmation juridique. Même structure que E2A (quatre niveaux, un lien fonctionnel en pointillé). Erreurs visées : sauter un échelon (A, D), confondre le lien fonctionnel avec le lien hiérarchique (C). En production, afficher l'organigramme plutôt que de le décrire.",
+   "suite": "M1-EVA-E2B2"
+  },
+  "M1-EVA-E2B2": {
+   "id": "M1-EVA-E2B2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Léna",
+   "preuve": "E2",
+   "variante": "B",
+   "mode": "choix",
+   "competences": [
+    "C02"
+   ],
+   "texte": "Au siège de la province, Léna croise un agent d'entretien d'un parc provincial (catégorie C). Il veut louer un logement et l'agence lui demande une attestation de son employeur. « À qui je la demande ? » Que lui conseille Léna ?",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "À son chef d'équipe, qui connaît son poste et ses horaires.",
+     "verdict": "risque"
+    },
+    {
+     "id": "B",
+     "libelle": "À la mairie de sa commune, qui délivre les attestations aux habitants.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "C",
+     "libelle": "Au service des ressources humaines, qui gère les dossiers des agents.",
+     "verdict": "adapte"
+    },
+    {
+     "id": "D",
+     "libelle": "À l'accueil du siège de la province, qui reçoit le public.",
+     "verdict": "inadapte"
+    }
+   ],
+   "note_expert": "C02-SF4. Pratique d'employeur, sans texte : l'attestation d'employeur est préparée par le service des ressources humaines (FICHE-M1-E2). Piège B : confondre l'employeur (la province) et la commune de résidence (attestation de domicile). À faire confirmer par un référent RH de province : circuit exact de l'attestation (qui la prépare, qui la signe) ; le chef d'équipe peut relayer la demande (A reste « risque »).",
    "suite": "M1-EVA-E3B"
   },
   "M1-EVA-E3B": {
@@ -2151,29 +2342,67 @@ window.DINA_DATA = {
    "competences": [
     "C17"
    ],
-   "texte": "Une note interne de l'an dernier fixe une règle. Noa découvre sur Leginova un texte plus récent qui la modifie. Que fait-il ?\n",
+   "texte": "Pour une note au comité de direction, Noa doit indiquer le nombre d'habitants de Koné. Où prend-il le chiffre ?",
    "options": [
     {
      "id": "A",
-     "libelle": "Il applique la note interne : c'est la règle de la maison.",
+     "libelle": "Dans une encyclopédie en ligne : le chiffre y est donné directement.",
      "verdict": "inadapte"
     },
     {
      "id": "B",
-     "libelle": "Il corrige lui-même la note interne et la diffuse.",
+     "libelle": "Sur le site de la commune de Koné : elle connaît ses habitants.",
      "verdict": "risque"
     },
     {
      "id": "C",
-     "libelle": "Il applique le texte en vigueur, note sa référence et signale à son responsable que la note interne est à mettre à jour.",
-     "verdict": "adapte"
+     "libelle": "Dans une note de l'ÉLAN d'il y a trois ans, qui cite déjà un chiffre.",
+     "verdict": "risque"
     },
     {
      "id": "D",
-     "libelle": "Il ne fait rien tant qu'on ne lui demande pas.",
-     "verdict": "inadapte"
+     "libelle": "Chez l'institut de la statistique, qui publie le recensement, avec son année.",
+     "verdict": "adapte"
     }
    ],
+   "note_expert": "C17-SF2. Repère de l'épisode 3 (zone « Le service qui produit l'information ») : pour un chiffre, le service qui le produit. Le recensement général de la population relève de l'État (loi organique, art. 21-I, 13°) ; ses résultats pour la Nouvelle-Calédonie sont diffusés par l'institut de la statistique et des études économiques de la Nouvelle-Calédonie. À confirmer : intitulé exact de l'institut et diffusion des résultats par commune. Aucun chiffre affiché. La commune (B) peut reprendre un chiffre exact, mais elle n'en est pas la source.",
+   "suite": "M1-EVA-E3B2"
+  },
+  "M1-EVA-E3B2": {
+   "id": "M1-EVA-E3B2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Ana",
+   "preuve": "E3",
+   "variante": "B",
+   "mode": "choix",
+   "competences": [
+    "C17"
+   ],
+   "texte": "Ana prépare une réponse à un agent sur une règle RH fixée par une délibération. Elle s'appuie sur une fiche explicative imprimée en 2023. Sur Leginova, la délibération affiche une modification plus récente que sa fiche. Que fait-elle ?",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "Elle relit l'article concerné dans la version en vigueur et note sa référence.",
+     "verdict": "adapte"
+    },
+    {
+     "id": "B",
+     "libelle": "Elle répond avec sa fiche, car le fond d'une règle change rarement.",
+     "verdict": "risque"
+    },
+    {
+     "id": "C",
+     "libelle": "Elle donne à l'agent la fiche et la nouvelle version, pour qu'il compare.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "D",
+     "libelle": "Elle attend une note de service avant de tenir compte du changement.",
+     "verdict": "risque"
+    }
+   ],
+   "note_expert": "C17-SF6 (et C17-SF5, conserver la référence). Item de méthode, sans fait juridique : aucune délibération réelle n'est nommée, aucune date de modification n'est inventée. Repères du module : la version consolidée intègre toutes les modifications (épisode 3, item T3) ; « en vigueur » = ni supprimée ni remplacée. Piège D : attendre une consigne interne alors que le texte en vigueur est disponible.",
    "suite": "M1-EVA-RES"
   },
   "M1-EVA-FIN": {
@@ -2532,5 +2761,5 @@ window.DINA_DATA = {
    "alt": "Trois questions avant d'utiliser une information : qui l'a produite ? de quand date-t-elle ? est-elle en vigueur ? Selon les réponses : je l'utilise, je vérifie, ou je l'écarte."
   }
  },
- "source": "v07.md"
+ "source": "Storyboard — M1 en pages v0.8.md"
 };

@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — Prologue v0.5.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — Prologue v0.6.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "PRO",
@@ -336,7 +336,7 @@ window.DINA_DATA = {
     {
      "icone": "i-medaille",
      "recto": "Le vendredi, un bilan",
-     "verso": "Des situations nouvelles, que vous n'avez pas encore vues. Un badge si elles sont réussies."
+     "verso": "Six situations nouvelles, que vous n'avez pas encore vues. Un badge avec 5 bonnes réponses sur 6. Pas encore ? Vous continuez le parcours et vous repassez quand vous voulez."
     },
     {
      "icone": "i-cadenas",
@@ -403,5 +403,5 @@ window.DINA_DATA = {
    "alt": "Organigramme de l'ÉLAN. En haut, Ariane, directrice. Pôle études et projets : Samuel, responsable du pôle, puis Noa, chargé d'études et d'appui aux projets, et Malia, chargée d'études et d'évaluation, marraine de Noa. Pôle ressources et administration : Ana, développement des compétences, et Cédric, accueil et logistique. En bas, les partenaires, qui ne dépendent pas de l'ÉLAN : Joël et Teiva, association Passerelles ; Léna, administration provinciale ; Élise, une commune. Chaque personne a son statut indiqué."
   }
  },
- "source": "Storyboard — Prologue v0.5.md"
+ "source": "Storyboard — Prologue v0.6.md"
 };

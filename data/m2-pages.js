@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.3.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.4.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M2-PAGES",
@@ -56,8 +56,8 @@ window.DINA_DATA = {
     "savoir": "L'évaluation du module",
     "titre": "L'évaluation",
     "debut": "M2-EVA-INTRO",
-    "duree": "5 min",
-    "accroche": "Trois situations nouvelles pour vérifier vos réflexes."
+    "duree": "8 min",
+    "accroche": "Six situations nouvelles pour vérifier vos réflexes."
    },
    {
     "id": "sortie",
@@ -2238,14 +2238,14 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Évaluation",
    "titre": "Vendredi : l'évaluation",
-   "texte": "Trois situations nouvelles. Pas de correction entre les questions : le bilan s'affiche à la fin.\nPour réussir, les trois situations doivent être réussies. Si ce n'est pas le cas, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez aussi repasser l'évaluation plus tard, quand vous le souhaitez.\n",
+   "texte": "Six situations nouvelles, deux par repère du module. Le bilan s'affiche à la fin.\nModule validé avec 5 réponses justes sur 6, dont au moins une par repère : un badge vous attend.\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nRéussie ou non, vous pouvez passer au module suivant.\n",
    "suite": "M2-EVA-E1A"
   },
   "M2-EVA-E1A": {
    "id": "M2-EVA-E1A",
    "type": "eval-item",
    "etape": "Évaluation",
-   "personnage": "Joël",
+   "personnage": "Léna",
    "preuve": "E1",
    "variante": "A",
    "mode": "choix",
@@ -2253,129 +2253,244 @@ window.DINA_DATA = {
     "C03",
     "C04"
    ],
-   "texte": "Samuel : « Réponds à Passerelles sur le planning des visites. »\nDans sa réponse, Joël demande aussi à l'ÉLAN de signer une attestation de partenariat pour une demande de subvention. Que fait Noa ?\n",
+   "texte": "Léna est chargée d'études à l'administration provinciale. Un journaliste d'une radio locale l'appelle : il sait que l'enquête de la province sur les transports scolaires est terminée. Il veut les premiers résultats, pas encore publiés, pour son journal de midi.\nQue fait Léna ?\n",
    "options": [
     {
      "id": "A",
-     "libelle": "Il répond sur le planning et signe l'attestation pour ne pas retarder Passerelles.",
-     "verdict": "inadapte"
+     "libelle": "Elle lui donne les grandes tendances, en précisant bien qu'elles restent provisoires et peuvent encore bouger.",
+     "verdict": "risque"
     },
     {
      "id": "B",
-     "libelle": "Il répond sur le planning, ne signe rien, et transmet la demande d'attestation à Samuel avec le contexte et la décision attendue.",
-     "verdict": "adapte"
+     "libelle": "Elle lui répond qu'elle n'a rien à dire sur ce sujet, et raccroche.",
+     "verdict": "inadapte"
     },
     {
      "id": "C",
-     "libelle": "Il répond que ce n'est pas de son ressort, sans autre suite.",
+     "libelle": "Elle lui lit les chiffres, à condition qu'il ne cite pas son nom.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "D",
+     "libelle": "Elle note sa demande et ses coordonnées, et la transmet tout de suite à sa responsable.",
+     "verdict": "adapte"
+    }
+   ],
+   "suite": "M2-EVA-E1A2",
+   "note_expert": "Savoir-faire visé : C04-SF3 (ce qui se décide seul, ce qui se fait valider), C03-SF3. Délibération n° 81, art. 20 : discrétion professionnelle pour « tous les faits, informations ou documents » connus dans les fonctions, sauf décision expresse de l'autorité ; art. 21 : devoir de répondre au public « dans le respect des règles mentionnées à l'article 20 ». La personne qui parle aux médias au nom de la province relève de l'organisation de chaque employeur (pratique d'employeur) : l'item est jugé sur la méthode (une communication externe sensible se fait valider), pas sur une règle de presse. B est faux au regard de l'art. 21 : la demande n'est pas traitée, elle est écartée."
+  },
+  "M2-EVA-E1A2": {
+   "id": "M2-EVA-E1A2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Ana",
+   "preuve": "E1",
+   "variante": "A",
+   "mode": "choix",
+   "competences": [
+    "C03",
+    "C04"
+   ],
+   "texte": "Ana est contractuelle au pôle ressources de l'ÉLAN. Ariane décide qu'à partir de lundi, les agents demandent leurs attestations par un formulaire en ligne, et plus par courriel. Ana pense que ce sera plus lent pour les agents en mission sur le terrain. Un collègue lui glisse : « Toi, tu es contractuelle. L'obligation de suivre les instructions, c'est pour les fonctionnaires. »\nQue fait Ana ?\n",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "Elle dit à Ariane ce qu'elle craint pour les agents en mission, et applique le formulaire lundi.",
+     "verdict": "adapte"
+    },
+    {
+     "id": "B",
+     "libelle": "Elle garde les courriels : contractuelle, elle n'est pas tenue par les mêmes obligations que les fonctionnaires.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "C",
+     "libelle": "Elle met en place le formulaire, et continue de traiter par courriel les agents qui le préfèrent.",
      "verdict": "risque"
     },
     {
      "id": "D",
-     "libelle": "Il attend que Samuel traite lui-même tout le courriel.",
+     "libelle": "Elle attend une note de service signée par Ariane avant de changer sa façon de travailler.",
      "verdict": "inadapte"
     }
    ],
-   "suite": "M2-EVA-E2A"
+   "suite": "M2-EVA-E2A",
+   "note_expert": "Savoir-faire visé : C04-SF1 (appliquer une consigne de son cadre professionnel), avec C03-S1 et C03-S3 (statut ; droits et obligations). Délibération n° 81, art. 22 : l'agent « doit se conformer aux instructions de son supérieur hiérarchique, sauf dans le cas où l'ordre donné est manifestement illégal et de nature à compromettre gravement un intérêt public » ; la consigne n'est ni l'un ni l'autre. Loi du pays n° 2021-4, art. 29-I, 6° : les agents contractuels sont soumis aux mêmes règles que les fonctionnaires en matière de « droits et obligations ». Dire son désaccord à son responsable avant d'appliquer : apport « Exécuter les instructions, et ses limites » (M2-P2). Ariane est ici la supérieure d'Ana (organigramme de la fiche de poste de Noa)."
   },
   "M2-EVA-E2A": {
    "id": "M2-EVA-E2A",
    "type": "eval-item",
    "etape": "Évaluation",
-   "personnage": "Noa",
+   "personnage": "Élise",
+   "preuve": "E2",
+   "variante": "A",
+   "mode": "choix",
+   "competences": [
+    "C18"
+   ],
+   "texte": "Élise est agente d'accueil dans une mairie. Un habitant demande quel jour passe le ramassage des encombrants dans son quartier : il déménage samedi. Élise a regardé le guide de l'accueil et le site de la commune : son quartier n'y figure pas. Trois personnes attendent derrière lui.\nQue fait Élise ?\n",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "Elle lui donne la date prévue pour le quartier voisin : ce doit être la même.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "B",
+     "libelle": "Elle continue de chercher sur le site de la commune pendant que l'habitant et la file patientent.",
+     "verdict": "risque"
+    },
+    {
+     "id": "C",
+     "libelle": "Elle note son numéro, pose la question au service concerné de la mairie, et le rappelle.",
+     "verdict": "adapte"
+    },
+    {
+     "id": "D",
+     "libelle": "Elle lui conseille de repasser lundi, quand sa responsable sera là pour lui répondre.",
+     "verdict": "inadapte"
+    }
+   ],
+   "suite": "M2-EVA-E2A2",
+   "note_expert": "Savoir-faire visé : C18-SF5 (identifier le moment d'interrompre son action et de demander), avec C18-SF1 et C18-SF2. Item de méthode, sans règle juridique : Élise a déjà mobilisé ses ressources (guide, site) ; chercher encore fait attendre la file ; deviner donne une information fausse ; renvoyer à lundi est trop tard (déménagement samedi). L'organisation de la collecte varie selon les communes : l'item ne donne aucune date ni aucun nom de service."
+  },
+  "M2-EVA-E2A2": {
+   "id": "M2-EVA-E2A2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Cédric",
    "preuve": "E2",
    "variante": "A",
    "mode": "ordre",
    "competences": [
     "C18"
    ],
-   "texte": "Pour finir le diagnostic, il manque à Noa la définition d'un indicateur produit par la province. Remettez ses actions dans l'ordre.\n",
+   "texte": "Cédric, à l'accueil et à la logistique de l'ÉLAN, écrit au garage qui a fait la dernière révision du véhicule de service. Il veut une réponse rapide. Remettez les phrases de son message dans l'ordre.\n",
    "options": [
     {
      "id": "A",
-     "libelle": "Consulter la note méthodologique du dossier partagé."
+     "libelle": "Une réponse avant vendredi midi me laisserait le temps de prendre rendez-vous chez vous."
     },
     {
      "id": "B",
-     "libelle": "Si le doute persiste, interroger le service producteur de la donnée."
+     "libelle": "Notre véhicule de service part lundi pour trois jours de route vers Poum et Ouégoa."
     },
     {
      "id": "C",
-     "libelle": "Solliciter Samuel seulement s'il faut arbitrer entre deux définitions."
+     "libelle": "La révision des 30 000 km comprend-elle le contrôle des pneus et des freins ?"
     },
     {
      "id": "D",
-     "libelle": "Finaliser le diagnostic en citant la définition retenue."
+     "libelle": "J'ai relu le carnet d'entretien : la révision y est notée, sans le détail des contrôles."
     }
    ],
    "attendu": [
-    "A",
     "B",
+    "D",
     "C",
-    "D"
+    "A"
    ],
-   "suite": "M2-EVA-E3A"
+   "suite": "M2-EVA-E3A",
+   "note_expert": "Savoir-faire visé : C18-SF3 (formuler une demande d'appui claire et contextualisée) et C18-SF4 (rendre compte des démarches déjà entreprises). Ordre attendu : le contexte, ce que j'ai déjà fait, une question précise, le délai (FICHE-M2-E3, étape 4 ; apport « Bien demander un appui », M2-P3). Les libellés ne portent aucun mot d'enchaînement ; l'ordre se déduit de la méthode, pas de la lecture. Item de méthode, sans règle juridique."
   },
   "M2-EVA-E3A": {
    "id": "M2-EVA-E3A",
    "type": "eval-item",
    "etape": "Évaluation",
-   "personnage": "Ariane",
+   "personnage": "Sione",
    "preuve": "E3",
    "variante": "A",
    "mode": "choix",
    "competences": [
     "C05"
    ],
-   "texte": "Mercredi, 8 h. Noa a une note à rendre à Samuel à 11 h, un compte rendu à relire pour Malia vendredi, un tableau pour Léna sans échéance.\nÀ 9 h, Ariane lui demande un document avant 10 h 30. Que fait Noa ?\n",
+   "texte": "Sione est agent technique, de catégorie C, dans un service routier du gouvernement de la Nouvelle-Calédonie. Son chef d'équipe lui a confié, pour vendredi, la reprise des passages piétons d'un carrefour, près de Bourail. Mardi matin, Sione ouvre la livraison : il manque la moitié de la peinture. Le fournisseur livrera le reste lundi.\nQue fait Sione ?\n",
    "options": [
     {
      "id": "A",
-     "libelle": "Il traite la demande d'Ariane, prévient Samuel tout de suite et lui propose une nouvelle heure pour la note.",
-     "verdict": "adapte"
-    },
-    {
-     "id": "B",
-     "libelle": "Il traite la demande d'Ariane et prévient Samuel à 11 h que la note aura du retard.",
+     "libelle": "Il commence avec la peinture reçue, et prévient son chef vendredi s'il ne peut pas finir.",
      "verdict": "risque"
     },
     {
+     "id": "B",
+     "libelle": "Il commande le reste chez un autre fournisseur, pour tenir l'échéance de vendredi.",
+     "verdict": "inadapte"
+    },
+    {
      "id": "C",
-     "libelle": "Il refuse la demande d'Ariane : il a déjà une échéance à 11 h.",
+     "libelle": "Il prévient son chef d'équipe ce matin, et propose de finir lundi, après la livraison.",
+     "verdict": "adapte"
+    },
+    {
+     "id": "D",
+     "libelle": "Il attend la livraison de lundi pour faire tout le carrefour en une seule fois.",
+     "verdict": "inadapte"
+    }
+   ],
+   "suite": "M2-EVA-E3A2",
+   "note_expert": "Savoir-faire visé : C05-SF5 (signaler suffisamment tôt un risque de retard), avec C05-SF4 (réorganiser face à un imprévu). Item de méthode, sans règle juridique. B engage une dépense sans validation (lien avec E1, règle « engager l'employeur » de M2). Sione est un personnage nouveau, propre à l'évaluation (D145 permet les personnages du récit, n'interdit pas d'autres agents) : à valider avec le canon des personnages. « Service routier du gouvernement » reste générique : aucun nom de direction réelle."
+  },
+  "M2-EVA-E3A2": {
+   "id": "M2-EVA-E3A2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Malia",
+   "preuve": "E3",
+   "variante": "A",
+   "mode": "choix",
+   "competences": [
+    "C05"
+   ],
+   "texte": "Mardi, 8 h 45. Malia a quatre choses à faire ce matin. Le comité de 14 h reçoit des invités extérieurs. Elle ne peut pas tout faire avant 10 h.\nPar quoi Malia commence-t-elle ?\n",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "Rappeler Ariane, qui a laissé hier soir un message : « Rien d'urgent, quand tu peux. »",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "B",
+     "libelle": "Envoyer les noms des invités à l'accueil, qui fait les badges à 9 h 30.",
+     "verdict": "adapte"
+    },
+    {
+     "id": "C",
+     "libelle": "Relire le rapport annuel du pôle, que Samuel attend pour vendredi midi au plus tard.",
      "verdict": "inadapte"
     },
     {
      "id": "D",
-     "libelle": "Il fait tout en même temps pour ne rien retarder.",
+     "libelle": "Répondre à une étudiante qui attend depuis hier un rendez-vous pour son mémoire.",
      "verdict": "inadapte"
     }
    ],
-   "suite": "M2-EVA-RES"
+   "suite": "M2-EVA-RES",
+   "note_expert": "Savoir-faire visé : C05-SF2 (identifier les priorités de son activité), avec C05-SF1 (relier une tâche aux objectifs du service). La priorité vient de l'échéance la plus proche dont dépend le travail d'un autre (l'accueil, 9 h 30), pas du rang de la personne qui demande (A : Ariane dit elle-même que ce n'est pas urgent) ni de l'ancienneté de la demande (D). Item de méthode, sans règle juridique."
   },
   "M2-EVA-RES": {
    "id": "M2-EVA-RES",
    "type": "eval-resultat",
    "etape": "Évaluation",
-   "regle": "E1, E2 et E3 réussies ; aucune compensation",
+   "regle": "5 réponses justes sur 6, au moins une par compétence",
    "preuves": {
     "E1": "Rester dans son périmètre",
     "E2": "Chercher, puis demander un appui",
-    "E3": "Tenir ses engagements face à un imprévu"
+    "E3": "Prioriser et tenir ses engagements"
    },
-   "texte_reussi": "Évaluation réussie. Vous savez ce qui relève de votre poste, vous cherchez avant de demander, et vous prévenez tôt quand une échéance est menacée.\n",
-   "texte_echec": "Certains repères sont encore à consolider. Une nouvelle tentative vous est proposée, sur d'autres situations.\n",
-   "texte_echec_final": "Certains repères restent à consolider. Les fiches indiquées ci-dessus sont dans votre carnet : relisez-les et revoyez les épisodes concernés. Quand vous vous sentez prêt, repassez l'évaluation depuis le sommaire : les situations ne seront pas les mêmes.\n",
+   "texte_reussi": "Évaluation réussie : le badge du module 2 est à vous. Vous savez ce qui relève de votre poste et ce que vous faites valider, vous appliquez une consigne même quand vous la discutez, vous demandez un appui au bon moment, et vous prévenez tôt quand une échéance est menacée.\n",
+   "texte_echec": "Certains repères sont encore à consolider. Une nouvelle tentative vous est proposée, sur six autres situations.\n",
+   "texte_echec_final": "Certains repères restent à consolider. Nous vous conseillons de relire les fiches indiquées ci-dessus, dans votre carnet, et de revoir les pages du module qu'elles accompagnent. Vous reprendrez l'évaluation quand vous le voudrez, depuis le sommaire : les deux séries de situations alternent d'une tentative à l'autre.\nVous pouvez aussi continuer votre parcours dès maintenant : le module suivant vous est ouvert.\n",
    "consolider": {
     "E1": {
-     "texte": "Je ne signe et ne promets rien qui engage l'ÉLAN : je transmets à mon responsable, avec le contexte et la décision attendue.",
+     "texte": "Ce qui engage mon employeur (une dépense, un prêt, une prise de parole en son nom), je le transmets à mon responsable. Une consigne que je discute, je dis pourquoi, puis je l'applique. À revoir : l'épisode 1 (lundi) et l'apport « Exécuter les instructions » de l'épisode 2.",
      "fiche": "FICHE-M2-E2"
     },
     "E2": {
-     "texte": "Je cherche d'abord dans les documents, puis je m'adresse à celui qui produit l'information ; mon responsable seulement s'il faut arbitrer.",
+     "texte": "Quand j'ai fait le tour des documents, je m'arrête et je m'adresse à celui qui sait, avec le contexte, ce que j'ai déjà fait, une question précise et le délai. À revoir : l'épisode 3 (mercredi).",
      "fiche": "FICHE-M2-E3"
     },
     "E3": {
-     "texte": "Quand une urgence décale une échéance, je préviens tout de suite et je propose un nouveau délai.",
+     "texte": "Je commence par l'échéance la plus proche dont dépend le travail d'un autre. Quand une échéance est menacée, je préviens tout de suite et je propose un nouveau délai. À revoir : le planning de l'épisode 1 et le défi (jeudi).",
      "fiche": "FICHE-M2-S"
     }
    },
@@ -2386,11 +2501,15 @@ window.DINA_DATA = {
     },
     {
      "titre": "Ce que je fais valider",
-     "texte": "Ce qui engage l'ÉLAN : signature, dépense, promesse, date imposée à un partenaire."
+     "texte": "Ce qui engage mon employeur : signature, dépense, prêt, promesse, prise de parole en son nom."
+    },
+    {
+     "titre": "Une consigne que je discute",
+     "texte": "Je dis pourquoi à mon responsable, puis je l'applique. Fonctionnaire ou contractuel, la règle est la même."
     },
     {
      "titre": "Avant de solliciter",
-     "texte": "Je cherche, puis je m'adresse à celui qui sait."
+     "texte": "Je cherche, je sais m'arrêter, puis je m'adresse à celui qui sait."
     },
     {
      "titre": "Quand une échéance est menacée",
@@ -2404,7 +2523,7 @@ window.DINA_DATA = {
    "id": "M2-EVA-E1B",
    "type": "eval-item",
    "etape": "Évaluation",
-   "personnage": "Samuel",
+   "personnage": "Cédric",
    "preuve": "E1",
    "variante": "B",
    "mode": "choix",
@@ -2412,36 +2531,113 @@ window.DINA_DATA = {
     "C03",
     "C04"
    ],
-   "texte": "Samuel : « Cale la réunion de lancement avec les partenaires. »\nNoa ne connaît pas les disponibilités d'Ariane, qui doit l'ouvrir. Que fait Noa ?\n",
+   "texte": "Cédric est à l'accueil et à la logistique de l'ÉLAN. La présidente d'un club sportif de Koné passe au guichet : elle voudrait emprunter le grand barnum de l'ÉLAN pour un tournoi, samedi. Rien n'est écrit sur le prêt de matériel dans la fiche de poste de Cédric.\nQue fait Cédric ?\n",
    "options": [
     {
      "id": "A",
-     "libelle": "Il fixe seul la date la plus pratique et l'annonce aux partenaires.",
+     "libelle": "Il prête le barnum : il est rangé au dépôt et personne ne s'en sert samedi.",
      "verdict": "inadapte"
     },
     {
      "id": "B",
-     "libelle": "Il recueille les disponibilités des partenaires, propose deux dates à Samuel, et n'annonce rien avant validation.",
-     "verdict": "adapte"
+     "libelle": "Il lui dit que c'est d'accord, sous réserve, et demande l'avis de son responsable dans la semaine.",
+     "verdict": "risque"
     },
     {
      "id": "C",
-     "libelle": "Il demande à Samuel de s'en occuper.",
-     "verdict": "inadapte"
+     "libelle": "Il note la demande, les dates et l'usage prévu, et la transmet à son responsable.",
+     "verdict": "adapte"
     },
     {
      "id": "D",
-     "libelle": "Il propose directement des dates à Ariane, sans en parler à Samuel.",
-     "verdict": "risque"
+     "libelle": "Il refuse : l'ÉLAN ne prête pas son matériel, pour ne pas créer d'habitude.",
+     "verdict": "inadapte"
     }
    ],
-   "suite": "M2-EVA-E2B"
+   "suite": "M2-EVA-E1B2",
+   "note_expert": "Savoir-faire visé : C04-SF3 (ce qui se décide seul, ce qui se fait valider), C03-SF3. Prêter un bien de l'établissement, c'est engager l'employeur : la décision revient à la personne habilitée (pratique d'employeur, aucune règle de prêt dans le corpus). Règle du module : « Ce qui n'est pas écrit dans ma fiche de poste n'est pas autorisé pour autant » (M2-P1). D est faux parce que Cédric invente une règle et décide seul du refus. B : un « d'accord, sous réserve » est déjà une promesse."
+  },
+  "M2-EVA-E1B2": {
+   "id": "M2-EVA-E1B2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Sione",
+   "preuve": "E1",
+   "variante": "B",
+   "mode": "choix",
+   "competences": [
+    "C03",
+    "C04"
+   ],
+   "texte": "Sione est fonctionnaire, agent technique de catégorie C dans un service routier du gouvernement de la Nouvelle-Calédonie. Son chef d'équipe décide que les sorties d'outillage seront notées sur une tablette, et plus dans le cahier du dépôt. Sione pense que ce sera plus long le matin, quand toute l'équipe part en même temps.\nQue fait Sione ?\n",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "Il garde le cahier : une consigne qui ralentit l'équipe n'a pas à être suivie.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "B",
+     "libelle": "Il note les sorties sur la tablette et dans le cahier pendant un mois, pour comparer.",
+     "verdict": "risque"
+    },
+    {
+     "id": "C",
+     "libelle": "Il utilise la tablette sans rien dire : la décision est prise, son avis ne compte plus.",
+     "verdict": "risque"
+    },
+    {
+     "id": "D",
+     "libelle": "Il dit à son chef ce qu'il craint pour les départs, et utilise la tablette.",
+     "verdict": "adapte"
+    }
+   ],
+   "suite": "M2-EVA-E2B",
+   "note_expert": "Savoir-faire visé : C04-SF1 (appliquer une consigne de son cadre professionnel), avec C03-S3 (droits et obligations). Délibération n° 81, art. 22 : se conformer aux instructions du supérieur hiérarchique, « sauf dans le cas où l'ordre donné est manifestement illégal et de nature à compromettre gravement un intérêt public » ; une consigne jugée moins pratique n'entre pas dans l'exception (A). Catégories A, B, C et D : loi du pays n° 2021-4, art. 9. Dire son désaccord avec ses arguments, puis appliquer : apport « Exécuter les instructions, et ses limites » (M2-P2). B : Sione garde l'ancien système de sa propre initiative ; C : l'avis utile ne remonte pas."
   },
   "M2-EVA-E2B": {
    "id": "M2-EVA-E2B",
    "type": "eval-item",
    "etape": "Évaluation",
-   "personnage": "Noa",
+   "personnage": "Léna",
+   "preuve": "E2",
+   "variante": "B",
+   "mode": "choix",
+   "competences": [
+    "C18",
+    "C17"
+   ],
+   "texte": "Léna, à l'administration provinciale, applique pour la première fois une méthode de calcul décrite dans le guide de son service. Depuis une heure, elle refait le calcul : ses résultats s'écartent beaucoup de ceux de l'an dernier. Un collègue avait fait le calcul l'an dernier. Le rapport part demain matin.\nQue fait Léna ?\n",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "Elle montre son calcul à ce collègue et lui demande à quelle étape il a procédé autrement.",
+     "verdict": "adapte"
+    },
+    {
+     "id": "B",
+     "libelle": "Elle reprend le calcul ce soir, seule, jusqu'à retrouver des résultats proches de ceux de l'an dernier.",
+     "verdict": "risque"
+    },
+    {
+     "id": "C",
+     "libelle": "Elle envoie ses résultats tels quels : ils suivent la méthode écrite dans le guide du service.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "D",
+     "libelle": "Elle reprend les résultats de l'an dernier, en attendant de comprendre d'où vient l'écart.",
+     "verdict": "inadapte"
+    }
+   ],
+   "suite": "M2-EVA-E2B2",
+   "note_expert": "Savoir-faire visé : C18-SF5 (identifier le moment d'interrompre son action et de demander), avec C18-SF1 (les ressources ont été mobilisées : le guide) et C17-SF4 (croiser une information lorsqu'un doute existe). Item de méthode, sans règle juridique. B : continuer seule la veille de l'échéance ; C : transmettre un résultat douteux sans le signaler ; D : présenter des chiffres anciens comme actuels."
+  },
+  "M2-EVA-E2B2": {
+   "id": "M2-EVA-E2B2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Ana",
    "preuve": "E2",
    "variante": "B",
    "mode": "ordre",
@@ -2449,69 +2645,107 @@ window.DINA_DATA = {
     "C18",
     "C17"
    ],
-   "texte": "Deux tableaux du dossier donnent deux chiffres différents de fréquentation. Remettez les actions de Noa dans l'ordre.\n",
+   "texte": "Ana, au pôle ressources de l'ÉLAN, prépare l'arrivée d'un fonctionnaire mis à disposition par une direction du gouvernement de la Nouvelle-Calédonie. Elle écrit au service des ressources humaines de cette direction. Elle veut une réponse rapide. Remettez les phrases de son message dans l'ordre.\n",
    "options": [
     {
      "id": "A",
-     "libelle": "Vérifier la date et la source de chaque tableau."
+     "libelle": "Pouvez-vous me transmettre la convention signée, ou me dire où en est sa signature ?"
     },
     {
      "id": "B",
-     "libelle": "Demander à Léna lequel fait foi, en citant les deux versions."
+     "libelle": "J'ai reçu l'arrêté de mise à disposition ; la convention entre nos deux employeurs n'est pas au dossier."
     },
     {
      "id": "C",
-     "libelle": "Informer Samuel seulement si l'écart persiste."
+     "libelle": "Une réponse avant le 20 novembre me permettrait de préparer son arrivée dans de bonnes conditions."
     },
     {
      "id": "D",
-     "libelle": "Utiliser le chiffre retenu en citant sa source."
+     "libelle": "Un agent de votre direction est mis à disposition de l'ÉLAN à partir du 1er décembre."
     }
    ],
    "attendu": [
-    "A",
+    "D",
     "B",
-    "C",
-    "D"
+    "A",
+    "C"
    ],
-   "suite": "M2-EVA-E3B"
+   "suite": "M2-EVA-E3B",
+   "note_expert": "Savoir-faire visé : C18-SF3 (formuler une demande d'appui claire et contextualisée) et C18-SF4 (rendre compte des démarches déjà entreprises), avec C17-SF1 (formuler son besoin d'information). Ordre attendu : le contexte, ce que j'ai déjà fait, une question précise, le délai (FICHE-M2-E3). Faits du message vérifiés : arrêté n° 1065, art. 90-1 (mise à disposition au profit notamment des « établissements publics territoriaux ») et art. 90-2 (« prononcée par arrêté » ; « ne peut intervenir qu'après signature d'une convention passée entre l'administration possédant la maîtrise du poste budgétaire et l'administration ou l'organisme d'accueil »). L'item ne demande aucune connaissance de ces règles : il est jugé sur la structure de la demande."
   },
   "M2-EVA-E3B": {
    "id": "M2-EVA-E3B",
    "type": "eval-item",
    "etape": "Évaluation",
-   "personnage": "Malia",
+   "personnage": "Noa",
    "preuve": "E3",
    "variante": "B",
    "mode": "choix",
    "competences": [
     "C05"
    ],
-   "texte": "Jeudi, Noa est autorisé à télétravailler. Le réseau est coupé depuis une heure. Noa a promis un document à Malia pour midi. Que fait-il ?\n",
+   "texte": "Un autre jeudi, Noa est autorisé à télétravailler. À 10 h, internet est coupé dans tout son quartier ; l'opérateur annonce un retour dans l'après-midi. Noa a promis à Malia un document pour midi. Son téléphone fonctionne.\nQue fait Noa ?\n",
    "options": [
     {
      "id": "A",
-     "libelle": "Il attend le retour du réseau et envoie le document dès que possible.",
+     "libelle": "Il finit le document hors ligne, et explique la coupure à Malia en le lui envoyant.",
      "verdict": "risque"
     },
     {
      "id": "B",
-     "libelle": "Il prévient Malia tout de suite par téléphone, avance hors ligne, propose une nouvelle heure et signale l'incident au support.",
+     "libelle": "Il appelle Malia maintenant, lui dit où il en est et lui propose une nouvelle heure.",
      "verdict": "adapte"
     },
     {
      "id": "C",
-     "libelle": "Il prévient Malia à midi que le document aura du retard.",
+     "libelle": "Il attend le retour d'internet, et envoie le document à Malia dès que possible.",
      "verdict": "inadapte"
     },
     {
      "id": "D",
-     "libelle": "Il se rend au bureau sans prévenir personne.",
-     "verdict": "partiel"
+     "libelle": "Il demande à un collègue resté au bureau de terminer le document à sa place.",
+     "verdict": "inadapte"
+    }
+   ],
+   "suite": "M2-EVA-E3B2",
+   "note_expert": "Savoir-faire visé : C05-SF5 (signaler suffisamment tôt un risque de retard), avec C05-SF6 (organiser son activité à distance dans le cadre défini). Télétravail : délibération n° 155, art. 7-I : « accordé par l'employeur, sur demande écrite de l'agent » (ce n'est pas un droit) ; art. 15, 8° : l'employeur fixe les plages horaires où il peut joindre l'agent. Aucun texte ne fixe la conduite en cas de coupure : item jugé sur la méthode (prévenir tôt, proposer un délai). D : le collègue n'a pas le dossier en main et Malia n'est pas prévenue."
+  },
+  "M2-EVA-E3B2": {
+   "id": "M2-EVA-E3B2",
+   "type": "eval-item",
+   "etape": "Évaluation",
+   "personnage": "Élise",
+   "preuve": "E3",
+   "variante": "B",
+   "mode": "choix",
+   "competences": [
+    "C05"
+   ],
+   "texte": "Lundi, 7 h 40. Élise est agente d'accueil dans une mairie, qui ouvre à 8 h. Sa responsable lui a laissé quatre tâches pour la matinée.\nPar quoi Élise commence-t-elle ?\n",
+   "options": [
+    {
+     "id": "A",
+     "libelle": "Envoyer à sa responsable le tableau des appels reçus la semaine passée, attendu ce soir.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "B",
+     "libelle": "Préparer le planning de l'accueil pour tout le mois de décembre, attendu vendredi midi.",
+     "verdict": "inadapte"
+    },
+    {
+     "id": "C",
+     "libelle": "Prévenir les trois usagers de 9 h : l'agent qui devait les recevoir est malade.",
+     "verdict": "adapte"
+    },
+    {
+     "id": "D",
+     "libelle": "Classer les formulaires déposés la semaine dernière, qui encombrent le guichet.",
+     "verdict": "inadapte"
     }
    ],
    "suite": "M2-EVA-RES",
-   "note_expert": "Télétravail : texte vérifié le 11-11 (délibération 155) ; autorisé par l'employeur, pas un droit ; mise en œuvre à confirmer chez les employeurs visés."
+   "note_expert": "Savoir-faire visé : C05-SF2 (identifier les priorités de son activité), avec C05-SF1 (relier une tâche aux objectifs du service : le service rendu aux usagers). La priorité vient de l'échéance la plus proche et de sa conséquence : sans appel, les usagers se déplacent pour rien. Item de méthode, sans règle juridique."
   },
   "M2-EVA-FIN": {
    "id": "M2-EVA-FIN",
@@ -2965,5 +3199,5 @@ window.DINA_DATA = {
    "alt": "Vendredi après-midi. Noa range ses documents à son bureau, détendu, la semaine terminée."
   }
  },
- "source": "Storyboard — M2 en pages v0.3.md"
+ "source": "Storyboard — M2 en pages v0.4.md"
 };

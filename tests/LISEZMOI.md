@@ -48,6 +48,19 @@ python tests/rejouer.py --largeur 390                    # le téléphone seulem
 python tests/rejouer.py --auto-test                      # prouve que le filet échoue quand on casse un écran
 ```
 
+## La règle d'évaluation (D150)
+
+`regle_evaluation.py` complète `rejouer.py`, qui ne joue que « tout juste » ou « tout faux ». Sur M1 et M2 en pages, il se trompe exprès sur des questions choisies et contrôle :
+
+- une erreur sur six : module validé, `passed`, score 83 ;
+- deux erreurs sur six, aux deux tentatives : non validé, `failed`, score 67 ;
+- réussi, puis raté depuis le sommaire : le module reste `passed`, score 100 conservé, et le bilan le dit ;
+- l'en-tête des questions : « situation n sur 6 ».
+
+```
+python tests/regle_evaluation.py
+```
+
 ## L'auto-test
 
 `--auto-test` copie le produit dans un dossier jetable, y casse dix choses une par une (erreur JS, débordement à l'arrivée et après « Valider », sauvegarde trop grosse, sauvegarde qui perd les réponses, reconstruction qui perd la progression, évaluation toujours réussie, résultat SCORM inversé, réécriture impossible, écran sans bouton) et vérifie que le filet les détecte. Le dépôt n'est jamais modifié. À relancer après toute modification de `rejouer.py`. Si le moteur change au point qu'une casse ne s'applique plus, le script le dit : mettre alors à jour `auto_test.py`.
