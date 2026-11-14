@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.5.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.6.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M1-PAGES",
@@ -240,10 +240,10 @@ window.DINA_DATA = {
      "libelle": "« Il pleut dans la classe de mon fils, à l'école primaire. »",
      "court": "Le toit d'une école primaire fuit",
      "attendu": "commune",
-     "feedback": "Piège : l'enseignement primaire (programmes, enseignants) relève de la Nouvelle-Calédonie, mais les bâtiments des écoles primaires publiques sont à la charge de la commune.",
+     "feedback": "Piège : la Nouvelle-Calédonie fixe les programmes de l'enseignement primaire, forme les maîtres et assure le contrôle pédagogique, mais les bâtiments des écoles primaires publiques sont à la charge de la commune.",
      "guichet": "La mairie",
-     "ref": "Loi organique, art. 22 ; code des communes de la Nouvelle-Calédonie",
-     "valider": "Répartition bâtiments / enseignement à confirmer, avec la base légale."
+     "ref": "Loi organique, art. 22, 28° ; code des communes de la Nouvelle-Calédonie",
+     "valider": "Corrigé le 14-11 : « enseignants » retiré, l'art. 22, 28° ne vise que les programmes, la formation des maîtres et le contrôle pédagogique. Charge des bâtiments par la commune : article du code des communes à citer."
     },
     {
      "id": "T1",
@@ -271,9 +271,9 @@ window.DINA_DATA = {
      "libelle": "« Ma mère, âgée, a besoin d'une aide à domicile. Qui peut l'aider ? »",
      "court": "Une aide à domicile pour une personne âgée",
      "attendu": "province",
-     "feedback": "L'aide sociale relève des provinces : chacune a ses propres dispositifs. La Nouvelle-Calédonie, elle, gère la protection sociale (CAFAT).",
+     "feedback": "L'aide sociale relève des provinces : chacune a ses propres dispositifs. Pour la perte d'autonomie, la Nouvelle-Calédonie a aussi un régime d'aides, et les provinces peuvent en évaluer les besoins : leurs services sociaux sont le bon point d'entrée.",
      "guichet": "Les services sociaux de la province",
-     "ref": "Loi organique, art. 20",
+     "ref": "Loi organique, art. 20 ; loi du pays n° 2009-2 du 7 janvier 2009 (aides aux personnes en perte d'autonomie)",
      "valider": "Repris de M1 (carte « aide sociale ») ; vérifier l'articulation aide sociale / protection sociale et l'intitulé des services."
     }
    ],
@@ -357,7 +357,7 @@ window.DINA_DATA = {
          "la fiscalité",
          "le droit du travail",
          "la protection sociale",
-         "l'enseignement primaire"
+         "les programmes de l'enseignement primaire"
         ],
         "ref": "Art. 22"
        },
@@ -382,10 +382,10 @@ window.DINA_DATA = {
      "guichet": "Le guichet n'est pas toujours la collectivité compétente. L'état civil relève de la Nouvelle-Calédonie, mais l'usager le demande à la mairie.",
      "plus_loin": {
       "titre": "Aller plus loin : quatre repères pour comprendre",
-      "texte": "**D'où vient cette répartition ?** Quatre dates suffisent pour s'y retrouver.\n\n- **1983 — Table ronde de Nainville-les-Roches.** Réunis par l'État près de Paris du 8 au 12 juillet, indépendantistes et non-indépendantistes discutent de l'avenir du territoire. La déclaration finale reconnaît le droit du peuple kanak, premier occupant, à l'indépendance, à exercer dans une autodétermination ouverte aux autres communautés dont il reconnaît la légitimité. Le RPCR ne la signe pas. Le gouvernement de la Nouvelle-Calédonie y voit une avancée historique : « la reconnaissance de la légitimité des uns et des autres ».\n- **1988-1989 — Accords de Matignon-Oudinot.** Création des trois provinces.\n- **1998-1999 — Accord de Nouméa.** Il organise le transfert progressif de compétences de l'État vers la Nouvelle-Calédonie. La loi organique du 19 mars 1999 fixe les listes : article 21 pour l'État, article 22 pour la Nouvelle-Calédonie, article 20 pour les provinces.\n- **Depuis 2000 — Les transferts de compétences.** Par exemple l'organisation de l'enseignement du second degré (2012), le droit civil et l'état civil (2013).\n\n**Le mot « pays ».** On parle souvent du « pays » pour la Nouvelle-Calédonie : ses lois s'appellent des lois du pays. Face à un usager, dites plutôt « la Nouvelle-Calédonie » ou « le gouvernement de la Nouvelle-Calédonie »."
+      "texte": "**D'où vient cette répartition ?** Quatre dates suffisent pour s'y retrouver.\n\n- **1983 — Table ronde de Nainville-les-Roches.** Réunis par l'État près de Paris du 8 au 12 juillet, indépendantistes et non-indépendantistes discutent de l'avenir du territoire. La déclaration finale reconnaît le droit du peuple kanak, premier occupant, à l'indépendance, à exercer dans une autodétermination ouverte aux autres communautés dont il reconnaît la légitimité. Le RPCR ne la signe pas.\n- **1988-1989 — Accords de Matignon-Oudinot.** Création des trois provinces.\n- **1998-1999 — Accord de Nouméa.** Il organise le transfert progressif de compétences de l'État vers la Nouvelle-Calédonie. La loi organique du 19 mars 1999 fixe les listes : article 21 pour l'État, article 22 pour la Nouvelle-Calédonie, article 20 pour les provinces.\n- **Depuis 2000 — Les transferts de compétences.** Par exemple l'organisation de l'enseignement du second degré (2012), le droit civil et l'état civil (2013).\n\n**Le mot « pays ».** On parle souvent du « pays » pour la Nouvelle-Calédonie : ses lois s'appellent des lois du pays. Face à un usager, dites plutôt « la Nouvelle-Calédonie » ou « le gouvernement de la Nouvelle-Calédonie »."
      },
      "regle_clair": "Par défaut, c'est la province qui s'occupe d'un sujet. L'État, la Nouvelle-Calédonie et les communes ne s'en occupent que si un texte le leur confie. On dit que la province est compétente « de droit commun ».",
-     "valider": "Repères historiques (D68, D89, D147) : rétablis le 12-11 (ils n'avaient pas été repris dans M1 en pages) ; Nainville-les-Roches ajouté à la demande de Marie-Ange Morvan, DRH de la province Sud. Sources : gouv.nc, communiqué des 40 ans de Nainville-les-Roches (12-07-2023) ; LARJE, Université de la Nouvelle-Calédonie. Formulation à valider par l'expert institutionnel."
+     "valider": "Repères historiques (D68, D89, D147) : rétablis le 12-11 (ils n'avaient pas été repris dans M1 en pages) ; Nainville-les-Roches ajouté à la demande de Marie-Ange Morvan, DRH de la province Sud. Sources : gouv.nc, communiqué des 40 ans de Nainville-les-Roches (12-07-2023) ; LARJE, Université de la Nouvelle-Calédonie. Formulation à valider par l'expert institutionnel. 14-11 : citation du gouvernement retirée (source non déposée) ; dates, contenu de la déclaration et position du RPCR à contrôler sur les sources."
     },
     {
      "type": "tri",
@@ -2028,7 +2028,7 @@ window.DINA_DATA = {
      "fiche": "FICHE-M1-E2"
     },
     "E3": {
-     "texte": "Avant d'utiliser une information : qui l'a produite, de quand elle date, si elle est définitive.",
+     "texte": "Avant d'utiliser une information : qui l'a produite, de quand elle date, si elle est en vigueur.",
      "fiche": "FICHE-M1-E3"
     }
    },
@@ -2185,7 +2185,7 @@ window.DINA_DATA = {
     },
     {
      "titre": "Je vérifie avant de transmettre",
-     "texte": "Qui l'a produite, de quand elle date, si elle est définitive.",
+     "texte": "Qui l'a produite, de quand elle date, si elle est en vigueur.",
      "competence": "C17 — Rechercher, vérifier, actualiser une information"
     },
     {
@@ -2327,11 +2327,11 @@ window.DINA_DATA = {
     },
     {
      "titre": "La province",
-     "texte": "Le développement économique, l'aide sociale, l'environnement, les collèges."
+     "texte": "Le développement économique, l'aide sociale, l'environnement, la construction et l'entretien des collèges."
     },
     {
      "titre": "La commune",
-     "texte": "La voirie, la police municipale, les écoles primaires, le guichet de l'état civil."
+     "texte": "La voirie, la police municipale, les bâtiments des écoles primaires, le guichet de l'état civil."
     }
    ],
    "exemple": "« Déposer plainte après un vol : la justice et le maintien de l'ordre relèvent de l'**État**. La plainte se dépose au **commissariat de police ou à la gendarmerie**. La police municipale, elle, dépend de la commune. »",
@@ -2493,5 +2493,5 @@ window.DINA_DATA = {
    "alt": "Bureau de Noa vu du dessus. Quatre objets représentent quatre sources d'information : une fiche de poste imprimée, un ordinateur ouvert sur l'intranet, une tablette ouverte sur un site officiel, un téléphone posé près d'un carnet."
   }
  },
- "source": "Storyboard — M1 en pages v0.5.md"
+ "source": "Storyboard — M1 en pages v0.6.md"
 };

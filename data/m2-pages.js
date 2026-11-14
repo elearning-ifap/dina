@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.2.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.3.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M2-PAGES",
@@ -526,7 +526,7 @@ window.DINA_DATA = {
        "texte": "La directrice décide si l'ÉLAN accompagne le projet, et comment. Noa lui donne les éléments pour décider."
       }
      ],
-     "a_retenir": "Préparer une décision n'est pas la prendre. Une promesse faite par un agent engage son employeur : dans le doute, je propose et je fais valider."
+     "a_retenir": "Préparer une décision n'est pas la prendre. Une promesse faite par un agent peut engager son employeur : dans le doute, je propose et je fais valider."
     },
     {
      "type": "apport",
@@ -557,8 +557,8 @@ window.DINA_DATA = {
        ]
       }
      ],
-     "a_retenir": "Fonctionnaire, stagiaire ou contractuel, catégorie A, B ou C : ces devoirs sont les vôtres. Pour ce qui dépend de votre statut, la fiche « Mon statut » est dans votre carnet ; votre gestionnaire RH vous répond.",
-     "sources": "Droits et obligations : délibération n° 81 du 24 juillet 1990 ; agents contractuels : loi du pays n° 2021-4.",
+     "a_retenir": "Fonctionnaire, stagiaire ou contractuel, catégorie A, B, C ou D : ces devoirs sont les vôtres. Pour ce qui dépend de votre statut, la fiche « Mon statut » est dans votre carnet ; votre gestionnaire RH vous répond.",
+     "sources": "Droits et obligations : délibération n° 81 du 24 juillet 1990 ; neutralité : page « Droits et obligations » de la DRHFPNC ; agents contractuels : loi du pays n° 2021-4 ; catégories : loi du pays n° 2021-4, art. 9.",
      "valider": "A4 (11-11) : le statut de Noa n'est plus enseigné dans le récit ; positions de carrière dans la fiche de connaissances FICHE-M2-STATUT. Formulations à faire valider par un expert statutaire."
     },
     {
@@ -1129,7 +1129,7 @@ window.DINA_DATA = {
        "items": [
         "Je vérifie le texte applicable",
         "J'alerte mon responsable, ou le niveau au-dessus",
-        "Je ne l'exécute que si l'illégalité n'est pas manifeste"
+        "Je ne refuse que si l'ordre est manifestement illégal et compromet gravement un intérêt public"
        ]
       }
      ],
@@ -2738,7 +2738,7 @@ window.DINA_DATA = {
       "Ma fiche de poste le range-t-elle dans « je fais valider » ?",
       "Y a-t-il un risque juridique, financier ou déontologique ?"
      ],
-     "si_non": "Je fais valider par mon responsable. Pour une question de déontologie, je peux aussi solliciter le référent déontologue de ma collectivité."
+     "si_non": "Je fais valider par mon responsable. Pour une question de déontologie, je peux aussi m'adresser au service des ressources humaines de mon employeur."
     },
     {
      "q": "Qui dois-je informer, et quand ?",
@@ -2760,7 +2760,7 @@ window.DINA_DATA = {
     "Ce que je peux faire seul",
     "Ce que je fais valider, et par qui",
     "Qui j'alerte en cas d'urgence",
-    "Le référent déontologue de ma collectivité"
+    "Le service RH de mon employeur, pour une question de déontologie"
    ],
    "competences": [
     "C04",
@@ -2920,7 +2920,7 @@ window.DINA_DATA = {
      "texte": "Le fonctionnaire quitte un temps son administration. Il n'est plus payé et, sauf exception, n'acquiert plus de droits à l'avancement et à la retraite. Il conserve toutefois, jusqu'à 4 ans, ses droits pour la liquidation de sa pension (art. 91-II)."
     }
    ],
-   "a_retenir": "Ces trois positions concernent les fonctionnaires. Contractuel ? Renseignez-vous auprès de votre employeur. Sources : délibération n° 81 du 24 juillet 1990 ; arrêté n° 1065, art. 75, 90-1 et 91 ; loi du pays n° 2021-4 ; délibération n° 155 du 19 mai 2021 (télétravail).",
+   "a_retenir": "Ces trois positions concernent les fonctionnaires. Stagiaire ? Vous pouvez être détaché ou mis à disposition, pas mis en disponibilité. Contractuel ? Renseignez-vous auprès de votre employeur. Sources : délibération n° 81 du 24 juillet 1990 ; arrêté n° 1065, art. 28, 75, 90-1 et 91 ; loi du pays n° 2021-4 ; délibération n° 155 du 19 mai 2021 (télétravail).",
    "reperes": [
     "Mon statut et ma catégorie",
     "Mon gestionnaire RH",
@@ -2965,5 +2965,5 @@ window.DINA_DATA = {
    "alt": "Vendredi après-midi. Noa range ses documents à son bureau, détendu, la semaine terminée."
   }
  },
- "source": "Storyboard — M2 en pages v0.2.md"
+ "source": "Storyboard — M2 en pages v0.3.md"
 };
