@@ -69,6 +69,21 @@
         else { img.hidden = true; img.parentNode.querySelector(".illu-vide").hidden = false; img.parentNode.classList.add("illu--vide"); }
       });
     });
+    /* T10 : infographie en image dans un apport ; si l'image manque, le bloc en code reprend sa place */
+    racine.querySelectorAll(".pg-info").forEach(function (blocInfo) {
+      var img = blocInfo.querySelector("img"), btn = blocInfo.querySelector(".pg-info-btn");
+      function vide() { blocInfo.classList.add("pg-info--vide"); }
+      if (img) {
+        img.addEventListener("error", vide);
+        if (img.complete && !img.naturalWidth) vide();
+      }
+      if (btn && !btn.dataset.branche) {
+        btn.dataset.branche = "1";
+        btn.addEventListener("click", function () {
+          ouvrirPanneau("Infographie", '<div class="info-zoom"><img src="' + esc(img.getAttribute("src")) + '" alt="' + esc(img.getAttribute("alt")) + '"></div>');
+        });
+      }
+    });
   }
   function role(nom) { return (M.personnages && M.personnages[nom]) ? '<span>' + esc(M.personnages[nom]) + "</span>" : ""; }
   function slug(nom) { return String(nom || "").split(" ")[0].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9-]/g, ""); }
@@ -1871,6 +1886,17 @@
       if (b.et_vous) h += '<aside class="pg-vous"><strong>Et vous ?</strong> ' + inline(b.et_vous) + "</aside>";
       return h;
     }
+    /* T10 : un apport peut remplacer sa grille ou sa méthode par une infographie (champ visuels : remplace + image) */
+    function visuelHtml(code, corps) {
+      var info = D.illustrations[code] || {};
+      return '<div class="pg-info" data-code="' + esc(code) + '"><figure class="pg-info-fig"><button type="button" class="pg-info-btn" aria-label="Agrandir l\'infographie : ' + esc(info.scene || code) + '">' +
+        '<img src="assets/img/' + esc(code) + '.png" alt="' + esc(info.alt || "") + '"><span class="pg-info-loupe" aria-hidden="true">' + ic("i-loupe") + "Agrandir</span></button></figure>" +
+        '<div class="pg-info-texte">' + corps + "</div></div>";
+    }
+    function avecVisuel(b, quoi, corps) {
+      var v = (b.visuels || []).filter(function (x) { return x.remplace === quoi; })[0];
+      return v ? visuelHtml(v.image, corps) : corps;
+    }
     function blocApport(b) {
       var h = b.texte ? '<div class="texte">' + md(b.texte) + "</div>" : "";
       if (b.regle) h += '<p class="pg-regle">' + inline(b.regle) + (b.regle_ref ? '<span class="pg-ref">' + esc(b.regle_ref) + "</span>" : "") + "</p>" + enClair(b.regle_clair);
@@ -1886,12 +1912,17 @@
       }
       if (b.colonnes) h += colonnes(b.colonnes);
       if (b.points) h += (b.points_titre ? '<h3 class="pg-sous">' + esc(b.points_titre) + "</h3>" : "") + points(b.points);
-      if (b.grille) h += (b.grille.titre ? '<h3 class="pg-sous">' + esc(b.grille.titre) + "</h3>" : "") + grilleHtml(b.grille);
-      if (b.methode) h += '<h3 class="pg-sous">' + esc(b.methode_titre || "La méthode") + '</h3><ol class="pg-methode">' + b.methode.map(function (m) { return "<li>" + inline(m) + "</li>"; }).join("") + "</ol>";
+      if (b.grille) h += avecVisuel(b, "grille", (b.grille.titre ? '<h3 class="pg-sous">' + esc(b.grille.titre) + "</h3>" : "") + grilleHtml(b.grille));
+      if (b.methode) h += avecVisuel(b, "methode", '<h3 class="pg-sous">' + esc(b.methode_titre || "La méthode") + '</h3><ol class="pg-methode">' + b.methode.map(function (m) { return "<li>" + inline(m) + "</li>"; }).join("") + "</ol>");
       if (b.guichet) h += '<p class="pg-guichet">' + ic("i-mairie") + "<span>" + inline(b.guichet) + "</span></p>";
       if (b.encadre) h += '<p class="pg-encadre">' + inline(b.encadre) + "</p>";
       if (b.a_retenir) h += '<div class="a-retenir">' + ic("i-ampoule") + "<span><strong>À retenir</strong> — " + inline(b.a_retenir) + "</span></div>";
-      if (b.plus_loin) h += '<details class="pg-plus"><summary>' + esc(b.plus_loin.titre || "Aller plus loin") + "</summary>" + md(b.plus_loin.texte) + "</details>";
+      if (b.plus_loin) {
+        var pl = b.plus_loin;
+        /* T10 : « Aller plus loin » peut porter une infographie (image) à la place d'une liste (liste = repli) */
+        h += '<details class="pg-plus"><summary>' + esc(pl.titre || "Aller plus loin") + "</summary>" +
+          (pl.image ? md(pl.avant || "") + visuelHtml(pl.image, md(pl.liste || "")) + md(pl.texte || "") : md((pl.avant ? pl.avant + "\n\n" : "") + (pl.liste ? pl.liste + "\n\n" : "") + (pl.texte || ""))) + "</details>";
+      }
       if (b.sources) h += '<p class="sources"><strong>Sources :</strong> ' + esc(b.sources) + "</p>";
       return h;
     }

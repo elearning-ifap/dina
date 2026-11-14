@@ -32,6 +32,20 @@
   .pg-et:not(.pg-et--encours) .pg-et-lib { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
 
+/* T10 : infographie en image dans un apport (remplace la grille ou la méthode ; repli sur le bloc en code si l'image manque) */
+.pg-info { margin: 0 0 1rem; }
+.pg-info-fig { margin: 0; }
+.pg-info-btn { display: block; text-align: left; width: 100%; padding: 0; border: 1px solid var(--bordure); border-radius: var(--rayon); background: #fff; overflow: hidden; cursor: zoom-in; font: inherit; }
+.pg-info-btn img { display: block; width: 100%; height: auto; }
+.pg-info-loupe { display: flex; align-items: center; justify-content: flex-end; gap: .35rem; padding: .45rem .8rem; border-top: 1px solid var(--bordure); background: #fff; color: #1F767A; font-size: .9rem; font-weight: 700; }
+.pg-info-loupe svg { width: 1em; height: 1em; }
+.pg-info-btn:focus-visible { outline: none; box-shadow: var(--focus); }
+.pg-info:not(.pg-info--vide) .pg-info-texte { display: none; }
+.pg-info--vide .pg-info-fig { display: none; }
+.info-zoom { overflow: auto; max-height: 75vh; -webkit-overflow-scrolling: touch; }
+.info-zoom img { display: block; width: max(100%, 46rem); max-width: none; height: auto; }
+.panneau:has(.info-zoom) { width: min(64rem, 96%); }
+
 /* Blocs */
 .pg-bloc { padding: 1.75rem 0 .5rem; border-top: 1px solid var(--bordure); scroll-margin-top: 3.5rem; }
 .pg-bloc:first-of-type { border-top: 0; }
