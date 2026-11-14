@@ -132,7 +132,7 @@ class Joueur:
     @staticmethod
     def image_prevue_absente(url):
         """Une image « ILL-… » pas encore déposée est un cas prévu : le moteur affiche un emplacement avec son texte alternatif."""
-        return "assets/img/" in url and url.lower().split("?")[0].endswith((".png", ".jpg", ".jpeg"))
+        return "assets/img/" in url and url.lower().split("?")[0].endswith((".png", ".jpg", ".jpeg", ".webp"))
 
     def sur_console(self, m):
         if m.type != "error":

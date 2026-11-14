@@ -1907,7 +1907,7 @@
     function visuelHtml(code, corps) {
       var info = D.illustrations[code] || {};
       return '<div class="pg-info" data-code="' + esc(code) + '"><figure class="pg-info-fig"><button type="button" class="pg-info-btn" aria-label="Agrandir l\'infographie : ' + esc(info.scene || code) + '">' +
-        '<img src="assets/img/' + esc(code) + '.png" alt="' + esc(info.alt || "") + '"><span class="pg-info-loupe" aria-hidden="true">' + ic("i-loupe") + "Agrandir</span></button></figure>" +
+        '<img src="assets/img/' + esc(code) + '.webp" alt="' + esc(info.alt || "") + '"><span class="pg-info-loupe" aria-hidden="true">' + ic("i-loupe") + "Agrandir</span></button></figure>" +
         '<div class="pg-info-texte">' + corps + "</div></div>";
     }
     function avecVisuel(b, quoi, corps) {
