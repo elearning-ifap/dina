@@ -203,9 +203,9 @@ window.DINA_DATA = {
      "id": "A",
      "libelle": "La note de cadrage Passerelles demandée par Samuel, pour jeudi 11 h.",
      "court": "La note de cadrage pour Samuel",
-     "attendu": "poste",
-     "feedback": "C'est la commande de son responsable, au cœur du poste : « préparer des documents d'aide à la décision ». Ariane, elle, décidera.",
-     "guichet": "Au cœur du poste : préparer l'aide à la décision",
+     "attendu": "prepare",
+     "feedback": "Noa prépare la note : c'est au cœur de son poste, « préparer des documents d'aide à la décision ». Ariane, elle, décidera.",
+     "guichet": "Noa prépare, Ariane décide",
      "clair": "Une **note de cadrage** présente une demande et ce qu'on propose d'en faire, pour que la personne qui décide puisse trancher."
     },
     {
@@ -213,7 +213,7 @@ window.DINA_DATA = {
      "libelle": "Confirmer à Joël que l'ÉLAN paie la location du minibus.",
      "court": "Confirmer le minibus à Joël",
      "attendu": "signale",
-     "feedback": "L'ÉLAN ne finance pas les projets qu'il accompagne. Une promesse de financement est dans la colonne « je fais valider » de la fiche de poste. Si Noa dit oui, Passerelles engage une dépense que personne ne paiera.",
+     "feedback": "Le transport relève de Passerelles, qui organise son projet, et l'ÉLAN ne finance pas les projets qu'il accompagne. Noa ne promet rien : il le dit à Joël et signale la demande à Samuel. S'il disait oui, Passerelles compterait sur une dépense que personne ne paiera.",
      "guichet": "Une promesse de financement : pas à moi"
     },
     {

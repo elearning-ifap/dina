@@ -591,7 +591,7 @@ window.DINA_DATA = {
     },
     {
      "id": "E",
-     "libelle": "Noa a fini sa première note d'étude. Qui la valide ?",
+     "libelle": "Noa a fini une note d'étude. Qui la valide ?",
      "court": "Faire valider une note",
      "attendu": "samuel",
      "feedback": "Son responsable direct valide son travail. Malia peut relire et conseiller, mais elle n'encadre pas Noa.",
@@ -644,11 +644,11 @@ window.DINA_DATA = {
      "phase": "situation",
      "titre": "Le comité de direction",
      "illustration": "ILL-N03",
-     "texte": "Mardi matin, Noa assiste au comité de direction de l'ÉLAN pour se présenter. Ariane ouvre la séance.",
+     "texte": "Mardi matin, Noa assiste au comité de direction de l'ÉLAN pour la première fois. Ariane ouvre la séance.",
      "repliques": [
       {
        "personnage": "Ariane",
-       "texte": "« Bienvenue, Noa. Le conseil d'administration se réunit dans quinze jours : nous lui présenterons le programme d'appui. »"
+       "texte": "« Bonjour à tous. Le conseil d'administration se réunit dans quinze jours : nous lui présenterons le programme d'appui. »"
       },
       {
        "personnage": "Malia",
@@ -1041,7 +1041,7 @@ window.DINA_DATA = {
      "phase": "situation",
      "titre": "Une ligne à compléter",
      "illustration": "ILL-N04",
-     "texte": "Mercredi. Joël a remis la liste d'orientation aux bénévoles de Passerelles. Malia la relit avec Noa : « Pour la couverture sociale, il faudrait ajouter le délai pour s'affilier après une embauche. L'accueil le donnera au téléphone. »",
+     "texte": "Mercredi. Avant que la liste d'orientation parte chez Passerelles, Malia la relit avec Noa : « Pour la couverture sociale, il faudrait ajouter le délai pour s'affilier après une embauche. L'accueil le donnera au téléphone. »",
      "repliques": [
       {
        "personnage": "Malia",
@@ -1706,7 +1706,7 @@ window.DINA_DATA = {
      "repliques": [
       {
        "personnage": "Joël",
-       "texte": "« Bonjour ! Les bénévoles ont reçu votre liste, merci. Vous pouvez nous envoyer la version vérifiée ? Et on aimerait l'aide de l'ÉLAN pour monter la permanence. »"
+       "texte": "« Bonjour ! Cédric m'a parlé de votre liste d'orientation. Vous pouvez nous l'envoyer, vérifiée ? Et on aimerait l'aide de l'ÉLAN pour monter la permanence. »"
       }
      ],
      "et_vous": "Vous est-il déjà arrivé qu'on vous demande quelque chose que vous n'aviez pas le pouvoir d'accorder ?"
@@ -2282,7 +2282,7 @@ window.DINA_DATA = {
    "dossier": "Le fil rouge de la semaine : la liste d'orientation, vérifiée et datée, a servi à répondre à Joël. Samuel parle de la demande de Passerelles à Ariane : le dossier avance.",
    "prochain": {
     "titre": "M2 — Je trouve ma place",
-    "texte": "Deux semaines plus tard, Samuel confie à Noa son premier dossier : Passerelles."
+    "texte": "La semaine suivante, Samuel confie à Noa le dossier Passerelles."
    },
    "suite": "MENU"
   }
@@ -2483,7 +2483,7 @@ window.DINA_DATA = {
    "alt": "Jeudi matin. Le bureau du pôle est vide ; Noa décroche le téléphone fixe, un carnet ouvert devant lui."
   },
   "ILL-N06": {
-   "scene": "Noa en fin de première semaine",
+   "scene": "Noa en fin de semaine",
    "personnages": "Noa",
    "alt": "Vendredi après-midi. Noa, à son bureau, relit ses notes de la semaine, détendu."
   },
