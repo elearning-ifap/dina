@@ -110,7 +110,7 @@ window.DINA_PILOTAGE = {
       livrables: [
         { titre: "Restitution du positionnement, visuelle et imprimable", lot: "L6", statut: "en_cours", qui: "marc" },
         { titre: "Évaluations des modules, différentes à chaque passage", lot: "L6", statut: "en_cours", qui: "marc", note: "Jouables pour M1 et M2." },
-        { titre: "Badges des 5 modules", lot: "L6", statut: "en_cours", qui: "marc", note: "Un badge par module, au nom du module. Délivré en cas de réussite." },
+        { titre: "Badges des 5 modules", lot: "L6", statut: "en_cours", qui: "marc", note: "Un badge par module, au nom du module. Délivré en cas de réussite : 5 réponses justes sur 6, au moins une par compétence (D150, 14-11). Pas de badge de parcours." },
         { titre: "Page d'ouverture : DINA, la notion de compétence et les 21 compétences", lot: "L5", statut: "a_faire", qui: "marc", note: "Demande des employeurs : voir toutes les compétences avant de commencer. Expliquer simplement ce qu'est une compétence. Piste visuelle : un code couleur qui montre ce que chaque module travaille." },
         { titre: "Fiches outils du module 1", lot: "L5", statut: "en_cours", qui: "marc", note: "Présentées le 28-10, à reprendre. Conservées le 10-11 (questions à se poser avant d'agir, vérifier qu'un texte est à jour…)." },
         { titre: "Fiches de connaissances", lot: "L5", statut: "en_cours", qui: "marc", note: "Demande de la province Sud, retenue le 10-11, en plus des fiches outils. Exemple : les institutions et les compétences de chacune. 10-11 : « Qui fait quoi en Nouvelle-Calédonie ? » (M1) passe en fiche de connaissances." },
@@ -131,7 +131,7 @@ window.DINA_PILOTAGE = {
         { titre: "Évaluation dans le SCORM, score transmis à Moodle", lot: "L6", statut: "a_faire", qui: "marc", note: "D142 : l'évaluation se fait dans le module, avec les situations du récit, différentes à chaque passage. Le score et le statut « réussi » partent dans Moodle, qui délivre le badge. Transmission du score à tester dans LIANE avec un module évalué." },
         { titre: "Règles de complétion et de progression", lot: "L2", statut: "a_faire", qui: "marc", note: "Activité, module, parcours." },
         { titre: "Reprise de parcours là où l'agent s'est arrêté", lot: "L2", statut: "a_faire", qui: "marc" },
-        { titre: "Badges Moodle : critères et attribution", lot: "L6", statut: "a_faire", qui: "marc" },
+        { titre: "Badges Moodle : critères et attribution", lot: "L6", statut: "a_faire", qui: "marc", note: "Badge sur la réussite du module ; accès au module suivant sur son achèvement : la non-réussite ne bloque pas (D150, 14-11)." },
         { titre: "Espace « Mes ressources » : fiches outils téléchargeables", lot: "L5", statut: "a_faire", qui: "marc" },
         { titre: "Rubrique d'aide et FAQ dans le cours", lot: "L2", statut: "a_faire", qui: "marc" },
         { titre: "Rôles et droits : agent, IFAP, employeur", lot: "L8", statut: "a_faire", qui: "marc", valide: "si" },
@@ -146,7 +146,7 @@ window.DINA_PILOTAGE = {
         { titre: "Choix des employeurs pilotes et jauge par employeur", lot: "L8", statut: "a_faire", qui: "mnb", valide: "valerie", attente: "mnb", note: "10 à 20 agents, davantage si le retour se fait par questionnaire. Plusieurs employeurs, pas seulement la province Sud : penser à la ville de Nouméa. Éviter qu'un employeur prenne toutes les places." },
         { titre: "Politique de vente aux employeurs non cotisants", lot: "L8", statut: "a_faire", qui: "mnb", valide: "valerie", note: "Tarif d'inscription à DINA pour les employeurs non cotisants. Aucun tarif n'existe pour les formations digitales. Relève du conseil d'administration. Le calcul fait il y a deux ans pour les modules est à revoir." },
         { titre: "Quatre indicateurs de suivi pour l'IFAP", lot: "L8", statut: "a_faire", qui: "marc" },
-        { titre: "Vue employeur : avancement de ses agents", lot: "L8", statut: "a_faire", qui: "marc", note: "Avancement seul, sans résultats ni badges." },
+        { titre: "Tableau employeur : avancement de ses agents", lot: "L8", statut: "a_faire", qui: "marc", valide: "si", note: "14-11 (D151) : envoi récurrent et automatisé au référent formation de chaque employeur, un tableau par employeur : modules commencés, terminés, terminés non validés. Jamais les réponses, les scores ni le positionnement. Outil à vérifier avec le service informatique. Point ouvert : le message aux agents." },
         { titre: "Information de l'employeur après deux échecs", lot: "L8", statut: "a_faire", qui: "marc", note: "Modalité à définir." },
         { titre: "Test interne IFAP : testeurs et recueil des retours", lot: "L7", statut: "a_faire", qui: "marc", valide: "mnb", echeance: "Janvier 2027", note: "Sur une version plus complète que le prototype. Double but : des retours de qualité et une communication interne (faire connaître le projet, fierté collective, futurs relais). Moment à choisir." },
         { titre: "Bilan du pilote", lot: "L8", statut: "a_faire", qui: "mnb", echeance: "Mars 2027" }
