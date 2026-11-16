@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.4.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.5.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M2-PAGES",
@@ -2257,23 +2257,18 @@ window.DINA_DATA = {
    "options": [
     {
      "id": "A",
-     "libelle": "Elle lui donne les grandes tendances, en précisant bien qu'elles restent provisoires et peuvent encore bouger.",
-     "verdict": "risque"
+     "libelle": "Elle note sa demande et ses coordonnées, et la transmet tout de suite à sa responsable.",
+     "verdict": "adapte"
     },
     {
      "id": "B",
-     "libelle": "Elle lui répond qu'elle n'a rien à dire sur ce sujet, et raccroche.",
-     "verdict": "inadapte"
+     "libelle": "Elle lui donne les grandes tendances, en précisant bien qu'elles restent provisoires et peuvent encore bouger.",
+     "verdict": "risque"
     },
     {
      "id": "C",
      "libelle": "Elle lui lit les chiffres, à condition qu'il ne cite pas son nom.",
      "verdict": "inadapte"
-    },
-    {
-     "id": "D",
-     "libelle": "Elle note sa demande et ses coordonnées, et la transmet tout de suite à sa responsable.",
-     "verdict": "adapte"
     }
    ],
    "suite": "M2-EVA-E1A2",
@@ -2307,11 +2302,6 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "Elle met en place le formulaire, et continue de traiter par courriel les agents qui le préfèrent.",
      "verdict": "risque"
-    },
-    {
-     "id": "D",
-     "libelle": "Elle attend une note de service signée par Ariane avant de changer sa façon de travailler.",
-     "verdict": "inadapte"
     }
    ],
    "suite": "M2-EVA-E2A",
@@ -2344,11 +2334,6 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "Elle note son numéro, pose la question au service concerné de la mairie, et le rappelle.",
      "verdict": "adapte"
-    },
-    {
-     "id": "D",
-     "libelle": "Elle lui conseille de repasser lundi, quand sa responsable sera là pour lui répondre.",
-     "verdict": "inadapte"
     }
    ],
    "suite": "M2-EVA-E2A2",
@@ -2420,11 +2405,6 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "Il prévient son chef d'équipe ce matin, et propose de finir lundi, après la livraison.",
      "verdict": "adapte"
-    },
-    {
-     "id": "D",
-     "libelle": "Il attend la livraison de lundi pour faire tout le carrefour en une seule fois.",
-     "verdict": "inadapte"
     }
    ],
    "suite": "M2-EVA-E3A2",
@@ -2455,17 +2435,12 @@ window.DINA_DATA = {
     },
     {
      "id": "C",
-     "libelle": "Relire le rapport annuel du pôle, que Samuel attend pour vendredi midi au plus tard.",
-     "verdict": "inadapte"
-    },
-    {
-     "id": "D",
      "libelle": "Répondre à une étudiante qui attend depuis hier un rendez-vous pour son mémoire.",
      "verdict": "inadapte"
     }
    ],
    "suite": "M2-EVA-RES",
-   "note_expert": "Savoir-faire visé : C05-SF2 (identifier les priorités de son activité), avec C05-SF1 (relier une tâche aux objectifs du service). La priorité vient de l'échéance la plus proche dont dépend le travail d'un autre (l'accueil, 9 h 30), pas du rang de la personne qui demande (A : Ariane dit elle-même que ce n'est pas urgent) ni de l'ancienneté de la demande (D). Item de méthode, sans règle juridique."
+   "note_expert": "Savoir-faire visé : C05-SF2 (identifier les priorités de son activité), avec C05-SF1 (relier une tâche aux objectifs du service). La priorité vient de l'échéance la plus proche dont dépend le travail d'un autre (l'accueil, 9 h 30), pas du rang de la personne qui demande (A : Ariane dit elle-même que ce n'est pas urgent) ni de l'ancienneté de la demande (C). Item de méthode, sans règle juridique."
   },
   "M2-EVA-RES": {
    "id": "M2-EVA-RES",
@@ -2540,22 +2515,17 @@ window.DINA_DATA = {
     },
     {
      "id": "B",
-     "libelle": "Il lui dit que c'est d'accord, sous réserve, et demande l'avis de son responsable dans la semaine.",
-     "verdict": "risque"
-    },
-    {
-     "id": "C",
      "libelle": "Il note la demande, les dates et l'usage prévu, et la transmet à son responsable.",
      "verdict": "adapte"
     },
     {
-     "id": "D",
-     "libelle": "Il refuse : l'ÉLAN ne prête pas son matériel, pour ne pas créer d'habitude.",
-     "verdict": "inadapte"
+     "id": "C",
+     "libelle": "Il lui dit que c'est d'accord, sous réserve, et demande l'avis de son responsable dans la semaine.",
+     "verdict": "risque"
     }
    ],
    "suite": "M2-EVA-E1B2",
-   "note_expert": "Savoir-faire visé : C04-SF3 (ce qui se décide seul, ce qui se fait valider), C03-SF3. Prêter un bien de l'établissement, c'est engager l'employeur : la décision revient à la personne habilitée (pratique d'employeur, aucune règle de prêt dans le corpus). Règle du module : « Ce qui n'est pas écrit dans ma fiche de poste n'est pas autorisé pour autant » (M2-P1). D est faux parce que Cédric invente une règle et décide seul du refus. B : un « d'accord, sous réserve » est déjà une promesse."
+   "note_expert": "Savoir-faire visé : C04-SF3 (ce qui se décide seul, ce qui se fait valider), C03-SF3. Prêter un bien de l'établissement, c'est engager l'employeur : la décision revient à la personne habilitée (pratique d'employeur, aucune règle de prêt dans le corpus). Règle du module : « Ce qui n'est pas écrit dans ma fiche de poste n'est pas autorisé pour autant » (M2-P1). C : un « d'accord, sous réserve » est déjà une promesse ; A : Cédric prête de sa propre initiative."
   },
   "M2-EVA-E1B2": {
    "id": "M2-EVA-E1B2",
@@ -2578,22 +2548,17 @@ window.DINA_DATA = {
     },
     {
      "id": "B",
-     "libelle": "Il note les sorties sur la tablette et dans le cahier pendant un mois, pour comparer.",
-     "verdict": "risque"
-    },
-    {
-     "id": "C",
      "libelle": "Il utilise la tablette sans rien dire : la décision est prise, son avis ne compte plus.",
      "verdict": "risque"
     },
     {
-     "id": "D",
+     "id": "C",
      "libelle": "Il dit à son chef ce qu'il craint pour les départs, et utilise la tablette.",
      "verdict": "adapte"
     }
    ],
    "suite": "M2-EVA-E2B",
-   "note_expert": "Savoir-faire visé : C04-SF1 (appliquer une consigne de son cadre professionnel), avec C03-S3 (droits et obligations). Délibération n° 81, art. 22 : se conformer aux instructions du supérieur hiérarchique, « sauf dans le cas où l'ordre donné est manifestement illégal et de nature à compromettre gravement un intérêt public » ; une consigne jugée moins pratique n'entre pas dans l'exception (A). Catégories A, B, C et D : loi du pays n° 2021-4, art. 9. Dire son désaccord avec ses arguments, puis appliquer : apport « Exécuter les instructions, et ses limites » (M2-P2). B : Sione garde l'ancien système de sa propre initiative ; C : l'avis utile ne remonte pas."
+   "note_expert": "Savoir-faire visé : C04-SF1 (appliquer une consigne de son cadre professionnel), avec C03-S3 (droits et obligations). Délibération n° 81, art. 22 : se conformer aux instructions du supérieur hiérarchique, « sauf dans le cas où l'ordre donné est manifestement illégal et de nature à compromettre gravement un intérêt public » ; une consigne jugée moins pratique n'entre pas dans l'exception (A). Catégories A, B, C et D : loi du pays n° 2021-4, art. 9. Dire son désaccord avec ses arguments, puis appliquer : apport « Exécuter les instructions, et ses limites » (M2-P2). B : l'avis utile ne remonte pas."
   },
   "M2-EVA-E2B": {
    "id": "M2-EVA-E2B",
@@ -2623,15 +2588,10 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "Elle envoie ses résultats tels quels : ils suivent la méthode écrite dans le guide du service.",
      "verdict": "inadapte"
-    },
-    {
-     "id": "D",
-     "libelle": "Elle reprend les résultats de l'an dernier, en attendant de comprendre d'où vient l'écart.",
-     "verdict": "inadapte"
     }
    ],
    "suite": "M2-EVA-E2B2",
-   "note_expert": "Savoir-faire visé : C18-SF5 (identifier le moment d'interrompre son action et de demander), avec C18-SF1 (les ressources ont été mobilisées : le guide) et C17-SF4 (croiser une information lorsqu'un doute existe). Item de méthode, sans règle juridique. B : continuer seule la veille de l'échéance ; C : transmettre un résultat douteux sans le signaler ; D : présenter des chiffres anciens comme actuels."
+   "note_expert": "Savoir-faire visé : C18-SF5 (identifier le moment d'interrompre son action et de demander), avec C18-SF1 (les ressources ont été mobilisées : le guide) et C17-SF4 (croiser une information lorsqu'un doute existe). Item de méthode, sans règle juridique. B : continuer seule la veille de l'échéance ; C : transmettre un résultat douteux sans le signaler."
   },
   "M2-EVA-E2B2": {
    "id": "M2-EVA-E2B2",
@@ -2684,31 +2644,26 @@ window.DINA_DATA = {
    "competences": [
     "C05"
    ],
-   "texte": "Un autre jeudi, Noa est autorisé à télétravailler. À 10 h, internet est coupé dans tout son quartier ; l'opérateur annonce un retour dans l'après-midi. Noa a promis à Malia un document pour midi. Son téléphone fonctionne.\nQue fait Noa ?\n",
+   "texte": "Jeudi, 9 h 10. Malia, en déplacement, a confié à Noa la mise à jour du tableau de suivi des formations, attendue vendredi à 16 h. Cédric demande à Noa dix minutes pour installer la salle avant la réunion de 10 h avec les partenaires. Que fait Noa ?",
    "options": [
     {
      "id": "A",
-     "libelle": "Il finit le document hors ligne, et explique la coupure à Malia en le lui envoyant.",
-     "verdict": "risque"
+     "libelle": "Il finit d'abord le tableau : Cédric s'arrangera avec quelqu'un d'autre, et le tableau est à lui.",
+     "verdict": "inadapte"
     },
     {
      "id": "B",
-     "libelle": "Il appelle Malia maintenant, lui dit où il en est et lui propose une nouvelle heure.",
+     "libelle": "Il aide Cédric tout de suite, puis reprend le tableau : il est attendu seulement demain.",
      "verdict": "adapte"
     },
     {
      "id": "C",
-     "libelle": "Il attend le retour d'internet, et envoie le document à Malia dès que possible.",
-     "verdict": "inadapte"
-    },
-    {
-     "id": "D",
-     "libelle": "Il demande à un collègue resté au bureau de terminer le document à sa place.",
-     "verdict": "inadapte"
+     "libelle": "Il écrit à Malia, en déplacement, pour lui demander s'il peut s'absenter dix minutes de son tableau.",
+     "verdict": "risque"
     }
    ],
-   "suite": "M2-EVA-E3B2",
-   "note_expert": "Savoir-faire visé : C05-SF5 (signaler suffisamment tôt un risque de retard), avec C05-SF6 (organiser son activité à distance dans le cadre défini). Télétravail : délibération n° 155, art. 7-I : « accordé par l'employeur, sur demande écrite de l'agent » (ce n'est pas un droit) ; art. 15, 8° : l'employeur fixe les plages horaires où il peut joindre l'agent. Aucun texte ne fixe la conduite en cas de coupure : item jugé sur la méthode (prévenir tôt, proposer un délai). D : le collègue n'a pas le dossier en main et Malia n'est pas prévenue."
+   "note_expert": "C05 (priorités, échéances, marge d'action). Savoir-faire visé : arbitrer sur l'échéance et l'effet sur les autres, sans demander ce qui relève de sa marge. Ici la bonne réponse n'est pas d'en référer : dix minutes pour une échéance de la matinée, dans les moyens de Noa. Remplace la v0.4 (internet coupé, appel à Malia), proche du défi de jeudi (Noa télétravaille, prévient Samuel). Item de méthode, sans règle juridique.",
+   "suite": "M2-EVA-E3B2"
   },
   "M2-EVA-E3B2": {
    "id": "M2-EVA-E3B2",
@@ -2730,16 +2685,11 @@ window.DINA_DATA = {
     },
     {
      "id": "B",
-     "libelle": "Préparer le planning de l'accueil pour tout le mois de décembre, attendu vendredi midi.",
-     "verdict": "inadapte"
-    },
-    {
-     "id": "C",
      "libelle": "Prévenir les trois usagers de 9 h : l'agent qui devait les recevoir est malade.",
      "verdict": "adapte"
     },
     {
-     "id": "D",
+     "id": "C",
      "libelle": "Classer les formulaires déposés la semaine dernière, qui encombrent le guichet.",
      "verdict": "inadapte"
     }
@@ -3199,5 +3149,5 @@ window.DINA_DATA = {
    "alt": "Vendredi après-midi. Noa range ses documents à son bureau, détendu, la semaine terminée."
   }
  },
- "source": "Storyboard — M2 en pages v0.4.md"
+ "source": "Storyboard — M2 en pages v0.5.md"
 };

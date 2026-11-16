@@ -27,7 +27,8 @@
   /* ---------- Utilitaires ---------- */
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function ic(id, cls) { return '<svg class="icone' + (cls ? " " + cls : "") + '" aria-hidden="true"><use href="#' + id + '"/></svg>'; }
-  function inline(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>"); }
+  /* Lien Markdown [texte](https://…) : seuls les liens http(s) sont rendus, dans un nouvel onglet (17-11, lien vers l'accord de Nouméa, D155) */
+  function inline(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>").replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>'); }
   /* Markdown simple : paragraphes, listes à puces, listes numérotées, gras, italique */
   function md(txt) {
     if (!txt) return "";
@@ -2036,7 +2037,7 @@
     function visuelHtml(code, corps) {
       var info = D.illustrations[code] || {};
       return '<div class="pg-info" data-code="' + esc(code) + '"><figure class="pg-info-fig"><button type="button" class="pg-info-btn" aria-label="Agrandir l\'infographie : ' + esc(info.scene || code) + '">' +
-        '<img src="assets/img/' + esc(code) + '.png" alt="' + esc(info.alt || "") + '"><span class="pg-info-loupe" aria-hidden="true">' + ic("i-loupe") + "Agrandir</span></button></figure>" +
+        '<img src="assets/img/' + esc(code) + '.webp" onerror="if(!this.dataset.e){this.dataset.e=1;this.src=this.src.replace(\'.webp\',\'.png\');}" alt="' + esc(info.alt || "") + '"><span class="pg-info-loupe" aria-hidden="true">' + ic("i-loupe") + "Agrandir</span></button></figure>" +
         '<div class="pg-info-texte">' + corps + "</div></div>";
     }
     function avecVisuel(b, quoi, corps) {

@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.8.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.10.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M1-PAGES",
@@ -385,10 +385,10 @@ window.DINA_DATA = {
       "avant": "**D'où vient cette répartition ?** Quatre dates suffisent pour s'y retrouver.",
       "image": "INF-M1-03",
       "liste": "- **1983 — Table ronde de Nainville-les-Roches.** Réunis par l'État près de Paris du 8 au 12 juillet, indépendantistes et non-indépendantistes discutent de l'avenir du territoire. La déclaration finale reconnaît le droit du peuple kanak, premier occupant, à l'indépendance, à exercer dans une autodétermination ouverte aux autres communautés dont il reconnaît la légitimité. Le RPCR ne la signe pas.\n- **1988-1989 — Accords de Matignon-Oudinot.** Création des trois provinces.\n- **1998-1999 — Accord de Nouméa.** Il organise le transfert progressif de compétences de l'État vers la Nouvelle-Calédonie. La loi organique du 19 mars 1999 fixe les listes : article 21 pour l'État, article 22 pour la Nouvelle-Calédonie, article 20 pour les provinces.\n- **Depuis 2000 — Les transferts de compétences.** Par exemple l'organisation de l'enseignement du second degré (2012), le droit civil et l'état civil (2013).",
-      "texte": "**Le mot « pays ».** On parle souvent du « pays » pour la Nouvelle-Calédonie : ses lois s'appellent des lois du pays. Face à un usager, dites plutôt « la Nouvelle-Calédonie » ou « le gouvernement de la Nouvelle-Calédonie »."
+      "texte": "**Le mot « pays ».** On parle souvent du « pays » pour la Nouvelle-Calédonie : ses lois s'appellent des lois du pays. Face à un usager, dites plutôt « la Nouvelle-Calédonie » ou « le gouvernement de la Nouvelle-Calédonie ».\n\n**L'accord de Nouméa.** Le texte officiel : [Accord sur la Nouvelle-Calédonie signé à Nouméa le 5 mai 1998 (Légifrance)](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000555817)"
      },
      "regle_clair": "Par défaut, c'est la province qui s'occupe d'un sujet. L'État, la Nouvelle-Calédonie et les communes ne s'en occupent que si un texte le leur confie. On dit que la province est compétente « de droit commun ».",
-     "valider": "Repères historiques (D68, D89, D147) : rétablis le 12-11 (ils n'avaient pas été repris dans M1 en pages) ; Nainville-les-Roches ajouté à la demande de Marie-Ange Morvan, DRH de la province Sud. Sources : gouv.nc, communiqué des 40 ans de Nainville-les-Roches (12-07-2023) ; LARJE, Université de la Nouvelle-Calédonie. Formulation à valider par l'expert institutionnel. 14-11 : citation du gouvernement retirée (source non déposée) ; dates, contenu de la déclaration et position du RPCR à contrôler sur les sources."
+     "valider": "Repères historiques (D68, D89, D147) : rétablis le 12-11 (ils n'avaient pas été repris dans M1 en pages) ; Nainville-les-Roches ajouté à la demande de Marie-Ange Morvan, DRH de la province Sud. Sources : gouv.nc, communiqué des 40 ans de Nainville-les-Roches (12-07-2023) ; LARJE, Université de la Nouvelle-Calédonie. Formulation à valider par l'expert institutionnel. 14-11 : citation du gouvernement retirée (source non déposée) ; dates, contenu de la déclaration et position du RPCR à contrôler sur les sources. 16-11 : lien vers le texte officiel de l'accord de Nouméa (Légifrance, JORF n° 121 du 27 mai 1998, NOR PRMX9801273X)."
     },
     {
      "type": "tri",
@@ -1943,11 +1943,6 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "1. l'État · 2. la Nouvelle-Calédonie · 3. la province",
      "verdict": "adapte"
-    },
-    {
-     "id": "D",
-     "libelle": "1. la Nouvelle-Calédonie · 2. la province · 3. la commune",
-     "verdict": "inadapte"
     }
    ],
    "note_expert": "C01-SF2. 1. Défense nationale : l'État (loi organique n° 99-209, art. 21-I, 3°). 2. Établissements hospitaliers : la Nouvelle-Calédonie (art. 22, 24°). À confirmer : le Médipôle est le site du centre hospitalier territorial, établissement public de la Nouvelle-Calédonie. 3. Ressources naturelles des eaux intérieures, « dont celles des rades et lagons » : les provinces (art. 46) ; au large, la zone économique exclusive relève de la Nouvelle-Calédonie (art. 22, 10°). Erreurs visées : la province pour l'hôpital (proximité), la Nouvelle-Calédonie pour le lagon (« la mer, c'est le pays »), l'État par réflexe. Aucun domaine des art. 21-III, 26, 27 ; aucun fait communal.",
@@ -1964,30 +1959,25 @@ window.DINA_DATA = {
    "competences": [
     "C01"
    ],
-   "texte": "Un habitant attend au guichet d'Élise. Il s'agace : « Tout ce qui est public, c'est l'État. Pourquoi on m'envoie toujours à la province ? » Quelle explication simple Élise lui donne-t-elle ?",
+   "texte": "Au guichet d'Élise, un habitant dit : « La province, c'est la mairie de la grande ville, non ? Pourquoi m'envoyer là-bas pour mon dossier ? » Quelle explication simple Élise lui donne-t-elle ?",
    "options": [
     {
      "id": "A",
-     "libelle": "« La loi donne des domaines à l'État, à la Nouvelle-Calédonie et à la commune. Le reste revient à la province. »",
+     "libelle": "La province est une collectivité distincte de la commune : elle a ses élus et, par défaut, la plupart des compétences.",
      "verdict": "adapte"
     },
     {
      "id": "B",
-     "libelle": "« L'État décide de tout, mais il confie aux provinces le soin d'appliquer ses décisions, au plus près de chez vous. »",
-     "verdict": "risque"
+     "libelle": "Oui, la province regroupe les mairies de son territoire et traite à leur place les dossiers qu'elles n'ont pas le temps de faire.",
+     "verdict": "inadapte"
     },
     {
      "id": "C",
-     "libelle": "« Depuis l'accord de Nouméa, la Nouvelle-Calédonie décide de tout, et la province fait seulement le travail sur le terrain. »",
-     "verdict": "inadapte"
-    },
-    {
-     "id": "D",
-     "libelle": "« Chaque année, les collectivités se partagent les sujets selon leur budget. Cette année, c'est la province qui a ce sujet. »",
-     "verdict": "inadapte"
+     "libelle": "Pas tout à fait : la province est l'État en région, elle applique ce que l'État décide pour la Nouvelle-Calédonie, dossier après dossier.",
+     "verdict": "risque"
     }
    ],
-   "note_expert": "C01-SF3. Loi organique, art. 20 : « Chaque province est compétente dans toutes les matières qui ne sont pas dévolues à l'Etat ou à la Nouvelle-Calédonie par la présente loi, ou aux communes par la législation applicable en Nouvelle-Calédonie. » Listes : art. 21 (État), art. 22 (Nouvelle-Calédonie). L'item ne cite aucun domaine : il ne repose sur aucun fait contestable. Distracteurs : la déconcentration de métropole (B), « le pays décide de tout » (C), le partage au budget (D). Nuance hors écran : délégations possibles du congrès aux provinces (art. 47).",
+   "note_expert": "C01-S (répartition des compétences). À valider par l'expert avant intégration : la commune et la province sont deux collectivités distinctes ; les provinces sont compétentes par défaut (loi organique n° 99-209, art. 20), les communes ont leurs propres compétences. Remplace la v0.9 (habitant qui dit « tout ce qui est public, c'est l'État »), trop proche de la phrase de Cédric dans l'épisode 1. Erreurs visées : province = commune ; province = État.",
    "suite": "M1-EVA-E2A"
   },
   "M1-EVA-E2A": {
@@ -2015,16 +2005,11 @@ window.DINA_DATA = {
     },
     {
      "id": "C",
-     "libelle": "La directrice générale des services.",
-     "verdict": "inadapte"
-    },
-    {
-     "id": "D",
      "libelle": "Le chef de l'équipe bâtiments.",
      "verdict": "adapte"
     }
    ],
-   "note_expert": "C02-SF1. Organigramme fictif : aucune affirmation juridique. Repère enseigné à l'épisode 2 : le trait plein indique le lien hiérarchique. Erreurs visées : sauter un échelon (A, C), confondre le lien fonctionnel en pointillé avec le lien hiérarchique (B). En production, afficher l'organigramme (composant organigramme de l'épisode 2) plutôt que de le décrire en texte.",
+   "note_expert": "C02-SF1. Organigramme fictif : aucune affirmation juridique. Repère enseigné à l'épisode 2 : le trait plein indique le lien hiérarchique. Erreurs visées : sauter un échelon (A), confondre le lien fonctionnel en pointillé avec le lien hiérarchique (B). En production, afficher l'organigramme (composant organigramme de l'épisode 2) plutôt que de le décrire en texte.",
    "suite": "M1-EVA-E2A2"
   },
   "M1-EVA-E2A2": {
@@ -2052,16 +2037,11 @@ window.DINA_DATA = {
     },
     {
      "id": "C",
-     "libelle": "À la CAFAT seulement, qui préviendra son employeur.",
-     "verdict": "inadapte"
-    },
-    {
-     "id": "D",
      "libelle": "Au service de l'état civil, qui a célébré son mariage.",
      "verdict": "inadapte"
     }
    ],
-   "note_expert": "C02-SF4. Pratique d'employeur, sans texte : la mise à jour du dossier administratif et de la paie passe par le service des ressources humaines de l'employeur (FICHE-M1-E2 : « Les ressources humaines : ma carrière, mes congés, ma paie »). Piège D : Élise travaille à la mairie, qui tient l'état civil, mais l'état civil n'est pas son service RH. À faire confirmer par un référent RH de commune : informer aussi son responsable est d'usage (A reste « risque », pas « inadapte »).",
+   "note_expert": "C02-SF4. Pratique d'employeur, sans texte : la mise à jour du dossier administratif et de la paie passe par le service des ressources humaines de l'employeur (FICHE-M1-E2 : « Les ressources humaines : ma carrière, mes congés, ma paie »). Piège C : Élise travaille à la mairie, qui tient l'état civil, mais l'état civil n'est pas son service RH. À faire confirmer par un référent RH de commune : informer aussi son responsable est d'usage (A reste « risque », pas « inadapte »).",
    "suite": "M1-EVA-E3A"
   },
   "M1-EVA-E3A": {
@@ -2090,11 +2070,6 @@ window.DINA_DATA = {
     {
      "id": "C",
      "libelle": "Auprès des collègues qui télétravaillent déjà à l'ÉLAN : ils connaissent bien la pratique.",
-     "verdict": "risque"
-    },
-    {
-     "id": "D",
-     "libelle": "Dans un article de presse récent sur le télétravail des agents publics.",
      "verdict": "risque"
     }
    ],
@@ -2128,11 +2103,6 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "Il ne s'en sert plus et cherche le texte qui s'applique aujourd'hui.",
      "verdict": "adapte"
-    },
-    {
-     "id": "D",
-     "libelle": "Il le cite s'il date de moins de cinq ans : c'est encore récent.",
-     "verdict": "inadapte"
     }
    ],
    "note_expert": "C17-SF6 (et C17-S4, évolution des règles). Repères du module : « en vigueur » = ni supprimée ni remplacée (apport de l'épisode 3) ; « une abrogation le supprime » (Aller plus loin). Item de méthode, sans fait juridique. À vérifier : la mention exacte affichée par Leginova pour un texte abrogé (« abrogé », « version en vigueur », etc.) ; adapter le libellé de la situation à l'écran réel.",
@@ -2208,11 +2178,6 @@ window.DINA_DATA = {
     },
     {
      "id": "C",
-     "libelle": "1. l'État · 2. la province · 3. la commune",
-     "verdict": "inadapte"
-    },
-    {
-     "id": "D",
      "libelle": "1. l'État · 2. l'État · 3. la province",
      "verdict": "risque"
     }
@@ -2240,21 +2205,16 @@ window.DINA_DATA = {
     },
     {
      "id": "B",
-     "libelle": "« Non : la province est un service de l'État, dirigé par le haut-commissaire. »",
-     "verdict": "inadapte"
-    },
-    {
-     "id": "C",
      "libelle": "« Non : sur son territoire, la province décide de tout, à la place des autres collectivités. »",
      "verdict": "risque"
     },
     {
-     "id": "D",
+     "id": "C",
      "libelle": "« Non : la province a ses domaines, décidés par son assemblée ; la Nouvelle-Calédonie a les siens. »",
      "verdict": "adapte"
     }
    ],
-   "note_expert": "C01-SF3. Loi organique, art. 3 : provinces et communes sont des collectivités territoriales qui « s'administrent librement par des assemblées élues » ; art. 20 : compétence de la province par défaut ; art. 157 : les matières de la compétence de la province relèvent de l'assemblée de province, sauf celles attribuées à son président ; art. 2 : le haut-commissaire représente le Gouvernement (piège B). Nuance hors écran : délégations du congrès aux provinces (art. 47).",
+   "note_expert": "C01-SF3. Loi organique, art. 3 : provinces et communes sont des collectivités territoriales qui « s'administrent librement par des assemblées élues » ; art. 20 : compétence de la province par défaut ; art. 157 : les matières de la compétence de la province relèvent de l'assemblée de province, sauf celles attribuées à son président ; art. 2 : le haut-commissaire représente le Gouvernement et ne dirige pas la province. Nuance hors écran : délégations du congrès aux provinces (art. 47).",
    "suite": "M1-EVA-E2B"
   },
   "M1-EVA-E2B": {
@@ -2284,14 +2244,9 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "Le chef du service appui aux communes.",
      "verdict": "risque"
-    },
-    {
-     "id": "D",
-     "libelle": "La directrice, au sommet de l'organigramme.",
-     "verdict": "inadapte"
     }
    ],
-   "note_expert": "C02-SF1. Organigramme fictif : aucune affirmation juridique. Même structure que E2A (quatre niveaux, un lien fonctionnel en pointillé). Erreurs visées : sauter un échelon (A, D), confondre le lien fonctionnel avec le lien hiérarchique (C). En production, afficher l'organigramme plutôt que de le décrire.",
+   "note_expert": "C02-SF1. Organigramme fictif : aucune affirmation juridique. Même structure que E2A (quatre niveaux, un lien fonctionnel en pointillé). Erreurs visées : sauter un échelon (A), confondre le lien fonctionnel avec le lien hiérarchique (C). En production, afficher l'organigramme plutôt que de le décrire.",
    "suite": "M1-EVA-E2B2"
   },
   "M1-EVA-E2B2": {
@@ -2321,11 +2276,6 @@ window.DINA_DATA = {
      "id": "C",
      "libelle": "Au service des ressources humaines, qui gère les dossiers des agents.",
      "verdict": "adapte"
-    },
-    {
-     "id": "D",
-     "libelle": "À l'accueil du siège de la province, qui reçoit le public.",
-     "verdict": "inadapte"
     }
    ],
    "note_expert": "C02-SF4. Pratique d'employeur, sans texte : l'attestation d'employeur est préparée par le service des ressources humaines (FICHE-M1-E2). Piège B : confondre l'employeur (la province) et la commune de résidence (attestation de domicile). À faire confirmer par un référent RH de province : circuit exact de l'attestation (qui la prépare, qui la signe) ; le chef d'équipe peut relayer la demande (A reste « risque »).",
@@ -2356,11 +2306,6 @@ window.DINA_DATA = {
     },
     {
      "id": "C",
-     "libelle": "Dans une note de l'ÉLAN d'il y a trois ans, qui cite déjà un chiffre.",
-     "verdict": "risque"
-    },
-    {
-     "id": "D",
      "libelle": "Chez l'institut de la statistique, qui publie le recensement, avec son année.",
      "verdict": "adapte"
     }
@@ -2372,37 +2317,32 @@ window.DINA_DATA = {
    "id": "M1-EVA-E3B2",
    "type": "eval-item",
    "etape": "Évaluation",
-   "personnage": "Ana",
+   "personnage": "Noa",
    "preuve": "E3",
    "variante": "B",
    "mode": "choix",
    "competences": [
     "C17"
    ],
-   "texte": "Ana prépare une réponse à un agent sur une règle RH fixée par une délibération. Elle s'appuie sur une fiche explicative imprimée en 2023. Sur Leginova, la délibération affiche une modification plus récente que sa fiche. Que fait-elle ?",
+   "texte": "Pour une note, Noa trouve sur le site d'un partenaire de l'ÉLAN un chiffre qui l'arrange : « 1 habitant sur 3 renonce à sa démarche ». Le chiffre n'a ni date, ni auteur, ni source. Que fait Noa ?",
    "options": [
     {
      "id": "A",
-     "libelle": "Elle relit l'article concerné dans la version en vigueur et note sa référence.",
+     "libelle": "Il écrit au partenaire pour savoir qui a produit ce chiffre, quand et comment.",
      "verdict": "adapte"
     },
     {
      "id": "B",
-     "libelle": "Elle répond avec sa fiche, car le fond d'une règle change rarement.",
+     "libelle": "Il le cite en écrivant « selon un site partenaire » : le lecteur saura d'où il vient.",
      "verdict": "risque"
     },
     {
      "id": "C",
-     "libelle": "Elle donne à l'agent la fiche et la nouvelle version, pour qu'il compare.",
+     "libelle": "Il le cite tel quel : le partenaire travaille avec l'ÉLAN, son chiffre est de confiance.",
      "verdict": "inadapte"
-    },
-    {
-     "id": "D",
-     "libelle": "Elle attend une note de service avant de tenir compte du changement.",
-     "verdict": "risque"
     }
    ],
-   "note_expert": "C17-SF6 (et C17-SF5, conserver la référence). Item de méthode, sans fait juridique : aucune délibération réelle n'est nommée, aucune date de modification n'est inventée. Repères du module : la version consolidée intègre toutes les modifications (épisode 3, item T3) ; « en vigueur » = ni supprimée ni remplacée. Piège D : attendre une consigne interne alors que le texte en vigueur est disponible.",
+   "note_expert": "C17-SF2 et SF6. Repères du module : qui a produit l'information, de quand elle date, si elle est en vigueur. Situation sans fait juridique ; nouvelle par rapport à l'épisode 3 (qui oppose un guide de 2019 à un site officiel à jour). Remplace la v0.9 (fiche imprimée en 2023 contre une délibération modifiée sur Leginova), qui reprend le conflit de l'épisode.",
    "suite": "M1-EVA-RES"
   },
   "M1-EVA-FIN": {
@@ -2761,5 +2701,5 @@ window.DINA_DATA = {
    "alt": "Trois questions avant d'utiliser une information : qui l'a produite ? de quand date-t-elle ? est-elle en vigueur ? Selon les réponses : je l'utilise, je vérifie, ou je l'écarte."
   }
  },
- "source": "Storyboard — M1 en pages v0.8.md"
+ "source": "Storyboard — M1 en pages v0.10.md"
 };
