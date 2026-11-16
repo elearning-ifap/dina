@@ -183,6 +183,14 @@
     tous.forEach(function (l) {
       if (l.attente && parPersonne[l.attente]) parPersonne[l.attente].push({ titre: (l.statut === "a_valider" ? "Valider : " : "") + l.titre, detail: l.note, lien: l.lien, lienTexte: l.lienTexte, lies: '<a class="lien-livrable" href="#' + l._id + '">Voir le livrable</a>' });
     });
+    D.parcours.forEach(function (p) {
+      (p.actions || []).forEach(function (a) {
+        [].concat(a.qui || []).forEach(function (k) {
+          if (k !== "marc" && parPersonne[k]) parPersonne[k].push({ titre: p.code + " : " + a.titre, lien: a.doc, lienTexte: a.docTexte || "Ouvrir le document",
+            lies: '<a class="lien-livrable" href="#' + p._id + '">Voir l\'étape du parcours</a>' });
+        });
+      });
+    });
     (D.actions || []).forEach(function (a) {
       var qui = [].concat(a.attente), avec = function (k) { return qui.filter(function (x) { return x !== k; }).map(nom); };
       qui.forEach(function (k) {
@@ -220,7 +228,7 @@
       var pc = pourcent(p.etats);
       var acts = (p.actions || []);
       var blocActions = '<div class="m-actions"><h4>Actions à conduire</h4>' + (acts.length ? "<ul>" + acts.map(function (a) {
-          return "<li><span>" + esc(a.titre) + "</span>" + (a.qui ? '<span class="m-qui">' + esc([].concat(a.qui).map(nom).join(", ")) + "</span>" : "") +
+          return "<li><span>" + esc(a.titre) + "</span>" + (a.doc ? ' <a class="lien-doc" href="' + esc(a.doc) + '" target="_blank" rel="noopener">' + esc(a.docTexte || "Ouvrir le document") + "</a>" : "") + (a.qui ? '<span class="m-qui">' + esc([].concat(a.qui).map(nom).join(", ")) + "</span>" : "") +
             '<span class="lies">' + liens(a.lie, p.code + " : « " + a.titre + " »") + "</span></li>";
         }).join("") + "</ul>" : '<p class="rien">Aucune action renseignée.</p>') + "</div>";
       return '<div class="m-ligne" id="' + p._id + '"><div class="m-titre"><span class="code">' + esc(p.code) + "</span><strong>" + esc(p.titre) + "</strong>" +

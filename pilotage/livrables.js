@@ -73,7 +73,9 @@ window.DINA_PILOTAGE = {
   ],
 
   /* Matrice du parcours : une ligne par étape du parcours, une colonne par étape de fabrication.
-     « actions » : les actions à conduire pour l'étape (titre, qui, lie obligatoire). Le % d'avancement se calcule sur les états.
+     « actions » : les actions à conduire pour l'étape (titre, qui, lie obligatoire, doc = lien direct vers le document à relire).
+     Les actions confiées à une autre personne que Marc apparaissent aussi dans « En attente de ». Le % d'avancement se calcule sur les états.
+     Documents de relecture : Google Docs du dossier Drive « DINA — Relectures », partagé en commentaire avec Marie-Noëlle Blanck.
      Depuis le 10-11, la validation experte porte sur le corpus, avant le scénario. */
   etapesFabrication: ["Corpus", "Validation experte du corpus", "Scénario", "Storyboard", "Visuels", "E-learning", "Intégration Moodle"],
   etapesFabricationCourt: ["Corpus", "Expert", "Scénar.", "Story.", "Visuels", "E-learn.", "Moodle"],
@@ -81,8 +83,8 @@ window.DINA_PILOTAGE = {
     { code: "POS", titre: "Positionnement", sousTitre: "Une semaine de travail",
       etats: ["sans_objet", "sans_objet", "valide", "en_cours", "sans_objet", "livre", "a_faire"],
       actions: [
-        { titre: "Relire et valider le storyboard v0.7 (accueil, compétences en jeu, bilan en deux écrans)", qui: "mnb", lie: "Restitution du positionnement, visuelle et imprimable" },
-        { titre: "Valider les 21 libellés de compétences en « je »", qui: "mnb", lie: "Référentiel des 21 compétences" },
+        { titre: "Relire et valider le storyboard v0.7 (accueil, compétences en jeu, bilan en deux écrans)", qui: "mnb", doc: "https://docs.google.com/document/d/10ubCfgl-Fc_GpLd9vXFL4SWWJQDJ3NaR69mveV-SySg/edit", lie: "Restitution du positionnement, visuelle et imprimable" },
+        { titre: "Valider les 21 libellés de compétences en « je »", qui: "mnb", doc: "https://docs.google.com/document/d/10ubCfgl-Fc_GpLd9vXFL4SWWJQDJ3NaR69mveV-SySg/edit", lie: "Référentiel des 21 compétences" },
         { titre: "Réduire le radar du profil : les six domaines doivent se lire sans faire défiler (retour province Sud)", qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable" },
         { titre: "Imprimer le profil sur une page dédiée, pas la page à l'écran", qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable" },
         { titre: "Intégrer le positionnement et sa restitution dans LIANE", qui: "marc", lie: "Intégration du positionnement et de sa restitution" }
@@ -91,7 +93,7 @@ window.DINA_PILOTAGE = {
     { code: "PRO", titre: "Prologue", sousTitre: "Bienvenue à l'ÉLAN",
       etats: ["sans_objet", "sans_objet", "valide", "en_cours", "livre", "livre", "a_faire"],
       actions: [
-        { titre: "Relire et valider le storyboard v0.6", qui: "mnb", lie: "PRO" },
+        { titre: "Relire et valider le storyboard v0.6", qui: "mnb", doc: "https://docs.google.com/document/d/1OK5Z0GqnKyhmZ91Hkn-gJkU9tNJwM-6exOITupLg8U0/edit", lie: "PRO" },
         { titre: "Passer le prologue en pages qui défilent : la règle vaut pour tout le parcours (D128)", qui: "marc", lie: "PRO" },
         { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
       ],
@@ -101,9 +103,9 @@ window.DINA_PILOTAGE = {
       actions: [
         { titre: "Terminer et vérifier le corpus ; lever les points juridiques", qui: "marc", lie: "Points juridiques à faire valider avant le pilote (M1, M2)" },
         { titre: "Faire valider le corpus par un référent ou un expert", qui: "employeurs", lie: ["Validation juridique de l'épisode « Qui fait quoi au pays ? »", "Validation experte du contenu juridique : experts en vacation et budget propre à DINA"] },
-        { titre: "Valider la grille des documents administratifs, les cinq demandes du défi et les repères historiques", qui: "mnb", lie: "M1" },
+        { titre: "Valider la grille des documents administratifs, les cinq demandes du défi et les repères historiques", qui: "mnb", doc: "https://docs.google.com/document/d/16g6h5X6RQW3NwDdbgyoq8GJf8RFGNaW-F5XOENtZ-cE/edit", lie: "M1" },
         { titre: "Vérifier la pertinence des infographies ; produire l'illustration de l'épisode « Qui fait quoi au pays ? »", qui: "marc", lie: ["Infographies du module 1", "Illustration de l'épisode « Qui fait quoi au pays ? » (accueil de l'ÉLAN)"] },
-        { titre: "Valider les fiches outils du module (refaites, dans le carnet)", qui: "mnb", lie: "Fiches outils du module 1" },
+        { titre: "Valider les fiches outils du module (refaites, dans le carnet)", qui: "mnb", doc: "https://elearning-ifap.github.io/dina/m1-pages.html", docTexte: "Ouvrir le module (bouton Carnet)", lie: "Fiches outils du module 1" },
         { titre: "Transformer les fiches de connaissances en fiches d'apport A4 recto verso ; ajouter Nainville-les-Roches", qui: "marc", lie: "Fiches de connaissances" },
         { titre: "Mettre un lien vers le texte de l'accord de Nouméa (5 mai 1998)", qui: "marc", lie: "M1" },
         { titre: "Trois choix de réponse au lieu de quatre dans les activités (retour province Sud)", qui: "marc", lie: "parcours" },
@@ -115,7 +117,7 @@ window.DINA_PILOTAGE = {
       actions: [
         { titre: "Terminer et vérifier le corpus ; faire valider les contenus statutaires, l'exécution des instructions et le télétravail", qui: "marc", lie: "Points juridiques à faire valider avant le pilote (M1, M2)" },
         { titre: "Faire valider le corpus par un référent ou un expert", qui: "employeurs", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA" },
-        { titre: "Relire le storyboard v0.4 (nouvelles situations, évaluation)", qui: "mnb", lie: "M2" },
+        { titre: "Relire le storyboard v0.4 (nouvelles situations, évaluation)", qui: "mnb", doc: "https://docs.google.com/document/d/1kiXFIDAR96ZaZp1Nv6eiG-1936kHaBFKAUWe14u_qy4/edit", lie: "M2" },
         { titre: "Rédiger la fiche de connaissances « Mon statut, en repères »", qui: "marc", lie: "Fiches de connaissances" },
         { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" },
         { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
@@ -170,7 +172,7 @@ window.DINA_PILOTAGE = {
         { titre: "Référentiel des 21 compétences", lot: "L1", statut: "valide", qui: "marc", valide: "employeurs", note: "Validé par les employeurs." },
         { titre: "Répartition des compétences par module", lot: "L1", statut: "valide", qui: "marc", valide: "mnb" },
         { titre: "Architecture pédagogique du parcours", lot: "L1", statut: "valide", qui: "marc", note: "Version 0.3 validée le 10-11 (D142) : répartition des messages entre Moodle et les composants SCORM, parcours en dix étapes, matrice des messages. Le plan d'ensemble : ordre des étapes, moment de chaque module dans les trois mois, durées, compétences travaillées et évaluées par module (21 compétences × modules). Version 0.2 du 07-10, à mettre à jour : M2 ramené à 1 h, positionnement non rejouable, 8 h estimées." },
-        { titre: "Règles de production (pédagogie, récit, visuels, évaluation)", lot: "L1", statut: "a_valider", qui: "marc", valide: "mnb", attente: "mnb", note: "Version 0.1 du 11-11 : un document court qui rassemble les canons et les décisions jusqu'à D146 (pédagogie, récit, écriture, visuels, évaluation, technique, validation du contenu). Cinq contradictions entre canons à trancher. Avant : Les règles que chaque module applique : mise en situation puis apport puis application, règles d'écriture, vocabulaire à deux étages, règles visuelles, règle des infographies, forme des évaluations. Elles sont aujourd'hui réparties dans les décisions : à rassembler en un document court." },
+        { titre: "Règles de production (pédagogie, récit, visuels, évaluation)", lot: "L1", statut: "en_cours", qui: "marc", valide: "mnb", attente: "marc", note: "16-11 : le document v0.1 est introuvable dans le coffre et dans le Drive ; à reconstituer, puis à déposer en Google Doc dans « DINA — Relectures » pour Marie-Noëlle Blanck. Version 0.1 du 11-11 : un document court qui rassemble les canons et les décisions jusqu'à D146 (pédagogie, récit, écriture, visuels, évaluation, technique, validation du contenu). Cinq contradictions entre canons à trancher. Avant : Les règles que chaque module applique : mise en situation puis apport puis application, règles d'écriture, vocabulaire à deux étages, règles visuelles, règle des infographies, forme des évaluations. Elles sont aujourd'hui réparties dans les décisions : à rassembler en un document court." },
         { titre: "Univers de l'ÉLAN : personnages et lieux", lot: "L1", statut: "valide", qui: "marc", valide: "mnb" },
         { titre: "Fil rouge : le dossier Passerelles", lot: "L1", statut: "valide", qui: "marc" },
         { titre: "Logo DINA et signature « Mes repères pour agir »", lot: "L1", statut: "valide", qui: "marc", valide: "mfp" },
