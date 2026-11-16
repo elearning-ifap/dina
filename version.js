@@ -30,7 +30,7 @@ window.DINA_VERSION = {
     { code: "pos", fichier: "positionnement.html", cle: "dina-positionnement", titre: "Test de positionnement",
       texte: "Votre première semaine dans un service public : quinze situations, et ce qui se passe après chacun de vos choix. Vous voyez où vous en êtes, domaine par domaine.",
       duree: "15 à 20 min environ", disponible: true },
-    { code: "prologue", fichier: "prologue.html", cle: "dina-prologue", titre: "Prologue « Bienvenue à l'ÉLAN »",
+    { code: "prologue", fichier: "prologue-pages.html", cle: "dina-prologue", titre: "Prologue « Bienvenue à l'ÉLAN »",
       texte: "Vous rencontrez Noa, ses collègues et l'organisation où il prend son poste.",
       duree: "environ 10 min", disponible: true },
     { code: "m1", fichier: "m1.html", cle: "dina-m1", titre: "Module 1 « Je me repère »",

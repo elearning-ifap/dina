@@ -93,11 +93,10 @@ window.DINA_PILOTAGE = {
     { code: "PRO", titre: "Prologue", sousTitre: "Bienvenue à l'ÉLAN",
       etats: ["sans_objet", "sans_objet", "valide", "en_cours", "livre", "livre", "a_faire"],
       actions: [
-        { titre: "Relire et valider le storyboard v0.6", qui: "mnb", doc: "https://docs.google.com/document/d/1OK5Z0GqnKyhmZ91Hkn-gJkU9tNJwM-6exOITupLg8U0/edit", lie: "PRO" },
-        { titre: "Passer le prologue en pages qui défilent : la règle vaut pour tout le parcours (D128)", qui: "marc", lie: "PRO" },
+        { titre: "Relire et valider le storyboard v0.6 (repris à l'identique dans « Prologue en pages v0.1 »)", qui: "mnb", doc: "https://docs.google.com/document/d/1OK5Z0GqnKyhmZ91Hkn-gJkU9tNJwM-6exOITupLg8U0/edit", lie: "PRO" },
         { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
       ],
-      note: "Storyboard v0.6 le 14-11 : la carte « Le vendredi, un bilan » annonce la règle de D150 : six situations nouvelles, un badge avec 5 bonnes réponses sur 6, la non-réussite ne bloque pas, reprise libre. v0.5 le 11-11 : la carte « Le vendredi, un bilan » annonce « des situations nouvelles, que vous n'avez pas encore vues » (D145). Avant (v0.4, 10-11) : Noa est à l'ÉLAN depuis quelques semaines (D130), plus de premier jour ni de badge provisoire ; étape « Arrivée » renommée « Début » ; collègues de toutes catégories annoncés ; un carnet par module. Seul composant à présenter l'ÉLAN, l'équipe et la règle du jeu (D142). Reste en écrans pour l'instant.", lien: "../prologue.html" },
+      note: "Storyboard v0.6 le 14-11 : la carte « Le vendredi, un bilan » annonce la règle de D150 : six situations nouvelles, un badge avec 5 bonnes réponses sur 6, la non-réussite ne bloque pas, reprise libre. v0.5 le 11-11 : la carte « Le vendredi, un bilan » annonce « des situations nouvelles, que vous n'avez pas encore vues » (D145). Avant (v0.4, 10-11) : Noa est à l'ÉLAN depuis quelques semaines (D130), plus de premier jour ni de badge provisoire ; étape « Arrivée » renommée « Début » ; collègues de toutes catégories annoncés ; un carnet par module. Seul composant à présenter l'ÉLAN, l'équipe et la règle du jeu (D142). 16-11 : le prologue passe en pages qui défilent (D128) et remplace la version en écrans dans l'accueil ; storyboard « Prologue en pages v0.1 », mêmes textes que la v0.6 ; trois pages (Noa à l'ÉLAN, l'équipe, comment vous allez apprendre) puis l'écran de fin, avec barre d'étapes.", lien: "../prologue-pages.html" },
     { code: "M1", titre: "Je me repère", sousTitre: "Comprendre mon environnement",
       etats: ["en_cours", "a_faire", "valide", "livre", "en_cours", "en_cours", "a_faire"],
       actions: [

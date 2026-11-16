@@ -282,3 +282,13 @@
 .pg-ordre-attendu { margin: 0; padding-left: 1.4rem; }
 .pg-msg-cc .pg-msg-vide { font-style: italic; }
 .pg-msg-reponse { margin-top: 1rem; }
+
+/* 16-11 (prologue en pages) — deux corrections de spécificité */
+.pg-illu .illu-vide[hidden] { display: none; }              /* l'indicateur « image à venir » restait affiché par-dessus l'image */
+.page-defil .duo-col--b h2 { color: #fff; }                 /* titre blanc sur la colonne bleue (la règle des titres de page le rendait sombre) */
+/* Schéma des acteurs (orbite) dans la colonne de la page : textes agrandis (le schéma est réduit de moitié), bouton de pause hors de la légende */
+.page-defil .orbite--groupes .orb-nom { font-size: 21px; }
+.page-defil .orbite--groupes .orb-role { font-size: 16px; }
+.page-defil .orbite--groupes .orb-groupe-titre { font-size: 24px; }
+.page-defil .orbite--groupes .orb-groupe-note { font-size: 17px; }
+.page-defil .orbite--groupes .anim-btn { top: auto; bottom: auto; right: 0; position: static; margin: 0 0 .4rem auto; display: flex; }

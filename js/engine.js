@@ -549,6 +549,29 @@
     var d = $(b.getAttribute("aria-controls")), ouvert = b.getAttribute("aria-expanded") === "true";
     b.setAttribute("aria-expanded", String(!ouvert)); d.hidden = ouvert; b.textContent = ouvert ? "En clair" : "Masquer";
   });
+  /* Pages qui défilent : blocs sans état à enregistrer (organigramme illustré, cartes retournables, réflexion libre) */
+  zone.addEventListener("click", function (ev) {
+    if (!zone.classList.contains("ecran--page")) return;
+    var o = ev.target.closest("#trombi-orga");
+    if (o) { var info = D.illustrations[o.dataset.illu] || {}; ouvrirPanneau("Organigramme", '<img class="trombi-image" src="assets/img/' + esc(o.dataset.illu) + '.jpg" alt="' + esc(o.dataset.alt || info.alt || "") + '">'); return; }
+    var tb = ev.target.closest(".tb-tete");
+    if (tb) { var d = $(tb.getAttribute("aria-controls")), ouvert = tb.getAttribute("aria-expanded") === "true"; tb.setAttribute("aria-expanded", String(!ouvert)); d.hidden = ouvert; tb.closest(".tb-carte").classList.toggle("ouverte", !ouvert); return; }
+    var c = ev.target.closest(".carte-ret");
+    if (c) {
+      var r = c.querySelector(".cr-recto"), v = c.querySelector(".cr-verso"), retournee = v.hidden, an = zone.querySelector(".pg-annonce");
+      v.hidden = !retournee; r.hidden = retournee; c.classList.toggle("retournee", retournee); c.setAttribute("aria-pressed", String(retournee));
+      c.classList.remove("tourne"); void c.offsetWidth; c.classList.add("tourne");
+      if (an) an.textContent = retournee ? v.textContent : r.textContent;
+      return;
+    }
+    var rf = ev.target.closest("[data-refl]");
+    if (rf) { var sec = rf.closest(".pg-refl"), fb = sec.querySelector(".feedback"); fb.hidden = false; rf.disabled = true; fb.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+  });
+  zone.addEventListener("input", function (ev) {
+    if (!zone.classList.contains("ecran--page")) return;
+    var t = ev.target.closest && ev.target.closest(".pg-refl-saisie"); if (!t) return;
+    var b = t.closest(".pg-refl").querySelector("[data-refl]"); b.disabled = !t.value.trim() || !t.closest(".pg-refl").querySelector(".feedback").hidden;
+  });
   /* Deux colonnes contrastées (ex. inventé / réel) */
   /* Infographie (D39) : blocs illustrés côte à côte, puis un fil de questions. Tout est du texte : lisible au lecteur d'écran. */
   function infographie(g) {
@@ -1320,8 +1343,8 @@
   }
 
   /* ---------- Trombinoscope : présenter une équipe sans obliger à tout ouvrir ---------- */
-  function rendreTrombi(e) {
-    zone.classList.add("ecran--lecture", "ecran--visuel");
+  /* HTML d'un trombinoscope (écran « hotspot » mode trombinoscope, bloc « equipe » des pages) */
+  function trombiHtml(e) {
     var groupes = [];
     e.zones.forEach(function (z) {
       var g = groupes.filter(function (x) { return x.nom === (z.groupe || ""); })[0];
@@ -1329,8 +1352,7 @@
       g.zones.push(z);
     });
     var notes = e.groupes || {};
-    var html = '<div class="colonne colonne--large">' + entete(e, libelleEtape(e)) + (e.texte ? '<div class="texte">' + md(e.texte) + "</div>" : "") +
-      (e.illustration ? '<p class="trombi-voir"><button type="button" class="btn-revoir" id="trombi-orga">' + ic("i-image") + " Voir l'organigramme illustré</button></p>" : "") +
+    return (e.illustration ? '<p class="trombi-voir"><button type="button" class="btn-revoir" id="trombi-orga" data-illu="' + esc(e.illustration) + '" data-alt="' + esc(e.alt || "") + '">' + ic("i-image") + " Voir l'organigramme illustré</button></p>" : "") +
       groupes.map(function (g, k) {
         return '<section class="trombi-groupe trombi-groupe--' + (k === 0 ? "interne" : "externe") + '">' + (g.nom ? "<h2>" + esc(g.nom) + "</h2>" : "") + (notes[g.nom] ? '<p class="trombi-note">' + inline(notes[g.nom]) + "</p>" : "") +
           '<ul class="trombi">' + g.zones.map(function (z) {
@@ -1342,7 +1364,11 @@
               '<div class="tb-detail" id="' + id + '" hidden>' + md(z.texte) + (z.repere ? '<p class="hs-repere">' + ic("i-ampoule") + "<span>" + inline(z.repere) + "</span></p>" : "") + "</div></li>";
           }).join("") + "</ul></section>";
       }).join("") +
-      (e.bandeau_final ? '<div class="a-retenir">' + ic("i-ampoule") + "<span>" + inline(e.bandeau_final) + "</span></div>" : "") + "</div>";
+      (e.bandeau_final ? '<div class="a-retenir">' + ic("i-ampoule") + "<span>" + inline(e.bandeau_final) + "</span></div>" : "");
+  }
+  function rendreTrombi(e) {
+    zone.classList.add("ecran--lecture", "ecran--visuel");
+    var html = '<div class="colonne colonne--large">' + entete(e, libelleEtape(e)) + (e.texte ? '<div class="texte">' + md(e.texte) + "</div>" : "") + trombiHtml(e) + "</div>";
     zone.innerHTML = html;
     zone.querySelectorAll(".tb-tete").forEach(function (b) {
       b.addEventListener("click", function () {
@@ -1427,13 +1453,16 @@
   }
 
   /* ---------- Cartes retournables (D49) ---------- */
+  function cartesListe(e) {
+    return '<ul class="cartes">' + e.cartes.map(function (c, n) {
+      return '<li><button type="button" class="carte-ret" data-n="' + n + '" aria-pressed="false" style="--teinte:' + TEINTES[n % TEINTES.length] + ";--teinte-fonce:" + TEINTES_FONCEES[n % TEINTES.length] + '"><span class="cr-recto">' + (c.icone ? '<span class="cr-ico">' + ic(c.icone) + "</span>" : "") + '<span class="cr-titre">' + inline(c.recto) + '</span><span class="cr-indice">Retourner</span></span><span class="cr-verso" hidden><span class="cr-rappel">' + inline(c.recto) + "</span>" + md(c.verso) + "</span></button></li>";
+    }).join("") + "</ul>";
+  }
   function rendreCartes(e) {
     zone.classList.add("ecran--lecture");
     zone.innerHTML = '<div class="colonne colonne--large">' + entete(e, libelleEtape(e)) + texteOuRepliques(e) +
       consigneZone(null, e.consigne || "Cliquez sur chaque carte pour la retourner.") +
-      '<ul class="cartes">' + e.cartes.map(function (c, n) {
-        return '<li><button type="button" class="carte-ret" data-n="' + n + '" aria-pressed="false" style="--teinte:' + TEINTES[n % TEINTES.length] + ";--teinte-fonce:" + TEINTES_FONCEES[n % TEINTES.length] + '"><span class="cr-recto">' + (c.icone ? '<span class="cr-ico">' + ic(c.icone) + "</span>" : "") + '<span class="cr-titre">' + inline(c.recto) + '</span><span class="cr-indice">Retourner</span></span><span class="cr-verso" hidden><span class="cr-rappel">' + inline(c.recto) + "</span>" + md(c.verso) + "</span></button></li>";
-      }).join("") + "</ul>" + (e.encadre ? '<div class="a-retenir">' + ic("i-ampoule") + "<span>" + inline(e.encadre) + "</span></div>" : "") +
+      cartesListe(e) + (e.encadre ? '<div class="a-retenir">' + ic("i-ampoule") + "<span>" + inline(e.encadre) + "</span></div>" : "") +
       '<p class="sr-only" id="annonce" aria-live="polite"></p></div>';
     zone.querySelector(".cartes").addEventListener("click", function (ev) {
       var b = ev.target.closest(".carte-ret"); if (!b) return;
@@ -1913,6 +1942,7 @@
     (e.categories || []).concat.apply(e.categories || [], (e.blocs || []).map(function (b) { return b.categories || []; })).forEach(function (c) { if (!cats[c.id]) cats[c.id] = c; });
     function catsDe(b) { return b.categories || e.categories || []; }
     var phases = e.phases || ["situation", "apport", "application"];
+    function libPhase(p) { return (e.libelles_phases && e.libelles_phases[p]) || PHASES_PAGE[p] || p; }   /* 16-11 : libellés propres à une page (prologue) */
     function sauverPage() { memoriser(e.id, st); }
     function libCat(id) { return [].concat(id).map(function (x) { return cats[x] ? cats[x].libelle : ""; }).join(" ou "); }
     /* 11-11 : une réponse attendue peut en admettre plusieurs (planning : « mardi ou mercredi ») */
@@ -1924,6 +1954,7 @@
     function complet(b) { var r = st.r[b.id] || {}; return itemsDe(b).every(function (it) { return bienAvant(b, it) || r[it.id]; }); }
     /* Blocs qui demandent une action avant la suite (D128 : la suite s'affiche quand l'activité est terminée) */
     var BLOQUANTS = { tri: 1, explorer: 1, recherche: 1, message: 1, ordre: 1 };
+    var lecture = !e.blocs.some(function (x) { return BLOQUANTS[x.type]; });
     /* Blocs visibles : jusqu'au premier bloc bloquant non terminé, inclus */
     function visibles() {
       var res = [];
@@ -1965,7 +1996,7 @@
 
     function enTete(b, n) {
       var comp = (b.competences || []).map(function (c) { return '<span class="pg-comp">' + esc(c) + "</span>"; }).join("");
-      return '<div class="pg-repere"><span class="pg-phase pg-phase--' + esc(b.phase) + '">' + esc(PHASES_PAGE[b.phase] || b.phase) + "</span>" + comp + "</div>" +
+      return '<div class="pg-repere"><span class="pg-phase pg-phase--' + esc(b.phase) + '">' + esc(libPhase(b.phase)) + "</span>" + comp + "</div>" +
         (b.titre ? '<h2 class="pg-titre" id="pg-t' + n + '">' + inline(b.titre) + "</h2>" : "");
     }
     /* « En clair » (D120) : reformulation à la demande, fermée par défaut ; ouverte par le gestionnaire commun des .off-btn */
@@ -2025,7 +2056,10 @@
               (x.exemples ? "<p>" + x.exemples.map(inline).join(", ") + "</p>" : "") + '<span class="pg-ref">' + esc(x.ref || "") + "</span></div></li>";
           }).join("") + "</ul></div></figure>";
       }
+      if (b.fiche_identite) h += ficheIdentite(b.fiche_identite);
+      if (b.texte_officiel) h += texteOfficiel(b.texte_officiel);
       if (b.colonnes) h += colonnes(b.colonnes);
+      if (b.orbite) h += orbite(b.orbite);
       if (b.points) h += (b.points_titre ? '<h3 class="pg-sous">' + esc(b.points_titre) + "</h3>" : "") + points(b.points);
       if (b.grille) h += avecVisuel(b, "grille", (b.grille.titre ? '<h3 class="pg-sous">' + esc(b.grille.titre) + "</h3>" : "") + grilleHtml(b.grille));
       if (b.methode) h += avecVisuel(b, "methode", '<h3 class="pg-sous">' + esc(b.methode_titre || "La méthode") + '</h3><ol class="pg-methode">' + b.methode.map(function (m) { return "<li>" + inline(m) + "</li>"; }).join("") + "</ol>");
@@ -2040,6 +2074,23 @@
       }
       if (b.sources) h += '<p class="sources"><strong>Sources :</strong> ' + esc(b.sources) + "</p>";
       return h;
+    }
+    /* ---------- 16-11 (prologue en pages) : trombinoscope, cartes retournables et réflexion libre ; non bloquants ---------- */
+    function blocEquipe(b) {
+      return (b.texte ? '<div class="texte">' + md(b.texte) + "</div>" : "") + trombiHtml(b);
+    }
+    function blocCartes(b) {
+      return (b.texte ? '<div class="texte">' + md(b.texte) + "</div>" : "") + '<p class="pg-consigne">' + inline(b.consigne || "Cliquez sur chaque carte pour la retourner.") + "</p>" + cartesListe(b) +
+        (b.encadre ? '<p class="pg-encadre">' + inline(b.encadre) + "</p>" : "") + '<p class="sr-only pg-annonce" aria-live="polite"></p>';
+    }
+    function blocReflexion(b) {
+      var id = "pg-refl-" + esc(b.id || "q");
+      return '<div class="pg-refl">' + (b.texte ? '<div class="texte">' + md(b.texte) + "</div>" : "") +
+        '<label class="rl-question" for="' + id + '">' + inline(b.question) + "</label>" +
+        '<textarea id="' + id + '" class="rl-saisie pg-refl-saisie" rows="5" autocomplete="off"></textarea>' +
+        '<p class="rl-mention">' + ic("i-cadenas") + "<span>" + esc(b.mention || "Votre réponse reste sur cet écran. Elle n'est transmise à personne.") + "</span></p>" +
+        '<p><button type="button" class="btn btn-secondaire" data-refl disabled>' + ic("i-check") + " Valider</button></p>" +
+        '<div class="feedback feedback--adapte" hidden aria-live="polite">' + md(b.apres || "") + "</div></div>";
     }
     /* ---------- 11-11 : document à lire dans la page (fiche de poste de M2) ; non bloquant ---------- */
     function blocDocument(b) {
@@ -2212,7 +2263,7 @@
       var o = (p.options || []).filter(function (x) { return x.id === (st.r[b.id] || {})[p.id]; })[0];
       return '<span class="pg-msg-cc"><strong>Copie :</strong> ' + (o ? esc(o.texte) : '<span class="pg-msg-vide">[à choisir]</span>') + "</span>";
     }
-    var RENDUS_BLOC = { recit: blocRecit, apport: blocApport, tri: blocTri, liste: blocListe, explorer: blocExplorer, recherche: blocRecherche, message: blocMessage, document: blocDocument, ordre: blocOrdre };
+    var RENDUS_BLOC = { recit: blocRecit, apport: blocApport, tri: blocTri, liste: blocListe, explorer: blocExplorer, recherche: blocRecherche, message: blocMessage, document: blocDocument, ordre: blocOrdre, equipe: blocEquipe, cartes: blocCartes, reflexion: blocReflexion };
     /* D132 : un carnet par module. La page terminée débloque ses fiches : elles rejoignent le carnet du module. */
     function fichesPage() {
       var ids = (e.fiches || []).filter(function (id) { return F[id]; });
@@ -2228,8 +2279,8 @@
     /* Étape affichée dans la barre : celle du bloc en haut de l'écran (la page défile, la barre suit) */
     function etapesHtml(iCour) {
       return phases.map(function (p, k) {
-        var s = fini || k < iCour ? "fait" : k === iCour ? "encours" : "avenir";
-        return '<li class="pg-et pg-et--' + s + '"' + (s === "encours" ? ' aria-current="step"' : "") + '><span class="pg-et-point">' + (s === "fait" ? ic("i-check") : k + 1) + "</span>" + '<span class="pg-et-lib">' + esc(PHASES_PAGE[p] || p) + "</span>" +
+        var s = (fini && !lecture) || k < iCour ? "fait" : k === iCour ? "encours" : "avenir";   /* 16-11 : une page de lecture (aucune activité) suit le défilement, elle n'est pas « faite » dès l'arrivée */
+        return '<li class="pg-et pg-et--' + s + '"' + (s === "encours" ? ' aria-current="step"' : "") + '><span class="pg-et-point">' + (s === "fait" ? ic("i-check") : k + 1) + "</span>" + '<span class="pg-et-lib">' + esc(libPhase(p)) + "</span>" +
           '<span class="sr-only"> — ' + (s === "fait" ? "fait" : s === "encours" ? "en cours" : "à venir") + "</span></li>";
       }).join("");
     }
@@ -2242,7 +2293,7 @@
       if (i === iAffiche) return;
       iAffiche = i;
       barre.querySelector(".pg-etapes").innerHTML = etapesHtml(i);
-      if (!fini) compteur.textContent = "Étape " + (i + 1) + " sur " + phases.length + " : " + (PHASES_PAGE[phases[i]] || phases[i]);
+      if (!fini) compteur.textContent = "Étape " + (i + 1) + " sur " + phases.length + " : " + libPhase(phases[i]);
     }
     function dessiner(nouveau) {
       var vis = visibles();

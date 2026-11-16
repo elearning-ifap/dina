@@ -422,7 +422,7 @@ a.btn { text-decoration: none; }
 .acquis-carte strong { color: var(--bleu-sombre); }
 .acquis-carte p { margin: .25rem 0 0; font-size: .95rem; }
 .prochain { display: flex; gap: .8rem; align-items: flex-start; margin-top: 1.4rem; padding: 1rem 1.2rem; border-radius: var(--rayon); background: var(--bleu); color: #fff; }
-.prochain .surtitre { color: #BFE3EA; margin: 0; }
+.prochain .surtitre { color: #fff; margin: 0; }   /* 16-11 : contraste 5,3:1 (le bleu clair donnait 3,9:1 sur le fond bleu-vert) */
 .prochain strong { display: block; font-family: var(--police-titre); font-size: 1.1rem; }
 .prochain p { margin: .3rem 0 0; color: #E6EEF4; }
 .prochain > .icone { flex: none; margin-top: .3rem; }
@@ -1029,7 +1029,7 @@ a.btn { text-decoration: none; }
 .anim-hote { position: relative; }
 .anim-hote > .anim-btn { position: absolute; top: .5rem; right: .5rem; z-index: 3; }
 @media (max-width: 720px) { .anim-hote > .anim-btn { display: inline-flex; } }
-@media (max-width: 720px) { .anim-hote > .anim-btn { min-height: 30px; padding: 0 .45rem; } .anim-hote > .anim-btn span { display: none; } }
+@media (max-width: 720px) { .anim-hote > .anim-btn { min-height: 30px; padding: 0 .45rem; } .anim-hote > .anim-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }   /* 16-11 : texte masqué à l'écran mais lu par les lecteurs d'écran (le bouton n'avait plus de nom accessible) */
 
 /* ==========================================================================
    Positionnement v0.5 (27-10, D117) — conséquences vivantes, agenda, tableau de bord, impression
