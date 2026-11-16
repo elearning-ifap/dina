@@ -34,6 +34,28 @@
 
   var tous = [];
   D.categories.forEach(function (c) { c.livrables.forEach(function (l) { tous.push(l); }); });
+  var POND = D.ponderation || { a_faire: 0, en_cours: 0.5, a_valider: 0.8, valide: 1, livre: 1 };
+  function pourcent(etats) {
+    var u = etats.filter(function (e) { return e !== "sans_objet"; });
+    return u.length ? Math.round(100 * u.reduce(function (a, e) { return a + (POND[e] || 0); }, 0) / u.length) : 0;
+  }
+
+  /* Ancres : un identifiant par livrable et par étape du parcours, pour les liens des tâches */
+  var parTitre = {}, parCode = {};
+  tous.forEach(function (l, i) { l._id = "l-" + (i + 1); parTitre[l.titre] = l; });
+  D.parcours.forEach(function (p) { p._id = "p-" + p.code; parCode[p.code] = p; });
+  var liensCasses = [];
+  function liens(lie, origine) {
+    var cibles = [].concat(lie == null ? [] : lie);
+    if (!cibles.length) { liensCasses.push(origine + " : aucun livrable rattaché"); return '<span class="lien-manquant">Livrable à rattacher</span>'; }
+    return cibles.map(function (c) {
+      if (c === "parcours") return '<a class="lien-livrable" href="#t-parcours">Parcours de l\'agent</a>';
+      if (parCode[c]) return '<a class="lien-livrable" href="#' + parCode[c]._id + '">' + esc(c + " — " + parCode[c].titre) + "</a>";
+      if (parTitre[c]) return '<a class="lien-livrable" href="#' + parTitre[c]._id + '">' + esc(c) + "</a>";
+      liensCasses.push(origine + " : « " + c + " » introuvable");
+      return '<span class="lien-manquant">' + esc(c) + " (introuvable)</span>";
+    }).join(" ");
+  }
 
   function compter(liste) {
     var n = {}; STATUTS.forEach(function (s) { n[s.code] = 0; });
@@ -75,7 +97,7 @@
       html += '<article class="indicateur"><h3>Temps de production</h3><p class="grand">' + fr(T.passeJours) + "<small> j sur " + fr(T.prevuJours) + " j prévus</small></p>" +
         jauge(conso, conso > 100 ? "var(--rouge)" : "var(--bleu-progression)") +
         '<p class="explication">' + conso + "\u00a0% de la charge consommée, " + fr(reste) + " j restants. Jours temps plein, dernière saisie le " + esc(T.arreteAu) + ".</p>" +
-        (T.concertationJours != null ? '<p class="explication">En plus de la production : ' + fr(T.concertationJours) + " j de réunions et de concertation (équipe projet, employeurs), hors des " + fr(T.prevuJours) + " j.</p>" : "") +
+        '<p class="explication">Réunions, concertation et préparation : en plus, hors des ' + fr(T.prevuJours) + " j (voir à côté).</p>" +
         '<p class="comparaison ' + (ecart > 10 ? "c-alerte" : "c-ok") + '">' +
         (ecart > 10 ? "Le temps consommé dépasse l'avancement de " + ecart + " points."
                     : "L'avancement (" + avance + "\u00a0%) est en phase ou en avance sur le temps consommé (" + conso + "\u00a0%).") + "</p>" +
@@ -87,6 +109,22 @@
             (depasse ? ", au-delà des " + fr(T.prevuJours) + "\u00a0j annoncés." : ".") + "</p>";
         })() +
         (jours(D.miseAJour) - jours(T.arreteAu) > 3 ? '<p class="explication">Saisie du temps antérieure à la mise à jour des statuts : la comparaison est à prendre avec prudence.</p>' : "") + "</article>";
+    }
+    var C = T && T.concertation;
+    if (C) {
+      var RUB = [
+        { cle: "equipe", titre: "Équipe projet", texte: "Réunions avec Marie-Noëlle Blanck, la direction" },
+        { cle: "employeurs", titre: "Employeurs", texte: "COPIL, séances, échanges avec les DRH" },
+        { cle: "preparation", titre: "Préparation et suites", texte: "Supports, comptes rendus, courriels" }
+      ];
+      var totC = RUB.reduce(function (a, r) { return a + (C[r.cle] || 0); }, 0);
+      var totalTout = (T.passeJours || 0) + totC;
+      html += '<article class="indicateur"><h3>Concertation et préparation</h3><p class="grand">' + fr(totC) + "<small> j, hors des " + fr(T.prevuJours) + " j</small></p>" +
+        '<ul class="rubriques">' + RUB.map(function (r) {
+          var v = C[r.cle] || 0, pc = totC ? Math.round(100 * v / totC) : 0;
+          return '<li><div class="rub-ligne"><strong>' + esc(r.titre) + "</strong><span>" + fr(v) + "\u00a0j</span></div>" + jauge(pc, "var(--jaune)") + "<small>" + esc(r.texte) + "</small></li>";
+        }).join("") + "</ul>" +
+        '<p class="explication">Temps total sur DINA : ' + fr(totalTout) + " j, dont " + (totalTout ? Math.round(100 * totC / totalTout) : 0) + "\u00a0% de concertation et de préparation.</p></article>";
     }
     $("indicateurs").innerHTML = html;
   })();
@@ -101,6 +139,33 @@
       '<p class="synthese-texte">' + faits + " livrables validés ou livrés sur " + total + ". Le détail module par module est plus bas.</p>";
   })();
 
+  /* Avancement par groupe de livrables : % pondéré, livrables faits, temps de production */
+  (function () {
+    var T = D.temps || {}, PG = T.productionParGroupe || {};
+    var groupes = [{ code: "parcours", titre: "Parcours de l'agent", texte: "Positionnement, prologue, 5 modules, bilan : les étapes de fabrication.", ancre: "t-parcours",
+      etats: [].concat.apply([], D.parcours.map(function (p) { return p.etats; })), unite: "étapes de fabrication",
+      duree: duree(D.parcours) }];
+    D.categories.forEach(function (c, ic) {
+      groupes.push({ code: c.code, titre: c.titre, texte: c.texte, ancre: "cat-" + c.code, etats: c.livrables.map(function (l) { return l.statut; }), unite: "livrables", duree: duree(c.livrables) });
+    });
+    if (D.backlog && D.backlog.items) groupes.push({ code: "moteur", titre: "Moteur et gabarits", texte: "Outil de production. Hors avancement global.", ancre: "t-backlog",
+      etats: D.backlog.items.map(function (x) { return x.statut; }), unite: "évolutions", duree: duree(D.backlog.items), hors: true });
+    $("groupes").innerHTML = groupes.map(function (g) {
+      var u = g.etats.filter(function (e) { return e !== "sans_objet"; });
+      var faits = u.filter(function (e) { return e === "valide" || e === "livre"; }).length, pc = pourcent(g.etats);
+      var j = PG[g.code];
+      return '<a class="groupe' + (g.hors ? " groupe--hors" : "") + '" href="#' + g.ancre + '"><div class="gr-tete"><h3>' + esc(g.titre) + '</h3><span class="gr-pc">' + pc + "<small>\u00a0%</small></span></div>" +
+        '<div class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + pc + '%;--c:var(--turquoise)"></span></div>' +
+        '<p class="gr-chiffres">' + faits + " / " + u.length + " " + g.unite + " validés ou livrés</p>" +
+        '<p class="gr-temps"><span>Production : <strong>' + (j != null ? fr(j) + "\u00a0j" : "—") + "</strong></span><span>" + esc(g.duree.texte) + "</span></p>" +
+        '<p class="gr-texte">' + esc(g.texte) + "</p></a>";
+    }).join("");
+    var somme = Object.keys(PG).reduce(function (a, k) { return a + PG[k]; }, 0);
+    $("groupes-note").textContent = "Temps de production par groupe, en jours temps plein" + (PG.divers ? ", plus " + fr(PG.divers) + " j de tâches diverses non rattachées" : "") +
+      (T.passeJours != null && Math.abs(somme - T.passeJours) > 0.01 ? ". Attention : la répartition (" + fr(somme) + " j) ne fait pas le total saisi (" + fr(T.passeJours) + " j)." : ".") +
+      " Le % pondère chaque statut comme l'avancement global.";
+  })();
+
   /* Jalons */
   $("jalons").style.setProperty("--n", D.jalons.length);
   $("jalons").innerHTML = D.jalons.map(function (j) {
@@ -113,14 +178,14 @@
     var parPersonne = {};
     Object.keys(D.personnes).forEach(function (k) { parPersonne[k] = []; });
     tous.forEach(function (l) {
-      if (l.attente && parPersonne[l.attente]) parPersonne[l.attente].push({ titre: (l.statut === "a_valider" ? "Valider : " : "") + l.titre, detail: l.note, lien: l.lien, lienTexte: l.lienTexte });
+      if (l.attente && parPersonne[l.attente]) parPersonne[l.attente].push({ titre: (l.statut === "a_valider" ? "Valider : " : "") + l.titre, detail: l.note, lien: l.lien, lienTexte: l.lienTexte, lies: '<a class="lien-livrable" href="#' + l._id + '">Voir le livrable</a>' });
     });
     (D.actions || []).forEach(function (a) {
       var qui = [].concat(a.attente), avec = function (k) { return qui.filter(function (x) { return x !== k; }).map(nom); };
       qui.forEach(function (k) {
         if (!parPersonne[k]) return;
         var autres = avec(k);
-        parPersonne[k].push({ titre: a.titre, detail: [autres.length ? "Avec " + autres.join(", ") + "." : "", a.note, a.echeance ? "Échéance : " + a.echeance : ""].filter(Boolean).join(" ") });
+        parPersonne[k].push({ titre: a.titre, detail: [autres.length ? "Avec " + autres.join(", ") + "." : "", a.note, a.echeance ? "Échéance : " + a.echeance : ""].filter(Boolean).join(" "), lies: liens(a.lie, "Action « " + a.titre + " »") });
       });
     });
     $("attentes").innerHTML = Object.keys(D.personnes).filter(function (k) {
@@ -131,7 +196,7 @@
       return '<article class="personne"><div class="personne-tete"><span class="initiales" aria-hidden="true">' + esc(init) + "</span>" +
         "<div><h3>" + esc(p.nom) + '</h3><p class="personne-role">' + esc(p.role) + "</p></div>" +
         '<span class="compteur' + (items.length ? "" : " compteur--zero") + '" aria-label="' + items.length + ' en attente">' + items.length + "</span></div>" +
-        (items.length ? "<ul>" + items.map(function (i) { return "<li>" + esc(i.titre) + (i.lien ? ' <a class="lien-doc" href="' + esc(i.lien) + '" target="_blank" rel="noopener">' + esc(i.lienTexte || "Ouvrir le document") + "</a>" : "") + (i.detail ? "<small>" + esc(i.detail) + "</small>" : "") + "</li>"; }).join("") + "</ul>"
+        (items.length ? "<ul>" + items.map(function (i) { return "<li>" + esc(i.titre) + (i.lien ? ' <a class="lien-doc" href="' + esc(i.lien) + '" target="_blank" rel="noopener">' + esc(i.lienTexte || "Ouvrir le document") + "</a>" : "") + (i.detail ? "<small>" + esc(i.detail) + "</small>" : "") + (i.lies ? '<span class="lies">' + i.lies + "</span>" : "") + "</li>"; }).join("") + "</ul>"
                       : '<p class="rien">Rien en attente pour l\'instant.</p>') + "</article>";
     }).join("");
   })();
@@ -149,12 +214,19 @@
     }).join("");
     var entete = '<div class="m-entete" aria-hidden="true"><div>Étape du parcours</div>' + D.etapesFabrication.map(function (e) { return "<div>" + esc(e) + "</div>"; }).join("") + "</div>";
     $("matrice").innerHTML = entete + D.parcours.map(function (p) {
-      return '<div class="m-ligne"><div class="m-titre"><span class="code">' + esc(p.code) + "</span><strong>" + esc(p.titre) + "</strong>" +
-        (p.sousTitre ? "<small>" + esc(p.sousTitre) + "</small>" : "") + (p.note ? "<small>" + esc(p.note) + "</small>" : "") +
+      var pc = pourcent(p.etats);
+      var acts = (p.actions || []);
+      var blocActions = '<div class="m-actions"><h4>Actions à conduire</h4>' + (acts.length ? "<ul>" + acts.map(function (a) {
+          return "<li><span>" + esc(a.titre) + "</span>" + (a.qui ? '<span class="m-qui">' + esc([].concat(a.qui).map(nom).join(", ")) + "</span>" : "") +
+            '<span class="lies">' + liens(a.lie, p.code + " : « " + a.titre + " »") + "</span></li>";
+        }).join("") + "</ul>" : '<p class="rien">Aucune action renseignée.</p>') + "</div>";
+      return '<div class="m-ligne" id="' + p._id + '"><div class="m-titre"><span class="code">' + esc(p.code) + "</span><strong>" + esc(p.titre) + "</strong>" +
+        '<span class="m-pc"><span class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + pc + '%;--c:var(--turquoise)"></span></span><b>' + pc + "\u00a0%</b></span>" +
+        (p.sousTitre ? "<small>" + esc(p.sousTitre) + "</small>" : "") + (p.note ? '<details class="m-note"><summary>Où en est-on</summary><small>' + esc(p.note) + "</small></details>" : "") +
         "<small>" + (p.duree != null ? "Durée prévue : " + fr(p.duree) + "\u00a0j" : '<span class="a-estimer">Durée à estimer</span>') + "</small></div>" +
         p.etats.map(function (s, i) {
           return '<div class="m-cell"><span class="etiquette-mobile" aria-hidden="true">' + esc(COURT[i] || D.etapesFabrication[i]) + "</span>" + pastille(s, D.etapesFabrication[i]) + "</div>";
-        }).join("") + "</div>";
+        }).join("") + blocActions + "</div>";
     }).join("");
   })();
 
@@ -179,7 +251,7 @@
           return '<li class="bk-item" data-statut="' + esc(x.statut) + '"><div class="bk-ligne"><span class="bk-titre">' +
             (x.lien ? '<a href="' + esc(x.lien) + '">' + esc(x.titre) + "</a>" : esc(x.titre)) + "</span>" + puce(x.statut) + "</div>" +
             (x.note ? '<p class="bk-note">' + esc(x.note) + "</p>" : "") +
-            (x.lie ? '<p class="bk-lie">Lié à : ' + esc(x.lie) + "</p>" : "") +
+            '<p class="bk-lie">Livrable : ' + liens(x.lie, "Évolution « " + x.titre + " »") + "</p>" +
             '<div class="livrable-meta">' + meta.join('<span aria-hidden="true">·</span>') + "</div></li>";
         }).join("") + "</ol></div>";
     }).join("");
@@ -189,7 +261,7 @@
   (function () {
     $("categories").innerHTML = D.categories.map(function (c, ic) {
       var n = compter(c.livrables), faits = n.valide + n.livre, du = duree(c.livrables);
-      return '<details class="categorie" data-cat="' + ic + '"' + (ic < 1 ? "" : "") + ">" +
+      return '<details class="categorie" id="cat-' + esc(c.code) + '" data-cat="' + ic + '">' +
         '<summary><div class="cat-texte"><h3>' + esc(c.titre) + "</h3><p>" + esc(c.texte) + "</p></div>" +
         '<div class="mini-barre">' + barre(n, c.livrables.length) + "<small>" + faits + " / " + c.livrables.length + " validés ou livrés</small><small>" + du.texte + "</small></div></summary>" +
         '<ul class="liste">' + c.livrables.map(function (l) {
@@ -198,7 +270,7 @@
           if (l.echeance) meta.push("Échéance : " + esc(l.echeance));
           if (l.lien) meta.push('<a class="lien-doc" href="' + esc(l.lien) + '" target="_blank" rel="noopener">' + esc(l.lienTexte || "Ouvrir le document") + "</a>");
           meta.push(l.duree != null ? "Durée prévue : " + fr(l.duree) + "\u00a0j" : '<span class="a-estimer">Durée à estimer</span>');
-          return '<li class="livrable" data-statut="' + l.statut + '"><span class="livrable-titre">' + esc(l.titre) + "</span>" + puce(l.statut) +
+          return '<li class="livrable" id="' + l._id + '" data-statut="' + l.statut + '"><span class="livrable-titre">' + esc(l.titre) + "</span>" + puce(l.statut) +
             '<div class="livrable-meta">' + meta.join("<span aria-hidden=\"true\">·</span>") + "</div>" +
             (l.note ? '<p class="livrable-note">' + esc(l.note) + "</p>" : "") + "</li>";
         }).join("") + '<li class="vide" hidden>Aucun livrable avec ce statut.</li></ul></details>';
@@ -226,4 +298,23 @@
       });
     });
   })();
+
+  /* Suivre un lien vers un livrable : ouvrir sa catégorie et le mettre en évidence */
+  function suivre() {
+    var id = decodeURIComponent(location.hash.slice(1)); if (!id) return;
+    var el = document.getElementById(id); if (!el) return;
+    var cat = el.closest ? el.closest("details") : null;
+    if (cat) cat.open = true;
+    if (el.hidden) el.hidden = false;
+    Array.prototype.forEach.call(document.querySelectorAll(".cible"), function (x) { x.classList.remove("cible"); });
+    el.classList.add("cible");
+    el.scrollIntoView({ block: "center" });
+  }
+  window.addEventListener("hashchange", suivre);
+  suivre();
+
+  if (liensCasses.length) {
+    $("alertes-liens").hidden = false;
+    $("alertes-liens").innerHTML = "<strong>Tâches sans livrable rattaché (" + liensCasses.length + ") :</strong><ul>" + liensCasses.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>";
+  }
 })();

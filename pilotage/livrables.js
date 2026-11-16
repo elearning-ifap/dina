@@ -6,10 +6,15 @@
    Personnes (clé "qui", "valide", "attente") : "marc", "mnb", "mfp", "valerie", "employeurs", "si", "pole".
 
    RÈGLE DE PUBLICATION : la page est publique (lien non référencé, mais lisible par tous).
-   Ne rien écrire ici sur le temps passé, les noms des experts ou des testeurs, ni les remarques internes. */
+   Temps : seulement des totaux (par rubrique de concertation, par groupe de livrables). Le détail réunion par réunion reste dans le coffre.
+   Ne rien écrire ici sur les noms des experts ou des testeurs, ni les remarques internes.
+
+   LIENS : toute tâche (action, évolution du moteur, action à conduire d'un module) porte « lie » : le titre exact d'un livrable,
+   ou le code d'une étape du parcours (« M1 »), ou « parcours » (toute la matrice). Plusieurs : lie: ["…", "…"].
+   Un lien manquant ou introuvable s'affiche en alerte sur la page. */
 
 window.DINA_PILOTAGE = {
-  miseAJour: "14-11-2026",
+  miseAJour: "16-11-2026",
   avertissement: "",   /* statuts confirmés par Marc Rolland le 06-11 ; texte affiché en tête de page si renseigné */
 
   /* Temps de travail, en jours temps plein. Reprendre les chiffres de « Suivi du temps DINA » (coffre Obsidian). */
@@ -17,8 +22,16 @@ window.DINA_PILOTAGE = {
   temps: {
     prevuJours: 32,          /* charge de production annoncée à la direction */
     passeJours: 9.81,        /* production : cumul saisi */
-    concertationJours: 1.73, /* réunions et concertation : cumul saisi, hors des 32 j */
-    arreteAu: "14-11-2026"   /* date de la dernière saisie */
+    arreteAu: "14-11-2026",  /* date de la dernière saisie */
+    /* Réunions, concertation et préparation : hors des 32 j. Trois rubriques. */
+    concertation: {
+      equipe: 1.03,          /* équipe projet : Marie-Noëlle Blanck, direction */
+      employeurs: 0.39,      /* employeurs : COPIL, séances, échanges avec les DRH */
+      preparation: 0.31      /* préparation et suites : supports, comptes rendus, courriels */
+    },
+    /* Production répartie par groupe de livrables (codes des catégories, plus « parcours » = modules, « moteur » = outil de production, « divers »).
+       La somme doit faire passeJours. Répartition des saisies anciennes faite au mieux le 16-11, à corriger par Marc. */
+    productionParGroupe: { parcours: 5.33, cadrage: 1.75, ressources: 0.25, plateforme: 0, suivi: 0, communication: 0.95, visuels: 0.15, moteur: 1, divers: 0.38 }
   },
 
   /* Avancement global : chaque livrable et chaque case de la matrice du parcours comptent pour une unité.
@@ -53,33 +66,87 @@ window.DINA_PILOTAGE = {
   ],
 
   /* Matrice du parcours : une ligne par étape du parcours, une colonne par étape de fabrication.
+     « actions » : les actions à conduire pour l'étape (titre, qui, lie obligatoire). Le % d'avancement se calcule sur les états.
      Depuis le 10-11, la validation experte porte sur le corpus, avant le scénario. */
   etapesFabrication: ["Corpus", "Validation experte du corpus", "Scénario", "Storyboard", "Visuels", "E-learning", "Intégration Moodle"],
   etapesFabricationCourt: ["Corpus", "Expert", "Scénar.", "Story.", "Visuels", "E-learn.", "Moodle"],
   parcours: [
     { code: "POS", titre: "Positionnement", sousTitre: "Une semaine de travail",
       etats: ["sans_objet", "sans_objet", "valide", "en_cours", "sans_objet", "livre", "a_faire"],
+      actions: [
+        { titre: "Relire et valider le storyboard v0.7 (accueil, compétences en jeu, bilan en deux écrans)", qui: "mnb", lie: "Restitution du positionnement, visuelle et imprimable" },
+        { titre: "Valider les 21 libellés de compétences en « je »", qui: "mnb", lie: "Référentiel des 21 compétences" },
+        { titre: "Rendre le profil imprimable (marges, en-tête, radar)", qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable" },
+        { titre: "Intégrer le positionnement et sa restitution dans LIANE", qui: "marc", lie: "Intégration du positionnement et de sa restitution" }
+      ],
       note: "Storyboard v0.7 en ligne le 10-11, à relire : accueil réécrit (« une semaine de travail »), compétences en jeu affichées après chaque choix, bilan en deux écrans (profil, puis « Votre parcours » : le parcours module par module avec le résultat de l'agent ; l'équipe et la règle du jeu restent au prologue, D142). Visuels ILL-POS1 et ILL-POS2 en place depuis le 10-11. Reste : impression du profil. Avant (v0.6) : storyboard prêt, à relire : accueil qui rassure (pas de note, pas d'échec, répondre spontanément), une seule passe, bouton « En clair », fin qui présente le dispositif. Reste : impression du profil. Revue du 10-11 : storyboard à terminer vite ; accueil à réécrire ; visuels à prévoir (Noa n'apparaît pas encore) ; bilan en deux écrans, radar puis univers de Noa ; le lien entre positionnement, prologue et M1 se fait dans le cours Moodle." },
     { code: "PRO", titre: "Prologue", sousTitre: "Bienvenue à l'ÉLAN",
       etats: ["sans_objet", "sans_objet", "valide", "en_cours", "livre", "livre", "a_faire"],
+      actions: [
+        { titre: "Relire et valider le storyboard v0.6", qui: "mnb", lie: "PRO" },
+        { titre: "Décider si le prologue passe en pages qui défilent (il reste en écrans)", qui: "marc", lie: "PRO" },
+        { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
+      ],
       note: "Storyboard v0.6 le 14-11 : la carte « Le vendredi, un bilan » annonce la règle de D150 : six situations nouvelles, un badge avec 5 bonnes réponses sur 6, la non-réussite ne bloque pas, reprise libre. v0.5 le 11-11 : la carte « Le vendredi, un bilan » annonce « des situations nouvelles, que vous n'avez pas encore vues » (D145). Avant (v0.4, 10-11) : Noa est à l'ÉLAN depuis quelques semaines (D130), plus de premier jour ni de badge provisoire ; étape « Arrivée » renommée « Début » ; collègues de toutes catégories annoncés ; un carnet par module. Seul composant à présenter l'ÉLAN, l'équipe et la règle du jeu (D142). Reste en écrans pour l'instant.", lien: "../prologue.html" },
     { code: "M1", titre: "Je me repère", sousTitre: "Comprendre mon environnement",
       etats: ["en_cours", "a_faire", "valide", "livre", "en_cours", "en_cours", "a_faire"],
+      actions: [
+        { titre: "Terminer et vérifier le corpus ; lever les points juridiques", qui: "marc", lie: "Points juridiques à faire valider avant le pilote (M1, M2)" },
+        { titre: "Faire valider le corpus par un référent ou un expert", qui: "employeurs", lie: ["Validation juridique de l'épisode « Qui fait quoi au pays ? »", "Validation experte du contenu juridique : experts en vacation et budget propre à DINA"] },
+        { titre: "Valider la grille des documents administratifs, les cinq demandes du défi et les repères historiques", qui: "mnb", lie: "M1" },
+        { titre: "Terminer les infographies et l'illustration de l'épisode « Qui fait quoi au pays ? »", qui: "marc", lie: ["Infographies du module 1", "Illustration de l'épisode « Qui fait quoi au pays ? » (accueil de l'ÉLAN)"] },
+        { titre: "Reprendre les fiches outils du module", qui: "marc", lie: "Fiches outils du module 1" },
+        { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
+      ],
       note: "M1 en pages v0.8 le 14-11 : évaluation réécrite (D150) : deux séries de six situations nouvelles, deux par compétence ; validé avec 5 bonnes réponses sur 6 ; la non-réussite ne bloque pas. v0.7 le 14-11 : infographies INF-M1-01 à 04 et ILL-N09 (T10). v0.6 le 14-11 : corrections juridiques après l'audit du fond (enseignement primaire, collèges et écoles primaires dans la fiche « Qui fait quoi », aide aux personnes âgées, citation retirée du repère de Nainville-les-Roches, « en vigueur » au lieu de « définitive ») ; récit aligné : la liste d'orientation est vérifiée avant de partir chez Passerelles, plus de traces de nouvel arrivant, « La semaine suivante » en fin de module. M1 en pages v0.5 le 12-11 : quatre repères historiques rétablis dans « Aller plus loin » (épisode 1), avec la table ronde de Nainville-les-Roches (1983) demandée par Marie-Ange Morvan, DRH de la province Sud (D147) ; formulation à valider. M1 en pages v0.4 le 11-11 : jours de la semaine rétablis, lundi à vendredi (D143) ; défi recentré sur « transmettre au bon interlocuteur, avec le contexte » (D144), tri « je fais / j'oriente / je transmets à Samuel », nouvelle demande « aides de la province », à valider. Avant, v0.3 du 10-11 : module complet (épisodes 1 à 3, défi « Le premier appel de Joël », évaluation, bilan). Épisode 3 « Une information sûre » et défi repris de M1 en écrans, avec Cédric qui vit aussi une situation. M1 en écrans devient une réserve de contenus (D128). Carnet du module actif : chaque épisode débloque sa fiche (D132), dont une fiche de connaissances « Qui fait quoi en Nouvelle-Calédonie ? » (D131). Épisode 3 enrichi de trois nouveaux blocs de page : bureau à explorer, recherche simulée, message à composer. À valider : grille des documents administratifs (épisode 3), cinq demandes du défi.", lien: "../m1-pages.html" },
     { code: "M2", titre: "Je trouve ma place", sousTitre: "",
       etats: ["en_cours", "a_faire", "valide", "livre", "en_cours", "en_cours", "a_faire"],
+      actions: [
+        { titre: "Terminer et vérifier le corpus ; faire valider les contenus statutaires, l'exécution des instructions et le télétravail", qui: "marc", lie: "Points juridiques à faire valider avant le pilote (M1, M2)" },
+        { titre: "Faire valider le corpus par un référent ou un expert", qui: "employeurs", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA" },
+        { titre: "Relire le storyboard v0.4 (nouvelles situations, évaluation)", qui: "mnb", lie: "M2" },
+        { titre: "Rédiger la fiche de connaissances « Mon statut, en repères »", qui: "marc", lie: "Fiches de connaissances" },
+        { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" },
+        { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
+      ],
       note: "M2 en pages v0.4 le 14-11 : évaluation réécrite (D150) : deux séries de six situations nouvelles, deux par compétence ; validé avec 5 bonnes réponses sur 6 ; la non-réussite ne bloque pas. v0.3 le 14-11 : corrections juridiques après l'audit du fond (exécution des instructions avec ses deux conditions, catégories A à D, référent déontologue retiré, stagiaire sans disponibilité, sources de la neutralité) ; tri de l'épisode 1 corrigé (la note de cadrage : « Je prépare, un autre décide »). v0.2 le 12-11 : télétravail présenté comme autorisé par l'employeur, pas comme un droit. M2 en pages v0.1 le 11-11, à relire : quatre pages (lundi : fiche de poste ; mardi : consigne floue ; mercredi : je suis bloqué ; jeudi : défi « La matinée déraille »), évaluation et bilan repris. Arbitrages A1 à A4 (D143 à D146) : jours partout, M2 propriétaire de « engager l'employeur », statut de Noa hors du récit (fiche de connaissances « Mon statut »), doublon du bureau à explorer retiré. Ana, Malia et Cédric vivent aussi une situation. Nouveaux blocs de page : remettre dans l'ordre, document. À valider : contenus statutaires, exécution des instructions, télétravail, nouvelles situations. Images : ILL-M06 dépend du télétravail.", lien: "../m2-pages.html" },
     { code: "M3", titre: "Je travaille avec les autres", sousTitre: "",
       etats: ["en_cours", "a_faire", "a_faire", "a_faire", "a_faire", "a_faire", "a_faire"],
+      actions: [
+        { titre: "Compléter et vérifier le corpus (note « Corpus à fournir — M3, M4, M5 »)", qui: "marc", lie: "M3" },
+        { titre: "Faire valider le corpus par un référent ou un expert", qui: "employeurs", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA" },
+        { titre: "Écrire le scénario, puis le storyboard en pages", qui: "marc", lie: "M3" },
+        { titre: "Préparer les prompts des illustrations", qui: "marc", lie: "Illustrations des modules 3 à 5" },
+        { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" }
+      ],
       note: "Premiers éléments de corpus, à compléter et à vérifier. Scénario à écrire." },
     { code: "M4", titre: "J'agis dans un cadre sécurisé", sousTitre: "",
       etats: ["en_cours", "a_faire", "a_faire", "a_faire", "a_faire", "a_faire", "a_faire"],
+      actions: [
+        { titre: "Compléter et vérifier le corpus (note « Corpus à fournir — M3, M4, M5 »)", qui: "marc", lie: "M4" },
+        { titre: "Faire valider le corpus par un référent ou un expert", qui: "employeurs", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA" },
+        { titre: "Écrire le scénario, puis le storyboard en pages", qui: "marc", lie: "M4" },
+        { titre: "Préparer les prompts des illustrations", qui: "marc", lie: "Illustrations des modules 3 à 5" },
+        { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" }
+      ],
       note: "Premiers éléments de corpus, à compléter et à vérifier. Scénario à écrire." },
     { code: "M5", titre: "J'incarne le service public", sousTitre: "",
       etats: ["en_cours", "a_faire", "a_faire", "a_faire", "a_faire", "a_faire", "a_faire"],
+      actions: [
+        { titre: "Compléter et vérifier le corpus (note « Corpus à fournir — M3, M4, M5 »)", qui: "marc", lie: "M5" },
+        { titre: "Faire valider le corpus par un référent ou un expert", qui: "employeurs", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA" },
+        { titre: "Écrire le scénario, puis le storyboard en pages", qui: "marc", lie: "M5" },
+        { titre: "Préparer les prompts des illustrations", qui: "marc", lie: "Illustrations des modules 3 à 5" },
+        { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" }
+      ],
       note: "Premiers éléments de corpus, à compléter et à vérifier. Scénario à écrire." },
     { code: "BIL", titre: "Bilan de parcours", sousTitre: "",
       etats: ["sans_objet", "a_faire", "a_faire", "a_faire", "sans_objet", "a_faire", "a_faire"],
+      actions: [
+        { titre: "Concevoir le bilan de parcours et l'évaluation de la compétence C21", qui: "marc", lie: "BIL" },
+        { titre: "Faire valider le corpus par un référent ou un expert", qui: "employeurs", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA" },
+        { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
+      ],
       note: "Clôture du parcours et évaluation de la compétence C21." }
   ],
 
@@ -186,7 +253,7 @@ window.DINA_PILOTAGE = {
 
   /* Évolutions du moteur e-learning et des gabarits (outil de production).
      Ne compte pas dans l'avancement global. Priorité : p1, p2, p3 (voir « priorites »).
-     Champs : titre, priorite, statut, duree (jours, estimation), lie (livrable ou action concernés), qui, note, lien. */
+     Champs : titre, priorite, statut, duree (jours, estimation), lie (obligatoire : livrable, étape du parcours ou « parcours »), qui, note, lien. */
   backlog: {
     texte: "Les évolutions du moteur e-learning et des gabarits d'écran. L'ordre suit le calendrier : d'abord ce qui conditionne le test interne et le passage dans LIANE. Durées estimées, à confirmer.",
     priorites: [
@@ -195,61 +262,61 @@ window.DINA_PILOTAGE = {
       { code: "p3", titre: "Après l'ouverture", echeance: "À partir d'avril 2027", texte: "Pistes d'évolution, sans engagement." }
     ],
     items: [
-      { priorite: "p1", titre: "Catalogue des gabarits", statut: "livre", duree: 1, qui: "marc", lien: "../gabarits.html",
+      { priorite: "p1", titre: "Catalogue des gabarits", statut: "livre", duree: 1, qui: "marc", lie: "Règles de production (pédagogie, récit, visuels, évaluation)", lien: "../gabarits.html",
         note: "25 gabarits jouables dans le vrai moteur, avec les champs du storyboard. Se met à jour seul à chaque publication." },
       { priorite: "p1", titre: "Vérifier que la reprise tient dans la limite SCORM 1.2", statut: "en_cours", duree: 0.5, qui: "marc", valide: "si", lie: "Test technique SCORM dans LIANE",
         note: "La sauvegarde de reprise est limitée à 4 096 caractères. À mesurer sur un module complet. Si la limite est dépassée : alléger l'état sauvegardé ou passer en SCORM 2004. 10-11 : M1 en pages, deux épisodes, environ 840 caractères (20 % de la limite). Confirmé dans LIANE le 10-11 : 777 caractères. Un module de cinq jours devrait tenir, à remesurer avec une évaluation." },
-      { priorite: "p1", titre: "Réduire les clics : prototype en pages qu'on fait défiler", statut: "valide", duree: 2.5, qui: "marc", valide: "mnb", lie: "Revoir l'ergonomie : regrouper des écrans pour réduire les clics", lien: "../m1-pages.html",
+      { priorite: "p1", titre: "Réduire les clics : prototype en pages qu'on fait défiler", statut: "valide", duree: 2.5, qui: "marc", valide: "mnb", lie: "parcours", lien: "../m1-pages.html",
         note: "Fait le 06-11 sur l'épisode « Qui fait quoi au pays ? » : nouveau type d'écran « page » dans le moteur (blocs situation, apport, application, liste). Une seule page au lieu de six écrans, les réponses ouvrent la suite, la compétence est affichée. Ajouts du 06-11 au soir : trois demandes de transfert et le bouton « En clair ». Testé à 390 px et sur ordinateur. Épisode 2 « Qui décide à l'ÉLAN ? » ajouté le 06-11 au soir : M1 en pages (m1-pages.html), storyboard « M1 en pages v0.2 » dans le coffre, build.py à jour. Validé le 10-11 par Marie-Noëlle Blanck : on généralise à tout le parcours, la suite s'affiche quand l'activité est terminée." },
-      { priorite: "p1", titre: "Afficher la compétence travaillée sur chaque écran", statut: "en_cours", qui: "marc",
+      { priorite: "p1", titre: "Afficher la compétence travaillée sur chaque écran", statut: "en_cours", qui: "marc", lie: ["M1", "POS"],
         note: "Demande unanime de la province Sud (06-11). Retenu le 10-11. Fait dans M1 en pages, et dans le positionnement après chaque choix (libellés en « je » à valider)." },
       { priorite: "p1", titre: "Bilan du positionnement en deux écrans", statut: "a_valider", valide: "mnb", attente: "mnb", duree: 0.5, qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable",
         note: "Fait le 10-11 (storyboard v0.7) : le profil, puis « Votre parcours » (les étapes avec le résultat de l'agent dans chaque domaine). L'organigramme et la règle du jeu restent au prologue (D142). À relire.", lien: "../positionnement.html" },
-      { priorite: "p1", titre: "Rubrique « Aller plus loin » en fin de journée", statut: "a_faire", duree: 0.5, qui: "marc",
+      { priorite: "p1", titre: "Rubrique « Aller plus loin » en fin de journée", statut: "a_faire", duree: 0.5, qui: "marc", lie: "parcours",
         note: "Vocabulaire à deux étages : le bouton « En clair » reformule à la demande, « Aller plus loin » propose des contenus plus soutenus et des liens vers les textes." },
       { priorite: "p1", titre: "Accueil et page de fin du positionnement", statut: "a_valider", duree: 0.5, qui: "marc", valide: "mnb", lie: "Restitution du positionnement, visuelle et imprimable",
         note: "Fait le 06-11 (storyboard v0.6) : l'accueil rassure et demande de répondre spontanément, une seule passe. La fin présente le dispositif : assistance, erreurs expliquées, badges. À relire." },
-      { priorite: "p1", titre: "Renommer l’étape « Arrivée » du prologue", statut: "livre", duree: 0.1, qui: "marc",
+      { priorite: "p1", titre: "Renommer l’étape « Arrivée » du prologue", statut: "livre", duree: 0.1, qui: "marc", lie: "PRO",
         note: "Retour du 10-11 : cliquer sur « Arrivée » pour commencer déroute (l'arrivée, c'est la fin d'une course). Fait le 10-11 (prologue v0.4) : « Début »." },
       { priorite: "p1", titre: "Profil de positionnement imprimable", statut: "a_faire", duree: 0.5, qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable",
         note: "Marges, en-tête DINA, radar lisible, réponse de réflexion mise en forme." },
       { priorite: "p1", titre: "Fiches outils en PDF A4 téléchargeables", statut: "a_faire", duree: 1, qui: "marc", lie: "Espace « Mes ressources » : fiches outils téléchargeables",
         note: "Une source unique pour l'écran et le PDF. Les fiches rejoignent le carnet du module." },
-      { priorite: "p1", titre: "Éprouver les quatre gabarits encore jamais testés", statut: "a_faire", duree: 0.5, qui: "marc",
+      { priorite: "p1", titre: "Éprouver les quatre gabarits encore jamais testés", statut: "a_faire", duree: 0.5, qui: "marc", lie: "M2",
         note: "Choix multiple, remise en ordre, boîte de réception, semaine à organiser. À faire lors de la reprise du module 2." },
-      { priorite: "p1", titre: "Figer la version du moteur pour le test interne", statut: "a_faire", duree: 0.25, qui: "marc",
+      { priorite: "p1", titre: "Figer la version du moteur pour le test interne", statut: "a_faire", duree: 0.25, qui: "marc", lie: "Test interne IFAP : testeurs et recueil des retours",
         note: "Version étiquetée sur GitHub : les retours restent rattachés à une version. Toute évolution suivante passe par cette liste." },
 
-      { priorite: "p2", titre: "Gabarit « simulation de dialogue »", statut: "a_valider", duree: 1, qui: "marc", valide: "mnb", lien: "../simulation.html",
+      { priorite: "p2", titre: "Gabarit « simulation de dialogue »", statut: "a_valider", duree: 1, qui: "marc", valide: "mnb", lie: "M3", lien: "../simulation.html",
         note: "Prototype jouable : l'appel de Joël (M3). Mis de côté le 10-11." },
-      { priorite: "p2", titre: "Écran « Où en est le dossier Passerelles »", statut: "a_faire", duree: 1.5, qui: "marc",
+      { priorite: "p2", titre: "Écran « Où en est le dossier Passerelles »", statut: "a_faire", duree: 1.5, qui: "marc", lie: "Fil rouge : le dossier Passerelles",
         note: "Montre l'état du fil rouge entre deux modules et s'enrichit à chaque module. Mis de côté le 10-11." },
-      { priorite: "p2", titre: "Gabarit « document à annoter »", statut: "a_faire", duree: 1, qui: "marc",
+      { priorite: "p2", titre: "Gabarit « document à annoter »", statut: "a_faire", duree: 1, qui: "marc", lie: "parcours",
         note: "Zones cliquables sur un vrai document : courrier, arrêté, organigramme. Prolonge l'image cliquable. Avec les pages qui défilent, les gabarits deviennent des blocs à reprendre." },
-      { priorite: "p2", titre: "Règle d'usage des infographies", statut: "en_cours", duree: 0.5, qui: "marc",
+      { priorite: "p2", titre: "Règle d'usage des infographies", statut: "en_cours", duree: 0.5, qui: "marc", lie: "Règles de production (pédagogie, récit, visuels, évaluation)",
         note: "Retenue le 10-11 : tout apport de plus de trois notions passe par une infographie, une image cliquable ou des cartes. Application commencée." },
-      { priorite: "p2", titre: "Mesurer l'usage de chaque gabarit", statut: "a_faire", duree: 1, qui: "marc", valide: "si",
+      { priorite: "p2", titre: "Mesurer l'usage de chaque gabarit", statut: "a_faire", duree: 1, qui: "marc", valide: "si", lie: "Quatre indicateurs de suivi pour l'IFAP",
         note: "Temps passé, écrans abandonnés. Pour savoir quels gabarits retravailler. Dépend des traces disponibles dans LIANE." },
       { priorite: "p2", titre: "Audit d'accessibilité complet du moteur", statut: "a_faire", duree: 2, qui: "marc", lie: "Recette : fonctionnement, pédagogie, accessibilité, mobile",
         note: "Clavier en priorité, puis lecteur d'écran, zoom à 200 %, contrastes, sur chaque gabarit." },
 
-      { priorite: "p3", titre: "Audio et vidéo dans les modules", statut: "a_faire", qui: "marc",
+      { priorite: "p3", titre: "Audio et vidéo dans les modules", statut: "a_faire", qui: "marc", lie: "Sélection de vidéos existantes (statut, règles de la fonction publique)",
         note: "Exclus du pilote (décision du 28-10, confirmée le 06-11). Rien n'est produit tant que l'apport n'est pas démontré." },
-      { priorite: "p3", titre: "Relire mes repères hors parcours", statut: "a_faire", qui: "marc",
+      { priorite: "p3", titre: "Relire mes repères hors parcours", statut: "a_faire", qui: "marc", lie: "Contenus de l'espace « Mes ressources »",
         note: "Accès direct aux apports et aux fiches d'un module terminé, sans rejouer les situations." },
-      { priorite: "p3", titre: "Déclinaisons par filière ou par catégorie", statut: "a_faire", qui: "marc",
+      { priorite: "p3", titre: "Déclinaisons par filière ou par catégorie", statut: "a_faire", qui: "marc", lie: "parcours",
         note: "Piste du 10-11 : des parcours adaptés à d'autres publics que l'attaché." },
-      { priorite: "p3", titre: "Un moteur pour d'autres formations LIANE", statut: "a_faire", qui: "marc",
+      { priorite: "p3", titre: "Un moteur pour d'autres formations LIANE", statut: "a_faire", qui: "marc", lie: "parcours",
         note: "Réutiliser le moteur et le catalogue pour d'autres modules de l'IFAP." }
     ]
   },
 
-  /* Actions qui ne sont pas des livrables mais qui bloquent l'avancée. Elles s'ajoutent à « En attente de ». */
+  /* Actions qui ne sont pas des livrables mais qui bloquent l'avancée. Elles s'ajoutent à « En attente de ». « lie » obligatoire. */
   actions: [
-    { attente: "employeurs", titre: "Faire tester le prototype par 2 ou 3 agents aux profils variés", echeance: "Début nov. 2026" },
-    { attente: "employeurs", titre: "Désigner un ou deux référents par module pour valider le fond", note: "Indispensable : sans référents, pas de pilote." },
-    { attente: "marc", titre: "Estimer la durée de production de chaque module", note: "Aucune durée estimée à ce jour dans la matrice du parcours." },
-    { attente: "valerie", titre: "Arbitrer le recours à des experts en vacation et un budget propre à DINA", note: "Demande préparée après l'échange avec la province Sud (06-11)." },
-    { attente: ["marc", "mnb"], titre: "Choisir les testeurs internes de l'IFAP et le moment du test", note: "À coupler avec une communication interne." }
+    { attente: "employeurs", titre: "Faire tester le prototype par 2 ou 3 agents aux profils variés", echeance: "Début nov. 2026", lie: "Prototype en ligne" },
+    { attente: "employeurs", titre: "Désigner un ou deux référents par module pour valider le fond", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA", note: "Indispensable : sans référents, pas de pilote." },
+    { attente: "marc", titre: "Estimer la durée de production de chaque module", lie: "parcours", note: "Aucune durée estimée à ce jour dans la matrice du parcours." },
+    { attente: "valerie", titre: "Arbitrer le recours à des experts en vacation et un budget propre à DINA", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA", note: "Demande préparée après l'échange avec la province Sud (06-11)." },
+    { attente: ["marc", "mnb"], titre: "Choisir les testeurs internes de l'IFAP et le moment du test", lie: "Test interne IFAP : testeurs et recueil des retours", note: "À coupler avec une communication interne." }
   ]
 };

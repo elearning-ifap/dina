@@ -7,8 +7,8 @@
 <title>DINA — tableau de bord du projet</title>
 <link rel="icon" href="../assets/logo/picto-dina.svg">
 <link rel="stylesheet" href="../css/tokens.css">
-<link rel="stylesheet" href="pilotage.css?v=20261110b">
-<script src="livrables.js?v=20261110b"></script>
+<link rel="stylesheet" href="pilotage.css?v=20261116a">
+<script src="livrables.js?v=20261116a"></script>
 </head>
 <body>
 <!-- Tableau de bord des livrables DINA. Les données sont dans livrables.js : ne rien modifier ici pour une mise à jour. -->
@@ -29,6 +29,14 @@
     <p class="avertissement" id="avertissement" hidden></p>
     <div class="indicateurs" id="indicateurs"></div>
     <div class="synthese" id="synthese" aria-label="Synthèse des livrables"></div>
+    <div class="alertes-liens" id="alertes-liens" hidden></div>
+  </section>
+
+  <section aria-labelledby="t-groupes">
+    <p class="surtitre">Par groupe</p>
+    <h2 id="t-groupes">Avancement et temps par groupe de livrables</h2>
+    <div class="groupes" id="groupes"></div>
+    <p class="explication" id="groupes-note"></p>
   </section>
 
   <section aria-labelledby="t-jalons">
@@ -72,6 +80,6 @@
   </div>
 </footer>
 
-<script src="pilotage.js?v=20261110b"></script>
+<script src="pilotage.js?v=20261116a"></script>
 </body>
 </html>

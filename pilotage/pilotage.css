@@ -211,6 +211,51 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
   body { background: #fff; }
 }
 
+/* ---- Concertation en trois rubriques ---- */
+.indicateurs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.rubriques { list-style: none; margin: 0; padding: 0; display: grid; gap: .65rem; }
+.rubriques .jauge { height: 8px; }
+.rubriques small { display: block; font-size: .75rem; color: var(--texte-2); margin-top: .15rem; }
+.rub-ligne { display: flex; justify-content: space-between; gap: .5rem; font-size: .875rem; margin-bottom: .2rem; }
+
+/* ---- Groupes de livrables ---- */
+.groupes { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 1rem; }
+.groupe { display: block; background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); box-shadow: var(--ombre); padding: 1rem 1.1rem; color: inherit; text-decoration: none; }
+.groupe:hover, .groupe:focus-visible { border-color: var(--turquoise); }
+.groupe--hors { border-style: dashed; }
+.gr-tete { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; margin-bottom: .5rem; }
+.gr-tete h3 { margin: 0; font-size: 1rem; }
+.gr-pc { font: 800 1.6rem/1 var(--police-titre); color: var(--anthracite); }
+.gr-pc small { font-size: .9rem; }
+.groupe .jauge { height: 10px; }
+.gr-chiffres { margin: .5rem 0 .2rem; font-size: .8125rem; font-weight: 700; }
+.gr-temps { margin: 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .2rem .8rem; font-size: .8125rem; color: var(--texte-2); }
+.gr-temps strong { color: var(--anthracite); }
+.gr-texte { margin: .4rem 0 0; font-size: .8125rem; color: var(--texte-2); line-height: 1.4; }
+
+/* ---- Liens des tâches vers les livrables ---- */
+.lies { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .25rem; }
+.lien-livrable { font-size: .8125rem; font-weight: 600; color: var(--bleu); }
+.lien-livrable::before { content: "→ "; }
+.lien-manquant { font-size: .8125rem; font-weight: 700; color: var(--corail-texte); background: var(--corail-clair); border-radius: 4px; padding: 0 .35rem; }
+.alertes-liens { margin-top: 1rem; padding: .6rem .9rem; background: var(--corail-clair); color: var(--corail-texte); border-radius: var(--rayon-compact); font-size: .875rem; }
+.alertes-liens ul { margin: .3rem 0 0; padding-left: 1.2rem; }
+.cible { outline: 3px solid var(--jaune); outline-offset: 2px; border-radius: 4px; }
+
+/* ---- Matrice : % et actions à conduire ---- */
+.m-note summary { cursor: pointer; font-size: .8125rem; font-weight: 600; color: var(--bleu); margin-top: .3rem; }
+.m-pc { display: flex; align-items: center; gap: .5rem; margin-top: .35rem; }
+.m-pc .jauge { flex: 1; height: 8px; max-width: 9rem; }
+.m-pc b { font: 800 .9375rem var(--police-titre); color: var(--anthracite); }
+.m-actions { grid-column: 1 / -1; margin: 0 1rem .9rem; padding: .7rem .9rem; background: var(--fond, #f6f6f4); border-radius: var(--rayon-compact); }
+.m-actions h4 { margin: 0 0 .4rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--texte-2); }
+.m-actions ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+.m-actions li { padding-left: .8rem; border-left: 3px solid var(--turquoise); font-size: .875rem; line-height: 1.4; }
+.m-actions .m-qui { margin-left: .5rem; font-size: .75rem; font-weight: 700; color: var(--bleu); }
+.m-actions .rien { margin: 0; font-size: .875rem; color: var(--texte-2); }
+@media (max-width: 960px) { .indicateurs { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 680px) { .indicateurs { grid-template-columns: 1fr; } .m-actions { margin: .3rem 16px .4rem; } }
+
 /* Lien direct vers un document (Google Drive) */
 .lien-doc { display: inline-flex; align-items: center; gap: .3rem; padding: .1rem .55rem; border: 1px solid var(--bleu); border-radius: 999px; color: var(--bleu); font-weight: 600; font-size: .8125rem; text-decoration: none; white-space: nowrap; }
 .lien-doc::before { content: "↗"; }
