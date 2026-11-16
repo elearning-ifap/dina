@@ -85,11 +85,9 @@ window.DINA_PILOTAGE = {
       actions: [
         { titre: "Relire et valider le storyboard v0.7 (accueil, compétences en jeu, bilan en deux écrans)", qui: "mnb", doc: "https://docs.google.com/document/d/10ubCfgl-Fc_GpLd9vXFL4SWWJQDJ3NaR69mveV-SySg/edit", lie: "Restitution du positionnement, visuelle et imprimable" },
         { titre: "Valider les 21 libellés de compétences en « je »", qui: "mnb", doc: "https://docs.google.com/document/d/10ubCfgl-Fc_GpLd9vXFL4SWWJQDJ3NaR69mveV-SySg/edit", lie: "Référentiel des 21 compétences" },
-        { titre: "Réduire le radar du profil : les six domaines doivent se lire sans faire défiler (retour province Sud)", qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable" },
-        { titre: "Imprimer le profil sur une page dédiée, pas la page à l'écran", qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable" },
         { titre: "Intégrer le positionnement et sa restitution dans LIANE", qui: "marc", lie: "Intégration du positionnement et de sa restitution" }
       ],
-      note: "Storyboard v0.7 en ligne le 10-11, à relire : accueil réécrit (« une semaine de travail »), compétences en jeu affichées après chaque choix, bilan en deux écrans (profil, puis « Votre parcours » : le parcours module par module avec le résultat de l'agent ; l'équipe et la règle du jeu restent au prologue, D142). Visuels ILL-POS1 et ILL-POS2 en place depuis le 10-11. Reste : impression du profil. Avant (v0.6) : storyboard prêt, à relire : accueil qui rassure (pas de note, pas d'échec, répondre spontanément), une seule passe, bouton « En clair », fin qui présente le dispositif. Reste : impression du profil. Revue du 10-11 : storyboard à terminer vite ; accueil à réécrire ; visuels à prévoir (Noa n'apparaît pas encore) ; bilan en deux écrans, radar puis univers de Noa ; le lien entre positionnement, prologue et M1 se fait dans le cours Moodle." },
+      note: "Storyboard v0.7 en ligne le 10-11, à relire : accueil réécrit (« une semaine de travail »), compétences en jeu affichées après chaque choix, bilan en deux écrans (profil, puis « Votre parcours » : le parcours module par module avec le résultat de l'agent ; l'équipe et la règle du jeu restent au prologue, D142). Visuels ILL-POS1 et ILL-POS2 en place depuis le 10-11. 16-11 et 17-11 : radar réduit, profil imprimable sur une page A4 dédiée et téléchargeable en PDF (logo DINA compris) ; à tester dans LIANE. Avant (v0.6) : storyboard prêt, à relire : accueil qui rassure (pas de note, pas d'échec, répondre spontanément), une seule passe, bouton « En clair », fin qui présente le dispositif. Revue du 10-11 : storyboard à terminer vite ; accueil à réécrire ; visuels à prévoir (Noa n'apparaît pas encore) ; bilan en deux écrans, radar puis univers de Noa ; le lien entre positionnement, prologue et M1 se fait dans le cours Moodle." },
     { code: "PRO", titre: "Prologue", sousTitre: "Bienvenue à l'ÉLAN",
       etats: ["sans_objet", "sans_objet", "valide", "en_cours", "livre", "livre", "a_faire"],
       actions: [
@@ -191,7 +189,7 @@ window.DINA_PILOTAGE = {
 
     { code: "ressources", titre: "Ressources et évaluations", texte: "Ce que l'agent garde, ce qui valide ses acquis.",
       livrables: [
-        { titre: "Restitution du positionnement, visuelle et imprimable", lot: "L6", statut: "en_cours", qui: "marc" },
+        { titre: "Restitution du positionnement, visuelle et imprimable", lot: "L6", statut: "en_cours", qui: "marc", note: "16-11 : radar réduit, profil imprimable sur une page A4 et téléchargeable en PDF. Reste la relecture du bilan et le test dans LIANE." },
         { titre: "Évaluations des modules, différentes à chaque passage", lot: "L6", statut: "en_cours", qui: "marc", note: "17-11 : jouables pour M1 et M2 ; les situations déjà vues sont remplacées (M1 v0.10, M2 v0.5). Séries A et B à faire relire par une tierce personne." },
         { titre: "Badges des 5 modules", lot: "L6", statut: "en_cours", qui: "marc", note: "Un badge par module, au nom du module. Délivré en cas de réussite : 5 réponses justes sur 6, au moins une par compétence (D150, 14-11). Pas de badge de parcours." },
         { titre: "Page d'ouverture : DINA, la notion de compétence et les 21 compétences", lot: "L5", statut: "a_faire", qui: "marc", note: "Demande des employeurs : voir toutes les compétences avant de commencer. Expliquer simplement ce qu'est une compétence. Piste visuelle : un code couleur qui montre ce que chaque module travaille. 16-11 : à faire vite, le code couleur par module se retrouve partout. Une partie existe peut-être déjà dans le prototype en pages : à vérifier." },
@@ -307,8 +305,8 @@ window.DINA_PILOTAGE = {
         note: "Fait le 06-11 (storyboard v0.6) : l'accueil rassure et demande de répondre spontanément, une seule passe. La fin présente le dispositif : assistance, erreurs expliquées, badges. À relire." },
       { priorite: "p1", titre: "Renommer l’étape « Arrivée » du prologue", statut: "livre", duree: 0.1, qui: "marc", lie: "PRO",
         note: "Retour du 10-11 : cliquer sur « Arrivée » pour commencer déroute (l'arrivée, c'est la fin d'une course). Fait le 10-11 (prologue v0.4) : « Début »." },
-      { priorite: "p1", titre: "Profil de positionnement imprimable", statut: "a_faire", duree: 0.5, qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable",
-        note: "Marges, en-tête DINA, radar lisible, réponse de réflexion mise en forme." },
+      { priorite: "p1", titre: "Profil de positionnement imprimable", statut: "livre", duree: 0.5, qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable",
+        note: "Fait le 16-11 : radar réduit, feuille A4 dédiée (en-tête DINA, radar, six domaines, vigilance, réponse de fin de semaine) et bouton « Télécharger en PDF » (logo en PNG le 17-11). À tester dans LIANE." },
       { priorite: "p1", titre: "Fiches outils en PDF A4 téléchargeables", statut: "a_faire", duree: 1, qui: "marc", lie: "Espace « Mes ressources » : fiches outils téléchargeables",
         note: "Une source unique pour l'écran et le PDF. Les fiches rejoignent le carnet du module." },
       { priorite: "p1", titre: "Éprouver les quatre gabarits encore jamais testés", statut: "a_faire", duree: 0.5, qui: "marc", lie: "M2",
