@@ -14,7 +14,7 @@
    Un lien manquant ou introuvable s'affiche en alerte sur la page. */
 
 window.DINA_PILOTAGE = {
-  miseAJour: "16-11-2026",
+  miseAJour: "17-11-2026",
   avertissement: "",   /* statuts confirmés par Marc Rolland le 06-11 ; texte affiché en tête de page si renseigné */
 
   /* Temps de travail, en jours temps plein. Reprendre les chiffres de « Suivi du temps DINA » (coffre Obsidian). */
@@ -133,7 +133,7 @@ window.DINA_PILOTAGE = {
         { titre: "Préparer les prompts des illustrations", qui: "marc", lie: "Illustrations des modules 3 à 5" },
         { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" }
       ],
-      note: "Premiers éléments de corpus, à compléter et à vérifier. Scénario à écrire." },
+      note: "Descriptif v0.2 le 17-11, à valider : 1 h 30, quatre épisodes et un défi, évaluation en trois repères (à trancher, D150). Premiers éléments de corpus, à compléter et à vérifier. Scénario à écrire." },
     { code: "M4", titre: "J'agis dans un cadre sécurisé", sousTitre: "",
       etats: ["en_cours", "a_faire", "a_faire", "a_faire", "a_faire", "a_faire", "a_faire"],
       actions: [
@@ -144,7 +144,7 @@ window.DINA_PILOTAGE = {
         { titre: "Préparer les prompts des illustrations", qui: "marc", lie: "Illustrations des modules 3 à 5" },
         { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" }
       ],
-      note: "Premiers éléments de corpus, à compléter et à vérifier. Scénario à écrire." },
+      note: "Descriptif v0.2 le 16-11, à valider : durée 1 h 45, livraison en deux parties SCORM proposée (non décidée), évaluation en trois repères. Premiers éléments de corpus, à compléter et à vérifier. Scénario à écrire." },
     { code: "M5", titre: "J'incarne le service public", sousTitre: "",
       etats: ["en_cours", "a_faire", "a_faire", "a_faire", "a_faire", "a_faire", "a_faire"],
       actions: [
@@ -154,7 +154,7 @@ window.DINA_PILOTAGE = {
         { titre: "Préparer les prompts des illustrations", qui: "marc", lie: "Illustrations des modules 3 à 5" },
         { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" }
       ],
-      note: "Premiers éléments de corpus, à compléter et à vérifier. Scénario à écrire." },
+      note: "Descriptif v0.2 le 17-11, à valider : 69 éléments pour 1 h 15, marge nulle, durée à mesurer au test interne ; évaluation en trois repères. Premiers éléments de corpus, à compléter et à vérifier. Scénario à écrire." },
     { code: "BIL", titre: "Bilan de parcours", sousTitre: "",
       etats: ["sans_objet", "a_faire", "a_faire", "a_faire", "sans_objet", "a_faire", "a_faire"],
       actions: [
@@ -174,6 +174,7 @@ window.DINA_PILOTAGE = {
         { titre: "Répartition des compétences par module", lot: "L1", statut: "valide", qui: "marc", valide: "mnb" },
         { titre: "Architecture pédagogique du parcours", lot: "L1", statut: "valide", qui: "marc", note: "Version 0.3 validée le 10-11 (D142) : répartition des messages entre Moodle et les composants SCORM, parcours en dix étapes, matrice des messages. Le plan d'ensemble : ordre des étapes, moment de chaque module dans les trois mois, durées, compétences travaillées et évaluées par module (21 compétences × modules). Version 0.2 du 07-10, à mettre à jour : M2 ramené à 1 h, positionnement non rejouable, 8 h estimées." },
         { titre: "Règles de production (pédagogie, récit, visuels, évaluation)", lot: "L1", statut: "en_cours", qui: "marc", valide: "mnb", attente: "marc", note: "16-11 : le document v0.1 est perdu (introuvable dans le coffre et le Drive). À refaire plus tard. Version 0.1 du 11-11 : un document court qui rassemble les canons et les décisions jusqu'à D146 (pédagogie, récit, écriture, visuels, évaluation, technique, validation du contenu). Cinq contradictions entre canons à trancher. Avant : Les règles que chaque module applique : mise en situation puis apport puis application, règles d'écriture, vocabulaire à deux étages, règles visuelles, règle des infographies, forme des évaluations. Elles sont aujourd'hui réparties dans les décisions : à rassembler en un document court." },
+        { titre: "Libellés des 21 compétences (« Je… »)", lot: "L1", statut: "a_valider", qui: "marc", valide: "mnb", attente: "mnb", note: "Les 21 libellés affichés à l'agent après chaque choix du positionnement et dans son profil. Un tableau à relire : OK ou proposition. Sans retour, les libellés actuels sont conservés.", lien: "https://docs.google.com/document/d/1qz4N5qnPaZjMOBI4W2eCL2fwWemBIrGGqSZ24_Z9j3Y/edit", lienTexte: "Ouvrir le document" },
         { titre: "Univers de l'ÉLAN : personnages et lieux", lot: "L1", statut: "valide", qui: "marc", valide: "mnb" },
         { titre: "Fil rouge : le dossier Passerelles", lot: "L1", statut: "valide", qui: "marc", note: "16-11 : le dossier est aussi lu comme un projet (D148, option retenue avec Marie-Noëlle Blanck le 12-11). Chaque étape porte une phase du projet (émergence, cadrage, lancement, réalisation, mise en service, clôture) et les rôles sont nommés (porteur, décideur, référent du dossier, contributeurs). Le référentiel ne change pas. Phases proposées pour M3 à M5 et le bilan, à reprendre dans leurs scénarios ; M1 et M2 : retouches de vocabulaire seulement, pas encore faites. Vocabulaire à faire vérifier par les référents employeurs (agents de catégorie C)." },
         { titre: "Logo DINA et signature « Mes repères pour agir »", lot: "L1", statut: "valide", qui: "marc", valide: "mfp" },

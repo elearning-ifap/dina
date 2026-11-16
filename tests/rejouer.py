@@ -29,6 +29,7 @@ RACINE = Path(__file__).resolve().parent.parent
 LIMITE = 4096
 MODULES = {
     "prologue": "prologue.html",
+    "prologue-pages": "prologue-pages.html",
     "positionnement": "positionnement.html",
     "m1": "m1.html",
     "m2": "m2.html",
@@ -396,6 +397,15 @@ class Joueur:
     # Types d'écrans dont la réponse est toujours gardée dans l'état (relevé sur le moteur : engine.js, memoriser)
     MEMORISES = {"choix", "classement", "assemblage", "choix-multiple", "ordre", "planning", "recherche", "messagerie", "pos-item", "page"}
 
+    # Blocs de page qui demandent une action (engine.js, BLOQUANTS) : seuls eux font enregistrer une réponse.
+    # Une page de pure lecture (prologue en pages : récit, équipe, cartes, réflexion non transmise) n'en garde aucune.
+    BLOQUANTS_PAGE = {"tri", "explorer", "recherche", "message", "ordre"}
+
+    def garde_une_reponse(self, ecran):
+        if ecran["type"] != "page":
+            return True
+        return any(b.get("type") in self.BLOQUANTS_PAGE for b in ecran.get("blocs", []))
+
     def etat_final_attendu(self):
         """Compare la sauvegarde à ce que l'outil a réellement joué, sans repasser par le moteur."""
         derniere = self.sauvegarde()["derniere"]
@@ -411,7 +421,7 @@ class Joueur:
         manque = [x for x in sections if x not in st.get("faites", [])]
         if manque:
             pb.append("état final : étapes terminées non enregistrées : " + ", ".join(manque))
-        attendues = [i for i in jouees if self.E[i]["type"] in self.MEMORISES
+        attendues = [i for i in jouees if (self.E[i]["type"] in self.MEMORISES and self.garde_une_reponse(self.E[i]))
                      or (self.E[i]["type"] == "hotspot" and self.E[i].get("mode") == "audit")
                      or (self.E[i]["type"] == "reponse-libre" and self.E[i].get("garder"))]
         perdues = [i for i in attendues if i not in st.get("reponses", {})]
