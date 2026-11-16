@@ -124,6 +124,9 @@
           var v = C[r.cle] || 0, pc = totC ? Math.round(100 * v / totC) : 0;
           return '<li><div class="rub-ligne"><strong>' + esc(r.titre) + "</strong><span>" + fr(v) + "\u00a0j</span></div>" + jauge(pc, "var(--jaune)") + "<small>" + esc(r.texte) + "</small></li>";
         }).join("") + "</ul>" +
+        ((T.contributions || []).length ? '<p class="explication"><strong>Temps de l\'équipe, hors réunions avec Marc :</strong> ' + T.contributions.map(function (c) {
+          return esc(nom(c.qui)) + " : " + (c.jours == null ? "pas encore saisi" : fr(c.jours) + "\u00a0j") + (c.texte ? " (" + esc(c.texte.toLowerCase()) + ")" : "");
+        }).join(" ; ") + ".</p>" : "") +
         '<p class="explication">Temps total sur DINA : ' + fr(totalTout) + " j, dont " + (totalTout ? Math.round(100 * totC / totalTout) : 0) + "\u00a0% de concertation et de préparation.</p></article>";
     }
     $("indicateurs").innerHTML = html;

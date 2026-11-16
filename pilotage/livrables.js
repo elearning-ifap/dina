@@ -22,16 +22,20 @@ window.DINA_PILOTAGE = {
   temps: {
     prevuJours: 32,          /* charge de production annoncée à la direction */
     passeJours: 9.81,        /* production : cumul saisi */
-    arreteAu: "14-11-2026",  /* date de la dernière saisie */
+    arreteAu: "16-11-2026",  /* date de la dernière saisie */
     /* Réunions, concertation et préparation : hors des 32 j. Trois rubriques. */
     concertation: {
-      equipe: 1.03,          /* équipe projet : Marie-Noëlle Blanck, direction */
+      equipe: 1.16,          /* équipe projet : Marie-Noëlle Blanck, direction */
       employeurs: 0.39,      /* employeurs : COPIL, séances, échanges avec les DRH */
       preparation: 0.31      /* préparation et suites : supports, comptes rendus, courriels */
     },
+    /* Temps donné par les autres membres de l'équipe (relectures, validations, hors réunions avec Marc). null = pas encore saisi. */
+    contributions: [
+      { qui: "mnb", jours: null, texte: "Relectures et validations" }
+    ],
     /* Production répartie par groupe de livrables (codes des catégories, plus « parcours » = modules, « moteur » = outil de production, « divers »).
        La somme doit faire passeJours. Répartition des saisies anciennes faite au mieux le 16-11, à corriger par Marc. */
-    productionParGroupe: { parcours: 5.33, cadrage: 1.75, ressources: 0.25, plateforme: 0, suivi: 0, communication: 0.95, visuels: 0.15, moteur: 1, divers: 0.38 }
+    productionParGroupe: { parcours: 5.33, cadrage: 1.75, ressources: 0.25, plateforme: 0, suivi: 0, communication: 0.95, administratif: 0, visuels: 0.15, moteur: 1, divers: 0.38 }
   },
 
   /* Avancement global : chaque livrable et chaque case de la matrice du parcours comptent pour une unité.
@@ -59,7 +63,10 @@ window.DINA_PILOTAGE = {
     { date: "Début nov. 2026", titre: "Retours des agents testeurs", texte: "2 ou 3 agents par employeur testent le prototype, retours sous 10 jours. L'essentiel des retours est reçu ; d'autres restent possibles", etat: "prochain" },
     { date: "10-11-2026", titre: "Revue du tableau de bord", texte: "Arbitrages sur l'ergonomie, le récit, les fiches, la validation experte et le pilote", etat: "franchi" },
     { date: "Novembre 2026", titre: "Validation technique", texte: "Un module en SCORM fonctionne dans LIANE : lancement, reprise, traces (J-TECH). Premier test réussi le 10-11 ; reste le téléphone et le rapport Moodle", etat: "prochain" },
+    { date: "16-11-2026", titre: "Revue du tableau de bord (2)", texte: "Validation experte : calendrier fixé. Nouveau chantier : suivi administratif et financier (Amon, conventions, attestation)", etat: "franchi" },
     { date: "À partir du 08-12-2026", titre: "Pause de production", texte: "Trois semaines sans production. Avant le départ : les productions les plus urgentes", etat: "a_venir", pause: true },
+    { date: "15-01-2027", titre: "Corpus validé par les experts", texte: "Les experts confirment que le corpus est complet et à jour. Une semaine de marge pour reporter les corrections dans les modules", etat: "a_venir" },
+    { date: "22 au 31-01-2027", titre: "Modules validés par les experts", texte: "Chaque expert relit les passages qui le concernent, aux endroits indiqués", etat: "a_venir" },
     { date: "Janvier 2027", titre: "Test interne IFAP", texte: "Des agents de l'IFAP vivent le parcours sur une version plus complète que le prototype, et la démarche sert aussi de communication interne. Date à fixer", etat: "a_venir" },
     { date: "Février 2027", titre: "Pilote", texte: "Un mois, 10 à 20 agents de plusieurs employeurs, sans vidéo ni audio. Retours recueillis par questionnaire", etat: "a_venir" },
     { date: "Mi-mars 2027", titre: "Ouverture de DINA", texte: "Inscription sur demande de l'employeur", etat: "a_venir" }
@@ -76,7 +83,8 @@ window.DINA_PILOTAGE = {
       actions: [
         { titre: "Relire et valider le storyboard v0.7 (accueil, compétences en jeu, bilan en deux écrans)", qui: "mnb", lie: "Restitution du positionnement, visuelle et imprimable" },
         { titre: "Valider les 21 libellés de compétences en « je »", qui: "mnb", lie: "Référentiel des 21 compétences" },
-        { titre: "Rendre le profil imprimable (marges, en-tête, radar)", qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable" },
+        { titre: "Réduire le radar du profil : les six domaines doivent se lire sans faire défiler (retour province Sud)", qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable" },
+        { titre: "Imprimer le profil sur une page dédiée, pas la page à l'écran", qui: "marc", lie: "Restitution du positionnement, visuelle et imprimable" },
         { titre: "Intégrer le positionnement et sa restitution dans LIANE", qui: "marc", lie: "Intégration du positionnement et de sa restitution" }
       ],
       note: "Storyboard v0.7 en ligne le 10-11, à relire : accueil réécrit (« une semaine de travail »), compétences en jeu affichées après chaque choix, bilan en deux écrans (profil, puis « Votre parcours » : le parcours module par module avec le résultat de l'agent ; l'équipe et la règle du jeu restent au prologue, D142). Visuels ILL-POS1 et ILL-POS2 en place depuis le 10-11. Reste : impression du profil. Avant (v0.6) : storyboard prêt, à relire : accueil qui rassure (pas de note, pas d'échec, répondre spontanément), une seule passe, bouton « En clair », fin qui présente le dispositif. Reste : impression du profil. Revue du 10-11 : storyboard à terminer vite ; accueil à réécrire ; visuels à prévoir (Noa n'apparaît pas encore) ; bilan en deux écrans, radar puis univers de Noa ; le lien entre positionnement, prologue et M1 se fait dans le cours Moodle." },
@@ -84,7 +92,7 @@ window.DINA_PILOTAGE = {
       etats: ["sans_objet", "sans_objet", "valide", "en_cours", "livre", "livre", "a_faire"],
       actions: [
         { titre: "Relire et valider le storyboard v0.6", qui: "mnb", lie: "PRO" },
-        { titre: "Décider si le prologue passe en pages qui défilent (il reste en écrans)", qui: "marc", lie: "PRO" },
+        { titre: "Passer le prologue en pages qui défilent : la règle vaut pour tout le parcours (D128)", qui: "marc", lie: "PRO" },
         { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
       ],
       note: "Storyboard v0.6 le 14-11 : la carte « Le vendredi, un bilan » annonce la règle de D150 : six situations nouvelles, un badge avec 5 bonnes réponses sur 6, la non-réussite ne bloque pas, reprise libre. v0.5 le 11-11 : la carte « Le vendredi, un bilan » annonce « des situations nouvelles, que vous n'avez pas encore vues » (D145). Avant (v0.4, 10-11) : Noa est à l'ÉLAN depuis quelques semaines (D130), plus de premier jour ni de badge provisoire ; étape « Arrivée » renommée « Début » ; collègues de toutes catégories annoncés ; un carnet par module. Seul composant à présenter l'ÉLAN, l'équipe et la règle du jeu (D142). Reste en écrans pour l'instant.", lien: "../prologue.html" },
@@ -94,8 +102,11 @@ window.DINA_PILOTAGE = {
         { titre: "Terminer et vérifier le corpus ; lever les points juridiques", qui: "marc", lie: "Points juridiques à faire valider avant le pilote (M1, M2)" },
         { titre: "Faire valider le corpus par un référent ou un expert", qui: "employeurs", lie: ["Validation juridique de l'épisode « Qui fait quoi au pays ? »", "Validation experte du contenu juridique : experts en vacation et budget propre à DINA"] },
         { titre: "Valider la grille des documents administratifs, les cinq demandes du défi et les repères historiques", qui: "mnb", lie: "M1" },
-        { titre: "Terminer les infographies et l'illustration de l'épisode « Qui fait quoi au pays ? »", qui: "marc", lie: ["Infographies du module 1", "Illustration de l'épisode « Qui fait quoi au pays ? » (accueil de l'ÉLAN)"] },
-        { titre: "Reprendre les fiches outils du module", qui: "marc", lie: "Fiches outils du module 1" },
+        { titre: "Vérifier la pertinence des infographies ; produire l'illustration de l'épisode « Qui fait quoi au pays ? »", qui: "marc", lie: ["Infographies du module 1", "Illustration de l'épisode « Qui fait quoi au pays ? » (accueil de l'ÉLAN)"] },
+        { titre: "Valider les fiches outils du module (refaites, dans le carnet)", qui: "mnb", lie: "Fiches outils du module 1" },
+        { titre: "Transformer les fiches de connaissances en fiches d'apport A4 recto verso ; ajouter Nainville-les-Roches", qui: "marc", lie: "Fiches de connaissances" },
+        { titre: "Mettre un lien vers le texte de l'accord de Nouméa (5 mai 1998)", qui: "marc", lie: "M1" },
+        { titre: "Trois choix de réponse au lieu de quatre dans les activités (retour province Sud)", qui: "marc", lie: "parcours" },
         { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
       ],
       note: "M1 en pages v0.8 le 14-11 : évaluation réécrite (D150) : deux séries de six situations nouvelles, deux par compétence ; validé avec 5 bonnes réponses sur 6 ; la non-réussite ne bloque pas. v0.7 le 14-11 : infographies INF-M1-01 à 04 et ILL-N09 (T10). v0.6 le 14-11 : corrections juridiques après l'audit du fond (enseignement primaire, collèges et écoles primaires dans la fiche « Qui fait quoi », aide aux personnes âgées, citation retirée du repère de Nainville-les-Roches, « en vigueur » au lieu de « définitive ») ; récit aligné : la liste d'orientation est vérifiée avant de partir chez Passerelles, plus de traces de nouvel arrivant, « La semaine suivante » en fin de module. M1 en pages v0.5 le 12-11 : quatre repères historiques rétablis dans « Aller plus loin » (épisode 1), avec la table ronde de Nainville-les-Roches (1983) demandée par Marie-Ange Morvan, DRH de la province Sud (D147) ; formulation à valider. M1 en pages v0.4 le 11-11 : jours de la semaine rétablis, lundi à vendredi (D143) ; défi recentré sur « transmettre au bon interlocuteur, avec le contexte » (D144), tri « je fais / j'oriente / je transmets à Samuel », nouvelle demande « aides de la province », à valider. Avant, v0.3 du 10-11 : module complet (épisodes 1 à 3, défi « Le premier appel de Joël », évaluation, bilan). Épisode 3 « Une information sûre » et défi repris de M1 en écrans, avec Cédric qui vit aussi une situation. M1 en écrans devient une réserve de contenus (D128). Carnet du module actif : chaque épisode débloque sa fiche (D132), dont une fiche de connaissances « Qui fait quoi en Nouvelle-Calédonie ? » (D131). Épisode 3 enrichi de trois nouveaux blocs de page : bureau à explorer, recherche simulée, message à composer. À valider : grille des documents administratifs (épisode 3), cinq demandes du défi.", lien: "../m1-pages.html" },
@@ -126,6 +137,7 @@ window.DINA_PILOTAGE = {
         { titre: "Compléter et vérifier le corpus (note « Corpus à fournir — M3, M4, M5 »)", qui: "marc", lie: "M4" },
         { titre: "Faire valider le corpus par un référent ou un expert", qui: "employeurs", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA" },
         { titre: "Écrire le scénario, puis le storyboard en pages", qui: "marc", lie: "M4" },
+        { titre: "Intégrer au récit une situation sur la confidentialité des données : document à caviarder, données nominatives et outil d'IA", qui: "marc", lie: "M4" },
         { titre: "Préparer les prompts des illustrations", qui: "marc", lie: "Illustrations des modules 3 à 5" },
         { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" }
       ],
@@ -165,7 +177,7 @@ window.DINA_PILOTAGE = {
         { titre: "Charte graphique DINA (couleurs, typographie, règles visuelles)", lot: "L1", statut: "valide", qui: "marc", valide: "mfp", note: "Considérée comme validée le 10-11, pour avancer. 06-11 : le vert foncé #103F41 est retiré du lecteur ; titres en gris anthracite, fond blanc sur les pages qui défilent." },
         { titre: "Récit adapté à l'agent déjà en poste", lot: "L1", statut: "en_cours", qui: "marc", note: "14-11 : appliqué à M1 en pages v0.6 (plus de traces de nouvel arrivant, « La semaine suivante » en fin de module) ; à reprendre dans M3 à M5. 11-11 : appliqué au prologue v0.4 (D130). Retenu le 10-11 : Noa est à l'ÉLAN depuis quelques semaines. Il a déjà son badge, l'organigramme et le règlement intérieur, on lui a présenté l'ÉLAN. Seule l'histoire change. Il faut aussi revoir le scénario du lendemain avec la mise en situation tournante." },
         { titre: "Décisions issues de la démonstration du 28-10", lot: "L1", statut: "valide", qui: "marc", valide: "mnb", note: "Validées le 06-11 : DINA 100 % en ligne, pilote sans vidéo ni audio, vocabulaire à deux étages, positionnement rassurant, infographies, mise en situation tournante, interface présentée dès le webinaire, temps de formation organisé par l'employeur. Le webinaire reste à préciser (contenu, public, moment)." },
-        { titre: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA", lot: "L1", statut: "en_cours", qui: "mnb", valide: "valerie", attente: "valerie", note: "L'expert valide le corpus : ce que l'agent public doit connaître. Il n'intervient pas sur le module fini. Des experts des DRH valident le corpus avant le scénario, puis le mettent à jour chaque année. Demande de budget envoyée à la direction le 06-11." },
+        { titre: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA", lot: "L1", statut: "en_cours", qui: "mnb", valide: "valerie", attente: "valerie", note: "16-11 : double validation, d'abord le corpus (complet, à jour ?), puis les modules aux endroits indiqués. Experts recrutés de gré à gré, en priorité par avenant au contrat d'intervenants qui travaillent déjà pour l'IFAP ; un seul expert ne peut pas couvrir les cinq modules, il en faut d'autres. Calendrier : corpus validé au 15-01-2027, modules relus du 22 au 31-01-2027. Urgent : accord de la direction sur le budget, avant la clôture budgétaire. Demande envoyée le 06-11, à expliquer de vive voix." },
         { titre: "Points juridiques à faire valider avant le pilote (M1, M2)", lot: "L1", statut: "en_cours", qui: "marc", attente: "marc", note: "Liste courte du 11-11 : onze points, avec l'endroit du module et le texte de référence. À soumettre à un référent RH en attendant les experts en vacation. Sinon, mention « contenu en cours de validation » pendant le pilote.", lien: "https://drive.google.com/file/d/1SQCm1XtpIkuZcGqkyz4-JhcTsp2gr2Bn/view", lienTexte: "Ouvrir la liste" },
         { titre: "Alertes de validité du corpus", lot: "L1", statut: "a_faire", qui: "marc", note: "Pour chaque texte du corpus : date de vérification et date de révision prévue (textes transitoires, réformes annoncées). Pour savoir quand faire revoir un module." },
         { titre: "Validation juridique de l'épisode « Qui fait quoi au pays ? »", lot: "L1", statut: "a_valider", qui: "marc", valide: "employeurs", attente: "employeurs", duree: 0.5,
@@ -178,25 +190,25 @@ window.DINA_PILOTAGE = {
         { titre: "Restitution du positionnement, visuelle et imprimable", lot: "L6", statut: "en_cours", qui: "marc" },
         { titre: "Évaluations des modules, différentes à chaque passage", lot: "L6", statut: "en_cours", qui: "marc", note: "Jouables pour M1 et M2." },
         { titre: "Badges des 5 modules", lot: "L6", statut: "en_cours", qui: "marc", note: "Un badge par module, au nom du module. Délivré en cas de réussite : 5 réponses justes sur 6, au moins une par compétence (D150, 14-11). Pas de badge de parcours." },
-        { titre: "Page d'ouverture : DINA, la notion de compétence et les 21 compétences", lot: "L5", statut: "a_faire", qui: "marc", note: "Demande des employeurs : voir toutes les compétences avant de commencer. Expliquer simplement ce qu'est une compétence. Piste visuelle : un code couleur qui montre ce que chaque module travaille." },
-        { titre: "Fiches outils du module 1", lot: "L5", statut: "en_cours", qui: "marc", note: "Présentées le 28-10, à reprendre. Conservées le 10-11 (questions à se poser avant d'agir, vérifier qu'un texte est à jour…)." },
-        { titre: "Fiches de connaissances", lot: "L5", statut: "en_cours", qui: "marc", note: "Demande de la province Sud, retenue le 10-11, en plus des fiches outils. Exemple : les institutions et les compétences de chacune. 10-11 : « Qui fait quoi en Nouvelle-Calédonie ? » (M1) passe en fiche de connaissances." },
+        { titre: "Page d'ouverture : DINA, la notion de compétence et les 21 compétences", lot: "L5", statut: "a_faire", qui: "marc", note: "Demande des employeurs : voir toutes les compétences avant de commencer. Expliquer simplement ce qu'est une compétence. Piste visuelle : un code couleur qui montre ce que chaque module travaille. 16-11 : à faire vite, le code couleur par module se retrouve partout. Une partie existe peut-être déjà dans le prototype en pages : à vérifier." },
+        { titre: "Fiches outils du module 1", lot: "L5", statut: "a_valider", valide: "mnb", attente: "mnb", qui: "marc", note: "16-11 : refaites, à double niveau, dans le carnet du module ; vues avec Marie-Noëlle Blanck. Présentées le 28-10, à reprendre. Conservées le 10-11 (questions à se poser avant d'agir, vérifier qu'un texte est à jour…)." },
+        { titre: "Fiches de connaissances", lot: "L5", statut: "en_cours", qui: "marc", note: "16-11 : contenus trop légers. Elles deviennent de vraies fiches d'apport : PDF A4 recto verso, relues par les experts, car l'agent les imprime et les garde (D154). Ajouter une fiche sur Nainville-les-Roches. Demande de la province Sud, retenue le 10-11, en plus des fiches outils. Exemple : les institutions et les compétences de chacune. 10-11 : « Qui fait quoi en Nouvelle-Calédonie ? » (M1) passe en fiche de connaissances." },
         { titre: "Un carnet par module", lot: "L5", statut: "en_cours", qui: "marc", note: "Chaque fiche débloquée rejoint le carnet du module. L'agent retrouve ses fiches sans refaire les écrans et les enregistre au fil de l'eau. Cinq carnets, un kit complet en fin de parcours. 10-11 : actif dans M1 en pages (trois fiches, version à imprimer, téléchargement du carnet)." },
         { titre: "Fiches outils des modules 2 à 5", lot: "L5", statut: "a_faire", qui: "marc" },
         { titre: "Contenus de l'espace « Mes ressources »", lot: "L5", statut: "a_faire", qui: "marc" },
-        { titre: "Sélection de vidéos existantes (statut, règles de la fonction publique)", lot: "L5", statut: "a_faire", qui: "marc", note: "En ressources complémentaires, hors de l'histoire de Noa. Aucune vidéo produite pour le pilote." }
+        { titre: "Sélection de vidéos existantes (statut, règles de la fonction publique)", lot: "L5", statut: "a_faire", qui: "marc", note: "En ressources complémentaires, hors de l'histoire de Noa. Aucune vidéo produite pour le pilote. 16-11 : peu de vidéos locales trouvées (exemple : le circuit d'une loi du pays au Congrès). Gardé pour plus tard." }
       ] },
 
     { code: "plateforme", titre: "Plateforme LIANE", texte: "Le parcours installé dans Moodle. La partie la plus complexe : LIANE s'utilise telle quelle, sans plugin.",
       livrables: [
-        { titre: "Relevé des contraintes LIANE : version de Moodle, thème, droits, affichage mobile", lot: "L2", statut: "a_faire", qui: "marc", valide: "si" },
+        { titre: "Relevé des contraintes LIANE : version de Moodle, thème, droits, affichage mobile", lot: "L2", statut: "a_faire", qui: "marc", valide: "si", note: "16-11 : à relever avec le service informatique : version de Moodle, droits, affichage. La structure de LIANE est stable ; il faudra s'y adapter." },
         { titre: "Test technique SCORM dans LIANE", lot: "J-TECH", statut: "a_valider", qui: "marc", valide: "si", echeance: "Novembre 2026", note: "Lancement, complétion, reprise, traces. Condition avant de produire les modules 2 à 5 en série. 10-11 : moteur branché en SCORM 1.2 et paquet de test de M1 en pages prêt, avec panneau de diagnostic. Testé dans LIANE le 10-11 : API trouvée, reprise au bon endroit, statut « completed » en fin de module, sauvegarde de 777 caractères (19 % de la limite), aucune erreur. Reste : rapport Moodle (statut, durée), affichage sur téléphone, réglages de l'activité (navigation Moodle masquée, taille de la fenêtre)." },
         { titre: "Structure du cours DINA : accueil, positionnement, prologue, 5 modules, bilan, ressources, aide", lot: "L2", statut: "a_faire", qui: "marc" },
-        { titre: "Page d'accueil DINA (tableau de bord de l'agent)", lot: "L2", statut: "a_faire", qui: "marc", note: "Avec les composants Moodle disponibles, sans format de cours dédié." },
+        { titre: "Page d'accueil DINA (tableau de bord de l'agent)", lot: "L2", statut: "a_faire", qui: "marc", note: "Avec les composants Moodle disponibles, sans format de cours dédié. 16-11 : déjà discuté avec le service informatique ; pourcentages d'avancement possibles." },
         { titre: "Intégration du positionnement et de sa restitution", lot: "L2", statut: "a_faire", qui: "marc", note: "Le positionnement ne peut pas être rejoué." },
         { titre: "Paquets SCORM : prologue, 5 modules, bilan", lot: "L2", statut: "a_faire", qui: "marc" },
         { titre: "Évaluation dans le SCORM, score transmis à Moodle", lot: "L6", statut: "en_cours", qui: "marc", note: "D142 : l'évaluation se fait dans le module, avec les situations du récit, différentes à chaque passage. Le score et le statut « réussi » partent dans Moodle, qui délivre le badge. 14-11 (D150) : le moteur applique la règle 5 sur 6, envoie le score sur 100 et ne fait jamais repasser un module réussi en « échoué » ; vérifié avec l'API SCORM simulée. Reste à tester dans LIANE." },
-        { titre: "Règles de complétion et de progression", lot: "L2", statut: "a_faire", qui: "marc", note: "Activité, module, parcours." },
+        { titre: "Règles de complétion et de progression", lot: "L2", statut: "a_faire", qui: "marc", note: "Activité, module, parcours. 16-11 : mêmes données que l'attestation de suivi : à concevoir ensemble." },
         { titre: "Reprise de parcours là où l'agent s'est arrêté", lot: "L2", statut: "a_faire", qui: "marc" },
         { titre: "Badges Moodle : critères et attribution", lot: "L6", statut: "a_faire", qui: "marc", note: "Badge sur la réussite du module ; accès au module suivant sur son achèvement : la non-réussite ne bloque pas (D150, 14-11)." },
         { titre: "Espace « Mes ressources » : fiches outils téléchargeables", lot: "L5", statut: "a_faire", qui: "marc" },
@@ -208,18 +220,19 @@ window.DINA_PILOTAGE = {
 
     { code: "suivi", titre: "Suivi du pilote", texte: "Inscrire, suivre, tirer le bilan.",
       livrables: [
-        { titre: "Questionnaire des nouveaux agents (début et fin de parcours)", lot: "L8", statut: "a_valider", qui: "marc", valide: "mnb", attente: "mnb", note: "Version 0.3 à valider.", lien: "https://drive.google.com/file/d/19Du3F5ht-U4MRwbz4e8_tYLJb_9cVeVJ/view", lienTexte: "Questionnaire v0.3" },
+        { titre: "Questionnaire des nouveaux agents (début et fin de parcours)", lot: "L8", statut: "en_cours", qui: "marc", valide: "mnb", attente: "marc", note: "16-11 : relu avec Marie-Noëlle Blanck. Il manque le cahier des charges : à quoi sert le questionnaire, où il se place dans le parcours, comment on l'exploite. Vocation pédagogique (profil des nouveaux arrivants), pas administrative. Question de la filière à discuter. Version 0.4 à produire, puis relecture avec de la place pour les commentaires.", lien: "https://drive.google.com/file/d/19Du3F5ht-U4MRwbz4e8_tYLJb_9cVeVJ/view", lienTexte: "Questionnaire v0.3" },
         { titre: "Tableau d'inscription propre à DINA", lot: "L8", statut: "a_faire", qui: "mnb", note: "L'inscription part d'une demande formelle de l'employeur." },
         { titre: "Choix des employeurs pilotes et jauge par employeur", lot: "L8", statut: "a_faire", qui: "mnb", valide: "valerie", attente: "mnb", note: "10 à 20 agents, davantage si le retour se fait par questionnaire. Plusieurs employeurs, pas seulement la province Sud : penser à la ville de Nouméa. Éviter qu'un employeur prenne toutes les places." },
         { titre: "Politique de vente aux employeurs non cotisants", lot: "L8", statut: "a_faire", qui: "mnb", valide: "valerie", note: "Tarif d'inscription à DINA pour les employeurs non cotisants. Aucun tarif n'existe pour les formations digitales. Relève du conseil d'administration. Le calcul fait il y a deux ans pour les modules est à revoir." },
         { titre: "Quatre indicateurs de suivi pour l'IFAP", lot: "L8", statut: "a_faire", qui: "marc" },
         { titre: "Tableau employeur : avancement de ses agents", lot: "L8", statut: "a_faire", qui: "marc", valide: "si", note: "14-11 (D151) : envoi récurrent et automatisé au référent formation de chaque employeur, un tableau par employeur : modules commencés, terminés, terminés non validés. Jamais les réponses, les scores ni le positionnement. Outil à vérifier avec le service informatique. Point ouvert : le message aux agents." },
         { titre: "Information de l'employeur après deux échecs", lot: "L8", statut: "a_faire", qui: "marc", note: "Modalité à définir." },
-        { titre: "Test interne IFAP : testeurs et recueil des retours", lot: "L7", statut: "a_faire", qui: "marc", valide: "mnb", echeance: "Janvier 2027", note: "Sur une version plus complète que le prototype. Double but : des retours de qualité et une communication interne (faire connaître le projet, fierté collective, futurs relais). Moment à choisir." },
+        { titre: "Test interne IFAP : testeurs et recueil des retours", lot: "L7", statut: "a_faire", qui: "marc", valide: "mnb", echeance: "Janvier 2027", note: "Sur une version plus complète que le prototype. Double but : des retours de qualité et une communication interne (faire connaître le projet, fierté collective, futurs relais). Moment à choisir. 16-11 : piste à trancher, intégrer des agents de l'IFAP au pilote de février au lieu d'un test séparé, ou réduire le test interne à une semaine. Deux choses à tester : les modules, puis les modules dans LIANE avec les messages Moodle qui font le lien." },
+        { titre: "COPIL de mise en œuvre avec les employeurs", lot: "L8", statut: "a_faire", qui: "mnb", valide: "valerie", note: "Idée du 16-11, mise de côté pour l'instant. Montrer le produit fini et le résultat du test interne, aider chaque employeur à choisir comment inscrire ses agents (au fil de l'eau ou autrement), présenter les extractions de suivi. Go / no-go avant le pilote, ou restitution des résultats après : à décider." },
         { titre: "Bilan du pilote", lot: "L8", statut: "a_faire", qui: "mnb", echeance: "Mars 2027" }
       ] },
 
-    { code: "communication", titre: "Communication et accompagnement", texte: "Faire connaître DINA et accompagner les agents.",
+    { code: "communication", titre: "Communication et accompagnement", texte: "Faire connaître DINA et accompagner les agents. 16-11 : Marie-Noëlle Blanck propose de reprendre la communication avec Marie-Françoise Pierre, pour que Marc se consacre à LIANE.",
       livrables: [
         { titre: "Stratégie de communication", lot: "L9", statut: "a_valider", qui: "marc", valide: "mfp", attente: "mfp", note: "Document de travail, version 0.1.", lien: "https://drive.google.com/file/d/1tzBDVqkObUqxBmc5h-dvG3qUkqEoeI53/view", lienTexte: "Stratégie v0.1" },
         { titre: "Stratégie de déploiement et d'adoption (marketing)", lot: "L9", statut: "a_valider", qui: "marc", valide: "mfp", attente: "mfp", note: "Document de travail, version 0.2. À ajouter : des temps de lien hors parcours (webinaires, petits-déjeuners), demande forte de la province Sud.", lien: "https://drive.google.com/file/d/1nx1eXCvQSQ6qcx93KbCCzBHqbL9L6H4o/view", lienTexte: "Stratégie v0.2" },
@@ -236,14 +249,25 @@ window.DINA_PILOTAGE = {
         { titre: "Fiche réflexe d'assistance", lot: "L9", statut: "a_faire", qui: "mnb", note: "Premier niveau : pôle stagiaires et coordonnateurs." },
         { titre: "Relances et messages de soutien", lot: "L9", statut: "a_faire", qui: "mnb", echeance: "Février 2027" },
         { titre: "Webinaire d'accueil des agents", lot: "L9", statut: "a_faire", qui: "mnb", note: "Présente dès le départ la boîte à outils, les fiches outils et les badges. À annoncer aussi dans les supports de communication. À préciser : contenu, public, moment." },
-        { titre: "Page DINA sur ifap.nc", lot: "L9", statut: "a_faire", qui: "mfp", note: "Après le pilote." }
+        { titre: "Page DINA sur ifap.nc", lot: "L9", statut: "a_faire", qui: "mfp", note: "Après le pilote." },
+        { titre: "Un nom pour les agents qui ont suivi DINA", lot: "L9", statut: "a_faire", qui: "marc", valide: "mfp", note: "Idée du 16-11 : un nom qui crée un sentiment d'appartenance, sans ironie possible." }
+      ] },
+
+    { code: "administratif", titre: "Suivi administratif et financier", texte: "Ce qui fait exister DINA dans la gestion de l'IFAP : produit, inscriptions, conventions, attestation. Ouvert le 16-11 (D153).",
+      livrables: [
+        { titre: "Produit et action DINA dans Amon", lot: "L8", statut: "a_faire", qui: "mnb", note: "Une action ouverte toute l'année, en asynchrone, avec des entrées et sorties permanentes, sans date de fin. Vérifier comment Amon gère l'asynchrone (exemples : préparations aux concours, plateformes achetées) et le décompte des heures de formation." },
+        { titre: "Publication de DINA dans le catalogue ifap.nc", lot: "L8", statut: "a_faire", qui: "mnb", note: "Suppose que le produit existe dans Amon. À vérifier avec le pôle concerné." },
+        { titre: "Inscriptions au fil de l'eau par le pôle stagiaires", lot: "L8", statut: "a_faire", qui: "mnb", note: "Lié au tableau d'inscription propre à DINA (Suivi du pilote). Demande de l'employeur, inscription dans Amon puis accès dans LIANE. À terme, synchronisation automatique Amon – LIANE." },
+        { titre: "Conventions de formation et impact budgétaire", lot: "L8", statut: "a_faire", qui: "mnb", note: "Conventions à établir pour les employeurs concernés : qui les fait, sur quel modèle." },
+        { titre: "Message de bienvenue à l'inscription et mode d'emploi pour l'employeur", lot: "L8", statut: "a_faire", qui: "marc", valide: "mnb", note: "Pas une convocation : un message Moodle clair qui dit à l'agent qu'il est inscrit et ce qui l'attend. Pour l'employeur : ce que reçoit l'agent, ce que reçoit l'employeur." },
+        { titre: "Attestation de suivi de DINA", lot: "L8", statut: "a_faire", qui: "marc", valide: "mnb", note: "Délivrée par la plateforme, pas par le pôle stagiaires. À définir : durée théorique ou réelle, intitulés précis des contenus, compétences travaillées. Jusqu'où peut-on attester (suivi, réussite, compétences) ? Lié aux règles de complétion." }
       ] },
 
     { code: "visuels", titre: "Visuels à générer", texte: "Images produites par Marc avec l'IA, à partir des prompts préparés.",
       livrables: [
         { titre: "Planches des personnages et des lieux", lot: "L1", statut: "livre", qui: "marc" },
         { titre: "Illustrations du module 1", lot: "L4", statut: "livre", qui: "marc" },
-        { titre: "Infographies du module 1", lot: "L4", statut: "en_cours", qui: "marc", note: "Cinq infographies produites, deux à corriger avant intégration." },
+        { titre: "Infographies du module 1", lot: "L4", statut: "en_cours", qui: "marc", note: "INF-M1-01 à 04 intégrées dans M1 en pages v0.7 (14-11). Règle : plus de trois informations, une infographie. Reste à vérifier la pertinence de chacune." },
         { titre: "Illustration de l'épisode « Qui fait quoi au pays ? » (accueil de l'ÉLAN)", lot: "L4", statut: "a_faire", qui: "marc", duree: 0.25, note: "Prompt prêt (ILL-N09). Emplacement visible dans le prototype tant que l'image manque." },
         { titre: "Illustrations du module 2", lot: "L4", statut: "livre", qui: "marc", note: "14-11 : les six illustrations de M2 en pages (ILL-M01, M03, M04, M05, M06, M08) sont en place et conformes au storyboard v0.4. ILL-M02 et M07 ne servaient qu'à l'ancienne version de M2. Les évaluations n'appellent pas d'image." },
         { titre: "Illustrations des modules 3 à 5", lot: "L4", statut: "a_faire", qui: "marc" },
@@ -316,6 +340,9 @@ window.DINA_PILOTAGE = {
     { attente: "employeurs", titre: "Faire tester le prototype par 2 ou 3 agents aux profils variés", echeance: "Début nov. 2026", lie: "Prototype en ligne" },
     { attente: "employeurs", titre: "Désigner un ou deux référents par module pour valider le fond", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA", note: "Indispensable : sans référents, pas de pilote." },
     { attente: "marc", titre: "Estimer la durée de production de chaque module", lie: "parcours", note: "Aucune durée estimée à ce jour dans la matrice du parcours." },
+    { attente: "marc", titre: "Expliquer à la direction pourquoi le budget des experts est urgent", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA", note: "16-11 : avant la clôture budgétaire ; corpus à valider au 15-01-2027." },
+    { attente: ["marc", "mnb"], titre: "Lister les profils d'experts par module et les intervenants déjà sous contrat avec l'IFAP", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA", note: "16-11 : priorité aux intervenants déjà sous contrat (avenant) ; vérifier leur qualité ; penser aux membres du COPIL." },
+    { attente: "mnb", titre: "Vérifier avec les pôles concernés la gestion de DINA dans Amon et les conventions", lie: ["Produit et action DINA dans Amon", "Conventions de formation et impact budgétaire"] },
     { attente: "valerie", titre: "Arbitrer le recours à des experts en vacation et un budget propre à DINA", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA", note: "Demande préparée après l'échange avec la province Sud (06-11)." },
     { attente: ["marc", "mnb"], titre: "Choisir les testeurs internes de l'IFAP et le moment du test", lie: "Test interne IFAP : testeurs et recueil des retours", note: "À coupler avec une communication interne." }
   ]
