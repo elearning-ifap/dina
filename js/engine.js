@@ -1704,6 +1704,80 @@
     return '<div class="pos-comps"><span class="pos-comps-tete">' + (cs.length > 1 ? "Compétences en jeu" : "Compétence en jeu") + '</span><ul>' +
       cs.map(function (c) { return '<li><span class="pg-comp">' + esc(c) + "</span>" + inline(L[c]) + "</li>"; }).join("") + "</ul></div>";
   }
+
+  /* Profil en PDF téléchargeable (A4) : jsPDF chargé à la demande, dessin direct (pas de capture d'écran) */
+  function chargerPdf(ok, ko) {
+    if (window.jspdf) { ok(); return; }
+    var sc = document.createElement("script"); sc.src = "js/jspdf.umd.min.js"; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc);
+  }
+  function posPdf(d) {
+    var doc = new window.jspdf.jsPDF({ unit: "mm", format: "a4" }), W = 210, M = 15, y = 0;
+    function brut(s) { return String(s == null ? "" : s).replace(/\*\*?/g, "").replace(/\s+/g, " ").trim(); }
+    function rgb(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+    function coul(h, t) { var c = rgb(h); if (t === "fill") doc.setFillColor(c[0], c[1], c[2]); else if (t === "draw") doc.setDrawColor(c[0], c[1], c[2]); else doc.setTextColor(c[0], c[1], c[2]); }
+    function place(h) { if (y + h > 282) { doc.addPage(); y = M; } }
+    var NIV = { present: "#2D7A63", approfondir: "#A88600", decouvrir: "#1A7BB2" };
+    /* en-tête */
+    doc.setFont("helvetica", "bold"); doc.setFontSize(24); coul("#5F6B7A", "text"); doc.text("DINA", M, 22);
+    doc.setFontSize(17); coul("#2D3748", "text"); doc.text("Mon positionnement", M + 34, 17.5);
+    doc.setFont("helvetica", "normal"); doc.setFontSize(10); coul("#5F6B7A", "text"); doc.text("Profil par domaine — " + d.date, M + 34, 23);
+    coul("#1F767A", "draw"); doc.setLineWidth(0.7); doc.line(M, 27, W - M, 27);
+    /* radar */
+    var n = d.blocs.length, cx = M + 29, cy = 70, R = 18, V = { present: 3, approfondir: 2, decouvrir: 1 };
+    function pt(k, r) { var a = -Math.PI / 2 + k * 2 * Math.PI / n; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
+    function poly(pts, style) { var rel = []; for (var i = 1; i < pts.length; i++) rel.push([pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]]); doc.lines(rel, pts[0][0], pts[0][1], [1, 1], style, true); }
+    coul("#D9DEE5", "draw"); doc.setLineWidth(0.25);
+    [1, 2, 3].forEach(function (l) { poly(d.blocs.map(function (_, k) { return pt(k, R * l / 3); }), "S"); });
+    d.blocs.forEach(function (_, k) { var p = pt(k, R); doc.line(cx, cy, p[0], p[1]); });
+    doc.saveGraphicsState(); doc.setGState(new doc.GState({ opacity: 0.22 })); coul("#00B2B8", "fill"); poly(d.blocs.map(function (b, k) { return pt(k, R * (V[d.niveaux[b.id]] || 0) / 3); }), "F"); doc.restoreGraphicsState();
+    coul("#1F767A", "draw"); doc.setLineWidth(0.6); poly(d.blocs.map(function (b, k) { return pt(k, R * (V[d.niveaux[b.id]] || 0) / 3); }), "S");
+    d.blocs.forEach(function (b, k) { var p = pt(k, R * (V[d.niveaux[b.id]] || 0) / 3); coul(NIV[d.niveaux[b.id]] || "#A0AEC0", "fill"); doc.circle(p[0], p[1], 1.5, "F"); });
+    doc.setFont("helvetica", "bold"); doc.setFontSize(8); coul("#2D3748", "text");
+    d.blocs.forEach(function (b, k) {
+      var p = pt(k, R + 4), anc = Math.abs(p[0] - cx) < 2 ? "center" : (p[0] > cx ? "left" : "right"), L = doc.splitTextToSize(brut(b.titre), 19);
+      doc.text(L, p[0], p[1] + (k === 0 ? -1 : 1.5) - (L.length > 1 ? 1.5 : 0), { align: anc });
+    });
+    /* légende */
+    doc.setFont("helvetica", "normal"); doc.setFontSize(8);
+    ["present", "approfondir", "decouvrir"].forEach(function (k, i) { coul(NIV[k], "fill"); doc.circle(M + 2, 109 + i * 5, 1.3, "F"); coul("#5F6B7A", "text"); doc.text(brut(d.N[k]), M + 5, 110 + i * 5); });
+    /* domaines (colonne de droite) */
+    var x0 = 88, lw = W - M - x0, yd = 33;
+    d.blocs.forEach(function (b, i) {
+      var niv = d.niveaux[b.id], phrase = niv ? brut(b[niv]) : "", mod = "À travailler dans : " + brut(b.module);
+      doc.setFont("helvetica", "normal"); doc.setFontSize(9);
+      var Lp = doc.splitTextToSize(phrase, lw - 4), Lm = doc.splitTextToSize(mod, lw - 4), h = 6 + Lp.length * 3.9 + Lm.length * 3.6 + 2;
+      coul(d.TE[i % 6], "fill"); doc.rect(x0, yd, 1.1, h - 1.5, "F");
+      doc.setFont("helvetica", "bold"); doc.setFontSize(10.5); coul("#2D3748", "text"); doc.text(brut(b.titre), x0 + 4, yd + 4);
+      doc.setFontSize(8.5); coul(NIV[niv] || "#5F6B7A", "text"); doc.text(niv ? brut(d.N[niv]) : "Non renseigné", x0 + lw, yd + 4, { align: "right" });
+      doc.setFont("helvetica", "normal"); doc.setFontSize(9); coul("#2D3748", "text"); doc.text(Lp, x0 + 4, yd + 8.6);
+      coul("#5F6B7A", "text"); doc.setFontSize(8.5); doc.text(Lm, x0 + 4, yd + 8.6 + Lp.length * 3.9 + 0.6);
+      yd += h;
+    });
+    y = Math.max(yd, 128) + 4;
+    /* points de vigilance */
+    if (d.vig.length) {
+      place(10 + d.vig.length * 5); doc.setFont("helvetica", "bold"); doc.setFontSize(11.5); coul("#2D3748", "text"); doc.text("Points de vigilance", M, y); y += 5.5;
+      doc.setFont("helvetica", "normal"); doc.setFontSize(9.5);
+      d.vig.forEach(function (v) { var L = doc.splitTextToSize("•  " + brut(v), W - 2 * M); place(L.length * 4.2); doc.text(L, M, y); y += L.length * 4.2 + 0.8; });
+      y += 3;
+    }
+    /* réponse de fin de semaine */
+    if (d.refl.length) {
+      place(16); doc.setFont("helvetica", "bold"); doc.setFontSize(11.5); coul("#2D3748", "text"); doc.text("Ma réponse de fin de semaine", M, y); y += 5.5;
+      d.refl.forEach(function (x) {
+        doc.setFont("helvetica", "italic"); doc.setFontSize(9.5); coul("#5F6B7A", "text");
+        var Lq = doc.splitTextToSize(brut(x.q), W - 2 * M); place(Lq.length * 4.2 + 8); doc.text(Lq, M, y); y += Lq.length * 4.2 + 1.5;
+        doc.setFont("helvetica", "normal"); coul("#2D3748", "text");
+        doc.splitTextToSize(String(x.r), W - 2 * M - 6).forEach(function (l) { place(4.4); coul("#00B2B8", "fill"); doc.rect(M, y - 3.2, 0.9, 4.4, "F"); doc.text(l, M + 4, y); y += 4.4; });
+        y += 3;
+      });
+    }
+    /* pied de page */
+    doc.setFont("helvetica", "normal"); doc.setFontSize(8); coul("#5F6B7A", "text");
+    var Lf = doc.splitTextToSize(brut(d.mention), W - 2 * M); place(Lf.length * 3.6 + 6); y += 2;
+    coul("#D9DEE5", "draw"); doc.setLineWidth(0.25); doc.line(M, y, W - M, y); doc.text(Lf, M, y + 4);
+    doc.save("DINA-mon-positionnement.pdf");
+  }
   function rendrePosProfil(e) {
     zone.classList.add("ecran--lecture", "ecran--visuel");
     var sec = sectionDe(e.id);
@@ -1776,7 +1850,8 @@
       (refl.length ? '<div class="pos-reflexion"><h2 class="fin-sous">Votre réponse de fin de semaine</h2>' + refl.map(function (x) { return "<p><em>" + inline(x.q) + "</em></p><blockquote>" + esc(x.r) + "</blockquote>"; }).join("") + "</div>" : "") +
       '<p class="rl-mention">' + ic("i-cadenas") + "<span>" + esc(e.mention || "") + "</span></p>" +
       /* D126 : le positionnement ne se rejoue pas — plus de bouton « Refaire » (réinitialisation réservée au mode présentation, touche P) */
-      '<p class="pos-actions-profil"><button type="button" class="btn btn-secondaire btn-petit" id="pos-imprimer">' + ic("i-imprimer") + " Imprimer mon positionnement</button></p>" +
+      '<p class="pos-actions-profil"><button type="button" class="btn btn-secondaire btn-petit" id="pos-imprimer">' + ic("i-imprimer") + " Imprimer mon positionnement</button>" +
+      ' <button type="button" class="btn btn-secondaire btn-petit" id="pos-pdf">' + ic("i-telecharger") + " Télécharger en PDF</button><span class=\"pos-pdf-etat\" id=\"pos-pdf-etat\" role=\"status\"></span></p>" +
       impression + '<p class="sr-only" id="annonce" aria-live="polite"></p></div>';
     zone.querySelector(".pos-cartes").addEventListener("click", function (ev) {
       var b = ev.target.closest(".carte-ret"); if (!b) return;
@@ -1786,6 +1861,16 @@
       $("annonce").textContent = retournee ? v.textContent : r.textContent;
     });
     $("pos-imprimer").addEventListener("click", function () { document.body.classList.add("impression-profil"); window.print(); setTimeout(function () { document.body.classList.remove("impression-profil"); }, 500); });
+    $("pos-pdf").addEventListener("click", function () {
+      var et = $("pos-pdf-etat"); et.textContent = "Préparation du PDF…";
+      chargerPdf(function () {
+        try {
+          posPdf({ blocs: e.blocs, niveaux: niveaux, N: N, TE: TE, date: dateImp, mention: e.mention, refl: refl,
+            vig: vigilances.map(function (x) { return x.item.titre + " — " + x.bloc.module; }) });
+          et.textContent = "PDF téléchargé.";
+        } catch (err) { et.textContent = "Le PDF n'a pas pu être créé. Utilisez « Imprimer » puis « Enregistrer au format PDF »."; }
+      }, function () { et.textContent = "Le PDF n'a pas pu être chargé. Utilisez « Imprimer » puis « Enregistrer au format PDF »."; });
+    });
     /* D133 : le bilan tient en deux écrans ; le second présente l'univers de Noa et la suite */
     if (E[e.suite]) principal("Découvrir la suite de votre parcours", function () { suivant(e); });
     else boutonFin(function () { principal("", null); });
