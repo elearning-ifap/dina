@@ -1054,7 +1054,8 @@ a.btn { text-decoration: none; }
 @container lecteur (min-width: 900px) { .pos-tableau { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
 .pos-tableau-g { padding: .8rem; border-radius: var(--rayon); background: var(--carte); border: 1px solid var(--bordure); box-shadow: var(--ombre); }
 .pos-radar { margin: 0; }
-.pos-radar svg { display: block; width: 100%; height: auto; max-height: 360px; }
+.pos-radar { max-width: 360px; margin-inline: auto; }
+.pos-radar svg { display: block; width: 100%; height: auto; max-height: 250px; }
 .rd-grille { fill: none; stroke: var(--bordure); stroke-width: 1.5; }
 .rd-axe { stroke: var(--bordure); stroke-width: 1.5; }
 .rd-forme { fill: rgba(0, 178, 184, .22); stroke: var(--bleu); stroke-width: 2.5; stroke-linejoin: round; }
@@ -1063,7 +1064,7 @@ a.btn { text-decoration: none; }
 .rd-point--approfondir { fill: var(--orange); }
 .rd-point--decouvrir { fill: var(--bleu-progression); }
 .rd-point--vide { fill: var(--gris); }
-.rd-lib { font: 700 14px var(--police-texte); fill: var(--texte); }
+.rd-lib { font: 700 16px var(--police-texte); fill: var(--texte); }
 .pos-legende { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.1rem; margin: .4rem 0 0; padding: 0; font-size: var(--taille-petit); color: var(--texte-2); }
 .pos-legende li { display: inline-flex; align-items: center; gap: .4rem; }
 .rd-pastille { display: inline-block; width: .8rem; height: .8rem; border-radius: 50%; }
@@ -1090,38 +1091,40 @@ a.btn { text-decoration: none; }
 .pos-actions-profil { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem; margin-top: 1.2rem; }
 .pos-actions-profil .btn-petit { margin-top: 0; }
 
-/* Impression du positionnement : une page, sans le lecteur */
+/* Page d'impression du profil : une feuille A4 autonome, invisible à l'écran */
+.pos-print { display: none; }
 @media print {
+  @page { size: A4; margin: 14mm; }
   body.impression-profil { background: #fff; }
   body.impression-profil .cadre-module { padding: 0; }
   body.impression-profil .dina-player { display: block; height: auto; max-width: none; border: 0; box-shadow: none; overflow: visible; }
-  body.impression-profil .bandeau, body.impression-profil .actions, body.impression-profil .pos-actions-profil, body.impression-profil .consigne-zone, body.impression-profil .voile, body.impression-profil .panneau { display: none !important; }
+  body.impression-profil .bandeau, body.impression-profil .actions, body.impression-profil .voile, body.impression-profil .panneau { display: none !important; }
   body.impression-profil .ecran { overflow: visible; padding: 0; }
-  body.impression-profil .pos-tableau { grid-template-columns: 1fr 1fr; }
-  body.impression-profil .pos-cartes { grid-template-columns: repeat(3, 1fr); }
-  body.impression-profil .carte-ret { min-height: 0; break-inside: avoid; }
-  body.impression-profil .cr-verso { display: grid !important; }
-  body.impression-profil .cr-verso[hidden] { display: grid !important; }
-  body.impression-profil .cr-indice { display: none; }
+  body.impression-profil .pos-profil > :not(.pos-print) { display: none !important; }
+  body.impression-profil .pos-profil { padding: 0; max-width: none; }
   body.impression-profil * { animation: none !important; transition: none !important; }
+  body.impression-profil .pos-print { display: block; -webkit-print-color-adjust: exact; print-color-adjust: exact; color: #1d1d1b; font-size: 10.5pt; line-height: 1.35; }
+  .pos-print .pp-tete { display: flex; align-items: center; gap: 1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--bleu); }
+  .pos-print .pp-logo { height: 14mm; width: auto; }
+  .pos-print h1 { margin: 0; font-size: 18pt; }
+  .pos-print .pp-tete p { margin: .1rem 0 0; color: var(--texte-2); }
+  .pos-print h2 { margin: .7rem 0 .25rem; font-size: 11.5pt; }
+  .pos-print .pp-corps { display: grid; grid-template-columns: 62mm 1fr; gap: 6mm; align-items: start; margin-top: .6rem; }
+  .pos-print .pos-radar { max-width: none; }
+  .pos-print .pos-radar svg { max-height: 60mm; }
+  .pos-print .rd-lib { font-size: 17px; }
+  .pos-print .pos-legende { flex-direction: column; align-items: flex-start; gap: .15rem; font-size: 8.5pt; }
+  .pos-print .pp-domaines { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.5mm; }
+  .pos-print .pp-domaines li { padding: 1.5mm 3mm; border-left: 3px solid var(--teinte); break-inside: avoid; }
+  .pos-print .pp-dom-tete { display: flex; justify-content: space-between; align-items: baseline; gap: .6rem; }
+  .pos-print .pp-domaines p { margin: .15rem 0 0; font-size: 9.5pt; }
+  .pos-print .pp-module { color: var(--texte-2); font-size: 8.5pt !important; }
+  .pos-print .pp-vig ul { margin: 0; padding-left: 1.1rem; }
+  .pos-print blockquote { margin: .2rem 0 0; padding: .3rem .6rem; border-left: 3px solid var(--turquoise); white-space: pre-wrap; }
+  .pos-print .pp-refl, .pos-print .pp-vig { break-inside: avoid; }
+  .pos-print .pp-pied { margin-top: .8rem; padding-top: .4rem; border-top: 1px solid var(--bordure); color: var(--texte-2); font-size: 8.5pt; }
 }
 @container lecteur (max-width: 720px) { .rd-lib { font-size: 21px; } }
-@media print {
-  body.impression-profil .pos-radar svg { max-height: 220px; }
-  body.impression-profil .pos-tableau-d .prochain, body.impression-profil h2.fin-sous:first-of-type { display: none; }
-  body.impression-profil .pos-tableau { margin: .3rem 0; gap: .6rem; }
-  body.impression-profil .pos-tableau-g { box-shadow: none; padding: .3rem; }
-  body.impression-profil .pos-vigilance { padding: .5rem .8rem; font-size: .85rem; }
-  body.impression-profil .pos-cartes { gap: .4rem; }
-  body.impression-profil .pos-carte { padding: .45rem .6rem; font-size: .76rem; border-top-width: 3px; }
-  body.impression-profil .pos-carte .cr-recto .cr-indice, body.impression-profil .pos-carte .cr-recto .pos-carte-titre { display: none; }
-  body.impression-profil .pos-carte-titre { font-size: .9rem; }
-  body.impression-profil .pos-carte .cr-recto { display: block; }
-  body.impression-profil .fin-sous { margin: .5rem 0 .3rem; font-size: .95rem; }
-  body.impression-profil .ecran h1 { font-size: 1.3rem; }
-  body.impression-profil .texte { font-size: .85rem; }
-}
-@media print { body.impression-profil .pos-carte-ex { display: none; } body.impression-profil .pos-reflexion blockquote { padding: .4rem .7rem; } }
 /* D114 : plus d'aplat #103F41 — centre du schéma en orbite en bleu-vert IFAP foncé */
 .orb-centre circle { fill: var(--bleu); }
 @media (max-width: 720px) { .orb-liste .orb-liste-centre { background: var(--bleu) !important; } }

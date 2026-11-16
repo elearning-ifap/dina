@@ -1755,6 +1755,19 @@
       : '<section class="pos-vigilance pos-vigilance--ok">' + ic("i-check-cercle") + "<div><p>" + esc(e.sans_vigilance || "Aucun point de vigilance sur les sujets sensibles de la semaine.") + "</p></div></section>";
     var refl = Object.keys(E).filter(function (id) { return E[id].type === "reponse-libre" && E[id].garder; }).map(function (id) { return { q: E[id].question, r: reponse(id) }; }).filter(function (x) { return x.r; });
     var legende = '<ul class="pos-legende">' + ["present", "approfondir", "decouvrir"].map(function (k) { return '<li><span class="rd-pastille rd-point--' + k + '"></span>' + esc(N[k]) + "</li>"; }).join("") + "</ul>";
+    /* Page d'impression du profil : une feuille A4 autonome, affichée seulement à l'impression (body.impression-profil) */
+    var dateImp = new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+    var impression = '<section class="pos-print" aria-hidden="true">' +
+      '<header class="pp-tete"><img class="pp-logo" src="assets/logo/logo-dina.svg" alt=""><div><h1>Mon positionnement</h1><p>Profil par domaine — ' + esc(dateImp) + "</p></div></header>" +
+      '<div class="pp-corps"><div class="pp-radar">' + posRadar(e.blocs, niveaux) + legende + "</div>" +
+      '<ul class="pp-domaines">' + e.blocs.map(function (b, n) {
+        var niv = niveaux[b.id];
+        return '<li style="--teinte:' + TE[n % 6] + '"><div class="pp-dom-tete"><strong>' + esc(b.titre) + '</strong><span class="pos-niveau pos-niveau--' + (niv || "vide") + '">' + esc(niv ? N[niv] : "Non renseigné") + "</span></div>" +
+          (niv ? "<p>" + inline(b[niv]) + "</p>" : "") + '<p class="pp-module"><em>À travailler dans :</em> ' + esc(b.module) + "</p></li>";
+      }).join("") + "</ul></div>" +
+      (vigilances.length ? '<div class="pp-vig"><h2>Points de vigilance</h2><ul>' + vigilances.map(function (x) { return "<li><strong>" + esc(x.item.titre) + "</strong> — " + esc(x.bloc.module) + "</li>"; }).join("") + "</ul></div>" : "") +
+      (refl.length ? '<div class="pp-refl"><h2>Ma réponse de fin de semaine</h2>' + refl.map(function (x) { return "<p><em>" + inline(x.q) + "</em></p><blockquote>" + esc(x.r) + "</blockquote>"; }).join("") + "</div>" : "") +
+      '<footer class="pp-pied">' + esc(e.mention || "") + "</footer></section>";
     zone.innerHTML = '<div class="colonne colonne--large pos-profil">' + entete(e, libelleEtape(e)) + '<div class="texte">' + md(e.texte) + "</div>" +
       (manquantes ? '<p class="pos-manque">' + ic("i-moitie") + "<span>" + manquantes + " situation" + (manquantes > 1 ? "s" : "") + " sans réponse : les domaines concernés ne sont pas renseignés.</span></p>" : "") +
       '<div class="pos-tableau"><div class="pos-tableau-g">' + posRadar(e.blocs, niveaux) + legende + '</div><div class="pos-tableau-d">' + vig +
@@ -1764,7 +1777,7 @@
       '<p class="rl-mention">' + ic("i-cadenas") + "<span>" + esc(e.mention || "") + "</span></p>" +
       /* D126 : le positionnement ne se rejoue pas — plus de bouton « Refaire » (réinitialisation réservée au mode présentation, touche P) */
       '<p class="pos-actions-profil"><button type="button" class="btn btn-secondaire btn-petit" id="pos-imprimer">' + ic("i-imprimer") + " Imprimer mon positionnement</button></p>" +
-      '<p class="sr-only" id="annonce" aria-live="polite"></p></div>';
+      impression + '<p class="sr-only" id="annonce" aria-live="polite"></p></div>';
     zone.querySelector(".pos-cartes").addEventListener("click", function (ev) {
       var b = ev.target.closest(".carte-ret"); if (!b) return;
       var r = b.querySelector(".cr-recto"), v = b.querySelector(".cr-verso"), retournee = v.hidden;
@@ -1907,7 +1920,7 @@
     function visuelHtml(code, corps) {
       var info = D.illustrations[code] || {};
       return '<div class="pg-info" data-code="' + esc(code) + '"><figure class="pg-info-fig"><button type="button" class="pg-info-btn" aria-label="Agrandir l\'infographie : ' + esc(info.scene || code) + '">' +
-        '<img src="assets/img/' + esc(code) + '.webp" alt="' + esc(info.alt || "") + '"><span class="pg-info-loupe" aria-hidden="true">' + ic("i-loupe") + "Agrandir</span></button></figure>" +
+        '<img src="assets/img/' + esc(code) + '.png" alt="' + esc(info.alt || "") + '"><span class="pg-info-loupe" aria-hidden="true">' + ic("i-loupe") + "Agrandir</span></button></figure>" +
         '<div class="pg-info-texte">' + corps + "</div></div>";
     }
     function avecVisuel(b, quoi, corps) {
