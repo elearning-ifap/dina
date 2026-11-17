@@ -102,18 +102,13 @@
       return '<div class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + Math.max(0, Math.min(pc, 100)) + '%;--c:' + couleur + '"></span></div>';
     }
     var html = '<article class="indicateur"><h3>Production de la formation digitale</h3><p class="grand">' + avanceProd + '<small> %</small></p>' +
-      jauge(avanceProd, "var(--turquoise)") +
-      '<p class="explication">Indicateur principal : ' + prod.length + ' livrables de production et ' + etapes.length +
-      ' étapes de fabrication du parcours, jusqu’à l’intégration dans LIANE. Pondération : en cours ' + Math.round(100 * P.en_cours) +
-      ' %, à valider ' + Math.round(100 * P.a_valider) + ' %, validé ou livré 100 %. Les unités sont comptées à poids égal.</p></article>';
+      jauge(avanceProd, "var(--turquoise)") + '<p class="explication">' + prodUnites.length + ' unités suivies · parcours et ressources pédagogiques</p></article>';
     html += '<article class="indicateur"><h3>Préparation du déploiement</h3><p class="grand">' + avanceDep + '<small> %</small></p>' +
-      jauge(avanceDep, "var(--bleu-progression)") +
-      '<p class="explication">' + dep.length +
-      ' livrables périphériques : communication, marketing, suivi du pilote et organisation administrative. Hors du pourcentage de production.</p></article>';
+      jauge(avanceDep, "var(--bleu-progression)") + '<p class="explication">' + dep.length + ' livrables · hors production</p></article>';
     html += '<article class="indicateur"><h3>Intégration dans LIANE</h3><p class="grand">' + integres +
       '<small> / ' + integrables.length + ' étapes</small></p>' +
       jauge(integrables.length ? Math.round(100 * integres / integrables.length) : 0, "var(--turquoise)") +
-      '<p class="explication">Nombre d’étapes du parcours dont l’intégration Moodle est validée ou livrée. Cet indicateur distingue l’avancement de conception d’un produit réellement installé dans LIANE.</p></article>';
+      '<p class="explication">Étapes du parcours intégrées et validées dans Moodle</p></article>';
     var T = D.temps;
     if (T && T.prevuJours) {
       var ventilation = T.productionParGroupe || {};
@@ -124,12 +119,7 @@
       html += '<article class="indicateur"><h3>Temps de production pédagogique et numérique</h3><p class="grand">' +
         fr(passeProduction) + '<small> j sur ' + fr(T.prevuJours) + ' j prévus</small></p>' +
         jauge(conso, conso > 100 ? "var(--rouge)" : "var(--bleu-progression)") +
-        '<p class="explication">' + conso + ' % du budget consommé ; ' + fr(reste) +
-        ' j disponibles. Hors concertation et activités périphériques.</p>' +
-        '<p class="comparaison ' + (ecart > 10 ? "c-alerte" : "c-ok") + '">' +
-        (ecart > 10 ? 'Temps consommé supérieur de ' + ecart + ' points à l’avancement estimé.' :
-        'Avancement de la production : ' + avanceProd + ' % ; budget consommé : ' + conso + ' %.') +
-        '</p><p class="explication">Dernière saisie : ' + esc(T.arreteAu) + '.</p></article>';
+        '<p class="explication">' + conso + ' % consommés · <strong>' + fr(reste) + ' j restants</strong></p></article>';
       var C = T.concertation || {};
       var equipe = C.equipe || 0, employeurs = C.employeurs || 0, preparation = C.preparation || 0;
       var concertation = equipe + employeurs + preparation;
@@ -139,16 +129,13 @@
         (concertation ? 100 * equipe / concertation : 0) + '%;--c:var(--jaune)"></span><span style="width:' +
         (concertation ? 100 * employeurs / concertation : 0) + '%;--c:var(--bleu-progression)"></span><span style="width:' +
         (concertation ? 100 * preparation / concertation : 0) + '%;--c:var(--turquoise)"></span></div>' +
-        '<p class="explication">Équipe projet : ' + fr(equipe) + ' j ; employeurs : ' + fr(employeurs) +
-        ' j ; préparation et suites : ' + fr(preparation) + ' j.</p>' +
-        '<p class="explication">Ces temps s’ajoutent aux 32 jours prévus pour la production.</p></article>';
+        '<p class="explication">Équipe : ' + fr(equipe) + ' j · Employeurs : ' + fr(employeurs) +
+        ' j · Préparation : ' + fr(preparation) + ' j</p></article>';
       html += '<article class="indicateur"><h3>Temps consacré aux activités périphériques</h3><p class="grand">' +
         fr(peripherique) + '<small> j hors production</small></p>' +
         '<div class="jauge" role="img" aria-label="Temps périphérique non imputé au budget de production"><span style="width:100%;--c:var(--gris)"></span></div>' +
-        '<p class="explication">Communication et marketing : ' + fr(ventilation.communication || 0) +
-        ' j ; suivi et organisation administrative : ' + fr((ventilation.suivi || 0) + (ventilation.administratif || 0)) + ' j.</p>' +
-        '<p class="explication">Temps total mobilisé sur DINA, toutes rubriques confondues : <strong>' +
-        fr(T.passeJours + concertation) + ' j</strong>. Ventilation historique à confirmer.</p></article>';
+        '<p class="explication">Communication et autres actions · total DINA : <strong>' +
+        fr(T.passeJours + concertation) + ' j</strong></p></article>';
     }
     $("indicateurs").innerHTML = html;
   })();
@@ -161,6 +148,46 @@
         return '<div class="chiffre"><strong>' + n[s.code] + '</strong><span style="--c:' + s.couleur + '">' + s.libelle + "</span></div>";
       }).join("") + "</div>" + barre(n, total) +
       '<p class="synthese-texte">' + faits + " livrables validés ou livrés sur " + total + ". Le détail module par module est plus bas.</p>";
+  })();
+
+
+  /* Navigation : tableau de bord synthétique, production et déploiement. */
+  var boutonsVues = Array.prototype.slice.call(document.querySelectorAll("[data-vue-bouton]"));
+  var sectionsVues = Array.prototype.slice.call(document.querySelectorAll("[data-vues]"));
+  function activerVue(vue, changerURL) {
+    if (["ensemble", "production", "deploiement"].indexOf(vue) < 0) vue = "ensemble";
+    boutonsVues.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-vue-bouton") === vue)); });
+    sectionsVues.forEach(function (el) { el.hidden = el.getAttribute("data-vues").split(" ").indexOf(vue) < 0; });
+    document.body.setAttribute("data-vue", vue);
+    if (changerURL) { history.replaceState(null, "", location.pathname + location.search + "#vue-" + vue); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  }
+  boutonsVues.forEach(function (b) { b.addEventListener("click", function () { activerVue(b.getAttribute("data-vue-bouton"), true); }); });
+  activerVue((location.hash.match(/^#vue-(ensemble|production|deploiement)$/) || [])[1] || "ensemble", false);
+
+  /* Priorités explicites : fondées sur les actions existantes et les validations en attente. */
+  (function () {
+    var priorites = [
+      {groupe:"À faire", rang:"1", titre:"Poursuivre la validation technique SCORM dans LIANE", acteur:"Marc · service informatique", cible:"Test technique SCORM dans LIANE", note:"Rapports Moodle, affichage mobile, réglages de l’activité."},
+      {groupe:"À faire", rang:"2", titre:"Préparer la mobilisation des experts spécialisés", acteur:"Marc · Marie-Noëlle", cible:"Validation experte du contenu juridique : experts en vacation et budget propre à DINA", note:"Corpus d’abord, relecture ciblée des modules ensuite."},
+      {groupe:"En attente", rang:"3", titre:"Validation des 21 libellés de compétences", acteur:"Marie-Noëlle", cible:"Libellés des 21 compétences (« Je… »)", note:"Document transmis, retour attendu."},
+      {groupe:"En attente", rang:"4", titre:"Validation des fiches outils du module 1", acteur:"Marie-Noëlle", cible:"Fiches outils du module 1", note:"Fiches accessibles dans le carnet du module."},
+      {groupe:"À faire", rang:"5", titre:"Poursuivre M1 jusqu’à son intégration", acteur:"Marc", cible:"M1", note:"Consolider les contenus et finaliser la chaîne de production."}
+    ];
+    function urlCible(c) { return parTitre[c] ? "#" + parTitre[c]._id : (parCode[c] ? "#" + parCode[c]._id : "#t-parcours"); }
+    $("priorites").innerHTML = ["À faire", "En attente"].map(function (g) {
+      var items = priorites.filter(function (p) { return p.groupe === g; });
+      return '<div class="priorites-colonne"><h3>' + esc(g) + '</h3><ol>' + items.map(function (p) {
+        return '<li><a href="' + urlCible(p.cible) + '" data-cible-vue="production"><span class="priorites-rang">' + p.rang + '</span><span class="priorites-contenu"><strong>' + esc(p.titre) + '</strong><small>' + esc(p.acteur) + '</small><small>' + esc(p.note) + '</small></span><span aria-hidden="true">↗</span></a></li>';
+      }).join("") + '</ol></div>';
+    }).join("");
+  })();
+
+  /* Les prochains jalons affichés sont issus de la liste existante, hors historique franchi. */
+  (function () {
+    var prochains = D.jalons.filter(function (j) { return j.etat !== "franchi" && !j.pause; }).slice(0, 4);
+    $("jalons-prochains").innerHTML = prochains.map(function (j) {
+      return '<article class="jalon-prochain"><span>' + esc(j.date) + '</span><strong>' + esc(j.titre) + '</strong><p>' + esc(j.texte) + '</p></article>';
+    }).join("");
   })();
 
   /* Avancement par groupe de livrables : % pondéré, livrables faits, temps de production */
@@ -245,6 +272,10 @@
       return '<span class="leg"><span class="pastille s-' + c + '" aria-hidden="true">' + ((c === "valide" || c === "livre") ? coche : "") + "</span>" + esc(LIBELLE[c]) + "</span>";
     }).join("");
     var entete = '<div class="m-entete" aria-hidden="true"><div>Étape du parcours</div>' + D.etapesFabrication.map(function (e) { return "<div>" + esc(e) + "</div>"; }).join("") + "</div>";
+    $("modules-apercu").innerHTML = D.parcours.map(function (p) {
+      var pc = pourcent(p.etats);
+      return '<a class="module-raccourci" href="#' + p._id + '"><span class="code">' + esc(p.code) + '</span><strong>' + esc(p.titre) + '</strong><span class="module-pourcent">' + pc + ' %</span><span class="module-mini-jauge"><span style="width:' + pc + '%"></span></span></a>';
+    }).join("");
     $("matrice").innerHTML = entete + D.parcours.map(function (p) {
       var pc = pourcent(p.etats);
       var acts = (p.actions || []);
@@ -334,7 +365,13 @@
   /* Suivre un lien vers un livrable : ouvrir sa catégorie et le mettre en évidence */
   function suivre() {
     var id = decodeURIComponent(location.hash.slice(1)); if (!id) return;
+    if (/^vue-(ensemble|production|deploiement)$/.test(id)) { activerVue(id.slice(4), false); return; }
     var el = document.getElementById(id); if (!el) return;
+    if (el.closest && el.closest("[data-vues]")) {
+      var bloc = el.closest("[data-vues]");
+      var sections = bloc.getAttribute("data-vues").split(" ");
+      if (bloc.hidden) activerVue(sections.indexOf("production") >= 0 ? "production" : "deploiement", false);
+    }
     var cat = el.closest ? el.closest("details") : null;
     if (cat) cat.open = true;
     if (el.hidden) el.hidden = false;
