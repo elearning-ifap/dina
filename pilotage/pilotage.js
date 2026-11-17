@@ -124,25 +124,31 @@
       html += '<article class="indicateur"><h3>Temps de production pédagogique et numérique</h3><p class="grand">' +
         fr(passeProduction) + '<small> j sur ' + fr(T.prevuJours) + ' j prévus</small></p>' +
         jauge(conso, conso > 100 ? "var(--rouge)" : "var(--bleu-progression)") +
-        '<p class="explication">' + conso + ' % du budget consommé, ' + fr(reste) +
-        ' j restants. Temps total saisi : ' + fr(T.passeJours) + ' j, dont ' + fr(peripherique) +
-        ' j classés dans les activités périphériques, non imputés ici. Dernière saisie le ' + esc(T.arreteAu) + '.</p>' +
+        '<p class="explication">' + conso + ' % du budget consommé ; ' + fr(reste) +
+        ' j disponibles. Hors concertation et activités périphériques.</p>' +
         '<p class="comparaison ' + (ecart > 10 ? "c-alerte" : "c-ok") + '">' +
-        (ecart > 10 ? "Le temps consommé dépasse l’avancement estimé de " + ecart + " points." :
-          "Avancement estimé : " + avanceProd + " % ; consommation du budget de production : " + conso + " %.") +
-        '</p>' +
-        (function () {
-          var du = duree(prod.concat(D.parcours)), nb = prod.length + D.parcours.length;
-          if (!du.estimes) return '<p class="explication">Durées de production des livrables : à estimer.</p>';
-          var depasse = du.total > T.prevuJours;
-          return '<p class="comparaison ' + (depasse ? "c-alerte" : "c-ok") +
-            '">Durée prévue des éléments de production déjà estimés : ' + fr(du.total) + ' j pour ' +
-            du.estimes + ' éléments sur ' + nb +
-            (depasse ? ', au-delà des ' + fr(T.prevuJours) + ' j annoncés.' : '.') + '</p>';
-        })() +
-        (jours(D.miseAJour) - jours(T.arreteAu) > 3 ?
-          '<p class="explication">La dernière saisie du temps précède la mise à jour des statuts : comparaison à prendre avec prudence.</p>' : '') +
-        '<p class="explication">La ventilation historique du temps reste à confirmer : les journées périphériques sont retranchées selon les rubriques existantes, sans modification des saisies d’origine.</p></article>';
+        (ecart > 10 ? 'Temps consommé supérieur de ' + ecart + ' points à l’avancement estimé.' :
+        'Avancement de la production : ' + avanceProd + ' % ; budget consommé : ' + conso + ' %.') +
+        '</p><p class="explication">Dernière saisie : ' + esc(T.arreteAu) + '.</p></article>';
+      var C = T.concertation || {};
+      var equipe = C.equipe || 0, employeurs = C.employeurs || 0, preparation = C.preparation || 0;
+      var concertation = equipe + employeurs + preparation;
+      html += '<article class="indicateur"><h3>Réunions, concertation et préparation</h3><p class="grand">' +
+        fr(concertation) + '<small> j hors budget de production</small></p>' +
+        '<div class="jauge" role="img" aria-label="Répartition du temps de concertation"><span style="width:' +
+        (concertation ? 100 * equipe / concertation : 0) + '%;--c:var(--jaune)"></span><span style="width:' +
+        (concertation ? 100 * employeurs / concertation : 0) + '%;--c:var(--bleu-progression)"></span><span style="width:' +
+        (concertation ? 100 * preparation / concertation : 0) + '%;--c:var(--turquoise)"></span></div>' +
+        '<p class="explication">Équipe projet : ' + fr(equipe) + ' j ; employeurs : ' + fr(employeurs) +
+        ' j ; préparation et suites : ' + fr(preparation) + ' j.</p>' +
+        '<p class="explication">Ces temps s’ajoutent aux 32 jours prévus pour la production.</p></article>';
+      html += '<article class="indicateur"><h3>Temps consacré aux activités périphériques</h3><p class="grand">' +
+        fr(peripherique) + '<small> j hors production</small></p>' +
+        '<div class="jauge" role="img" aria-label="Temps périphérique non imputé au budget de production"><span style="width:100%;--c:var(--gris)"></span></div>' +
+        '<p class="explication">Communication et marketing : ' + fr(ventilation.communication || 0) +
+        ' j ; suivi et organisation administrative : ' + fr((ventilation.suivi || 0) + (ventilation.administratif || 0)) + ' j.</p>' +
+        '<p class="explication">Temps total mobilisé sur DINA, toutes rubriques confondues : <strong>' +
+        fr(T.passeJours + concertation) + ' j</strong>. Ventilation historique à confirmer.</p></article>';
     }
     $("indicateurs").innerHTML = html;
   })();
