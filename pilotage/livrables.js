@@ -21,7 +21,7 @@ window.DINA_PILOTAGE = {
   /* Les 32 jours couvrent la production pédagogique et numérique seule. Les temps de communication restent historisés mais sont exclus du calcul du temps de production strict. Réunions et concertation (équipe projet, employeurs) viennent en plus. */
   temps: {
     prevuJours: 32,          /* charge de production annoncée à la direction */
-    passeJours: 10.56,        /* production : cumul saisi */
+    passeJours: 10.81,        /* production : cumul saisi */
     arreteAu: "17-11-2026",  /* date de la dernière saisie */
     /* Réunions, concertation et préparation : hors des 32 j. Trois rubriques. */
     concertation: {
@@ -35,7 +35,7 @@ window.DINA_PILOTAGE = {
     ],
     /* Production répartie par groupe de livrables (codes des catégories, plus « parcours » = modules, « moteur » = outil de production, « divers »).
        La somme doit faire passeJours. Répartition des saisies anciennes faite au mieux le 16-11, à corriger par Marc. */
-    productionParGroupe: { parcours: 5.58, cadrage: 1.75, ressources: 0.75, plateforme: 0, suivi: 0, communication: 0.95, administratif: 0, visuels: 0.15, moteur: 1, divers: 0.38 }
+    productionParGroupe: { parcours: 5.83, cadrage: 1.75, ressources: 0.75, plateforme: 0, suivi: 0, communication: 0.95, administratif: 0, visuels: 0.15, moteur: 1, divers: 0.38 }
   },
 
   /* Périmètres distincts : production = formation digitale intégrée et recettée dans LIANE ; deploiement = communication, pilotage du pilote et organisation administrative. Les cases de la matrice appartiennent toutes à la production. */
