@@ -159,6 +159,12 @@
     boutonsVues.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-vue-bouton") === vue)); });
     sectionsVues.forEach(function (el) { el.hidden = el.getAttribute("data-vues").split(" ").indexOf(vue) < 0; });
     document.body.setAttribute("data-vue", vue);
+    Array.prototype.forEach.call(document.querySelectorAll(".categorie[data-perimetre]"), function (c) {
+      c.hidden = vue !== "ensemble" && c.getAttribute("data-perimetre") !== vue;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".groupe[data-perimetre]"), function (g) {
+      g.hidden = vue !== "ensemble" && g.getAttribute("data-perimetre") !== vue;
+    });
     if (changerURL) { history.replaceState(null, "", location.pathname + location.search + "#vue-" + vue); window.scrollTo({ top: 0, behavior: "smooth" }); }
   }
   boutonsVues.forEach(function (b) { b.addEventListener("click", function () { activerVue(b.getAttribute("data-vue-bouton"), true); }); });
@@ -193,24 +199,25 @@
   /* Avancement par groupe de livrables : % pondéré, livrables faits, temps de production */
   (function () {
     var T = D.temps || {}, PG = T.productionParGroupe || {};
-    var groupes = [{ code: "parcours", titre: "Parcours de l'agent", texte: "Positionnement, prologue, 5 modules, bilan : les étapes de fabrication.", ancre: "t-parcours",
+    var groupes = [{ code: "parcours", titre: "Parcours de l'agent", texte: "Positionnement, prologue, 5 modules, bilan : les étapes de fabrication.", ancre: "t-parcours", perimetre: "production",
       etats: [].concat.apply([], D.parcours.map(function (p) { return p.etats; })), unite: "étapes de fabrication",
       duree: duree(D.parcours) }];
     D.categories.forEach(function (c, ic) {
-      groupes.push({ code: c.code, titre: c.titre, texte: c.texte, ancre: "cat-" + c.code, etats: c.livrables.map(function (l) { return l.statut; }), unite: "livrables", duree: duree(c.livrables) });
+      groupes.push({ code: c.code, perimetre: c.perimetre || "production", titre: c.titre, texte: c.texte, ancre: "cat-" + c.code, etats: c.livrables.map(function (l) { return l.statut; }), unite: "livrables", duree: duree(c.livrables) });
     });
-    if (D.backlog && D.backlog.items) groupes.push({ code: "moteur", titre: "Moteur et gabarits", texte: "Outil de production. Hors avancement global.", ancre: "t-backlog",
+    if (D.backlog && D.backlog.items) groupes.push({ code: "moteur", titre: "Moteur et gabarits", texte: "Outil de production. Hors avancement global.", ancre: "t-backlog", perimetre: "production",
       etats: D.backlog.items.map(function (x) { return x.statut; }), unite: "évolutions", duree: duree(D.backlog.items), hors: true });
     $("groupes").innerHTML = groupes.map(function (g) {
       var u = g.etats.filter(function (e) { return e !== "sans_objet"; });
       var faits = u.filter(function (e) { return e === "valide" || e === "livre"; }).length, pc = pourcent(g.etats);
       var j = PG[g.code];
-      return '<a class="groupe' + (g.hors ? " groupe--hors" : "") + '" href="#' + g.ancre + '"><div class="gr-tete"><h3>' + esc(g.titre) + '</h3><span class="gr-pc">' + pc + "<small>\u00a0%</small></span></div>" +
+      return '<a class="groupe' + (g.hors ? " groupe--hors" : "") + '" data-perimetre="' + (g.perimetre || "production") + '" href="#' + g.ancre + '"><div class="gr-tete"><h3>' + esc(g.titre) + '</h3><span class="gr-pc">' + pc + "<small>\u00a0%</small></span></div>" +
         '<div class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + pc + '%;--c:var(--turquoise)"></span></div>' +
         '<p class="gr-chiffres">' + faits + " / " + u.length + " " + g.unite + " validés ou livrés</p>" +
         '<p class="gr-temps"><span>Production : <strong>' + (j != null ? fr(j) + "\u00a0j" : "—") + "</strong></span><span>" + esc(g.duree.texte) + "</span></p>" +
         '<p class="gr-texte">' + esc(g.texte) + "</p></a>";
     }).join("");
+    activerVue(document.body.getAttribute("data-vue") || "ensemble", false);
     var somme = Object.keys(PG).reduce(function (a, k) { return a + PG[k]; }, 0);
     $("groupes-note").textContent = "Temps de production par groupe, en jours temps plein" + (PG.divers ? ", plus " + fr(PG.divers) + " j de tâches diverses non rattachées" : "") +
       (T.passeJours != null && Math.abs(somme - T.passeJours) > 0.01 ? ". Attention : la répartition (" + fr(somme) + " j) ne fait pas le total saisi (" + fr(T.passeJours) + " j)." : ".") +
@@ -324,7 +331,7 @@
   (function () {
     $("categories").innerHTML = D.categories.map(function (c, ic) {
       var n = compter(c.livrables), faits = n.valide + n.livre, du = duree(c.livrables);
-      return '<details class="categorie" id="cat-' + esc(c.code) + '" data-cat="' + ic + '">' +
+      return '<details class="categorie" id="cat-' + esc(c.code) + '" data-perimetre="' + (c.perimetre || "production") + '" data-cat="' + ic + '">' +
         '<summary><div class="cat-texte"><h3>' + esc(c.titre) + "</h3><p>" + esc(c.texte) + "</p></div>" +
         '<div class="mini-barre">' + barre(n, c.livrables.length) + "<small>" + faits + " / " + c.livrables.length + " validés ou livrés</small><small>" + du.texte + "</small></div></summary>" +
         '<ul class="liste">' + c.livrables.map(function (l) {
@@ -338,6 +345,7 @@
             (l.note ? '<p class="livrable-note">' + esc(l.note) + "</p>" : "") + "</li>";
         }).join("") + '<li class="vide" hidden>Aucun livrable avec ce statut.</li></ul></details>';
     }).join("");
+    activerVue(document.body.getAttribute("data-vue") || "ensemble", false);
 
     var filtres = [{ code: "tous", libelle: "Tous (" + tous.length + ")" }].concat(STATUTS.map(function (s) {
       return { code: s.code, libelle: s.libelle + " (" + compter(tous)[s.code] + ")" };
