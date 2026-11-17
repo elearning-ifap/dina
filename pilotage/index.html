@@ -7,7 +7,7 @@
 <title>DINA — tableau de bord du projet</title>
 <link rel="icon" href="../assets/logo/picto-dina.svg">
 <link rel="stylesheet" href="../css/tokens.css">
-<link rel="stylesheet" href="pilotage.css?v=20261117-ux2">
+<link rel="stylesheet" href="pilotage.css?v=20261117-ux4">
 <script src="livrables.js?v=20261117b"></script>
 </head>
 <body>
@@ -27,7 +27,7 @@
     <button type="button" class="vue-bouton" data-vue-bouton="production" aria-pressed="false">Production</button>
     <button type="button" class="vue-bouton" data-vue-bouton="deploiement" aria-pressed="false">Déploiement</button>
   </nav>
-  <section class="tete">
+  <section class="tete" data-vues="ensemble">
     <p class="surtitre">Pilotage du projet</p>
     <h1>Où en est DINA ?</h1>
     <p class="maj" id="maj"></p>
@@ -41,6 +41,17 @@
     <div class="alertes-liens" id="alertes-liens" hidden></div>
   </section>
 
+  <section class="vue-introduction bloc-vue" data-vues="production" aria-labelledby="t-production">
+    <p class="surtitre">Fabrication du parcours</p><h1 id="t-production">Production pédagogique et numérique</h1>
+    <p>Du positionnement au bilan : conception, ressources, validation experte, e-learning et intégration dans LIANE.</p>
+    <div class="vue-resume" id="resume-production"></div>
+  </section>
+  <section class="vue-introduction bloc-vue" data-vues="deploiement" aria-labelledby="t-deploiement">
+    <p class="surtitre">Mise en service</p><h1 id="t-deploiement">Préparation du déploiement</h1>
+    <p>Pilote, inscriptions, suivi administratif, accompagnement et communication. Ces activités restent distinctes de la production du parcours.</p>
+    <div class="vue-resume" id="resume-deploiement"></div>
+  </section>
+
   <section class="bloc-vue" data-vues="ensemble" aria-labelledby="t-priorites">
     <div class="entete-section"><div><p class="surtitre">Pour agir</p><h2 id="t-priorites">Les prochaines priorités</h2></div><p class="note-section">Les actions sont liées aux livrables du coffre.</p></div>
     <div id="priorites" class="priorites"></div>
@@ -51,9 +62,17 @@
     <div id="jalons-prochains" class="jalons-prochains"></div>
   </section>
 
+  <section class="bloc-vue" data-vues="production" aria-labelledby="t-parcours">
+    <div id="modules-apercu" class="modules-apercu" aria-label="Accès rapide aux étapes du parcours"></div>
+    <p class="surtitre">Le parcours de l'agent</p>
+    <h2 id="t-parcours">Avancement module par module</h2>
+    <div class="legende" id="legende-matrice"></div>
+    <div class="matrice" id="matrice"></div>
+  </section>
+
   <section class="bloc-vue" data-vues="production deploiement" aria-labelledby="t-groupes">
     <p class="surtitre">Par groupe</p>
-    <h2 id="t-groupes">Avancement et temps par groupe de livrables</h2>
+    <h2 id="t-groupes">Avancement par groupe de livrables</h2>
     <div class="groupes" id="groupes"></div>
     <p class="explication" id="groupes-note"></p>
   </section>
@@ -70,13 +89,6 @@
     <div class="attentes" id="attentes"></div>
   </section>
 
-  <section class="bloc-vue" data-vues="production" aria-labelledby="t-parcours">
-    <div id="modules-apercu" class="modules-apercu" aria-label="Accès rapide aux étapes du parcours"></div>
-    <p class="surtitre">Le parcours de l'agent</p>
-    <h2 id="t-parcours">Avancement module par module</h2>
-    <div class="legende" id="legende-matrice"></div>
-    <div class="matrice" id="matrice"></div>
-  </section>
 
   <section class="bloc-vue" data-vues="production" aria-labelledby="t-backlog" id="backlog-section" hidden>
     <p class="surtitre">Outil de production</p>
@@ -87,7 +99,7 @@
 
   <section class="bloc-vue" data-vues="production deploiement" aria-labelledby="t-livrables">
     <p class="surtitre">Inventaire</p>
-    <h2 id="t-livrables">Tous les livrables, par catégorie</h2>
+    <h2 id="t-livrables">Livrables du périmètre</h2>
     <div class="filtres" role="group" aria-label="Filtrer par statut" id="filtres"></div>
     <div id="categories"></div>
   </section>
@@ -100,6 +112,6 @@
   </div>
 </footer>
 
-<script src="pilotage.js?v=20261117-ux3"></script>
+<script src="pilotage.js?v=20261117-ux4"></script>
 </body>
 </html>
