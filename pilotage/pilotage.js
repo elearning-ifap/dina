@@ -33,7 +33,7 @@
   }
 
   var tous = [];
-  D.categories.forEach(function (c) { c.livrables.forEach(function (l) { tous.push(l); }); });
+  D.categories.forEach(function (c) { c.livrables.forEach(function (l) { l._perimetre = c.perimetre || "production"; tous.push(l); }); });
   var POND = D.ponderation || { a_faire: 0, en_cours: 0.5, a_valider: 0.8, valide: 1, livre: 1 };
   function pourcent(etats) {
     var u = etats.filter(function (e) { return e !== "sans_objet"; });
@@ -138,6 +138,11 @@
         fr(T.passeJours + concertation) + ' j</strong></p></article>';
     }
     $("indicateurs").innerHTML = html;
+    function resume(id, items) {
+      $(id).innerHTML = items.map(function (item) { return '<div class="resume-item"><strong>' + esc(item[0]) + '</strong><span>' + esc(item[1]) + '</span></div>'; }).join("");
+    }
+    resume("resume-production", [[avanceProd+" %","Avancement pédagogique et numérique"],[integres+" / "+integrables.length,"Étapes intégrées dans LIANE"],[T && T.prevuJours ? fr(T.prevuJours-passeProduction)+" j" : "—","Budget de production restant"]]);
+    resume("resume-deploiement", [[avanceDep+" %","Avancement du déploiement"],[dep.filter(function(l){return l.statut==="valide"||l.statut==="livre";}).length+" / "+dep.length,"Livrables terminés"],[T && T.prevuJours ? fr(peripherique)+" j" : "—","Temps périphérique mobilisé"]]);
   })();
 
   /* Synthèse */
@@ -159,6 +164,8 @@
     boutonsVues.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-vue-bouton") === vue)); });
     sectionsVues.forEach(function (el) { el.hidden = el.getAttribute("data-vues").split(" ").indexOf(vue) < 0; });
     document.body.setAttribute("data-vue", vue);
+    if (typeof rendreAttentes === "function") rendreAttentes(vue);
+    if (typeof mettreAJourFiltres === "function") mettreAJourFiltres(vue);
     Array.prototype.forEach.call(document.querySelectorAll(".categorie[data-perimetre]"), function (c) {
       c.hidden = vue !== "ensemble" && c.getAttribute("data-perimetre") !== vue;
     });
@@ -214,14 +221,14 @@
       return '<a class="groupe' + (g.hors ? " groupe--hors" : "") + '" data-perimetre="' + (g.perimetre || "production") + '" href="#' + g.ancre + '"><div class="gr-tete"><h3>' + esc(g.titre) + '</h3><span class="gr-pc">' + pc + "<small>\u00a0%</small></span></div>" +
         '<div class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + pc + '%;--c:var(--turquoise)"></span></div>' +
         '<p class="gr-chiffres">' + faits + " / " + u.length + " " + g.unite + " validés ou livrés</p>" +
-        '<p class="gr-temps"><span>Production : <strong>' + (j != null ? fr(j) + "\u00a0j" : "—") + "</strong></span><span>" + esc(g.duree.texte) + "</span></p>" +
+        '<p class="gr-temps"><span>' + (g.perimetre === "deploiement" ? "Temps périphérique" : "Temps de production") + ' : <strong>' + (j != null ? fr(j) + "\u00a0j" : "—") + "</strong></span><span>" + esc(g.duree.texte) + "</span></p>" +
         '<p class="gr-texte">' + esc(g.texte) + "</p></a>";
     }).join("");
     activerVue(document.body.getAttribute("data-vue") || "ensemble", false);
     var somme = Object.keys(PG).reduce(function (a, k) { return a + PG[k]; }, 0);
-    $("groupes-note").textContent = "Temps de production par groupe, en jours temps plein" + (PG.divers ? ", plus " + fr(PG.divers) + " j de tâches diverses non rattachées" : "") +
+    $("groupes-note").textContent = "Temps saisi par groupe, en jours temps plein (production ou activités périphériques)" + (PG.divers ? ", plus " + fr(PG.divers) + " j de tâches diverses non rattachées" : "") +
       (T.passeJours != null && Math.abs(somme - T.passeJours) > 0.01 ? ". Attention : la répartition (" + fr(somme) + " j) ne fait pas le total saisi (" + fr(T.passeJours) + " j)." : ".") +
-      " Le % pondère chaque statut comme l'avancement global.";
+      " Les pourcentages sont pondérés selon les statuts, comme dans la vue d’ensemble.";
   })();
 
   /* Jalons */
@@ -231,14 +238,16 @@
       '<span class="jalon-date">' + esc(j.date) + "</span><h3>" + esc(j.titre) + "</h3><p>" + esc(j.texte) + "</p></li>";
   }).join("");
 
-  /* En attente de */
-  (function () {
+  /* En attente de : les actions sont ventilées selon leur livrable de rattachement. */
+  function rendreAttentes(vue) {
+    if (vue === "ensemble") return;
+    function perimetres(lie) { return [].concat(lie || []).map(function(c){return parTitre[c] ? parTitre[c]._perimetre : (parCode[c] || c === "parcours" ? "production" : null);}).filter(Boolean); }
     var parPersonne = {};
     Object.keys(D.personnes).forEach(function (k) { parPersonne[k] = []; });
     tous.forEach(function (l) {
-      if (l.attente && parPersonne[l.attente]) parPersonne[l.attente].push({ titre: (l.statut === "a_valider" ? "Valider : " : "") + l.titre, detail: l.note, lien: l.lien, lienTexte: l.lienTexte, lies: '<a class="lien-livrable" href="#' + l._id + '">Voir le livrable</a>' });
+      if (l._perimetre === vue && l.attente && parPersonne[l.attente]) parPersonne[l.attente].push({ titre: (l.statut === "a_valider" ? "Valider : " : "") + l.titre, detail: l.note, lien: l.lien, lienTexte: l.lienTexte, lies: '<a class="lien-livrable" href="#' + l._id + '">Voir le livrable</a>' });
     });
-    D.parcours.forEach(function (p) {
+    if (vue === "production") D.parcours.forEach(function (p) {
       (p.actions || []).forEach(function (a) {
         [].concat(a.qui || []).forEach(function (k) {
           if (k !== "marc" && parPersonne[k]) parPersonne[k].push({ titre: p.code + " : " + a.titre, lien: a.doc, lienTexte: a.docTexte || "Ouvrir le document",
@@ -247,6 +256,7 @@
       });
     });
     (D.actions || []).forEach(function (a) {
+      if (perimetres(a.lie).indexOf(vue) < 0) return;
       var qui = [].concat(a.attente), avec = function (k) { return qui.filter(function (x) { return x !== k; }).map(nom); };
       qui.forEach(function (k) {
         if (!parPersonne[k]) return;
@@ -255,7 +265,7 @@
       });
     });
     $("attentes").innerHTML = Object.keys(D.personnes).filter(function (k) {
-      return PERSONNES_TOUJOURS.indexOf(k) >= 0 || parPersonne[k].length;
+      return parPersonne[k].length > 0;
     }).map(function (k) {
       var p = D.personnes[k], items = parPersonne[k];
       var init = p.nom.split(/[\s-]+/).filter(function (m) { return /^[A-ZÉÈ]/.test(m); }).map(function (m) { return m[0]; }).slice(0, 2).join("");
@@ -265,7 +275,7 @@
         (items.length ? "<ul>" + items.map(function (i) { return "<li>" + esc(i.titre) + (i.lien ? ' <a class="lien-doc" href="' + esc(i.lien) + '" target="_blank" rel="noopener">' + esc(i.lienTexte || "Ouvrir le document") + "</a>" : "") + (i.detail ? "<small>" + esc(i.detail) + "</small>" : "") + (i.lies ? '<span class="lies">' + i.lies + "</span>" : "") + "</li>"; }).join("") + "</ul>"
                       : '<p class="rien">Rien en attente pour l\'instant.</p>') + "</article>";
     }).join("");
-  })();
+  }
 
   /* Matrice du parcours */
   (function () {
@@ -347,17 +357,28 @@
     }).join("");
     activerVue(document.body.getAttribute("data-vue") || "ensemble", false);
 
-    var filtres = [{ code: "tous", libelle: "Tous (" + tous.length + ")" }].concat(STATUTS.map(function (s) {
-      return { code: s.code, libelle: s.libelle + " (" + compter(tous)[s.code] + ")" };
+    mettreAJourFiltres(document.body.getAttribute("data-vue") || "ensemble");
+
+    $("filtres").addEventListener("click", function (e) {
+      var b = e.target.closest(".filtre"); if (!b) return;
+      appliquerFiltre(b.getAttribute("data-filtre"));
+    });
+  })();
+
+  function mettreAJourFiltres(vue) {
+    var liste = tous.filter(function(l){return vue === "ensemble" || l._perimetre === vue;});
+    var filtres = [{ code: "tous", libelle: "Tous (" + liste.length + ")" }].concat(STATUTS.map(function (s) {
+      return { code: s.code, libelle: s.libelle + " (" + compter(liste)[s.code] + ")" };
     }));
     $("filtres").innerHTML = filtres.map(function (f, i) {
       return '<button type="button" class="filtre" data-filtre="' + f.code + '" aria-pressed="' + (i === 0) + '">' + esc(f.libelle) + "</button>";
     }).join("");
 
-    $("filtres").addEventListener("click", function (e) {
-      var b = e.target.closest(".filtre"); if (!b) return;
-      var code = b.getAttribute("data-filtre");
-      Array.prototype.forEach.call(document.querySelectorAll(".filtre"), function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+    appliquerFiltre("tous");
+  }
+
+  function appliquerFiltre(code) {
+      Array.prototype.forEach.call(document.querySelectorAll(".filtre"), function (x) { x.setAttribute("aria-pressed", String(x.getAttribute("data-filtre") === code)); });
       Array.prototype.forEach.call(document.querySelectorAll(".categorie"), function (cat) {
         var visibles = 0;
         Array.prototype.forEach.call(cat.querySelectorAll(".livrable"), function (li) {
@@ -367,8 +388,7 @@
         cat.querySelector(".vide").hidden = visibles > 0;
         cat.open = code !== "tous";
       });
-    });
-  })();
+  }
 
   /* Suivre un lien vers un livrable : ouvrir sa catégorie et le mettre en évidence */
   function suivre() {
@@ -378,7 +398,9 @@
     if (el.closest && el.closest("[data-vues]")) {
       var bloc = el.closest("[data-vues]");
       var sections = bloc.getAttribute("data-vues").split(" ");
-      if (bloc.hidden) activerVue(sections.indexOf("production") >= 0 ? "production" : "deploiement", false);
+      var categorie = el.closest(".categorie[data-perimetre]");
+      if (categorie && categorie.hidden) activerVue(categorie.getAttribute("data-perimetre"), false);
+      else if (bloc.hidden) activerVue(sections.indexOf("production") >= 0 ? "production" : "deploiement", false);
     }
     var cat = el.closest ? el.closest("details") : null;
     if (cat) cat.open = true;
