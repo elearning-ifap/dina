@@ -45,6 +45,10 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
 .grand small { font: 700 1rem var(--police-texte); color: var(--texte-2); }
 .jauge { height: 14px; border-radius: 999px; background: var(--gris-clair); overflow: hidden; }
 .jauge > span { display: block; height: 100%; border-radius: 999px; background: var(--c); }
+.jauge--repartition { display: flex; }
+.jauge--repartition > span { flex: 0 0 auto; border-radius: 0; }
+.jauge--repartition > span:first-child { border-radius: 999px 0 0 999px; }
+.jauge--repartition > span:last-child { border-radius: 0 999px 999px 0; }
 .explication { margin: .6rem 0 0; font-size: .8125rem; line-height: 1.45; color: var(--texte-2); }
 .comparaison { margin: .6rem 0 0; font-size: .875rem; font-weight: 700; padding: .4rem .7rem; border-radius: var(--rayon-compact); }
 .c-ok { background: var(--bleu-clair); color: var(--bleu); }
