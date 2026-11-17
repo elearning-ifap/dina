@@ -317,3 +317,12 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
  .entete-section { display: block; }
  .jalons-prochains,.modules-apercu { grid-template-columns: 1fr; }
 }
+
+/* Titres et synthèses spécifiques aux deux vues de travail. */
+.vue-introduction { margin-top: 1.1rem; }
+.vue-introduction > p:not(.surtitre) { color: var(--texte-2); max-width: 60rem; }
+.vue-resume { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin: 1.2rem 0; }
+.resume-item { display: flex; flex-direction: column; gap: .35rem; padding: 1rem; background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); }
+.resume-item strong { font-size: 1.65rem; color: var(--anthracite); }
+.resume-item span { color: var(--texte-2); font-size: .85rem; }
+@media (max-width:680px) { .vue-resume { grid-template-columns: 1fr; } }
