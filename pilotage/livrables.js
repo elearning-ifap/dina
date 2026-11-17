@@ -105,7 +105,6 @@ window.DINA_PILOTAGE = {
         { titre: "Vérifier la pertinence des infographies ; produire l'illustration de l'épisode « Qui fait quoi au pays ? »", qui: "marc", lie: ["Infographies du module 1", "Illustration de l'épisode « Qui fait quoi au pays ? » (accueil de l'ÉLAN)"] },
         { titre: "Valider les fiches outils du module (refaites, dans le carnet)", qui: "mnb", doc: "https://elearning-ifap.github.io/dina/m1-pages.html", docTexte: "Ouvrir le module (bouton Carnet)", lie: "Fiches outils du module 1" },
         { titre: "Transformer les fiches de connaissances en fiches d'apport A4 recto verso ; ajouter Nainville-les-Roches", qui: "marc", lie: "Fiches de connaissances" },
-        { titre: "Mettre un lien vers le texte de l'accord de Nouméa (5 mai 1998)", qui: "marc", lie: "M1" },
         { titre: "Trois choix de réponse au lieu de quatre dans les activités (retour province Sud)", qui: "marc", lie: "parcours" },
         { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
       ],
