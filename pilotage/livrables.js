@@ -106,6 +106,7 @@ window.DINA_PILOTAGE = {
         { titre: "Valider les fiches outils du module (refaites, dans le carnet)", qui: "mnb", doc: "https://elearning-ifap.github.io/dina/m1-pages.html", docTexte: "Ouvrir le module (bouton Carnet)", lie: "Fiches outils du module 1" },
         { titre: "Transformer les fiches de connaissances en fiches d'apport A4 recto verso ; ajouter Nainville-les-Roches", qui: "marc", lie: "Fiches de connaissances" },
         { titre: "Trois choix de réponse au lieu de quatre dans les activités (retour province Sud)", qui: "marc", lie: "parcours" },
+        { titre: "Déplacer l'apport du défi en fin d'épisode 3 et en fiche d'outil débloquée après le défi (D162, à appliquer au storyboard v0.11)", qui: "marc", lie: ["M1", "M2"] },
         { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
       ],
       note: "M1 en pages v0.10 le 17-11 : deux questions d'évaluation remplacées par des situations nouvelles (la province prise pour la mairie, un chiffre sans source) ; la première est à valider par l'expert ; liens cliquables dans les textes. v0.8 le 14-11 : évaluation réécrite (D150) : deux séries de six situations nouvelles, deux par compétence ; validé avec 5 bonnes réponses sur 6 ; la non-réussite ne bloque pas. v0.7 le 14-11 : infographies INF-M1-01 à 04 et ILL-N09 (T10). v0.6 le 14-11 : corrections juridiques après l'audit du fond (enseignement primaire, collèges et écoles primaires dans la fiche « Qui fait quoi », aide aux personnes âgées, citation retirée du repère de Nainville-les-Roches, « en vigueur » au lieu de « définitive ») ; récit aligné : la liste d'orientation est vérifiée avant de partir chez Passerelles, plus de traces de nouvel arrivant, « La semaine suivante » en fin de module. M1 en pages v0.5 le 12-11 : quatre repères historiques rétablis dans « Aller plus loin » (épisode 1), avec la table ronde de Nainville-les-Roches (1983) demandée par Marie-Ange Morvan, DRH de la province Sud (D147) ; formulation à valider. M1 en pages v0.4 le 11-11 : jours de la semaine rétablis, lundi à vendredi (D143) ; défi recentré sur « transmettre au bon interlocuteur, avec le contexte » (D144), tri « je fais / j'oriente / je transmets à Samuel », nouvelle demande « aides de la province », à valider. Avant, v0.3 du 10-11 : module complet (épisodes 1 à 3, défi « Le premier appel de Joël », évaluation, bilan). Épisode 3 « Une information sûre » et défi repris de M1 en écrans, avec Cédric qui vit aussi une situation. M1 en écrans devient une réserve de contenus (D128). Carnet du module actif : chaque épisode débloque sa fiche (D132), dont une fiche de connaissances « Qui fait quoi en Nouvelle-Calédonie ? » (D131). Épisode 3 enrichi de trois nouveaux blocs de page : bureau à explorer, recherche simulée, message à composer. À valider : grille des documents administratifs (épisode 3), cinq demandes du défi.", lien: "../m1-pages.html" },
@@ -139,10 +140,10 @@ window.DINA_PILOTAGE = {
         { titre: "Faire valider le corpus par les experts spécialisés", qui: "mnb", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA" },
         { titre: "Écrire les épisodes 3 et 4, le défi du jeudi, l'évaluation du vendredi (trois repères, D158) et le bilan", qui: "marc", lie: "M4" },
         { titre: "Intégrer au récit une situation sur la confidentialité des données : document à caviarder, données nominatives et outil d'IA", qui: "marc", lie: "M4" },
-        { titre: "Préparer les prompts des illustrations (ILL-Q01 à Q03, INF-M4-01 et 02)", qui: "marc", lie: "Illustrations des modules 4 et 5" },
+        { titre: "Vérifier les images de M4 dans la page (ILL-Q01 à Q09, INF-M4-01 à 04)", qui: "marc", lie: "Illustrations des modules 4 et 5" },
         { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" }
       ],
-      note: "17-11 : descriptif v0.3 (1 h 45, un seul SCORM : D157 ; évaluation en trois repères : D158). Storyboard « M4 en pages v0.1 » : épisodes 1 (lundi) et 2 (mardi), page construite. Restent les épisodes 3 et 4, le défi, l'évaluation et le bilan ; images à produire." },
+      note: "17-11 : descriptif v0.3 (1 h 45, un seul SCORM : D157 ; évaluation en trois repères : D158). Storyboard « M4 en pages v0.1 » : épisodes 1 (lundi) et 2 (mardi), page construite. Restent les épisodes 3 et 4, le défi, l'évaluation et le bilan. Images produites et placées. Fiche source sur le droit de retrait, l'accident de service et le service fait ajoutées au corpus." },
     { code: "M5", titre: "J'incarne le service public", sousTitre: "",
       etats: ["en_cours", "a_faire", "a_faire", "en_cours", "a_faire", "a_faire", "a_faire"],
       actions: [
@@ -152,7 +153,7 @@ window.DINA_PILOTAGE = {
         { titre: "Préparer les prompts des illustrations (ILL-S01 à S09, INF-M5-01 à 04)", qui: "marc", lie: "Illustrations des modules 4 et 5" },
         { titre: "Produire les fiches outils du module", qui: "marc", lie: "Fiches outils des modules 2 à 5" }
       ],
-      note: "17-11 : descriptif v0.2 (1 h 15, trois repères). Storyboard « M5 en pages v0.1 » : cinq pages (lundi à jeudi, défi), évaluation, bilan et 5 fiches. Page pas encore construite ; images à produire." },
+      note: "17-11 : descriptif v0.2 (1 h 15, trois repères). Storyboard « M5 en pages v0.1 » : cinq pages (lundi à jeudi, défi), évaluation, bilan et 5 fiches. Page « m5-pages » construite le 17-11, pas encore rejouée dans un navigateur ; images à produire. D163 : la preuve de la compétence C19 est cherchée dans M5." },
     { code: "BIL", titre: "Bilan de parcours", sousTitre: "",
       etats: ["sans_objet", "a_faire", "a_faire", "a_faire", "sans_objet", "a_faire", "a_faire"],
       actions: [
@@ -274,7 +275,7 @@ window.DINA_PILOTAGE = {
         { titre: "Illustration de l'épisode « Qui fait quoi au pays ? » (accueil de l'ÉLAN)", lot: "L4", statut: "a_faire", qui: "marc", duree: 0.25, note: "Prompt prêt (ILL-N09). Emplacement visible dans le prototype tant que l'image manque." },
         { titre: "Illustrations du module 2", lot: "L4", statut: "livre", qui: "marc", note: "14-11 : les six illustrations de M2 en pages (ILL-M01, M03, M04, M05, M06, M08) sont en place et conformes au storyboard v0.4. ILL-M02 et M07 ne servaient qu'à l'ancienne version de M2. Les évaluations n'appellent pas d'image." },
         { titre: "Illustrations et infographies du module 3", lot: "L4", statut: "en_cours", qui: "marc", note: "17-11 : 8 scènes (ILL-T01 à T08) et 4 infographies (INF-M3-01 à 04) produites, converties (JPG 85 %, PNG optimisés) et placées dans le dossier des images ; planches de lieux L2, L7 et L11 faites. Reste à les voir en place dans la page M3." },
-        { titre: "Illustrations des modules 4 et 5", lot: "L4", statut: "a_faire", qui: "marc", note: "Codes prévus par les storyboards du 17-11 : M4 ILL-Q01 à Q03 et INF-M4-01, 02 ; M5 ILL-S01 à S09 et INF-M5-01 à 04. Prompts à rédiger." },
+        { titre: "Illustrations des modules 4 et 5", lot: "L4", statut: "en_cours", qui: "marc", note: "17-11 : côté M4, ILL-Q01 à Q09 et INF-M4-01 à 04 produites, allégées (JPG 1600 × 900, PNG 256 couleurs) et placées dans le dossier des images ; planche de lieux L8 et L9 faites. Reste à les voir en place dans la page M4. Côté M5 : ILL-S01 à S09 et INF-M5-01 à 04, prompts à rédiger." },
         { titre: "Visuels des 5 badges", lot: "L6", statut: "en_cours", qui: "marc", note: "14-11 : prompts prêts (BDG-M1 à BDG-M5) : un médaillon par module, sur la carte du parcours, sans texte (Moodle affiche le nom). À confirmer : un pictogramme en design plat plutôt qu'une photographie (exception à D27)." }
       ] }
   ],
