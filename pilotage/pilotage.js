@@ -135,7 +135,7 @@
       var concertation = equipe + employeurs + preparation;
       html += '<article class="indicateur"><h3>Réunions, concertation et préparation</h3><p class="grand">' +
         fr(concertation) + '<small> j hors budget de production</small></p>' +
-        '<div class="jauge" role="img" aria-label="Répartition du temps de concertation"><span style="width:' +
+        '<div class="jauge jauge--repartition" role="img" aria-label="Répartition du temps de concertation"><span style="width:' +
         (concertation ? 100 * equipe / concertation : 0) + '%;--c:var(--jaune)"></span><span style="width:' +
         (concertation ? 100 * employeurs / concertation : 0) + '%;--c:var(--bleu-progression)"></span><span style="width:' +
         (concertation ? 100 * preparation / concertation : 0) + '%;--c:var(--turquoise)"></span></div>' +
