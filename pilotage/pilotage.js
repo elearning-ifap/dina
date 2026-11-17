@@ -73,61 +73,76 @@
   $("maj").textContent = "Mis à jour le " + D.miseAJour + ".";
   if (D.avertissement) { $("avertissement").textContent = D.avertissement; $("avertissement").hidden = false; }
 
-  /* Indicateurs : avancement global et temps passé */
+  /* Indicateurs : deux périmètres, préparation Moodle et temps de production strict. */
   (function () {
     var P = D.ponderation || { a_faire: 0, en_cours: 0.5, a_valider: 0.8, valide: 1, livre: 1 };
-    var unites = [];
-    tous.forEach(function (l) { unites.push(l.statut); });
-    D.parcours.forEach(function (p) { p.etats.forEach(function (e) { if (e !== "sans_objet") unites.push(e); }); });
-    var somme = unites.reduce(function (a, e) { return a + (P[e] || 0); }, 0);
-    var avance = unites.length ? Math.round(100 * somme / unites.length) : 0;
-
+    var prod = [], dep = [];
+    D.categories.forEach(function (c) {
+      c.livrables.forEach(function (l) { (c.perimetre === "deploiement" ? dep : prod).push(l); });
+    });
+    function progression(unites) {
+      return unites.length ? Math.round(100 * unites.reduce(function (n, statut) {
+        return n + (P[statut] || 0);
+      }, 0) / unites.length) : 0;
+    }
+    var etapes = [];
+    D.parcours.forEach(function (p) { p.etats.forEach(function (e) { if (e !== "sans_objet") etapes.push(e); }); });
+    var prodUnites = prod.map(function (l) { return l.statut; }).concat(etapes);
+    var depUnites = dep.map(function (l) { return l.statut; });
+    var avanceProd = progression(prodUnites), avanceDep = progression(depUnites);
+    var colonnesMoodle = (D.etapesFabrication || []).indexOf("Intégration Moodle");
+    var integrables = D.parcours.filter(function (p) {
+      return colonnesMoodle >= 0 && p.etats[colonnesMoodle] !== "sans_objet";
+    });
+    var integres = integrables.filter(function (p) {
+      return p.etats[colonnesMoodle] === "valide" || p.etats[colonnesMoodle] === "livre";
+    }).length;
     function jours(d) { var m = String(d || "").split("-"); return m.length === 3 ? Date.UTC(+m[2], +m[1] - 1, +m[0]) / 864e5 : 0; }
     function jauge(pc, couleur) {
-      return '<div class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + Math.min(pc, 100) + "%;--c:" + couleur + '"></span></div>';
+      return '<div class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + Math.max(0, Math.min(pc, 100)) + '%;--c:' + couleur + '"></span></div>';
     }
-    var html = '<article class="indicateur"><h3>Avancement global</h3><p class="grand">' + avance + "<small> %</small></p>" + jauge(avance, "var(--turquoise)") +
-      '<p class="explication">Calculé sur ' + unites.length + " unités : les " + tous.length + " livrables et les " + (unites.length - tous.length) +
-      " étapes de fabrication des modules. À faire 0\u00a0%, en cours " + Math.round(100 * P.en_cours) + "\u00a0%, à valider " + Math.round(100 * P.a_valider) + "\u00a0%, validé ou livré 100\u00a0%.</p></article>";
-
+    var html = '<article class="indicateur"><h3>Production de la formation digitale</h3><p class="grand">' + avanceProd + '<small> %</small></p>' +
+      jauge(avanceProd, "var(--turquoise)") +
+      '<p class="explication">Indicateur principal : ' + prod.length + ' livrables de production et ' + etapes.length +
+      ' étapes de fabrication du parcours, jusqu’à l’intégration dans LIANE. Pondération : en cours ' + Math.round(100 * P.en_cours) +
+      ' %, à valider ' + Math.round(100 * P.a_valider) + ' %, validé ou livré 100 %. Les unités sont comptées à poids égal.</p></article>';
+    html += '<article class="indicateur"><h3>Préparation du déploiement</h3><p class="grand">' + avanceDep + '<small> %</small></p>' +
+      jauge(avanceDep, "var(--bleu-progression)") +
+      '<p class="explication">' + dep.length +
+      ' livrables périphériques : communication, marketing, suivi du pilote et organisation administrative. Hors du pourcentage de production.</p></article>';
+    html += '<article class="indicateur"><h3>Intégration dans LIANE</h3><p class="grand">' + integres +
+      '<small> / ' + integrables.length + ' étapes</small></p>' +
+      jauge(integrables.length ? Math.round(100 * integres / integrables.length) : 0, "var(--turquoise)") +
+      '<p class="explication">Nombre d’étapes du parcours dont l’intégration Moodle est validée ou livrée. Cet indicateur distingue l’avancement de conception d’un produit réellement installé dans LIANE.</p></article>';
     var T = D.temps;
     if (T && T.prevuJours) {
-      var conso = Math.round(100 * T.passeJours / T.prevuJours), reste = T.prevuJours - T.passeJours;
-      var ecart = conso - avance;
-      html += '<article class="indicateur"><h3>Temps de production</h3><p class="grand">' + fr(T.passeJours) + "<small> j sur " + fr(T.prevuJours) + " j prévus</small></p>" +
+      var ventilation = T.productionParGroupe || {};
+      var peripherique = (ventilation.communication || 0) + (ventilation.administratif || 0) + (ventilation.suivi || 0);
+      var passeProduction = Math.max(0, T.passeJours - peripherique);
+      var conso = Math.round(100 * passeProduction / T.prevuJours), reste = T.prevuJours - passeProduction;
+      var ecart = conso - avanceProd;
+      html += '<article class="indicateur"><h3>Temps de production pédagogique et numérique</h3><p class="grand">' +
+        fr(passeProduction) + '<small> j sur ' + fr(T.prevuJours) + ' j prévus</small></p>' +
         jauge(conso, conso > 100 ? "var(--rouge)" : "var(--bleu-progression)") +
-        '<p class="explication">' + conso + "\u00a0% de la charge consommée, " + fr(reste) + " j restants. Jours temps plein, dernière saisie le " + esc(T.arreteAu) + ".</p>" +
-        '<p class="explication">Réunions, concertation et préparation : en plus, hors des ' + fr(T.prevuJours) + " j (voir à côté).</p>" +
+        '<p class="explication">' + conso + ' % du budget consommé, ' + fr(reste) +
+        ' j restants. Temps total saisi : ' + fr(T.passeJours) + ' j, dont ' + fr(peripherique) +
+        ' j classés dans les activités périphériques, non imputés ici. Dernière saisie le ' + esc(T.arreteAu) + '.</p>' +
         '<p class="comparaison ' + (ecart > 10 ? "c-alerte" : "c-ok") + '">' +
-        (ecart > 10 ? "Le temps consommé dépasse l'avancement de " + ecart + " points."
-                    : "L'avancement (" + avance + "\u00a0%) est en phase ou en avance sur le temps consommé (" + conso + "\u00a0%).") + "</p>" +
+        (ecart > 10 ? "Le temps consommé dépasse l’avancement estimé de " + ecart + " points." :
+          "Avancement estimé : " + avanceProd + " % ; consommation du budget de production : " + conso + " %.") +
+        '</p>' +
         (function () {
-          var du = duree(tous.concat(D.parcours)), nb = tous.length + D.parcours.length;
+          var du = duree(prod.concat(D.parcours)), nb = prod.length + D.parcours.length;
           if (!du.estimes) return '<p class="explication">Durées de production des livrables : à estimer.</p>';
           var depasse = du.total > T.prevuJours;
-          return '<p class="comparaison ' + (depasse ? "c-alerte" : "c-ok") + '">Durée prévue des livrables : ' + fr(du.total) + "\u00a0j pour " + du.estimes + " éléments estimés sur " + nb +
-            (depasse ? ", au-delà des " + fr(T.prevuJours) + "\u00a0j annoncés." : ".") + "</p>";
+          return '<p class="comparaison ' + (depasse ? "c-alerte" : "c-ok") +
+            '">Durée prévue des éléments de production déjà estimés : ' + fr(du.total) + ' j pour ' +
+            du.estimes + ' éléments sur ' + nb +
+            (depasse ? ', au-delà des ' + fr(T.prevuJours) + ' j annoncés.' : '.') + '</p>';
         })() +
-        (jours(D.miseAJour) - jours(T.arreteAu) > 3 ? '<p class="explication">Saisie du temps antérieure à la mise à jour des statuts : la comparaison est à prendre avec prudence.</p>' : "") + "</article>";
-    }
-    var C = T && T.concertation;
-    if (C) {
-      var RUB = [
-        { cle: "equipe", titre: "Équipe projet", texte: "Réunions avec Marie-Noëlle Blanck, la direction" },
-        { cle: "employeurs", titre: "Employeurs", texte: "COPIL, séances, échanges avec les DRH" },
-        { cle: "preparation", titre: "Préparation et suites", texte: "Supports, comptes rendus, courriels" }
-      ];
-      var totC = RUB.reduce(function (a, r) { return a + (C[r.cle] || 0); }, 0);
-      var totalTout = (T.passeJours || 0) + totC;
-      html += '<article class="indicateur"><h3>Concertation et préparation</h3><p class="grand">' + fr(totC) + "<small> j, hors des " + fr(T.prevuJours) + " j</small></p>" +
-        '<ul class="rubriques">' + RUB.map(function (r) {
-          var v = C[r.cle] || 0, pc = totC ? Math.round(100 * v / totC) : 0;
-          return '<li><div class="rub-ligne"><strong>' + esc(r.titre) + "</strong><span>" + fr(v) + "\u00a0j</span></div>" + jauge(pc, "var(--jaune)") + "<small>" + esc(r.texte) + "</small></li>";
-        }).join("") + "</ul>" +
-        ((T.contributions || []).length ? '<p class="explication"><strong>Temps de l\'équipe, hors réunions avec Marc :</strong> ' + T.contributions.map(function (c) {
-          return esc(nom(c.qui)) + " : " + (c.jours == null ? "pas encore saisi" : fr(c.jours) + "\u00a0j") + (c.texte ? " (" + esc(c.texte.toLowerCase()) + ")" : "");
-        }).join(" ; ") + ".</p>" : "") +
-        '<p class="explication">Temps total sur DINA : ' + fr(totalTout) + " j, dont " + (totalTout ? Math.round(100 * totC / totalTout) : 0) + "\u00a0% de concertation et de préparation.</p></article>";
+        (jours(D.miseAJour) - jours(T.arreteAu) > 3 ?
+          '<p class="explication">La dernière saisie du temps précède la mise à jour des statuts : comparaison à prendre avec prudence.</p>' : '') +
+        '<p class="explication">La ventilation historique du temps reste à confirmer : les journées périphériques sont retranchées selon les rubriques existantes, sans modification des saisies d’origine.</p></article>';
     }
     $("indicateurs").innerHTML = html;
   })();
@@ -241,7 +256,7 @@
     }).join("");
   })();
 
-  /* Évolutions du moteur et des gabarits : trois priorités en colonnes. Hors avancement global. */
+  /* Évolutions du moteur et des gabarits : trois priorités en colonnes. Hors indicateurs d’avancement, car ces travaux alimentent les livrables de production déjà comptés. */
   (function () {
     var B = D.backlog;
     if (!B || !B.items || !B.items.length) return;
