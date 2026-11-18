@@ -97,6 +97,9 @@
     var integres = integrables.filter(function (p) {
       return p.etats[colonnesMoodle] === "valide" || p.etats[colonnesMoodle] === "livre";
     }).length;
+    var plat = []; D.categories.forEach(function (c) { if (c.code === "plateforme") c.livrables.forEach(function (l) { plat.push(l.statut); }); });
+    var platFaits = plat.filter(function (x) { return x === "valide" || x === "livre"; }).length;
+    var avanceInteg = progression(plat.concat(integrables.map(function (p) { return p.etats[colonnesMoodle]; })));
     function jours(d) { var m = String(d || "").split("-"); return m.length === 3 ? Date.UTC(+m[2], +m[1] - 1, +m[0]) / 864e5 : 0; }
     function jauge(pc, couleur) {
       return '<div class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + Math.max(0, Math.min(pc, 100)) + '%;--c:' + couleur + '"></span></div>';
@@ -105,10 +108,9 @@
       jauge(avanceProd, "var(--turquoise)") + '<p class="explication">' + prodUnites.length + ' unités suivies · parcours et ressources pédagogiques</p></article>';
     html += '<article class="indicateur"><h3>Préparation du déploiement</h3><p class="grand">' + avanceDep + '<small> %</small></p>' +
       jauge(avanceDep, "var(--bleu-progression)") + '<p class="explication">' + dep.length + ' livrables · hors production</p></article>';
-    html += '<article class="indicateur"><h3>Intégration dans LIANE</h3><p class="grand">' + integres +
-      '<small> / ' + integrables.length + ' étapes</small></p>' +
-      jauge(integrables.length ? Math.round(100 * integres / integrables.length) : 0, "var(--turquoise)") +
-      '<p class="explication">Étapes du parcours intégrées et validées dans Moodle</p></article>';
+    html += '<article class="indicateur"><h3>Intégration dans LIANE</h3><p class="grand">' + avanceInteg + '<small> %</small></p>' +
+      jauge(avanceInteg, "var(--turquoise)") +
+      '<p class="explication">Cours, réglages et paquets : ' + platFaits + ' / ' + plat.length + ' livrables de la plateforme validés ou livrés · ' + integres + ' / ' + integrables.length + ' paquets finaux intégrés et validés</p></article>';
     var T = D.temps;
     if (T && T.prevuJours) {
       var ventilation = T.productionParGroupe || {};
