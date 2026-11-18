@@ -170,16 +170,17 @@
   (function () {
     var n = compter(tous), faits = n.valide + n.livre, pc = pourcent(tous.map(function (l) { return l.statut; }));
     var T = D.temps || {};
-    var barres = [{ titre: "Parcours de l'agent", etats: [].concat.apply([], D.parcours.map(function (p) { return p.etats; })) }]
-      .concat(D.categories.map(function (c) { return { titre: c.titre, etats: c.livrables.map(function (l) { return l.statut; }) }; }));
+    var barres = [{ titre: "Parcours de l'agent", ancre: "t-parcours", etats: [].concat.apply([], D.parcours.map(function (p) { return p.etats; })) }]
+      .concat(D.categories.map(function (c) { return { titre: c.titre, ancre: "cat-" + c.code, etats: c.livrables.map(function (l) { return l.statut; }) }; }));
     var html = '<div class="global-chiffres"><div class="global-pc"><strong>' + pc + '<small> %</small></strong><span>Avancement global des livrables</span></div>' +
       '<div class="global-pc"><strong>' + faits + '<small> / ' + tous.length + '</small></strong><span>livrables validés ou livrés</span></div>' +
       (T.prevuJours ? '<div class="global-pc"><strong>' + fr(T.passeJours) + '<small> j</small></strong><span>de temps saisi (production : ' + fr(T.prevuJours) + ' j prévus)</span></div>' : "") + "</div>" +
       '<div class="global-barres">' + barres.map(function (b) {
         var u = b.etats.filter(function (e) { return e !== "sans_objet"; }), f = u.filter(function (e) { return e === "valide" || e === "livre"; }).length, p = pourcent(b.etats);
-        return '<div class="global-barre"><span class="global-nom">' + esc(b.titre) + '</span><div class="jauge" role="img" aria-label="' + p + ' %"><span style="width:' + p + '%;--c:var(--turquoise)"></span></div><b>' + p + ' %</b><small>' + f + " / " + u.length + "</small></div>";
-      }).join("") + "</div>";
+        return '<a class="global-barre" href="#' + b.ancre + '"><span class="global-nom">' + esc(b.titre) + '</span><div class="jauge" role="img" aria-label="' + p + ' %"><span style="width:' + p + '%;--c:var(--turquoise)"></span></div><b>' + p + ' %</b><small>' + f + " / " + u.length + "</small></a>";
+      }).join("") + '</div><p class="global-aide">Cliquez sur un groupe pour voir la liste de ses livrables.</p>';
     $("global").innerHTML = html;
+    Array.prototype.forEach.call(document.querySelectorAll("a.global-barre"), function (a) { a.addEventListener("click", function () { setTimeout(suivre, 0); }); });
   })();
 
   /* Vue Marie-Noëlle : ce qu'elle doit relire ou valider, avec les liens */
@@ -463,13 +464,13 @@
   /* Suivre un lien vers un livrable : ouvrir sa catégorie et le mettre en évidence */
   function suivre() {
     var id = decodeURIComponent(location.hash.slice(1)); if (!id) return;
-    if (/^vue-(ensemble|production|deploiement)$/.test(id)) { activerVue(id.slice(4), false); return; }
+    if (/^vue-(ensemble|mnb|production|deploiement)$/.test(id)) { activerVue(id.slice(4), false); return; }
     var el = document.getElementById(id); if (!el) return;
     if (el.closest && el.closest("[data-vues]")) {
       var bloc = el.closest("[data-vues]");
       var sections = bloc.getAttribute("data-vues").split(" ");
       var categorie = el.closest(".categorie[data-perimetre]");
-      if (categorie && categorie.hidden) activerVue(categorie.getAttribute("data-perimetre"), false);
+      if (categorie && (categorie.hidden || bloc.hidden)) activerVue(categorie.getAttribute("data-perimetre"), false);
       else if (bloc.hidden) activerVue(sections.indexOf("production") >= 0 ? "production" : "deploiement", false);
     }
     var cat = el.closest ? el.closest("details") : null;
