@@ -326,3 +326,23 @@ h3 { font-family: var(--police-titre); font-weight: 700; color: var(--anthracite
 .resume-item strong { font-size: 1.65rem; color: var(--anthracite); }
 .resume-item span { color: var(--texte-2); font-size: .85rem; }
 @media (max-width:680px) { .vue-resume { grid-template-columns: 1fr; } }
+
+/* Avancement global et listes d'actions (v20261119) */
+.global { background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); box-shadow: var(--ombre); padding: 1.25rem; margin: 1rem 0; }
+.global-chiffres { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; margin-bottom: 1rem; }
+.global-pc strong { display: block; font-size: 2.25rem; line-height: 1.1; }
+.global-pc small { font-size: 1rem; font-weight: 600; color: var(--texte-2); }
+.global-pc span { font-size: .875rem; color: var(--texte-2); }
+.global-barres { display: grid; gap: .5rem; }
+.global-barre { display: grid; grid-template-columns: minmax(9rem, 16rem) 1fr 3rem 4rem; gap: .75rem; align-items: center; font-size: .875rem; }
+.global-barre .jauge { height: 10px; }
+.global-barre b { text-align: right; }
+.global-barre small { color: var(--texte-2); }
+@media (max-width: 640px) { .global-barre { grid-template-columns: 1fr 3rem; } .global-barre .jauge { grid-column: 1 / -1; order: 3; } .global-barre small { display: none; } }
+.liste-actions { display: grid; gap: .5rem; margin: .75rem 0 1.5rem; }
+.liste-actions h2 { margin-top: 1rem; }
+.ligne-action { background: var(--carte); border: 1px solid var(--bordure); border-radius: var(--rayon); padding: .7rem .9rem; display: grid; gap: .3rem; }
+.ligne-titre { display: flex; flex-wrap: wrap; gap: .4rem .6rem; align-items: center; }
+.ligne-liens { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.ligne-action small, .ligne-note { color: var(--texte-2); }
+.liste-repliee > summary { cursor: pointer; font-weight: 700; margin: .5rem 0; }

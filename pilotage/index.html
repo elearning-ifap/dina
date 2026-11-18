@@ -7,8 +7,8 @@
 <title>DINA — tableau de bord du projet</title>
 <link rel="icon" href="../assets/logo/picto-dina.svg">
 <link rel="stylesheet" href="../css/tokens.css">
-<link rel="stylesheet" href="pilotage.css?v=20261117-ux4">
-<script src="livrables.js?v=20261117b"></script>
+<link rel="stylesheet" href="pilotage.css?v=20261119-ux5">
+<script src="livrables.js?v=20261119"></script>
 </head>
 <body>
 <!-- Tableau de bord des livrables DINA. Les données sont dans livrables.js : ne rien modifier ici pour une mise à jour. -->
@@ -23,15 +23,18 @@
 
 <main id="contenu" class="page">
   <nav class="navigation-vues" aria-label="Vues du tableau de bord">
-    <button type="button" class="vue-bouton" data-vue-bouton="ensemble" aria-pressed="true">Vue d’ensemble</button>
+    <button type="button" class="vue-bouton" data-vue-bouton="ensemble" aria-pressed="true">Direction</button>
+    <button type="button" class="vue-bouton" data-vue-bouton="mnb" aria-pressed="false">Marie-Noëlle</button>
     <button type="button" class="vue-bouton" data-vue-bouton="production" aria-pressed="false">Production</button>
     <button type="button" class="vue-bouton" data-vue-bouton="deploiement" aria-pressed="false">Déploiement</button>
   </nav>
-  <section class="tete" data-vues="ensemble">
+  <section class="tete" data-vues="ensemble mnb production deploiement">
     <p class="surtitre">Pilotage du projet</p>
     <h1>Où en est DINA ?</h1>
     <p class="maj" id="maj"></p>
     <p class="avertissement" id="avertissement" hidden></p>
+    <div class="global" id="global" aria-label="Avancement global"></div>
+    <div data-vues="ensemble">
     <div class="indicateurs" id="indicateurs"></div>
     <details class="methode-indicateurs"><summary>Comment lire ces indicateurs ?</summary>
       <p>L’avancement est une estimation fondée sur les statuts : à faire 0 %, en cours 50 %, à valider 80 %, validé ou livré 100 %. Les unités sont comptées à poids égal, sans pondération par durée.</p>
@@ -39,6 +42,7 @@
     </details>
     <div class="synthese" id="synthese" aria-label="Synthèse des livrables" hidden></div>
     <div class="alertes-liens" id="alertes-liens" hidden></div>
+    </div>
   </section>
 
   <section class="vue-introduction bloc-vue" data-vues="production" aria-labelledby="t-production">
@@ -60,6 +64,20 @@
   <section class="bloc-vue" data-vues="ensemble" aria-labelledby="t-prochains">
     <div class="entete-section"><div><p class="surtitre">À venir</p><h2 id="t-prochains">Les prochains jalons</h2></div></div>
     <div id="jalons-prochains" class="jalons-prochains"></div>
+  </section>
+
+  <section class="bloc-vue" data-vues="mnb" aria-labelledby="t-mnb">
+    <p class="surtitre">Relectures et validations</p><h1 id="t-mnb">Ce que Marie-Noëlle doit relire ou valider</h1>
+    <div class="vue-resume" id="mnb-resume"></div>
+    <div id="mnb-liste" class="liste-actions"></div>
+    <details class="liste-repliee" id="mnb-resp"><summary id="mnb-resp-titre"></summary><div id="mnb-resp-liste" class="liste-actions"></div></details>
+  </section>
+
+  <section class="bloc-vue" data-vues="production" aria-labelledby="t-marc">
+    <p class="surtitre">Pour agir</p><h2 id="t-marc">En cours chez Marc</h2>
+    <div id="marc-cours" class="liste-actions"></div>
+    <h2 id="t-visuels">Visuels à produire ou à vérifier</h2>
+    <div id="visuels-produire" class="liste-actions"></div>
   </section>
 
   <section class="bloc-vue" data-vues="production" aria-labelledby="t-parcours">
@@ -112,6 +130,6 @@
   </div>
 </footer>
 
-<script src="pilotage.js?v=20261117-ux4"></script>
+<script src="pilotage.js?v=20261119-ux5"></script>
 </body>
 </html>

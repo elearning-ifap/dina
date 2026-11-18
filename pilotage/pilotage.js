@@ -158,11 +158,79 @@
   })();
 
 
+  /* Avancement global et par groupe, visible dans toutes les vues */
+  function ouvrir(o, manque) {
+    var l = [];
+    if (o.lien) l.push({ texte: o.lienTexte || "Ouvrir le document", url: o.lien });
+    if (o.doc) l.push({ texte: o.docTexte || "Ouvrir le document", url: o.doc });
+    (o.liens || []).forEach(function (x) { l.push(x); });
+    if (!l.length) return manque ? '<span class="lien-manquant">lien à fournir</span>' : "";
+    return l.map(function (x) { return '<a class="lien-doc" href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.texte || "Ouvrir le document") + "</a>"; }).join(" ");
+  }
+  (function () {
+    var n = compter(tous), faits = n.valide + n.livre, pc = pourcent(tous.map(function (l) { return l.statut; }));
+    var T = D.temps || {};
+    var barres = [{ titre: "Parcours de l'agent", etats: [].concat.apply([], D.parcours.map(function (p) { return p.etats; })) }]
+      .concat(D.categories.map(function (c) { return { titre: c.titre, etats: c.livrables.map(function (l) { return l.statut; }) }; }));
+    var html = '<div class="global-chiffres"><div class="global-pc"><strong>' + pc + '<small> %</small></strong><span>Avancement global des livrables</span></div>' +
+      '<div class="global-pc"><strong>' + faits + '<small> / ' + tous.length + '</small></strong><span>livrables validés ou livrés</span></div>' +
+      (T.prevuJours ? '<div class="global-pc"><strong>' + fr(T.passeJours) + '<small> j</small></strong><span>de temps saisi (production : ' + fr(T.prevuJours) + ' j prévus)</span></div>' : "") + "</div>" +
+      '<div class="global-barres">' + barres.map(function (b) {
+        var u = b.etats.filter(function (e) { return e !== "sans_objet"; }), f = u.filter(function (e) { return e === "valide" || e === "livre"; }).length, p = pourcent(b.etats);
+        return '<div class="global-barre"><span class="global-nom">' + esc(b.titre) + '</span><div class="jauge" role="img" aria-label="' + p + ' %"><span style="width:' + p + '%;--c:var(--turquoise)"></span></div><b>' + p + ' %</b><small>' + f + " / " + u.length + "</small></div>";
+      }).join("") + "</div>";
+    $("global").innerHTML = html;
+  })();
+
+  /* Vue Marie-Noëlle : ce qu'elle doit relire ou valider, avec les liens */
+  (function () {
+    var fini = function (st) { return st === "valide" || st === "livre"; };
+    var arelire = [], resp = [];
+    tous.forEach(function (l) {
+      if (fini(l.statut)) return;
+      var att = [].concat(l.attente || []);
+      if (att.indexOf("mnb") >= 0 || (l.valide === "mnb" && l.statut === "a_valider")) arelire.push(l);
+      else if (l.qui === "mnb") resp.push(l);
+    });
+    var actions = [];
+    D.parcours.forEach(function (p) { (p.actions || []).forEach(function (a) { if ([].concat(a.qui || []).indexOf("mnb") >= 0) actions.push({ titre: p.code + " : " + a.titre, doc: a.doc, docTexte: a.docTexte, liens: a.liens }); }); });
+    (D.actions || []).forEach(function (a) { if ([].concat(a.attente || []).indexOf("mnb") >= 0) actions.push({ titre: a.titre, doc: a.doc, docTexte: a.docTexte, liens: a.liens, note: a.note }); });
+    function ligne(o, statut) {
+      return '<div class="ligne-action"><div class="ligne-titre">' + (statut ? puce(statut) + " " : "") + "<strong>" + esc(o.titre) + "</strong>" +
+        (o.echeance ? '<small> · échéance : ' + esc(o.echeance) + "</small>" : "") + "</div>" +
+        (o.note ? "<small>" + esc(String(o.note).slice(0, 220)) + (String(o.note).length > 220 ? "…" : "") + "</small>" : "") +
+        '<div class="ligne-liens">' + ouvrir(o, true) + (o._lie ? " " + o._lie : "") + "</div></div>";
+    }
+    var sansLien = arelire.filter(function (l) { return !l.lien && !l.doc && !(l.liens || []).length; }).length + actions.filter(function (a) { return !a.doc && !(a.liens || []).length; }).length;
+    $("mnb-resume").innerHTML = [[arelire.length + actions.length, "éléments à relire, valider ou conduire"], [sansLien, "sans lien vers le document"], [resp.length, "livrables dont elle est responsable (repliés)"]].map(function (x) {
+      return '<div class="resume-item"><strong>' + x[0] + "</strong><span>" + esc(x[1]) + "</span></div>";
+    }).join("");
+    $("mnb-liste").innerHTML = "<h2>À relire ou valider</h2>" + (arelire.length ? arelire.map(function (l) { return ligne(l, l.statut); }).join("") : '<p class="rien">Rien en attente.</p>') +
+      "<h2>Actions des modules</h2>" + (actions.length ? actions.map(function (a) { return ligne(a); }).join("") : '<p class="rien">Aucune action.</p>');
+    $("mnb-resp-titre").textContent = "Livrables dont Marie-Noëlle est responsable (" + resp.length + ")";
+    $("mnb-resp-liste").innerHTML = resp.map(function (l) { return ligne(l, l.statut); }).join("");
+  })();
+
+  /* Vue Production : tâches de Marc en cours, visuels à produire */
+  (function () {
+    var fini = function (st) { return st === "valide" || st === "livre"; };
+    var marc = tous.filter(function (l) { return l.qui === "marc" && l.statut === "en_cours" && l._perimetre === "production"; });
+    function ligne(o) {
+      return '<div class="ligne-action"><div class="ligne-titre">' + puce(o.statut) + " <strong>" + esc(o.titre) + "</strong></div>" +
+        '<div class="ligne-liens">' + ouvrir(o, false) + ' <a class="lien-livrable" href="#' + o._id + '">Voir la fiche</a></div></div>';
+    }
+    $("marc-cours").innerHTML = marc.length ? marc.map(ligne).join("") : '<p class="rien">Rien en cours.</p>';
+    var vis = [];
+    D.categories.forEach(function (c) { if (c.code === "visuels") c.livrables.forEach(function (l) { if (!fini(l.statut)) vis.push(l); }); });
+    $("visuels-produire").innerHTML = vis.length ? vis.map(function (l) { return ligne(l) + (l.note ? '<small class="ligne-note">' + esc(String(l.note).slice(0, 260)) + (String(l.note).length > 260 ? "…" : "") + "</small>" : ""); }).join("") : '<p class="rien">Tous les visuels sont livrés.</p>';
+  })();
+
+
   /* Navigation : tableau de bord synthétique, production et déploiement. */
   var boutonsVues = Array.prototype.slice.call(document.querySelectorAll("[data-vue-bouton]"));
   var sectionsVues = Array.prototype.slice.call(document.querySelectorAll("[data-vues]"));
   function activerVue(vue, changerURL) {
-    if (["ensemble", "production", "deploiement"].indexOf(vue) < 0) vue = "ensemble";
+    if (["ensemble", "mnb", "production", "deploiement"].indexOf(vue) < 0) vue = "ensemble";
     boutonsVues.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-vue-bouton") === vue)); });
     sectionsVues.forEach(function (el) { el.hidden = el.getAttribute("data-vues").split(" ").indexOf(vue) < 0; });
     document.body.setAttribute("data-vue", vue);
@@ -177,7 +245,7 @@
     if (changerURL) { history.replaceState(null, "", location.pathname + location.search + "#vue-" + vue); window.scrollTo({ top: 0, behavior: "smooth" }); }
   }
   boutonsVues.forEach(function (b) { b.addEventListener("click", function () { activerVue(b.getAttribute("data-vue-bouton"), true); }); });
-  activerVue((location.hash.match(/^#vue-(ensemble|production|deploiement)$/) || [])[1] || "ensemble", false);
+  activerVue((location.hash.match(/^#vue-(ensemble|mnb|production|deploiement)$/) || [])[1] || "ensemble", false);
 
   /* Priorités explicites : fondées sur les actions existantes et les validations en attente. */
   (function () {
@@ -242,7 +310,7 @@
 
   /* En attente de : les actions sont ventilées selon leur livrable de rattachement. */
   function rendreAttentes(vue) {
-    if (vue === "ensemble") return;
+    if (vue === "ensemble" || vue === "mnb") return;
     function perimetres(lie) { return [].concat(lie || []).map(function(c){return parTitre[c] ? parTitre[c]._perimetre : (parCode[c] || c === "parcours" ? "production" : null);}).filter(Boolean); }
     var parPersonne = {};
     Object.keys(D.personnes).forEach(function (k) { parPersonne[k] = []; });
