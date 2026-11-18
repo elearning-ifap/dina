@@ -222,7 +222,7 @@ window.DINA_PILOTAGE = {
         { titre: "Recette : fonctionnement, pédagogie, accessibilité, mobile", lot: "L7", statut: "a_faire", qui: "marc", valide: "mnb", echeance: "Janvier 2027" }
       ] },
 
-    { code: "suivi", titre: "Suivi du pilote", perimetre: "deploiement", texte: "Inscrire, suivre, tirer le bilan.",
+    { code: "suivi", titre: "Pilote avec les premiers agents (février 2027)", perimetre: "deploiement", texte: "Tout ce qui permet de lancer le pilote avec de vrais agents : questionnaire de début et de fin, inscriptions, choix des employeurs pilotes, comité de pilotage, bilan.",
       livrables: [
         { titre: "Questionnaire des nouveaux agents (début et fin de parcours)", lot: "L8", statut: "a_valider", qui: "marc", valide: "mnb", attente: "mnb", note: "Version 0.4 soumise à Marie-Noëlle Blanck, en attente de validation ; six choix à trancher.", lien: "https://docs.google.com/document/d/1jtyN2D9T1iCXORxhgB326IxREplwAQ3gZacTVHmCrVM/edit", lienTexte: "Questionnaire v0.4" },
         { titre: "Tableau d'inscription propre à DINA", lot: "L8", statut: "a_faire", qui: "mnb", note: "L'inscription part d'une demande formelle de l'employeur." },
