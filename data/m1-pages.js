@@ -466,7 +466,9 @@ window.DINA_DATA = {
    "note_expert": "Contenu juridique à faire valider par les référents employeurs (voir le champ « valider » de chaque item).",
    "suite": "QFQ-FIN",
    "fiches": [
-    "FICHE-M1-E1"
+    "FICHE-M1-E1",
+    "FA-M1-01",
+    "FA-M1-02"
    ]
   },
   "QFQ-FIN": {
@@ -1590,7 +1592,8 @@ window.DINA_DATA = {
    "note_expert": "Types de textes et autorités (grille de l'apport) à faire valider par les référents ; repris de M1-E3-APP1 (M1 v0.2).",
    "suite": "QFQ-E3-FIN",
    "fiches": [
-    "FICHE-M1-E3"
+    "FICHE-M1-E3",
+    "FA-M1-03"
    ]
   },
   "QFQ-E3-FIN": {
@@ -2647,6 +2650,46 @@ window.DINA_DATA = {
     "C18"
    ],
    "version": "0.3"
+  },
+  "FA-M1-01": {
+     "id": "FA-M1-01",
+     "type": "fiche",
+     "modele": "pdf",
+     "categorie": "apport",
+     "titre": "Qui fait quoi en Nouvelle-Calédonie ?",
+     "quand": "État, Nouvelle-Calédonie, provinces, communes : repérer qui est compétent.",
+     "pdf": "assets/fiches/FA-M1-01.pdf",
+     "competences": [
+        "C01",
+        "C02"
+     ],
+     "version": "0.3"
+  },
+  "FA-M1-02": {
+     "id": "FA-M1-02",
+     "type": "fiche",
+     "modele": "pdf",
+     "categorie": "apport",
+     "titre": "Références juridiques et historique",
+     "quand": "D'où vient la répartition des compétences, et quels textes la fixent.",
+     "pdf": "assets/fiches/FA-M1-02.pdf",
+     "competences": [
+        "C01"
+     ],
+     "version": "0.3"
+  },
+  "FA-M1-03": {
+     "id": "FA-M1-03",
+     "type": "fiche",
+     "modele": "pdf",
+     "categorie": "apport",
+     "titre": "Reconnaître et vérifier un texte",
+     "quand": "Qui prend le texte, de quand il date, s'il est en vigueur.",
+     "pdf": "assets/fiches/FA-M1-03.pdf",
+     "competences": [
+        "C17"
+     ],
+     "version": "0.3"
   }
  },
  "illustrations": {

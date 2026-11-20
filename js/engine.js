@@ -2268,13 +2268,18 @@
     }
     var RENDUS_BLOC = { recit: blocRecit, apport: blocApport, tri: blocTri, liste: blocListe, explorer: blocExplorer, recherche: blocRecherche, message: blocMessage, document: blocDocument, ordre: blocOrdre, equipe: blocEquipe, cartes: blocCartes, reflexion: blocReflexion };
     /* D132 : un carnet par module. La page terminée débloque ses fiches : elles rejoignent le carnet du module. */
+    /* Fiche d'apport en PDF (modele « pdf ») : téléchargement direct ; les autres fiches : version à imprimer */
+    function lienFiche(id, f) {
+      if (f.pdf) return '<a class="btn btn-secondaire btn-petit" href="' + esc(f.pdf) + '" download target="_blank" rel="noopener">' + ic("i-fichier") + " Télécharger en PDF</a>";
+      return '<a class="btn btn-secondaire btn-petit" href="fiche.html?id=' + esc(id) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Version à imprimer</a>";
+    }
     function fichesPage() {
       var ids = (e.fiches || []).filter(function (id) { return F[id]; });
       if (!ids.length || M.sans_carnet) return "";
       ids.forEach(function (id) { ajouterCarnet("fiche", id); });
       return '<section class="pg-fiches" aria-label="Fiches débloquées"><h2 class="pg-fiches-titre">' + ic("i-carnet") + (ids.length > 1 ? "Fiches ajoutées à votre carnet" : "Fiche ajoutée à votre carnet") + "</h2><ul>" +
         ids.map(function (id) { var f = F[id]; return "<li><span><strong>" + esc(f.titre) + "</strong>" + (GROUPES_FICHES[f.categorie] ? '<span class="pg-fiche-type">' + esc(GROUPES_FICHES[f.categorie].replace(/s(?= |$)/g, "")) + "</span>" : "") + "</span>" +
-          '<a class="btn btn-secondaire btn-petit" href="fiche.html?id=' + esc(id) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Version à imprimer</a></li>"; }).join("") +
+          lienFiche(id, f) + "</li>"; }).join("") +
         '</ul><p><button type="button" class="lien pg-fiches-carnet">' + ic("i-carnet") + " Ouvrir mon carnet</button></p></section>";
     }
 
@@ -2461,7 +2466,8 @@
         var f = F[c.id]; if (!f) return;
         g = GROUPES_FICHES[f.categorie] || "Fiches outils"; titre = f.titre;
         corps = (f.quand ? "<p><strong>Quand l'utiliser ?</strong> " + inline(f.quand) + "</p>" : "") + ficheTexte(f);
-        extra = '<a class="btn btn-secondaire btn-petit" href="fiche.html?id=' + esc(c.id) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Version à imprimer</a>";
+        corps = f.pdf ? "<p><strong>Fiche d'apport A4 recto verso.</strong> " + inline(f.quand || "") + (f.competences ? " Compétences : " + f.competences.map(esc).join(", ") + "." : "") + "</p>" : corps;
+        extra = f.pdf ? '<a class="btn btn-secondaire btn-petit" href="' + esc(f.pdf) + '" download target="_blank" rel="noopener">' + ic("i-fichier") + " Télécharger en PDF</a>" : '<a class="btn btn-secondaire btn-petit" href="fiche.html?id=' + esc(c.id) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Version à imprimer</a>";
       }
       (groupes[g] = groupes[g] || []).push({ titre: titre, corps: corps, extra: extra });
     });
