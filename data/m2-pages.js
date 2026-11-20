@@ -783,7 +783,8 @@ window.DINA_DATA = {
    ],
    "fiches": [
     "FICHE-M2-E1",
-    "FICHE-M2-STATUT"
+    "FICHE-M2-STATUT",
+    "FA-M2-02"
    ],
    "suite": "M2-P1-FIN"
   },
@@ -1351,7 +1352,8 @@ window.DINA_DATA = {
     }
    ],
    "fiches": [
-    "FICHE-M2-E2"
+    "FICHE-M2-E2",
+    "FA-M2-01"
    ],
    "suite": "M2-P2-FIN"
   },
@@ -1793,7 +1795,8 @@ window.DINA_DATA = {
     }
    ],
    "fiches": [
-    "FICHE-M2-E3"
+    "FICHE-M2-E3",
+    "FA-M2-03"
    ],
    "suite": "M2-P3-FIN"
   },
@@ -2792,7 +2795,10 @@ window.DINA_DATA = {
     "FICHE-M2-E2",
     "FICHE-M2-E3",
     "FICHE-M2-S",
-    "FICHE-M2-STATUT"
+    "FICHE-M2-STATUT",
+    "FA-M2-01",
+    "FA-M2-02",
+    "FA-M2-03"
    ],
    "suite": "M2-FIN"
   },
@@ -2832,6 +2838,7 @@ window.DINA_DATA = {
  "fiches": {
   "FICHE-M2-E1": {
    "id": "FICHE-M2-E1",
+   "pdf": "assets/fiches/FO-M2-E1.pdf",
    "type": "fiche",
    "code": "M2-E1",
    "modele": "formulaire",
@@ -2880,6 +2887,7 @@ window.DINA_DATA = {
   },
   "FICHE-M2-E2": {
    "id": "FICHE-M2-E2",
+   "pdf": "assets/fiches/FO-M2-E2.pdf",
    "type": "fiche",
    "code": "M2-E2",
    "modele": "checklist",
@@ -2954,6 +2962,7 @@ window.DINA_DATA = {
   },
   "FICHE-M2-E3": {
    "id": "FICHE-M2-E3",
+   "pdf": "assets/fiches/FO-M2-E3.pdf",
    "type": "fiche",
    "code": "M2-E3",
    "modele": "aide-memoire",
@@ -3010,6 +3019,7 @@ window.DINA_DATA = {
   },
   "FICHE-M2-S": {
    "id": "FICHE-M2-S",
+   "pdf": "assets/fiches/FO-M2-S.pdf",
    "type": "fiche",
    "code": "M2-S",
    "modele": "aide-memoire",
@@ -3115,6 +3125,46 @@ window.DINA_DATA = {
    ],
    "version": "0.1",
    "valider": "Nouvelle fiche (A4, 11-11), reprise de M2-E1-APP2 et M2-E1-APP2B (M2 v0.4). Contenu statutaire à faire valider (délibération 81, arrêté 1065, délibération 230, loi du pays 2021-4). Ajouts du 12-11 (T05), nuance de l'art. 91-II (loi du pays 2024-10) et repères du télétravail (délibération 155)."
+  },
+  "FA-M2-01": {
+     "id": "FA-M2-01",
+     "type": "fiche",
+     "modele": "pdf",
+     "categorie": "apport",
+     "titre": "Ma marge d'action",
+     "quand": "Jusqu'où je peux agir seul, et quand je demande.",
+     "pdf": "assets/fiches/FA-M2-01.pdf",
+     "competences": [
+        "C03",
+        "C04"
+     ],
+     "version": "0.3"
+  },
+  "FA-M2-02": {
+     "id": "FA-M2-02",
+     "type": "fiche",
+     "modele": "pdf",
+     "categorie": "apport",
+     "titre": "Mon statut, en repères",
+     "quand": "Ce que mon statut change pour moi au quotidien.",
+     "pdf": "assets/fiches/FA-M2-02.pdf",
+     "competences": [
+        "C03"
+     ],
+     "version": "0.3"
+  },
+  "FA-M2-03": {
+     "id": "FA-M2-03",
+     "type": "fiche",
+     "modele": "pdf",
+     "categorie": "apport",
+     "titre": "Informer, prévenir, demander",
+     "quand": "Tenir ses échéances, dire ce que vaut une information, demander un appui.",
+     "pdf": "assets/fiches/FA-M2-03.pdf",
+     "competences": [
+        "C18"
+     ],
+     "version": "0.3"
   }
  },
  "illustrations": {

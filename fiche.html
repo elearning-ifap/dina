@@ -34,7 +34,8 @@
   var id = decodeURIComponent((location.search.match(/[?&]id=([^&]+)/) || [])[1] || "");
   var m = (id.match(/^FICHE-(M\d)-/) || [])[1];
   var donnees = document.createElement("script");
-  donnees.src = "data/" + (m ? m.toLowerCase() : "m2") + ".js";
+  var d = (location.search.match(/[?&]d=([a-z0-9-]+)/) || [])[1];   /* module « en pages » : l'écran appelant passe son fichier de données (m3-pages…) */
+  donnees.src = "data/" + (d || (m ? m.toLowerCase() : "m2")) + ".js";
   donnees.onload = donnees.onerror = function () {
     var f = document.createElement("script"); f.src = "js/fiche.js"; document.body.appendChild(f);
   };

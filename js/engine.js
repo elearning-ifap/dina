@@ -207,7 +207,22 @@
   /* ---------- État ---------- */
   var etat = completer(charger() || nouvelEtat());
   function nouvelEtat() { return { ecran: "MENU", faites: [], historique: [], eval: { tentative: 1, resultats: {}, statut: null }, presentation: false, reponses: {}, carnet: [], auto: {} }; }
-  function completer(x) { x.reponses = x.reponses || {}; x.carnet = x.carnet || []; x.auto = x.auto || {}; x.animPause = !!x.animPause; return x; }
+  function completer(x) {
+    x.ecran = x.ecran || "MENU"; x.faites = x.faites || []; x.historique = x.historique || [];
+    x.eval = x.eval || { tentative: 1, resultats: {}, statut: null };
+    x.reponses = x.reponses || {}; x.carnet = x.carnet || []; x.auto = x.auto || {}; x.animPause = !!x.animPause; return x;
+  }
+  /* Allègement (suspend_data limité à 4 096 caractères) : les valeurs vides ou fausses ne sont pas écrites, completer() les rétablit à la lecture */
+  function etatLeger() {
+    var x = {};
+    Object.keys(etat).forEach(function (k) {
+      var v = etat[k];
+      if (v === false || v === undefined || v === null) return;
+      if (Array.isArray(v) ? !v.length : (typeof v === "object" && !Object.keys(v).length)) return;
+      x[k] = v;
+    });
+    return x;
+  }
 
   /* ---------- Réponses conservées (retour arrière sans tout refaire) ---------- */
   function memoriser(id, rep) { etat.reponses[id] = rep; sauver(); }
@@ -232,7 +247,7 @@
     try { var s = localStorage.getItem(CLE); return s ? JSON.parse(s) : null; } catch (e) { return null; }
   }
   function sauver() {
-    var json = JSON.stringify(etat);
+    var json = JSON.stringify(etatLeger());
     if (SCORM.actif && SCORM.actif()) SCORM.ecrireEtat(json);
     try { localStorage.setItem(CLE, json); } catch (e) { /* stockage indisponible : l'état reste en mémoire */ }
   }
@@ -306,7 +321,7 @@
     if (id === "ACCUEIL") id = "MENU";
     if (!sansHistorique && etat.ecran && etat.ecran !== id) {
       etat.historique.push(etat.ecran);
-      if (etat.historique.length > 80) etat.historique.shift();
+      if (etat.historique.length > 12) etat.historique.shift();   /* retour arrière : 12 écrans suffisent, l'historique pèse dans la sauvegarde */
     }
     etat.ecran = id;
     sauver();
@@ -1111,7 +1126,7 @@
       html += '<div class="apercu-fiche">' + apercuFiche(f) + "</div>";
     }
     html += '<div class="liens-outil">' + (f && f.modele === "chemin" ? '<button type="button" class="btn btn-secondaire" id="recommencer">' + ic("i-recommencer") + " Recommencer</button>" : "") +
-      '<a class="btn btn-secondaire" href="fiche.html?id=' + esc(e.fiche) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Ouvrir la fiche à imprimer</a></div></div>";
+      '<a class="btn btn-secondaire" href="' + esc(urlFiche(e.fiche)) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Ouvrir la fiche à imprimer</a></div></div>";
     zone.innerHTML = html;
     if (f && f.modele === "chemin") cheminInteractif(f);
     principal("Continuer", function () { suivant(e); });
@@ -1208,7 +1223,7 @@
       var C = !bon && e.consolider && e.consolider[p], f = C && C.fiche && F[C.fiche];
       return '<li class="preuve preuve--' + (bon ? "ok" : "ko") + '">' + ic(bon ? "i-check-cercle" : "i-moitie") + "<span><strong>" + (e.preuves && e.preuves[p] ? esc(e.preuves[p]) : p) + "</strong>" + (bon ? "Réussie" : "À consolider") + (q.total > 1 ? " · " + q.justes + " sur " + q.total : "") +
         (C ? '<span class="consolider">' + inline(C.texte) + "</span>" : "") + "</span>" +
-        (f ? '<a class="btn btn-secondaire btn-petit" href="fiche.html?id=' + esc(C.fiche) + '" target="_blank" rel="noopener">' + ic("i-fichier") + " " + esc(f.titre) + "</a>" : "") + "</li>";
+        (f ? '<a class="btn btn-secondaire btn-petit" href="' + esc(urlFiche(C.fiche)) + '" target="_blank" rel="noopener">' + ic("i-fichier") + " " + esc(f.titre) + "</a>" : "") + "</li>";
     }).join("");
     var texte = ok ? e.texte_reussi : (peutReprendre ? e.texte_echec : (e.texte_echec_final || e.texte_echec));
     zone.innerHTML = '<div class="colonne"><span class="surtitre">Évaluation · tentative ' + tent + "</span><h1>" + (ok ? "Évaluation réussie" : "Bilan de l'évaluation") + "</h1>" +
@@ -1272,7 +1287,7 @@
     e.fiches.forEach(function (id) { ajouterCarnet("fiche", id); });
     zone.innerHTML = '<div class="colonne colonne--large">' + entete(e, "Mes ressources") + md(e.texte) + '<ul class="ressources">' + e.fiches.map(function (id) {
       var f = F[id];
-      return '<li class="ressource"><span class="res-icone">' + ic("i-fichier") + '</span><div><strong>' + esc(f.titre) + "</strong><span>" + esc(f.quand) + '</span></div><a class="btn btn-secondaire" href="fiche.html?id=' + esc(id) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Ouvrir</a></li>";
+      return '<li class="ressource"><span class="res-icone">' + ic("i-fichier") + '</span><div><strong>' + esc(f.titre) + "</strong><span>" + esc(f.quand) + '</span></div><span class="res-actions">' + (f.modele === "pdf" ? boutonsFiche(id, f, "") : '<a class="btn btn-secondaire" href="' + esc(urlFiche(id)) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Ouvrir</a>" + (f.pdf ? " " + boutonsFiche(id, { pdf: f.pdf, modele: "pdf" }, "") : "")) + "</span></li>";
     }).join("") + "</ul></div>";
     principal("Continuer", function () { suivant(e); });
   }
@@ -2277,10 +2292,7 @@
     var RENDUS_BLOC = { recit: blocRecit, apport: blocApport, tri: blocTri, liste: blocListe, explorer: blocExplorer, recherche: blocRecherche, message: blocMessage, document: blocDocument, ordre: blocOrdre, equipe: blocEquipe, cartes: blocCartes, reflexion: blocReflexion };
     /* D132 : un carnet par module. La page terminée débloque ses fiches : elles rejoignent le carnet du module. */
     /* Fiche d'apport en PDF (modele « pdf ») : téléchargement direct ; les autres fiches : version à imprimer */
-    function lienFiche(id, f) {
-      if (f.pdf) return '<a class="btn btn-secondaire btn-petit" href="' + esc(f.pdf) + '" download target="_blank" rel="noopener">' + ic("i-fichier") + " Télécharger en PDF</a>";
-      return '<a class="btn btn-secondaire btn-petit" href="fiche.html?id=' + esc(id) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Version à imprimer</a>";
-    }
+    function lienFiche(id, f) { return boutonsFiche(id, f, " btn-petit"); }
     function fichesPage() {
       var ids = (e.fiches || []).filter(function (id) { return F[id]; });
       if (!ids.length || M.sans_carnet) return "";
@@ -2461,6 +2473,15 @@
   }
 
   /* ---------- Carnet de Noa (D37) ---------- */
+  /* Boutons d'une fiche : « Version à imprimer » (page HTML) et/ou « Télécharger en PDF » (fiche A4 déposée dans assets/fiches) */
+  var DONNEES_PAGES = (location.pathname.match(/([a-z0-9-]+-pages)\.html$/) || [])[1];
+  function urlFiche(id) { return "fiche.html?id=" + encodeURIComponent(id) + (DONNEES_PAGES ? "&d=" + DONNEES_PAGES : ""); }
+  function boutonsFiche(id, f, taille) {
+    var h = "";
+    if (f.modele !== "pdf") h += '<a class="btn btn-secondaire' + taille + '" href="' + esc(urlFiche(id)) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Version à imprimer</a> ";
+    if (f.pdf) h += '<a class="btn btn-secondaire' + taille + '" href="' + esc(f.pdf) + '" download target="_blank" rel="noopener">' + ic("i-fichier") + " Télécharger en PDF</a>";
+    return h;
+  }
   var GROUPES_FICHES = { outil: "Fiches outils", connaissance: "Fiches de connaissances", apport: "Fiches apports", ressource: "Ressources", "plus-loin": "Pour aller plus loin" };   /* D131 : fiches de connaissances */
   function elementsCarnet() {
     var groupes = {}, ordre = ["Documents", "Apports", "Fiches de connaissances", "Fiches outils", "Fiches apports", "Ressources", "Pour aller plus loin"];
@@ -2477,7 +2498,7 @@
         g = GROUPES_FICHES[f.categorie] || "Fiches outils"; titre = f.titre;
         corps = (f.quand ? "<p><strong>Quand l'utiliser ?</strong> " + inline(f.quand) + "</p>" : "") + ficheTexte(f);
         corps = f.pdf ? "<p><strong>Fiche d'apport A4 recto verso.</strong> " + inline(f.quand || "") + (f.competences ? " Compétences : " + f.competences.map(esc).join(", ") + "." : "") + "</p>" : corps;
-        extra = f.pdf ? '<a class="btn btn-secondaire btn-petit" href="' + esc(f.pdf) + '" download target="_blank" rel="noopener">' + ic("i-fichier") + " Télécharger en PDF</a>" : '<a class="btn btn-secondaire btn-petit" href="fiche.html?id=' + esc(c.id) + '" target="_blank" rel="noopener">' + ic("i-imprimer") + " Version à imprimer</a>";
+        extra = boutonsFiche(c.id, f, " btn-petit");
       }
       (groupes[g] = groupes[g] || []).push({ titre: titre, corps: corps, extra: extra });
     });

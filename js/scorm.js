@@ -74,6 +74,52 @@
   window.addEventListener("pagehide", terminer);
   window.addEventListener("beforeunload", terminer);
 
+  /* ---------- Compression de l'état (18-11) : suspend_data est limité à 4 096 caractères en SCORM 1.2 ----------
+     Un état compressé commence par « ~ » ; un état en JSON simple (« { ») reste lisible. */
+  /* Compression de l'état (LZW à largeur variable, sortie en base64 « URL » : 1 caractère = 6 bits). */
+  var ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+  function enc(s) {
+    var oct = unescape(encodeURIComponent(s)), dict = {}, n, next = 258, w = 9, acc = 0, nb = 0, out = "";
+    for (n = 0; n < 256; n++) dict[String.fromCharCode(n)] = n;
+    function put(c) { acc = (acc << w) | c; nb += w; while (nb >= 6) { nb -= 6; out += ALPHA.charAt((acc >> nb) & 63); } acc &= (1 << nb) - 1; }
+    var cur = "";
+    for (var i = 0; i < oct.length; i++) {
+      var ch = oct.charAt(i), t = cur + ch;
+      if (dict.hasOwnProperty(t)) { cur = t; continue; }
+      put(dict[cur]);
+      if (next < 4096) { dict[t] = next++; if (next > (1 << w) && w < 12) w++; }
+      cur = ch;
+    }
+    if (cur) {
+      put(dict[cur]);
+      if (next < 4096) { next++; if (next > (1 << w) && w < 12) w++; }   /* le décodeur ajoute une entrée après ce code : même largeur pour la fin */
+    }
+    put(257);
+    if (nb > 0) { acc <<= (6 - nb); out += ALPHA.charAt(acc & 63); }
+    return out;
+  }
+  function dec(z) {
+    var tab = [], n, next = 258, w = 9, acc = 0, nb = 0, pos = 0, prev = null, res = "";
+    for (n = 0; n < 256; n++) tab[n] = String.fromCharCode(n);
+    function get() {
+      while (nb < w) { if (pos >= z.length) return 257; var v = ALPHA.indexOf(z.charAt(pos++)); if (v < 0) throw new Error("base64"); acc = (acc << 6) | v; nb += 6; }
+      nb -= w; var c = (acc >> nb) & ((1 << w) - 1); acc &= (1 << nb) - 1; return c;
+    }
+    for (;;) {
+      var c = get(), e;
+      if (c === 257) break;
+      if (c < 256 || (c >= 258 && c < next)) e = tab[c];
+      else if (c === next && prev !== null) e = prev + prev.charAt(0);
+      else throw new Error("code");
+      res += e;
+      if (prev !== null && next < 4096) { tab[next++] = prev + e.charAt(0); }
+      /* le décodeur ajoute une entrée en retard d'un code sur l'encodeur */
+      if (next + 1 > (1 << w) && w < 12) w++;
+      prev = e;
+    }
+    return decodeURIComponent(escape(res));
+  }
+
   window.DINA_SCORM = {
     mode: MODE,
     actif: function () { init(); return ouvert; },
@@ -86,10 +132,11 @@
       diag.reprise = !!s; diag.suspendTaille = diag.suspendMax = s.length;
       majDiag();
       if (!s) return null;
-      try { return JSON.parse(s); } catch (e) { diag.erreurs.push("suspend_data illisible"); majDiag(); return null; }
+      try { return JSON.parse(s.charAt(0) === "~" ? dec(s.slice(1)) : s); } catch (e) { diag.erreurs.push("suspend_data illisible"); majDiag(); return null; }
     },
     ecrireEtat: function (json) {
       if (!ouvert) return false;
+      try { var z = "~" + enc(json); if (z.length < json.length) json = z; } catch (e) { /* JSON simple */ }
       diag.suspendTaille = json.length;
       diag.suspendMax = Math.max(diag.suspendMax, json.length);
       if (json.length > LIMITE_SUSPEND) {

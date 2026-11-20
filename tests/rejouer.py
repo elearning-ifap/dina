@@ -35,6 +35,9 @@ MODULES = {
     "m2": "m2.html",
     "m1-pages": "m1-pages.html",
     "m2-pages": "m2-pages.html",
+    "m4-pages": "m4-pages.html",
+    "m3-pages": "m3-pages.html",
+    "m5-pages": "m5-pages.html",
 }
 TAILLES = {1366: 768, 390: 844}
 FINS = ("fin", "pos-suite")   # derniers écrans : leur bouton quitte la page, on s'arrête dessus
@@ -384,6 +387,14 @@ class Joueur:
     def sauvegarde(self):
         return self.page.evaluate("() => ({ derniere: window.__scorm_simule.v['cmi.suspend_data'] || '', ecritures: window.__scorm_simule.ecritures, diag: window.DINA_SCORM.diagnostic() })")
 
+    def decoder(self, brut):
+        """État sauvegardé → dict. L'état est compressé (préfixe « ~ », scorm.js) : on le fait relire par l'adaptateur lui-même."""
+        if not brut or brut[0] != "~":
+            return json.loads(brut)
+        txt = self.page.evaluate("""(brut) => { const v = window.__scorm_simule.v, ancien = v['cmi.suspend_data'];
+            v['cmi.suspend_data'] = brut; const r = window.DINA_SCORM.lireEtat(); v['cmi.suspend_data'] = ancien; return JSON.stringify(r); }""", brut)
+        return json.loads(txt)
+
     def controle_sauvegarde(self):
         s = self.sauvegarde()
         # écritures acceptées par le LMS simulé, et plus grand état que le moteur a tenté d'écrire (même refusé)
@@ -411,7 +422,7 @@ class Joueur:
         derniere = self.sauvegarde()["derniere"]
         if not derniere:
             return ["état final : aucune sauvegarde enregistrée dans le LMS"]
-        st = json.loads(derniere)
+        st = self.decoder(derniere)
         lms = self.page.evaluate("() => window.__scorm_simule.v")
         jouees = [i for i in dict.fromkeys(self.vus) if i in self.E]
         pb = []
@@ -455,8 +466,8 @@ class Joueur:
         if len(self.sauvegarde()["ecritures"]) <= n_avant:
             raise Echec("reconstruction : la touche A n'a provoqué aucune réécriture, la comparaison ne prouve rien")   # touche A : pause des animations, deux fois = état d'origine
         apres = self.sauvegarde()["derniere"]
-        if json.loads(avant) != json.loads(apres):
-            ka, kb = json.loads(avant), json.loads(apres)
+        if self.decoder(avant) != self.decoder(apres):
+            ka, kb = self.decoder(avant), self.decoder(apres)
             diff = [k for k in set(ka) | set(kb) if ka.get(k) != kb.get(k)]
             raise Echec("reconstruction différente, clés : " + ", ".join(sorted(diff)))
 
