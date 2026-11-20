@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — Prologue en pages v0.1.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — Prologue en pages v0.2.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "PRO-PAGES",
@@ -33,7 +33,7 @@ window.DINA_DATA = {
    {
     "id": "regle",
     "libelle": "La règle du jeu",
-    "titre": "Comment vous allez apprendre",
+    "titre": "Comment allez-vous apprendre ?",
     "savoir": "Comprendre comment vous allez apprendre",
     "accroche": "Vous êtes Noa : une semaine par module.",
     "debut": "PRO-P3",
@@ -64,13 +64,13 @@ window.DINA_DATA = {
      "phase": "situation",
      "titre": "Koné, lundi, 7 h 30",
      "illustration": "ILL-P1",
-     "texte": "Noa, 29 ans, travaille depuis quelques semaines à l'Établissement de liaison et d'appui de Nouvelle-Calédonie. Ici, tout le monde dit « l'ÉLAN ». Il a son badge, ses accès, l'organigramme. Ce lundi, il arrive tôt.",
+     "texte": "Noa, 29 ans, travaille depuis quelques semaines à l'Établissement de liaison et d'appui de Nouvelle-Calédonie. Ici, tout le monde l'appelle l'ÉLAN.\n\nIl commence à connaître ses collègues et son environnement de travail, mais il lui reste encore beaucoup à découvrir.",
      "repliques": [
       {
        "personnage": "Noa",
-       "didascalie": "Il se dit",
+       "didascalie": "Noa se dit",
        "canal": "note",
-       "texte": "« On m'a tout présenté. Mais il me reste tant à comprendre : qui fait quoi, à qui je réponds, ce que j'ai le droit de faire. Sans me tromper. »"
+       "texte": "« Je commence à prendre mes marques, mais j'ai encore pas mal de questions. Qui fait quoi ? À qui m'adresser ? Qu'est-ce que je peux décider seul ? »"
       }
      ]
     },
@@ -78,7 +78,7 @@ window.DINA_DATA = {
      "type": "apport",
      "phase": "apport",
      "titre": "Où travaille Noa ?",
-     "texte": "Avant la réunion de pôle, Noa relit la présentation de son employeur, reçue à son arrivée.",
+     "texte": "Avant sa réunion de pôle, Noa relit la fiche de présentation de son établissement, reçue lors de son arrivée.",
      "fiche_identite": {
       "sigle": "É",
       "logo": "logo-elan-symbole.png",
@@ -93,12 +93,12 @@ window.DINA_DATA = {
        {
         "icone": "i-lieu",
         "libelle": "Siège",
-        "valeur": "Koné. Ses agents se déplacent dans les trois provinces."
+        "valeur": "Koné, avec des interventions dans les trois provinces."
        },
        {
         "icone": "i-equipe",
         "libelle": "Équipe",
-        "valeur": "Environ 24 agents, une directrice et trois pôles."
+        "valeur": "Une vingtaine d'agents répartis en trois pôles, sous la responsabilité d'une directrice."
        },
        {
         "icone": "i-projet",
@@ -106,14 +106,14 @@ window.DINA_DATA = {
         "valeur": "Aider les communes et les associations à préparer et à suivre leurs projets d'intérêt général."
        }
       ],
-      "pied": "Pour quoi faire ? Pour que les habitants trouvent des services **plus proches et plus simples**."
+      "pied": "Dans quel but ? Rendre les services publics **plus proches et plus simples** pour les habitants."
      }
     },
     {
      "type": "apport",
      "phase": "apport",
      "titre": "Ce que fait l'établissement",
-     "texte": "Dans le hall, les statuts de l'établissement sont affichés. Ils fixent ses missions. Le texte officiel n'est pas toujours facile à lire : sous chaque alinéa, cliquez sur « En clair ».",
+     "texte": "En parcourant son dossier d'accueil, Noa découvre les statuts de l'ÉLAN, qui définissent les missions de l'établissement.\n\nMais que signifient ces missions dans son travail quotidien ?\n\nCliquez sur « En clair » pour le découvrir.",
      "texte_officiel": {
       "source": "Statuts de l'Établissement de liaison et d'appui de Nouvelle-Calédonie, l'ÉLAN (texte fictif, rédigé pour la formation)",
       "article": "Article 2 — Missions",
@@ -147,7 +147,7 @@ window.DINA_DATA = {
      "type": "apport",
      "phase": "apport",
      "titre": "L'ÉLAN n'existe pas. Les règles, si.",
-     "texte": "Vous ne trouverez l'ÉLAN dans aucun annuaire. Mais ce que Noa va vivre, et les règles qu'il va apprendre, vous serviront dès demain.",
+     "texte": "Inutile de chercher l'ÉLAN dans un annuaire ! Cet établissement a été imaginé pour votre parcours DINA. En revanche, les situations vécues par Noa pourraient bien vous arriver dans votre propre service.",
      "colonnes": [
       {
        "icone": "i-imagine",
@@ -192,8 +192,8 @@ window.DINA_DATA = {
     {
      "type": "equipe",
      "phase": "situation",
-     "titre": "L'équipe de Noa",
-     "texte": "Voici l'équipe de Noa, et les partenaires avec qui il travaille. Ouvrez une fiche pour en savoir plus.",
+     "titre": "Faites connaissance avec l'équipe de Noa",
+     "texte": "Noa ne travaille pas seul. Il peut compter sur ses collègues et collabore avec de nombreux partenaires.\n\nCliquez sur les personnages pour faire leur connaissance.",
      "illustration": "ILL-P3",
      "groupes": {
       "Son équipe à l'ÉLAN": "Ils travaillent avec Noa, au siège de l'établissement, à Koné.",
@@ -297,7 +297,7 @@ window.DINA_DATA = {
      "type": "apport",
      "phase": "apport",
      "titre": "Qui travaille avec Noa pour les habitants ?",
-     "texte": "Autour de Noa, beaucoup d'acteurs travaillent pour les mêmes habitants. Certains forment le service public, d'autres sont privés. L'ÉLAN les aide à travailler ensemble, sans décider à leur place.",
+     "texte": "Autour de Noa, de nombreux acteurs contribuent à répondre aux besoins des habitants.\n\nIls n'ont pas tous les mêmes missions, mais ils sont souvent amenés à travailler ensemble. Certains font partie du service public, d'autres non.",
      "orbite": {
       "centre": "Les habitants",
       "groupes": [
@@ -323,9 +323,9 @@ window.DINA_DATA = {
         ]
        }
       ],
-      "legende": "Noa connaît son équipe, pas encore tout ce paysage. Cette semaine, il va apprendre à s'y repérer."
+      "legende": "Noa connaît déjà son équipe. Il va maintenant apprendre à mieux comprendre cet environnement."
      },
-     "a_retenir": "Quand un habitant s'adresse à un service public, il en devient l'**usager**. C'est le mot que vous lirez dans les textes officiels."
+     "a_retenir": "On appelle **usager** une personne qui utilise un service public."
     }
    ]
   },
@@ -333,8 +333,8 @@ window.DINA_DATA = {
    "id": "PRO-P3",
    "type": "page",
    "etape": "La règle du jeu",
-   "titre": "Comment vous allez apprendre",
-   "chapeau": "Vous êtes Noa : une semaine par module. Voici la règle du jeu, puis une question pour vous.",
+   "titre": "Comment allez-vous apprendre ?",
+   "chapeau": "Mettez-vous à la place de Noa : une semaine par module. Voici la règle du jeu, puis une question pour vous.",
    "phases": [
     "apport",
     "application"
@@ -349,46 +349,51 @@ window.DINA_DATA = {
     {
      "type": "cartes",
      "phase": "apport",
-     "titre": "La règle du jeu",
+     "titre": "Comment allez-vous apprendre ?",
      "texte": "Vous connaissez Noa et son environnement. Voici comment vous allez progresser avec lui.",
      "consigne": "Cliquez sur chaque carte.",
      "cartes": [
       {
        "icone": "i-equipe",
-       "recto": "Vous êtes Noa",
+       "recto": "Mettez-vous à la place de Noa",
        "verso": "Vous êtes Noa, attaché d'administration stagiaire. Ses collègues, de toutes catégories, vivent aussi des situations. Dans la vraie vie, vous êtes peut-être contractuel, de catégorie B ou C : ces règles vous concernent aussi. Quand elles changent selon le statut, DINA vous le dit."
       },
       {
        "icone": "i-semaine",
-       "recto": "Cinq modules, une semaine chacun",
-       "verso": "Chaque module raconte une semaine de Noa, du lundi au vendredi, au fil de ses premiers mois à l'ÉLAN."
+       "recto": "Cinq modules, cinq semaines dans la vie de Noa",
+       "verso": "Chaque module vous fait découvrir une nouvelle semaine de travail de Noa."
       },
       {
        "icone": "i-dialogue",
        "recto": "Se tromper pour apprendre",
-       "verso": "Vous décidez pour Noa, vous voyez ce qui se passe, puis le repère utile arrive. Il n'y a pas de piège : chaque réponse est expliquée."
+       "verso": "Vous prenez les décisions pour Noa et en découvrez les conséquences. Vous avez le droit de vous tromper : chaque choix est une occasion d'apprendre et d'acquérir les bons réflexes. Ici, pas de piège, chaque réponse est expliquée. Après chaque situation, un repère utile vous est proposé."
+      },
+      {
+       "icone": "i-valider",
+       "recto": "Faites le point sur vos acquis",
+       "verso": "À la fin de chaque module, six nouvelles situations vous permettent de vérifier vos acquis. Cinq réponses adaptées sur six vous donnent accès à un badge. Vous pouvez réessayer, et dans tous les cas continuer le parcours."
       },
       {
        "icone": "i-medaille",
-       "recto": "Le vendredi, un bilan",
-       "verso": "Six situations nouvelles, que vous n'avez pas encore vues. Un badge avec 5 bonnes réponses sur 6. Pas encore ? Vous continuez le parcours et vous repassez quand vous voulez."
+       "recto": "Gagnez des badges",
+       "verso": "Chaque module réussi vous donne un badge. En réussissant les cinq, vous obtenez le badge du parcours DINA."
       },
       {
        "icone": "i-cadenas",
-       "recto": "Votre profil reste à vous",
+       "recto": "Votre positionnement vous appartient",
        "verso": "Le résultat de votre positionnement n'est vu que par vous. Il montre ce que vous savez déjà et où chaque sujet sera travaillé."
       }
      ],
-     "encadre": "Vos outils : dans chaque module, le bouton **Carnet**, en haut de l'écran, garde les fiches du module, à relire ou à télécharger. Vous pouvez faire une pause et reprendre où vous en étiez."
+     "encadre": "Votre **carnet** vous accompagne tout au long du parcours. Vous y retrouverez les fiches utiles à consulter ou à télécharger.\n\nVous pouvez faire une pause à tout moment et reprendre là où vous vous êtes arrêté."
     },
     {
      "type": "reflexion",
      "id": "PRO-P3-ET-VOUS",
      "phase": "application",
      "titre": "Et vous ?",
-     "question": "Qu'est-ce qui vous a le plus surpris, ou inquiété, depuis votre arrivée dans votre poste ?",
-     "apres": "Noa vit sans doute la même chose, quelques semaines après son arrivée. Vous êtes à sa place : accompagnez-le.",
-     "mention": "Votre réponse reste sur cet écran. Elle n'est transmise à personne."
+     "question": "Depuis votre arrivée dans votre poste, qu'est-ce qui vous a le plus surpris ? Quelles questions vous posez-vous encore ?",
+     "apres": "Noa se pose peut-être les mêmes questions que vous…",
+     "mention": "Votre réponse, c'est entre vous et votre écran !"
     }
    ]
   },
@@ -396,8 +401,8 @@ window.DINA_DATA = {
    "id": "PRO-FIN",
    "type": "fin",
    "etape": "La règle du jeu",
-   "titre": "Fin du prologue",
-   "texte": "Vous avez fait la connaissance de Noa et de l'ÉLAN.\n",
+   "titre": "Prêt à accompagner Noa ?",
+   "texte": "Vous connaissez maintenant Noa, son équipe et son environnement de travail.\n\nIl est temps de l'accompagner dans ses premières aventures professionnelles.",
    "points_titre": "Ce que vous savez maintenant",
    "points": [
     {
@@ -415,7 +420,7 @@ window.DINA_DATA = {
    ],
    "prochain": {
     "titre": "J'accompagne Noa dans sa semaine",
-    "texte": "Module 1 « Je me repère ». Lundi matin, des demandes d'usagers arrivent à l'ÉLAN. Aidez Noa à savoir qui fait quoi."
+    "texte": "Module 1 « Je me repère ». Lundi matin, plusieurs demandes arrivent à l'ÉLAN. Noa ne sait pas encore vers qui les orienter. À vous de l'aider !"
    },
    "suite": "ACCUEIL"
   }
@@ -438,5 +443,5 @@ window.DINA_DATA = {
    "alt": "Organigramme de l'ÉLAN. En haut, Ariane, directrice. Pôle études et projets : Samuel, responsable du pôle, puis Noa, chargé d'études et d'appui aux projets, et Malia, chargée d'études et d'évaluation, marraine de Noa. Pôle ressources et administration : Ana, développement des compétences, et Cédric, accueil et logistique. En bas, les partenaires, qui ne dépendent pas de l'ÉLAN : Joël et Teiva, association Passerelles ; Léna, administration provinciale ; Élise, une commune. Chaque personne a son statut indiqué."
   }
  },
- "source": "Storyboard — Prologue en pages v0.1.md"
+ "source": "Storyboard — Prologue en pages v0.2.md"
 };
