@@ -2470,6 +2470,8 @@
         var x = E[c.id]; if (!x) return;
         g = x.type === "document" ? "Documents" : "Apports"; titre = x.titre || x.id;
         corps = x.type === "document" ? docHtml(x) : contenuApport(x) + (x.a_retenir ? '<p class="a-retenir">' + ic("i-ampoule") + "<span><strong>À retenir</strong> — " + inline(x.a_retenir) + "</span></p>" : "");
+        extra = (x.fiches_pdf || []).filter(function (id) { return F[id] && F[id].pdf; }).map(function (id) {
+          return '<a class="btn btn-secondaire btn-petit" href="' + esc(F[id].pdf) + '" download target="_blank" rel="noopener">' + ic("i-fichier") + " Télécharger la fiche en PDF</a>"; }).join(" ");
       } else {
         var f = F[c.id]; if (!f) return;
         g = GROUPES_FICHES[f.categorie] || "Fiches outils"; titre = f.titre;
