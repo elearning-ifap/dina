@@ -541,6 +541,7 @@ window.DINA_DATA = {
    "competences": [
     "C01"
    ],
+   "fiches_pdf": ["FA-M1-01"],
    "suite": "M1-E1-APP2",
    "repliques": [
     {
@@ -626,6 +627,7 @@ window.DINA_DATA = {
    "competences": [
     "C01"
    ],
+   "fiches_pdf": ["FA-M1-02"],
    "suite": "M1-E1-OUT",
    "repliques": [
     {
@@ -1627,6 +1629,7 @@ window.DINA_DATA = {
    "competences": [
     "C17"
    ],
+   "fiches_pdf": ["FA-M1-03"],
    "suite": "M1-E3-APP2",
    "repliques": [
     {
@@ -2698,6 +2701,46 @@ window.DINA_DATA = {
     "C18"
    ],
    "version": "0.3"
+  },
+  "FA-M1-01": {
+     "id": "FA-M1-01",
+     "type": "fiche",
+     "modele": "pdf",
+     "categorie": "apport",
+     "titre": "Qui fait quoi en Nouvelle-Calédonie ?",
+     "quand": "État, Nouvelle-Calédonie, provinces, communes : repérer qui est compétent.",
+     "pdf": "assets/fiches/FA-M1-01.pdf",
+     "competences": [
+        "C01",
+        "C02"
+     ],
+     "version": "0.3"
+  },
+  "FA-M1-02": {
+     "id": "FA-M1-02",
+     "type": "fiche",
+     "modele": "pdf",
+     "categorie": "apport",
+     "titre": "Références juridiques et historique",
+     "quand": "D'où vient la répartition des compétences, et quels textes la fixent.",
+     "pdf": "assets/fiches/FA-M1-02.pdf",
+     "competences": [
+        "C01"
+     ],
+     "version": "0.3"
+  },
+  "FA-M1-03": {
+     "id": "FA-M1-03",
+     "type": "fiche",
+     "modele": "pdf",
+     "categorie": "apport",
+     "titre": "Reconnaître et vérifier un texte",
+     "quand": "Qui prend le texte, de quand il date, s'il est en vigueur.",
+     "pdf": "assets/fiches/FA-M1-03.pdf",
+     "competences": [
+        "C17"
+     ],
+     "version": "0.3"
   }
  },
  "illustrations": {

@@ -500,6 +500,14 @@
     if (e.orbite) html += orbite(e.orbite);
     if (e.a_retenir) html += '<div class="a-retenir">' + ic("i-ampoule") + "<span><strong>À retenir</strong> — " + inline(e.a_retenir) + "</span></div>";
     if (e.sources) html += '<p class="sources"><strong>Sources :</strong> ' + esc(e.sources) + "</p>";
+    /* Fiche d'apport en PDF (A4 recto verso) : téléchargement direct, et la fiche rejoint le carnet */
+    var pdfs = (e.fiches_pdf || []).filter(function (id) { return F[id] && F[id].pdf; });
+    if (pdfs.length) {
+      pdfs.forEach(function (id) { ajouterCarnet("fiche", id); });
+      html += '<section class="pg-fiches" aria-label="Fiche à télécharger"><h2 class="pg-fiches-titre">' + ic("i-fichier") + (pdfs.length > 1 ? "Fiches d'apport à télécharger" : "Fiche d'apport à télécharger") + "</h2><ul>" +
+        pdfs.map(function (id) { var f = F[id]; return "<li><span><strong>" + esc(f.titre) + "</strong></span>" +
+          '<a class="btn btn-secondaire btn-petit" href="' + esc(f.pdf) + '" download target="_blank" rel="noopener">' + ic("i-fichier") + " Télécharger en PDF</a></li>"; }).join("") + "</ul></section>";
+    }
     html += "</div>";
     zone.innerHTML = html;
     enchainerRepliques(e);
