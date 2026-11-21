@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M3 en pages v0.1.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M3 en pages v0.2.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M3-PAGES",
@@ -347,6 +347,12 @@ window.DINA_DATA = {
      "texte": "Noa a le bon canal. Reste à savoir ce qu'on écrit et comment on écoute.",
      "regle": "Je choisis le canal selon la personne et l'urgence, j'écris une demande claire, et je m'assure que l'autre a compris la même chose que moi.",
      "regle_clair": "Un **canal** est le moyen de contact (appel, courriel, SMS, rencontre). **Reformuler**, c'est redire avec ses mots ce qu'on a compris, pour que l'autre confirme.",
+     "visuels": [
+      {
+       "remplace": "methode",
+       "image": "INF-M3-01"
+      }
+     ],
      "methode_titre": "Cinq repères pour communiquer",
      "methode": [
       "Je choisis le canal selon l'urgence, la complexité, la trace nécessaire et l'interlocuteur.",
@@ -829,6 +835,12 @@ window.DINA_DATA = {
      "texte": "Cédric n'est pas le chef de Joël, ni d'Élise, ni de Léna. Personne ici n'est le chef de personne.",
      "regle": "Je fais avancer l'action avec des gens qui ne dépendent pas de moi. Je demande, je remercie, je tiens mes engagements, et je dis à chacun ce qu'il doit faire ou savoir.",
      "regle_clair": "**Transversal** : on travaille avec des personnes d'autres services ou d'autres organisations, sans lien hiérarchique. **Pour action** : j'attends que la personne fasse quelque chose. **Pour information** : elle n'a rien à faire, mais elle doit savoir.",
+     "visuels": [
+      {
+       "remplace": "methode",
+       "image": "INF-M3-02"
+      }
+     ],
      "methode_titre": "Six repères pour travailler à plusieurs",
      "methode": [
       "Chaque service a ses rôles et ses délais : on demande, on remercie, on tient ses engagements.",
@@ -1099,6 +1111,12 @@ window.DINA_DATA = {
      "texte": "Cédric participe au lancement de la permanence : il ne la pilote pas, il y contribue. Un projet a un début, des étapes et une fin.",
      "regle": "Dans un projet, je sais où il en est, qui porte, qui décide, et ce qu'on attend de moi à cette étape.",
      "regle_clair": "Le **porteur** défend le projet et le fait avancer. Le **décideur** tranche. Un **contributeur** apporte une part précise du travail : c'est le cas de Cédric, comme de Noa.",
+     "visuels": [
+      {
+       "remplace": "methode",
+       "image": "INF-M3-04"
+      }
+     ],
      "methode_titre": "Le cycle d'un projet",
      "methode": [
       "Émergence : une idée ou un besoin apparaît.",
@@ -1367,6 +1385,12 @@ window.DINA_DATA = {
      "texte": "Noa n'a pas voulu blesser Léna. Pourtant le message est arrivé comme un reproche.",
      "regle": "Un malentendu se désamorce en séparant les faits, ce qu'on en pense et ce qu'on ressent, puis en écoutant avant d'expliquer.",
      "regle_clair": "Un **malentendu** : chacun comprend autre chose que ce que l'autre voulait dire. Un **désaccord**, c'est un avis différent. Un **conflit**, c'est une tension qui dure et s'installe.",
+     "visuels": [
+      {
+       "remplace": "methode",
+       "image": "INF-M3-03"
+      }
+     ],
      "methode_titre": "Quatre repères",
      "methode": [
       "Je sépare les faits, les interprétations et les ressentis.",
@@ -2384,6 +2408,7 @@ window.DINA_DATA = {
   "M3-SOR-1": {
    "id": "M3-SOR-1",
    "type": "narration",
+   "illustration": "ILL-T08",
    "etape": "Bilan",
    "titre": "Ce que Noa a appris cette semaine",
    "texte": "Vendredi, fin de matinée. Ariane passe au bureau : les trois organisations ont validé le calendrier commun et le tableau « qui fait quoi ». La prochaine étape du dossier est la tournée des six lieux, au module 4. Voici ce que Noa sait faire maintenant.",
@@ -2509,7 +2534,6 @@ window.DINA_DATA = {
  "fiches": {
   "FICHE-M3-E1": {
    "id": "FICHE-M3-E1",
-   "pdf": "assets/fiches/FO-M3-E1.pdf",
    "type": "fiche",
    "code": "M3-E1",
    "modele": "aide-memoire",
@@ -2563,11 +2587,11 @@ window.DINA_DATA = {
     "C06"
    ],
    "version": "0.1",
-   "valider": "Canaux autorisés selon l'employeur ; écriture administrative (DITP) ; discrétion (délibération 81, art. 20-21). À faire valider (corpus M3, n° 1 à 3)."
+   "valider": "Canaux autorisés selon l'employeur ; écriture administrative (DITP) ; discrétion (délibération 81, art. 20-21). À faire valider (corpus M3, n° 1 à 3).",
+   "pdf": "assets/fiches/FO-M3-E1.pdf"
   },
   "FICHE-M3-E2": {
    "id": "FICHE-M3-E2",
-   "pdf": "assets/fiches/FO-M3-E2.pdf",
    "type": "fiche",
    "code": "M3-E2",
    "modele": "checklist",
@@ -2626,11 +2650,11 @@ window.DINA_DATA = {
     "C17"
    ],
    "version": "0.1",
-   "valider": "Convention (définition, qui signe pour une association et une commune) et travail en transversal : aucun texte au corpus (D149)."
+   "valider": "Convention (définition, qui signe pour une association et une commune) et travail en transversal : aucun texte au corpus (D149).",
+   "pdf": "assets/fiches/FO-M3-E2.pdf"
   },
   "FICHE-M3-E3": {
    "id": "FICHE-M3-E3",
-   "pdf": "assets/fiches/FO-M3-E3.pdf",
    "type": "fiche",
    "code": "M3-E3",
    "modele": "aide-memoire",
@@ -2681,7 +2705,8 @@ window.DINA_DATA = {
     "C18"
    ],
    "version": "0.1",
-   "valider": "Malentendu, désaccord simple, seuil de l'appui, recours propres à chaque employeur, frontière avec le harcèlement (M4). Corpus M3, n° 7."
+   "valider": "Malentendu, désaccord simple, seuil de l'appui, recours propres à chaque employeur, frontière avec le harcèlement (M4). Corpus M3, n° 7.",
+   "pdf": "assets/fiches/FO-M3-E3.pdf"
   },
   "FICHE-M3-PROJET": {
    "id": "FICHE-M3-PROJET",
@@ -2748,46 +2773,46 @@ window.DINA_DATA = {
    "valider": "Aucune source propre au secteur public calédonien (D148) ; à confronter à un guide projet d'un employeur. Vocabulaire à tester auprès d'agents de catégorie C. Corpus M3, n° 8 et 9."
   },
   "FA-M3-01": {
-     "id": "FA-M3-01",
-     "type": "fiche",
-     "modele": "pdf",
-     "categorie": "apport",
-     "titre": "Contribuer à un projet",
-     "quand": "Où en est le projet, qui porte, qui décide, ce qu'on attend de moi.",
-     "pdf": "assets/fiches/FA-M3-01.pdf",
-     "competences": [
-        "C07"
-     ],
-     "version": "0.3"
+   "id": "FA-M3-01",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Contribuer à un projet",
+   "quand": "Où en est le projet, qui porte, qui décide, ce qu'on attend de moi.",
+   "pdf": "assets/fiches/FA-M3-01.pdf",
+   "competences": [
+    "C07"
+   ],
+   "version": "0.3"
   },
   "FA-M3-02": {
-     "id": "FA-M3-02",
-     "type": "fiche",
-     "modele": "pdf",
-     "categorie": "apport",
-     "titre": "Communiquer en professionnel",
-     "quand": "Choisir le bon canal et les bons mots.",
-     "pdf": "assets/fiches/FA-M3-02.pdf",
-     "competences": [
-        "C06",
-        "C17"
-     ],
-     "version": "0.3"
+   "id": "FA-M3-02",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Communiquer en professionnel",
+   "quand": "Choisir le bon canal et les bons mots.",
+   "pdf": "assets/fiches/FA-M3-02.pdf",
+   "competences": [
+    "C06",
+    "C17"
+   ],
+   "version": "0.3"
   },
   "FA-M3-03": {
-     "id": "FA-M3-03",
-     "type": "fiche",
-     "modele": "pdf",
-     "categorie": "apport",
-     "titre": "La convention : un accord écrit entre organisations",
-     "quand": "Ce qu'engage une convention et ce qu'elle précise.",
-     "pdf": "assets/fiches/FA-M3-03.pdf",
-     "competences": [
-        "C03",
-        "C04",
-        "C07"
-     ],
-     "version": "0.3"
+   "id": "FA-M3-03",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "La convention : un accord écrit entre organisations",
+   "quand": "Ce qu'engage une convention et ce qu'elle précise.",
+   "pdf": "assets/fiches/FA-M3-03.pdf",
+   "competences": [
+    "C03",
+    "C04",
+    "C07"
+   ],
+   "version": "0.3"
   }
  },
  "illustrations": {
@@ -2852,5 +2877,5 @@ window.DINA_DATA = {
    "alt": "Six étapes en frise : émergence, cadrage, lancement, réalisation, mise en service, clôture. Le lancement est mis en valeur : c'est l'étape du dossier Passerelles cette semaine."
   }
  },
- "source": "Storyboard — M3 en pages v0.1.md"
+ "source": "Storyboard — M3 en pages v0.2.md"
 };

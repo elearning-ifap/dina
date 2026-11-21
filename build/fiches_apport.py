@@ -257,6 +257,52 @@ FICHES.append({
     "sources": "Loi organique n° 99-209 du 19 mars 1999 (art. 99, 107, 126, 128, 204) ; Leginova ; Légifrance ; DRHFPNC.",
 })
 
+# ------------------------------------------------------------------------------ FA-M1-04
+FICHES.append({
+    "id": "FA-M1-04",
+    "titre": "Qui décide, qui encadre, qui aide",
+    "sous_titre": "Le même schéma chez tous les employeurs publics : qui délibère, qui dirige, qui prépare et exécute",
+    "competences": "C02 · C01",
+    "recto": [
+        boite("essentiel", "L'essentiel",
+              "<p>Je m'adresse à <strong>celui qui gère le sujet</strong>. Ce qui <strong>engage l'employeur</strong> passe par mon responsable.</p>"
+              "<p>Chez tous les employeurs publics, le schéma est le même : <strong>une assemblée délibère</strong>, <strong>un exécutif dirige</strong>, "
+              "<strong>des services préparent et exécutent</strong>.</p>"),
+        "<h2>Le même schéma chez tous les employeurs publics</h2>",
+        table(["Employeur", "Délibère", "Dirige", "Prépare et exécute"], [
+            ["**La commune**", "Le conseil municipal", "Le maire", "Les services municipaux"],
+            ["**La province**", "L'assemblée de province", "Son président", "L'administration provinciale"],
+            ["**La Nouvelle-Calédonie**", "Le congrès", "Le gouvernement", "L'administration de la Nouvelle-Calédonie"],
+            ["**Un établissement public**", "Le conseil d'administration", "Le directeur ou la directrice", "Les services"],
+        ], "schema"),
+        boite("methode", "Avant de demander, trois questions",
+              '<ol><li>Est-ce que ça <strong>engage mon employeur</strong> (signature, promesse, dépense) ? Si oui : mon responsable.</li>'
+              '<li>Est-ce un sujet géré par un <strong>service</strong> (RH, informatique, partenariats, logistique) ? Si oui : ce service.</li>'
+              '<li>Ai-je besoin qu\'on m\'<strong>explique</strong> ? Je cherche d\'abord (organigramme, intranet), puis je demande à ma marraine ou à un collègue.</li></ol>'),
+    ],
+    "verso": [
+        "<h2>Engager l'employeur</h2>",
+        boite("reperes", "Ce que cela veut dire",
+              "<p><strong>Engager l'employeur</strong>, c'est signer, promettre, dépenser ou parler en son nom. Un agent ne le fait pas seul : "
+              "il <strong>transmet à son responsable</strong>, qui décide ou fait remonter à la direction.</p>"),
+        "<h2>Trois rôles à ne pas confondre</h2>",
+        table(["Rôle", "Ce qu'il fait"], [
+            ["**Celui qui décide**", "L'assemblée délibère, l'exécutif dirige. C'est lui qui engage l'employeur."],
+            ["**Celui qui encadre**", "Mon responsable : le trait plein de l'organigramme. C'est lui qui valide."],
+            ["**Celui qui aide**", "Une marraine, un collègue : elle aide, elle n'encadre pas."],
+        ], "roles3"),
+        boite("exemple", "Les partenaires gardent leur hiérarchie",
+              "<p>Un partenaire répond à son association, une commune à son maire. Mon employeur ne leur donne pas d'ordre : il <strong>coopère</strong>.</p>"),
+        boite("retenir", "À retenir",
+              "<p>Je m'adresse à celui qui gère le sujet. Ce qui engage mon employeur passe par mon responsable. Une marraine aide, elle n'encadre pas.</p>"),
+        boite("methode", "Chez mon employeur, je renseigne",
+              '<div class="lignes"><p>Le nom de mon responsable :</p><p>Mon contact RH :</p><p>Le support informatique :</p><p>Où trouver l\'organigramme :</p></div>'),
+    ],
+    "zoom_recto": 1.3, "zoom_verso": 1.2,
+    "sources": "Loi organique n° 99-209 du 19 mars 1999 ; code des communes de la Nouvelle-Calédonie. Grille reprise de la note de l'expert de M1 v0.2. "
+               "L'organigramme de l'ÉLAN est fictif : chez mon employeur, je cherche le mien.",
+})
+
 CSS = """
 @page { size: A4; margin: 0; }
 :root { --bleu:#1F767A; --anthracite:#3C3C3B; --turquoise:#00B2B8; --jaune:#FFCB00; --jaune-clair:#FFF6D1;
@@ -301,6 +347,9 @@ tbody tr:nth-child(even) td { background: #FAFAF8; }
 .institutions td:first-child { width: 48mm; }
 .textes td:first-child { width: 40mm; } .textes td:nth-child(2) { width: 38mm; font-size: 8.4pt; color: var(--texte-2); }
 .actes td:first-child { width: 36mm; } .actes td:nth-child(2) { width: 62mm; }
+.schema td:first-child { width: 36mm; } .roles3 td:first-child { width: 42mm; }
+.lignes p { margin: 0 0 1.2mm; padding-bottom: 5.2mm; border-bottom: .3mm dotted #B9B3AA; }
+.lignes p:last-child { margin-bottom: 0; }
 .mots td:first-child { width: 40mm; } .ou2 td:first-child { width: 78mm; }
 .trois { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4mm; } .trois .boite { font-size: 8.8pt; }
 ul.ou { margin: 0; padding-left: 5mm; } ul.ou li { margin-bottom: 1mm; }

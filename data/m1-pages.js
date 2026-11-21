@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.12.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.13.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M1-PAGES",
@@ -913,7 +913,8 @@ window.DINA_DATA = {
    "note_expert": "Grille « délibère, dirige, exécute » à faire valider par les référents (reprise de M1-E2-APP1).",
    "suite": "QFQ-E2-FIN",
    "fiches": [
-    "FICHE-M1-E2"
+    "FICHE-M1-E2",
+    "FA-M1-04"
    ]
   },
   "QFQ-E2-FIN": {
@@ -2449,7 +2450,11 @@ window.DINA_DATA = {
     "FICHE-M1-E1",
     "FICHE-M1-E2",
     "FICHE-M1-E3",
-    "FICHE-M1-DEF"
+    "FICHE-M1-DEF",
+    "FA-M1-01",
+    "FA-M1-02",
+    "FA-M1-03",
+    "FA-M1-04"
    ],
    "suite": "M1-FIN"
   },
@@ -2732,6 +2737,20 @@ window.DINA_DATA = {
     "C17"
    ],
    "version": "0.3"
+  },
+  "FA-M1-04": {
+   "id": "FA-M1-04",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Qui décide, qui encadre, qui aide",
+   "quand": "Le même schéma chez tous les employeurs publics : à qui m'adresser.",
+   "pdf": "assets/fiches/FA-M1-04.pdf",
+   "competences": [
+    "C02",
+    "C01"
+   ],
+   "version": "0.1"
   }
  },
  "illustrations": {
@@ -2786,5 +2805,5 @@ window.DINA_DATA = {
    "alt": "Trois questions avant d'utiliser une information : qui l'a produite ? de quand date-t-elle ? est-elle en vigueur ? Selon les réponses : je l'utilise, je vérifie, ou je l'écarte."
   }
  },
- "source": "Storyboard — M1 en pages v0.12.md"
+ "source": "Storyboard — M1 en pages v0.13.md"
 };
