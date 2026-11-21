@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M4 en pages v0.3.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M4 en pages v0.4.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M4-PAGES",
@@ -26,7 +26,7 @@ window.DINA_DATA = {
     "savoir": "Protéger l'information",
     "titre": "Ce fichier qui circule",
     "debut": "M4-P2",
-    "duree": "22 min",
+    "duree": "25 min",
     "accroche": "Mardi, en télétravail. Un fichier d'habitants, un outil d'IA, un faux courriel et une photo qui en montre trop."
    },
    {
@@ -551,7 +551,7 @@ window.DINA_DATA = {
    "type": "page",
    "etape": "Épisode 2",
    "titre": "Ce fichier qui circule",
-   "chapeau": "Mardi, Noa travaille à distance. Teiva lui envoie le tableau des habitants accompagnés. Léna propose de le résumer avec un outil d'IA, un faux courriel de l'informatique arrive, et une photo publiée montre un écran lisible. Vous protégez l'information, une demande après l'autre.",
+   "chapeau": "Mardi, Noa travaille à distance. Teiva lui envoie le tableau des habitants accompagnés. Léna propose de le résumer avec un outil d'IA, un faux courriel de l'informatique arrive, une photo publiée montre un écran lisible, et un compte rendu part à la commune. Vous protégez l'information, une demande après l'autre.",
    "competences": [
     "C10",
     "C17"
@@ -673,6 +673,41 @@ window.DINA_DATA = {
      "court": "La photo de l'atelier",
      "attendu": "accord",
      "feedback": "Des personnes reconnaissables : je demande d'abord leur accord et celui de mon responsable, puis je choisis ce qui est lisible."
+    },
+    {
+     "id": "K1",
+     "libelle": "« Mme Wakolo et son fils sont suivis par Passerelles pour leur dossier de logement. »",
+     "court": "Mme Wakolo et son dossier",
+     "attendu": "masquer",
+     "feedback": "Un nom et une situation personnelle : la commune n'en a pas besoin pour réserver une salle. Je masque."
+    },
+    {
+     "id": "K2",
+     "libelle": "« Rappeler M. Poédi au 75 xx xx avant la prochaine permanence. »",
+     "court": "Le numéro de M. Poédi",
+     "attendu": "masquer",
+     "feedback": "Un nom et un numéro de téléphone : c'est pour l'équipe, pas pour la commune. Je masque."
+    },
+    {
+     "id": "K3",
+     "libelle": "« Salle souhaitée le mardi, de 8 h à 11 h, à partir de février. »",
+     "court": "Le créneau de la salle",
+     "attendu": "garder",
+     "feedback": "C'est l'objet même de l'envoi : la commune en a besoin pour réserver. Je laisse."
+    },
+    {
+     "id": "K4",
+     "libelle": "« Fréquentation attendue : une douzaine d'habitants par permanence. »",
+     "court": "La fréquentation attendue",
+     "attendu": "garder",
+     "feedback": "Un total n'identifie personne et aide la commune à prévoir la salle. Je laisse."
+    },
+    {
+     "id": "K5",
+     "libelle": "« Un habitant a fait un malaise lors de la dernière réunion d'information de Passerelles. »",
+     "court": "Le malaise d'un habitant",
+     "attendu": "masquer",
+     "feedback": "Même sans nom, une information de santé sur un habitant d'un petit lieu peut le faire reconnaître. Elle ne sert pas à la commune : je masque."
     }
    ],
    "blocs": [
@@ -862,6 +897,53 @@ window.DINA_DATA = {
      "valider": "Réseaux sociaux (réserve, obligations des agents) : délibération 81 et circulaire DRHFPNC. Procédure de signalement d'un incident : propre à chaque employeur."
     },
     {
+     "type": "recit",
+     "phase": "application",
+     "titre": "Le compte rendu pour la commune",
+     "texte": "Fin de matinée. Samuel demande à Noa d'envoyer à la commune le compte rendu de la réunion d'hier. La commune en a besoin pour réserver la salle de la permanence. Mais le compte rendu a été écrit pour l'équipe : il parle des habitants.",
+     "repliques": [
+      {
+       "personnage": "Samuel",
+       "canal": "messagerie",
+       "texte": "« Tu peux envoyer le compte rendu à la commune avant midi ? Relis-le avant, il a été écrit pour nous. »"
+      }
+     ]
+    },
+    {
+     "type": "tri",
+     "id": "caviardage",
+     "phase": "application",
+     "titre": "Ce que Noa masque avant l'envoi",
+     "competences": [
+      "C10"
+     ],
+     "items": [
+      "K1",
+      "K2",
+      "K3",
+      "K4",
+      "K5"
+     ],
+     "categories": [
+      {
+       "id": "masquer",
+       "libelle": "Je le masque avant l'envoi",
+       "court": "Je masque"
+      },
+      {
+       "id": "garder",
+       "libelle": "Je le laisse : la commune en a besoin",
+       "court": "Je laisse"
+      }
+     ],
+     "consigne": "Pour chaque passage du compte rendu, que faites-vous avant de l'envoyer à la commune ?",
+     "retour": "immediat",
+     "bouton": "Vérifier",
+     "bilan": "Avant d'envoyer un document hors de l'équipe, je le relis. Je masque ce qui identifie un habitant ou touche à sa situation, et je garde ce dont le destinataire a besoin.",
+     "bilan_tout": "Noa masque les trois passages dans une copie du compte rendu, l'enregistre en PDF et vérifie que le texte masqué ne peut plus être sélectionné ni copié. L'original reste dans le dossier de l'équipe.",
+     "valider": "Caviardage (occultation) avant communication d'un document : bonne pratique issue de la CADA et de la CNIL (métropole), à faire valider par un expert en protection des données. Pas de règle calédonienne commune trouvée ; ne pas la présenter comme une obligation chiffrée."
+    },
+    {
      "type": "tri",
      "id": "transfert",
      "phase": "application",
@@ -926,6 +1008,10 @@ window.DINA_DATA = {
     {
      "titre": "Réagir à une publication",
      "texte": "La photo est retirée, le responsable de Noa est informé."
+    },
+    {
+     "titre": "Relire avant d'envoyer",
+     "texte": "Le compte rendu part à la commune sans noms ni situations d'habitants."
     }
    ],
    "dossier": "Le fichier des habitants est partagé sans les exposer. La tournée de jeudi garde les six lieux.",
@@ -2284,7 +2370,7 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Évaluation",
    "titre": "Vendredi : l'évaluation",
-   "texte": "Six situations nouvelles, hors du dossier Passerelles. Le bilan s'affiche à la fin.\nModule validé avec 5 réponses justes sur 6, dont au moins une par repère : un badge vous attend.\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nRéussie ou non, vous pouvez passer au module suivant.\n",
+   "texte": "Six situations nouvelles, hors du dossier Passerelles. Le bilan s'affiche à la fin.\nModule validé avec 5 réponses justes sur 6 : vous obtenez le badge « J'agis dans un cadre sécurisé ».\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nRéussie ou non, vous pouvez passer au module suivant.\n",
    "suite": "M4-EVA-E1A"
   },
   "M4-EVA-E1A": {
@@ -2484,13 +2570,13 @@ window.DINA_DATA = {
    "id": "M4-EVA-RES",
    "type": "eval-resultat",
    "etape": "Évaluation",
-   "regle": "5 réponses justes sur 6, au moins une par repère",
+   "regle": "5 réponses justes sur 6",
    "preuves": {
     "E1": "Agir dans les règles et avec les moyens du service",
     "E2": "Partager une information sans l'exposer",
     "E3": "Repérer un risque et alerter"
    },
-   "texte_reussi": "Évaluation réussie : le badge du module 4 est à vous. Vous vérifiez la règle et son actualité, vous exprimez un besoin sans engager la dépense, vous protégez l'information des personnes et vous savez sécuriser, alerter et orienter sans vous substituer.\n",
+   "texte_reussi": "Module validé : vous obtenez le badge « J'agis dans un cadre sécurisé ». Vous vérifiez la règle et son actualité, vous exprimez un besoin sans engager la dépense, vous protégez l'information des personnes et vous savez sécuriser, alerter et orienter sans vous substituer.\n",
    "texte_echec": "Certains repères sont encore à consolider. Une nouvelle tentative vous est proposée, sur six autres situations.\n",
    "texte_echec_final": "Certains repères restent à consolider. Nous vous conseillons de relire les fiches indiquées ci-dessus, dans votre carnet, et de revoir les pages du module qu'elles accompagnent. Vous reprendrez l'évaluation quand vous le voudrez, depuis le sommaire : les deux séries de situations alternent d'une tentative à l'autre.\nVous pouvez aussi continuer votre parcours dès maintenant : le module suivant vous est ouvert.\n",
    "consolider": {
@@ -2969,6 +3055,10 @@ window.DINA_DATA = {
     {
      "titre": "Une photo ou une publication",
      "texte": "Je regarde ce qui est lisible à l'arrière-plan avant de publier."
+    },
+    {
+     "titre": "Un document à envoyer hors de l'équipe",
+     "texte": "Dans une copie, je masque ce qui identifie une personne ou touche à sa situation ; je vérifie que le texte masqué a vraiment disparu."
     }
    ],
    "exemple": "« Léna, je ne peux pas vous envoyer le tableau nominatif. Voici le total par lieu, sans noms. Pour plus de détail, il faut l'accord de mon responsable. »",
@@ -3274,5 +3364,5 @@ window.DINA_DATA = {
    "alt": "Quatre étapes. Je sécurise sans me mettre en danger. J'alerte : 15, 18, 17. J'écoute et j'oriente, sans promettre le secret absolu. Je signale pour que le risque soit corrigé."
   }
  },
- "source": "Storyboard — M4 en pages v0.3.md"
+ "source": "Storyboard — M4 en pages v0.4.md"
 };

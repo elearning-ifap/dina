@@ -22,7 +22,7 @@ window.DINA_VERSION = {
     ],
     evolutions: [
       "Les modules 1 à 5 et le bilan sont ouverts. Le module 1 est présenté dans sa version « page qui défile ».",
-      "Évaluation de chaque module : deux séries de six situations, différentes à chaque passage ; trois choix de réponse ; module réussi avec 5 réponses justes sur 6. Un module non réussi ne bloque pas la suite.",
+      "Évaluation de chaque module : deux séries de six situations, différentes à chaque passage ; trois choix de réponse ; module réussi avec 5 réponses justes sur 6, et le badge porte le nom du module. Un module non réussi ne bloque pas la suite.",
       "Les fiches d'apport et les fiches outils sont téléchargeables en PDF (brouillons, avant relecture par les experts).",
       "Le bilan de parcours est nouveau. Il donne accès au badge du parcours quand tous les modules sont réussis.",
       "Les modules 4 et 5 sont en cours de relecture : textes et illustrations peuvent encore changer."
@@ -45,7 +45,7 @@ window.DINA_VERSION = {
       duree: "1 h environ", disponible: true },
     { code: "m3", fichier: "m3-pages.html", cle: "dina-m3", titre: "Module 3 « Je travaille avec les autres »",
       texte: "Lancer la permanence de Passerelles avec la commune et la province : choisir le bon canal et les bons mots, transmettre avec le contexte.",
-      duree: "1 h 15 environ", disponible: true },
+      duree: "1 h 30 environ", disponible: true },
     { code: "m4", fichier: "m4-pages.html", cle: "dina-m4", titre: "Module 4 « J'agis dans un cadre sécurisé »",
       texte: "Le diagnostic des six lieux : manier avec soin un fichier d'habitants accompagnés et agir dans le cadre.",
       duree: "1 h 45 environ", disponible: true },

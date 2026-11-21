@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.13.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.14.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M1-PAGES",
@@ -1924,7 +1924,7 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Évaluation",
    "titre": "Le bilan de la semaine",
-   "texte": "Six situations nouvelles, deux par compétence. Le bilan s'affiche à la fin.\nModule validé avec 5 bonnes réponses sur 6, dont au moins une par compétence : un badge vous attend.\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nValidée ou non, vous pouvez passer au module suivant.",
+   "texte": "Six situations nouvelles, deux par compétence. Le bilan s'affiche à la fin.\nModule validé avec 5 réponses justes sur 6 : vous obtenez le badge « Je me repère ».\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nValidée ou non, vous pouvez passer au module suivant.",
    "suite": "M1-EVA-E1A"
   },
   "M1-EVA-E1A": {
@@ -2123,7 +2123,7 @@ window.DINA_DATA = {
    "id": "M1-EVA-RES",
    "type": "eval-resultat",
    "etape": "Évaluation",
-   "regle": "5 réponses justes sur 6, au moins une par compétence",
+   "regle": "5 réponses justes sur 6",
    "preuves": {
     "E1": "Orienter une demande",
     "E2": "Trouver le bon interlocuteur",
@@ -2806,5 +2806,5 @@ window.DINA_DATA = {
    "alt": "Trois questions avant d'utiliser une information : qui l'a produite ? de quand date-t-elle ? est-elle en vigueur ? Selon les réponses : je l'utilise, je vérifie, ou je l'écarte."
   }
  },
- "source": "Storyboard — M1 en pages v0.13.md"
+ "source": "Storyboard — M1 en pages v0.14.md"
 };

@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M3 en pages v0.2.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M3 en pages v0.3.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M3-PAGES",
@@ -6,7 +6,7 @@ window.DINA_DATA = {
   "cle": "m3-pages",
   "titre": "Je travaille avec les autres",
   "code": "M3",
-  "duree": "1 h 15 environ",
+  "duree": "1 h 30 environ",
   "intro": "Prototype du module 3 en pages qui défilent. Ariane a accepté l'appui de l'ÉLAN : il faut maintenant lancer la permanence de Passerelles avec la commune et la province. Du lundi au vendredi, choisissez le bon canal et les bons mots, faites circuler l'information, désamorcez un malentendu et gardez le cap quand tout change.",
   "sections": [
    {
@@ -1953,7 +1953,7 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Évaluation",
    "titre": "Vendredi : l'évaluation",
-   "texte": "Six situations nouvelles, hors du dossier Passerelles. Le bilan s'affiche à la fin.\nModule validé avec 5 réponses justes sur 6, dont au moins une par compétence : un badge vous attend.\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nRéussie ou non, vous pouvez passer au module suivant.\n",
+   "texte": "Six situations nouvelles, hors du dossier Passerelles. Le bilan s'affiche à la fin.\nModule validé avec 5 réponses justes sur 6 : vous obtenez le badge « Je travaille avec les autres ».\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nRéussie ou non, vous pouvez passer au module suivant.\n",
    "suite": "M3-EVA-E1A"
   },
   "M3-EVA-E1A": {
@@ -2152,14 +2152,14 @@ window.DINA_DATA = {
    "id": "M3-EVA-RES",
    "type": "eval-resultat",
    "etape": "Évaluation",
-   "regle": "5 réponses justes sur 6, au moins une par compétence",
+   "regle": "5 réponses justes sur 6",
    "preuves": {
     "E1": "Choisir le bon canal et les bons mots",
     "E2": "Faire circuler l'information et coopérer",
     "E3": "Désamorcer un malentendu",
     "E4": "S'adapter quand tout change"
    },
-   "texte_reussi": "Évaluation réussie : le badge du module 3 est à vous. Vous choisissez le bon canal et les bons mots, vous dites à chacun ce qu'il doit faire ou savoir, vous désamorcez un malentendu simple et vous cherchez ce qui change quand tout change.\n",
+   "texte_reussi": "Module validé : vous obtenez le badge « Je travaille avec les autres ». Vous choisissez le bon canal et les bons mots, vous dites à chacun ce qu'il doit faire ou savoir, vous désamorcez un malentendu simple et vous cherchez ce qui change quand tout change.\n",
    "texte_echec": "Certains repères sont encore à consolider. Une nouvelle tentative vous est proposée, sur six autres situations.\n",
    "texte_echec_final": "Certains repères restent à consolider. Nous vous conseillons de relire les fiches indiquées ci-dessus, dans votre carnet, et de revoir les pages du module qu'elles accompagnent. Vous reprendrez l'évaluation quand vous le voudrez, depuis le sommaire : les deux séries de situations alternent d'une tentative à l'autre.\nVous pouvez aussi continuer votre parcours dès maintenant : le module suivant vous est ouvert.\n",
    "consolider": {
@@ -2877,5 +2877,5 @@ window.DINA_DATA = {
    "alt": "Six étapes en frise : émergence, cadrage, lancement, réalisation, mise en service, clôture. Le lancement est mis en valeur : c'est l'étape du dossier Passerelles cette semaine."
   }
  },
- "source": "Storyboard — M3 en pages v0.2.md"
+ "source": "Storyboard — M3 en pages v0.3.md"
 };

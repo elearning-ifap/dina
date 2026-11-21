@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.7.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.8.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M2-PAGES",
@@ -2245,7 +2245,7 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Évaluation",
    "titre": "Vendredi : l'évaluation",
-   "texte": "Six situations nouvelles, deux par repère du module. Le bilan s'affiche à la fin.\nModule validé avec 5 réponses justes sur 6, dont au moins une par repère : un badge vous attend.\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nRéussie ou non, vous pouvez passer au module suivant.\n",
+   "texte": "Six situations nouvelles, deux par repère du module. Le bilan s'affiche à la fin.\nModule validé avec 5 réponses justes sur 6 : vous obtenez le badge « Je trouve ma place ».\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nRéussie ou non, vous pouvez passer au module suivant.\n",
    "suite": "M2-EVA-E1A"
   },
   "M2-EVA-E1A": {
@@ -2453,13 +2453,13 @@ window.DINA_DATA = {
    "id": "M2-EVA-RES",
    "type": "eval-resultat",
    "etape": "Évaluation",
-   "regle": "5 réponses justes sur 6, au moins une par compétence",
+   "regle": "5 réponses justes sur 6",
    "preuves": {
     "E1": "Rester dans son périmètre",
     "E2": "Chercher, puis demander un appui",
     "E3": "Prioriser et tenir ses engagements"
    },
-   "texte_reussi": "Évaluation réussie : le badge du module 2 est à vous. Vous savez ce qui relève de votre poste et ce que vous faites valider, vous appliquez une consigne même quand vous la discutez, vous demandez un appui au bon moment, et vous prévenez tôt quand une échéance est menacée.\n",
+   "texte_reussi": "Module validé : vous obtenez le badge « Je trouve ma place ». Vous savez ce qui relève de votre poste et ce que vous faites valider, vous appliquez une consigne même quand vous la discutez, vous demandez un appui au bon moment, et vous prévenez tôt quand une échéance est menacée.\n",
    "texte_echec": "Certains repères sont encore à consolider. Une nouvelle tentative vous est proposée, sur six autres situations.\n",
    "texte_echec_final": "Certains repères restent à consolider. Nous vous conseillons de relire les fiches indiquées ci-dessus, dans votre carnet, et de revoir les pages du module qu'elles accompagnent. Vous reprendrez l'évaluation quand vous le voudrez, depuis le sommaire : les deux séries de situations alternent d'une tentative à l'autre.\nVous pouvez aussi continuer votre parcours dès maintenant : le module suivant vous est ouvert.\n",
    "consolider": {
@@ -3203,5 +3203,5 @@ window.DINA_DATA = {
    "alt": "Vendredi après-midi. Noa range ses documents à son bureau, détendu, la semaine terminée."
   }
  },
- "source": "Storyboard — M2 en pages v0.7.md"
+ "source": "Storyboard — M2 en pages v0.8.md"
 };

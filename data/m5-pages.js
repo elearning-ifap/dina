@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M5 en pages v0.2.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M5 en pages v0.3.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M5-PAGES",
@@ -1856,7 +1856,7 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Évaluation",
    "titre": "Vendredi : l'évaluation",
-   "texte": "Six situations nouvelles, hors du dossier Passerelles. Le bilan s'affiche à la fin.\nModule validé avec 5 réponses justes sur 6, dont au moins une par repère : un badge vous attend.\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nRéussie ou non, vous pouvez passer au module suivant.\n",
+   "texte": "Six situations nouvelles, hors du dossier Passerelles. Le bilan s'affiche à la fin.\nModule validé avec 5 réponses justes sur 6 : vous obtenez le badge « J'incarne le service public ».\nSinon, une seconde tentative vous est proposée, sur d'autres situations. Vous pourrez reprendre l'évaluation quand vous voulez.\nRéussie ou non, vous pouvez passer au module suivant.\n",
    "suite": "M5-EVA-E1A"
   },
   "M5-EVA-E1A": {
@@ -2055,13 +2055,13 @@ window.DINA_DATA = {
    "id": "M5-EVA-RES",
    "type": "eval-resultat",
    "etape": "Évaluation",
-   "regle": "5 réponses justes sur 6, au moins une par repère",
+   "regle": "5 réponses justes sur 6",
    "preuves": {
     "E1": "Principes et discernement",
     "E2": "Servir l'usager",
     "E3": "Mesurer et améliorer"
    },
-   "texte_reussi": "Évaluation réussie : le badge du module 5 est à vous. Vous reliez une situation à un principe du service public, vous repérez un lien d'intérêt et demandez conseil, vous servez chacun avec les mêmes égards et vous proposez une amélioration avec un indicateur simple.\n",
+   "texte_reussi": "Module validé : vous obtenez le badge « J'incarne le service public ». Vous reliez une situation à un principe du service public, vous repérez un lien d'intérêt et demandez conseil, vous servez chacun avec les mêmes égards et vous proposez une amélioration avec un indicateur simple.\n",
    "texte_echec": "Certains repères sont encore à consolider. Une nouvelle tentative vous est proposée, sur six autres situations.\n",
    "texte_echec_final": "Certains repères restent à consolider. Nous vous conseillons de relire les fiches indiquées ci-dessus, dans votre carnet, et de revoir les pages du module qu'elles accompagnent. Vous reprendrez l'évaluation quand vous le voudrez, depuis le sommaire : les deux séries de situations alternent d'une tentative à l'autre.\nVous pouvez aussi continuer votre parcours dès maintenant : le module suivant vous est ouvert.\n",
    "consolider": {
@@ -2821,5 +2821,5 @@ window.DINA_DATA = {
    "alt": "Cinq étapes en frise : l'objectif, activité résultat utilité, un constat factuel, une amélioration simple, un indicateur."
   }
  },
- "source": "Storyboard — M5 en pages v0.2.md"
+ "source": "Storyboard — M5 en pages v0.3.md"
 };
