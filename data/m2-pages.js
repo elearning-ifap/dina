@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.5.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.7.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M2-PAGES",
@@ -36,7 +36,7 @@ window.DINA_DATA = {
     "savoir": "Demander un appui au bon moment",
     "titre": "Je suis bloqué",
     "debut": "M2-P3",
-    "duree": "12 min",
+    "duree": "13 min",
     "accroche": "Un accès refusé, une question RH, une définition introuvable. Qui peut aider Noa ?"
    },
    {
@@ -46,7 +46,7 @@ window.DINA_DATA = {
     "savoir": "Le défi : tenir ses engagements",
     "titre": "La matinée déraille",
     "debut": "M2-DEF",
-    "duree": "10 min",
+    "duree": "9 min",
     "accroche": "Noa travaille de chez lui. À 9 h, Ariane appelle."
    },
    {
@@ -1385,12 +1385,17 @@ window.DINA_DATA = {
    "type": "page",
    "etape": "Épisode 3",
    "titre": "Je suis bloqué",
-   "chapeau": "Trois blocages dans la même matinée, et la note attendue jeudi. Vous choisissez vers qui Noa se tourne, vous découvrez comment bien demander un appui, puis vous l'écrivez.",
+   "chapeau": "Trois blocages dans la même matinée, et la note attendue jeudi. Vous choisissez vers qui Noa se tourne, vous découvrez comment bien demander un appui, puis vous l'écrivez. Une règle sur les urgences conclut l'épisode.",
    "competences": [
     "C18",
-    "C03"
+    "C03",
+    "C05"
    ],
    "competences_lib": [
+    {
+     "code": "C05",
+     "libelle": "J'organise mon activité et mes priorités."
+    },
     {
      "code": "C18",
      "libelle": "J'agis en autonomie et je demande appui au bon moment."
@@ -1792,6 +1797,27 @@ window.DINA_DATA = {
      ],
      "mention": "Pour le dossier Passerelles : le dossier partagé est de nouveau ouvert, et la note s'appuie sur une définition claire de la démarche aboutie.",
      "a_retenir": "Une demande précise obtient une réponse rapide. Et si je bloque depuis trop longtemps, je m'arrête et je demande."
+    },
+    {
+     "type": "apport",
+     "phase": "apport",
+     "titre": "Quand une urgence décale une échéance",
+     "competences": [
+      "C05",
+      "C04"
+     ],
+     "texte": "La fiche de poste de Noa le dit : « Une demande directe d'Ariane qui modifie le travail confié est clarifiée avec Samuel. »",
+     "regle": "Quand une urgence décale une échéance, je préviens tout de suite la personne qui attend mon travail, et je propose un nouveau délai.",
+     "regle_clair": "Prévenir **tôt**, c'est laisser à l'autre le temps de s'organiser. Prévenir à l'heure de l'échéance, c'est le mettre devant le fait accompli.",
+     "methode_titre": "Quand la matinée déraille",
+     "methode": [
+      "Je repère ce qui est urgent et ce qui peut glisser.",
+      "Je préviens celui dont l'échéance glisse, avec un nouveau délai.",
+      "Je traite l'urgent.",
+      "Je vérifie avant d'annoncer ce qui ne dépend pas de moi."
+     ],
+     "encadre": "Sur site ou à distance, la règle est la même. À distance, je choisis le canal que l'autre lira tout de suite : un SMS, un appel.",
+     "valider": "Télétravail et travail à distance : texte vérifié le 11-11 (délibération 155) ; autorisé par l'employeur, pas un droit. Mise en œuvre à confirmer chez les employeurs visés."
     }
    ],
    "fiches": [
@@ -1850,7 +1876,6 @@ window.DINA_DATA = {
    ],
    "phases": [
     "situation",
-    "apport",
     "application"
    ],
    "bouton_fin": "Terminer le défi",
@@ -1937,27 +1962,6 @@ window.DINA_DATA = {
      "feedback_ok": "Samuel est prévenu avant tout le reste : il peut s'organiser. Le point d'Ariane passe en premier parce qu'elle l'attend avant 11 h ; la note suivra.",
      "feedback_ko": "Prévenez d'abord Samuel : la demande d'Ariane modifie le travail qu'il vous a confié, et il doit le savoir tout de suite. Ensuite, le point d'Ariane, attendu avant 11 h.",
      "bouton": "Vérifier l'ordre"
-    },
-    {
-     "type": "apport",
-     "phase": "apport",
-     "titre": "Quand une urgence décale une échéance",
-     "competences": [
-      "C05",
-      "C04"
-     ],
-     "texte": "La fiche de poste de Noa le dit : « Une demande directe d'Ariane qui modifie le travail confié est clarifiée avec Samuel. »",
-     "regle": "Quand une urgence décale une échéance, je préviens tout de suite la personne qui attend mon travail, et je propose un nouveau délai.",
-     "regle_clair": "Prévenir **tôt**, c'est laisser à l'autre le temps de s'organiser. Prévenir à l'heure de l'échéance, c'est le mettre devant le fait accompli.",
-     "methode_titre": "Quand la matinée déraille",
-     "methode": [
-      "Je repère ce qui est urgent et ce qui peut glisser.",
-      "Je préviens celui dont l'échéance glisse, avec un nouveau délai.",
-      "Je traite l'urgent.",
-      "Je vérifie avant d'annoncer ce qui ne dépend pas de moi."
-     ],
-     "encadre": "Sur site ou à distance, la règle est la même. À distance, je choisis le canal que l'autre lira tout de suite : ici, un SMS.",
-     "valider": "Télétravail et travail à distance : texte vérifié le 11-11 (délibération 155) ; autorisé par l'employeur, pas un droit. Mise en œuvre à confirmer chez les employeurs visés."
     },
     {
      "type": "tri",
@@ -2838,7 +2842,6 @@ window.DINA_DATA = {
  "fiches": {
   "FICHE-M2-E1": {
    "id": "FICHE-M2-E1",
-   "pdf": "assets/fiches/FO-M2-E1.pdf",
    "type": "fiche",
    "code": "M2-E1",
    "modele": "formulaire",
@@ -2883,11 +2886,11 @@ window.DINA_DATA = {
    "competences": [
     "C03"
    ],
-   "version": "0.3"
+   "version": "0.3",
+   "pdf": "assets/fiches/FO-M2-E1.pdf"
   },
   "FICHE-M2-E2": {
    "id": "FICHE-M2-E2",
-   "pdf": "assets/fiches/FO-M2-E2.pdf",
    "type": "fiche",
    "code": "M2-E2",
    "modele": "checklist",
@@ -2958,11 +2961,11 @@ window.DINA_DATA = {
     "C04",
     "C18"
    ],
-   "version": "0.3"
+   "version": "0.3",
+   "pdf": "assets/fiches/FO-M2-E2.pdf"
   },
   "FICHE-M2-E3": {
    "id": "FICHE-M2-E3",
-   "pdf": "assets/fiches/FO-M2-E3.pdf",
    "type": "fiche",
    "code": "M2-E3",
    "modele": "aide-memoire",
@@ -3015,11 +3018,11 @@ window.DINA_DATA = {
    "competences": [
     "C18"
    ],
-   "version": "0.3"
+   "version": "0.3",
+   "pdf": "assets/fiches/FO-M2-E3.pdf"
   },
   "FICHE-M2-S": {
    "id": "FICHE-M2-S",
-   "pdf": "assets/fiches/FO-M2-S.pdf",
    "type": "fiche",
    "code": "M2-S",
    "modele": "aide-memoire",
@@ -3072,7 +3075,8 @@ window.DINA_DATA = {
    "competences": [
     "C05"
    ],
-   "version": "0.1"
+   "version": "0.1",
+   "pdf": "assets/fiches/FO-M2-S.pdf"
   },
   "FICHE-M2-STATUT": {
    "id": "FICHE-M2-STATUT",
@@ -3127,44 +3131,44 @@ window.DINA_DATA = {
    "valider": "Nouvelle fiche (A4, 11-11), reprise de M2-E1-APP2 et M2-E1-APP2B (M2 v0.4). Contenu statutaire à faire valider (délibération 81, arrêté 1065, délibération 230, loi du pays 2021-4). Ajouts du 12-11 (T05), nuance de l'art. 91-II (loi du pays 2024-10) et repères du télétravail (délibération 155)."
   },
   "FA-M2-01": {
-     "id": "FA-M2-01",
-     "type": "fiche",
-     "modele": "pdf",
-     "categorie": "apport",
-     "titre": "Ma marge d'action",
-     "quand": "Jusqu'où je peux agir seul, et quand je demande.",
-     "pdf": "assets/fiches/FA-M2-01.pdf",
-     "competences": [
-        "C03",
-        "C04"
-     ],
-     "version": "0.3"
+   "id": "FA-M2-01",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Ma marge d'action",
+   "quand": "Jusqu'où je peux agir seul, et quand je demande.",
+   "pdf": "assets/fiches/FA-M2-01.pdf",
+   "competences": [
+    "C03",
+    "C04"
+   ],
+   "version": "0.3"
   },
   "FA-M2-02": {
-     "id": "FA-M2-02",
-     "type": "fiche",
-     "modele": "pdf",
-     "categorie": "apport",
-     "titre": "Mon statut, en repères",
-     "quand": "Ce que mon statut change pour moi au quotidien.",
-     "pdf": "assets/fiches/FA-M2-02.pdf",
-     "competences": [
-        "C03"
-     ],
-     "version": "0.3"
+   "id": "FA-M2-02",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Mon statut, en repères",
+   "quand": "Ce que mon statut change pour moi au quotidien.",
+   "pdf": "assets/fiches/FA-M2-02.pdf",
+   "competences": [
+    "C03"
+   ],
+   "version": "0.3"
   },
   "FA-M2-03": {
-     "id": "FA-M2-03",
-     "type": "fiche",
-     "modele": "pdf",
-     "categorie": "apport",
-     "titre": "Informer, prévenir, demander",
-     "quand": "Tenir ses échéances, dire ce que vaut une information, demander un appui.",
-     "pdf": "assets/fiches/FA-M2-03.pdf",
-     "competences": [
-        "C18"
-     ],
-     "version": "0.3"
+   "id": "FA-M2-03",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Informer, prévenir, demander",
+   "quand": "Tenir ses échéances, dire ce que vaut une information, demander un appui.",
+   "pdf": "assets/fiches/FA-M2-03.pdf",
+   "competences": [
+    "C18"
+   ],
+   "version": "0.3"
   }
  },
  "illustrations": {
@@ -3199,5 +3203,5 @@ window.DINA_DATA = {
    "alt": "Vendredi après-midi. Noa range ses documents à son bureau, détendu, la semaine terminée."
   }
  },
- "source": "Storyboard — M2 en pages v0.5.md"
+ "source": "Storyboard — M2 en pages v0.7.md"
 };
