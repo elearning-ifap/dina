@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.10.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M1 en pages v0.12.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M1-PAGES",
@@ -37,7 +37,7 @@ window.DINA_DATA = {
     "savoir": "Vérifier une information",
     "titre": "Une information sûre",
     "debut": "QFQ-E3",
-    "duree": "20 min",
+    "duree": "21 min",
     "accroche": "Quatre documents, un délai. Lequel croire ?"
    },
    {
@@ -47,7 +47,7 @@ window.DINA_DATA = {
     "savoir": "Le défi : le premier appel de Joël",
     "titre": "Le premier appel de Joël",
     "debut": "QFQ-DEF",
-    "duree": "10 min",
+    "duree": "9 min",
     "accroche": "Noa est seul au pôle. Le téléphone sonne."
    },
    {
@@ -944,12 +944,17 @@ window.DINA_DATA = {
    "type": "page",
    "etape": "Épisode 3",
    "titre": "Une information sûre",
-   "chapeau": "Une ligne de la liste à compléter. Vous cherchez la source, vous triez les documents, vous découvrez les trois vérifications, puis vous décidez et demandez un appui.",
+   "chapeau": "Une ligne de la liste à compléter. Vous cherchez la source, vous triez les documents, vous découvrez les trois vérifications, puis vous décidez et demandez un appui. Samuel vous donne ensuite une règle pour transmettre.",
    "competences": [
+    "C02",
     "C17",
     "C18"
    ],
    "competences_lib": [
+    {
+     "code": "C02",
+     "libelle": "Je trouve le bon interlocuteur."
+    },
     {
      "code": "C17",
      "libelle": "Je recherche, je vérifie et j'actualise une information."
@@ -1587,6 +1592,26 @@ window.DINA_DATA = {
      "mention": "Pour le dossier Passerelles : la liste d'orientation est vérifiée et datée, ligne par ligne.",
      "a_retenir": "Avant d'utiliser une information : qui l'a produite, de quand elle date, si elle est en vigueur. Si deux sources officielles ne concordent pas, je demande un appui.",
      "sources": "Leginova (leginova.gouv.nc) ; Légifrance (legifrance.gouv.fr) ; site de la CAFAT ; site de la DRHFPNC (drhfpnc.gouv.nc)."
+    },
+    {
+     "type": "apport",
+     "phase": "apport",
+     "titre": "Transmettre au bon interlocuteur, avec le contexte",
+     "competences": [
+      "C02",
+      "C18"
+     ],
+     "texte": "Mercredi, en fin d'après-midi, Samuel résume : « Ce qui est à toi, tu le fais. Ce qui relève d'un autre service, tu orientes. Ce qui engage l'ÉLAN, tu me le transmets, avec le contexte. »",
+     "regle": "Quand une demande ne relève pas de moi, je la transmets à la bonne personne, avec le contexte : qui demande quoi, ce que j'ai déjà fait, ce qui reste à décider.",
+     "regle_clair": "Transmettre avec le contexte, c'est permettre à l'autre d'agir sans tout redemander. Ce qui engage l'ÉLAN (signer, promettre, dépenser) se décide plus haut : vous verrez au module 2 jusqu'où va la marge de Noa.",
+     "methode_titre": "Un message qui se lit en une fois",
+     "methode": [
+      "Qui a appelé, et quand.",
+      "Ce qu'il demande.",
+      "Ce que j'ai déjà fait.",
+      "Ce qui reste à décider, et par qui."
+     ],
+     "guichet": "Transmettre n'est pas se défausser : Noa répond tout de suite sur ce qui est à lui, et dit à son interlocuteur ce qui va se passer pour le reste."
     }
    ],
    "note_expert": "Types de textes et autorités (grille de l'apport) à faire valider par les référents ; repris de M1-E3-APP1 (M1 v0.2).",
@@ -1624,7 +1649,7 @@ window.DINA_DATA = {
    "type": "page",
    "etape": "Défi",
    "titre": "Le premier appel de Joël",
-   "chapeau": "Noa est seul au pôle. Un partenaire appelle et demande plus que ce que Noa peut accorder. Vous répondez, vous découvrez comment transmettre au bon interlocuteur, avec le contexte, puis vous rendez compte.",
+   "chapeau": "Noa est seul au pôle. Un partenaire appelle et demande plus que ce que Noa peut accorder. Vous répondez, vous choisissez ce que Noa fait, oriente ou transmet, puis vous rendez compte.",
    "competences": [
     "C02",
     "C18"
@@ -1641,7 +1666,6 @@ window.DINA_DATA = {
    ],
    "phases": [
     "situation",
-    "apport",
     "application"
    ],
    "bouton_fin": "Terminer le défi",
@@ -1769,29 +1793,9 @@ window.DINA_DATA = {
      "consigne": "Choisissez la réponse de Noa.",
      "retour": "immediat",
      "bouton": "Vérifier",
-     "bilan": "Relisez l'explication : la règle vient juste dessous.",
+     "bilan": "Relisez l'explication : la règle de Samuel est dans la fiche « Transmettre avec le contexte ».",
      "bilan_tout": "Noa a répondu sans dépasser son rôle. Reste à comprendre pourquoi.",
      "qcu": true
-    },
-    {
-     "type": "apport",
-     "phase": "apport",
-     "titre": "Transmettre au bon interlocuteur, avec le contexte",
-     "competences": [
-      "C02",
-      "C18"
-     ],
-     "texte": "En fin de matinée, Samuel résume : « Ce qui est à toi, tu le fais. Ce qui relève d'un autre service, tu orientes. Ce qui engage l'ÉLAN, tu me le transmets, avec le contexte. »",
-     "regle": "Quand une demande ne relève pas de moi, je la transmets à la bonne personne, avec le contexte : qui demande quoi, ce que j'ai déjà fait, ce qui reste à décider.",
-     "regle_clair": "Transmettre avec le contexte, c'est permettre à l'autre d'agir sans tout redemander. Ce qui engage l'ÉLAN (signer, promettre, dépenser) se décide plus haut : vous verrez au module 2 jusqu'où va la marge de Noa.",
-     "methode_titre": "Un message qui se lit en une fois",
-     "methode": [
-      "Qui a appelé, et quand.",
-      "Ce qu'il demande.",
-      "Ce que j'ai déjà fait.",
-      "Ce qui reste à décider, et par qui."
-     ],
-     "guichet": "Transmettre n'est pas se défausser : Noa répond tout de suite sur ce qui est à lui, et dit à Joël ce qui va se passer pour le reste."
     },
     {
      "type": "tri",
@@ -1880,7 +1884,10 @@ window.DINA_DATA = {
      "a_retenir": "Je fais ce qui relève de mon rôle ; j'oriente vers le bon service ; je transmets à mon responsable ce qui engage mon employeur, avec le contexte : qui, quoi, ce que j'ai fait, ce qui reste à décider."
     }
    ],
-   "suite": "QFQ-DEF-FIN"
+   "suite": "QFQ-DEF-FIN",
+   "fiches": [
+    "FICHE-M1-DEF"
+   ]
   },
   "QFQ-DEF-FIN": {
    "id": "QFQ-DEF-FIN",
@@ -2437,11 +2444,12 @@ window.DINA_DATA = {
    "type": "ressources",
    "etape": "Bilan",
    "titre": "Mes ressources",
-   "texte": "Les trois fiches du module sont rangées dans votre carnet. Ouvrez-les pour les imprimer ou les enregistrer en PDF.",
+   "texte": "Les quatre fiches du module sont rangées dans votre carnet. Ouvrez-les pour les imprimer ou les enregistrer en PDF.",
    "fiches": [
     "FICHE-M1-E1",
     "FICHE-M1-E2",
-    "FICHE-M1-E3"
+    "FICHE-M1-E3",
+    "FICHE-M1-DEF"
    ],
    "suite": "M1-FIN"
   },
@@ -2651,45 +2659,79 @@ window.DINA_DATA = {
    ],
    "version": "0.3"
   },
+  "FICHE-M1-DEF": {
+   "id": "FICHE-M1-DEF",
+   "type": "fiche",
+   "code": "M1-DEF-03",
+   "modele": "aide-memoire",
+   "categorie": "outil",
+   "titre": "Transmettre avec le contexte",
+   "quand": "Une demande ne relève pas de vous, ou elle engage votre employeur : avant de la passer à quelqu'un.",
+   "etapes": [
+    {
+     "titre": "1. Je dis qui a appelé, et quand",
+     "texte": "Le nom de la personne, son organisme, le moment de l'appel."
+    },
+    {
+     "titre": "2. Je dis ce qu'elle demande",
+     "texte": "La demande en une phrase, sans interprétation."
+    },
+    {
+     "titre": "3. Je dis ce que j'ai déjà fait",
+     "texte": "Ce que j'ai répondu, envoyé ou promis. Je n'ai rien promis qui engage l'employeur."
+    },
+    {
+     "titre": "4. Je dis ce qui reste à décider, et par qui",
+     "texte": "La personne qui peut trancher et ce que j'attends d'elle."
+    }
+   ],
+   "exemple": "« Joël, de Passerelles, a appelé ce matin. Il demande un appui de l'ÉLAN pour sa permanence. Je lui ai envoyé la liste vérifiée et je ne lui ai rien promis. Il reste à décider si l'ÉLAN l'appuie. Ses coordonnées sont ci-dessous. »",
+   "a_retenir": "Un message qui se lit en une fois permet à l'autre d'agir sans tout redemander.",
+   "competences": [
+    "C02",
+    "C18"
+   ],
+   "version": "0.1"
+  },
   "FA-M1-01": {
-     "id": "FA-M1-01",
-     "type": "fiche",
-     "modele": "pdf",
-     "categorie": "apport",
-     "titre": "Qui fait quoi en Nouvelle-Calédonie ?",
-     "quand": "État, Nouvelle-Calédonie, provinces, communes : repérer qui est compétent.",
-     "pdf": "assets/fiches/FA-M1-01.pdf",
-     "competences": [
-        "C01",
-        "C02"
-     ],
-     "version": "0.3"
+   "id": "FA-M1-01",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Qui fait quoi en Nouvelle-Calédonie ?",
+   "quand": "État, Nouvelle-Calédonie, provinces, communes : repérer qui est compétent.",
+   "pdf": "assets/fiches/FA-M1-01.pdf",
+   "competences": [
+    "C01",
+    "C02"
+   ],
+   "version": "0.3"
   },
   "FA-M1-02": {
-     "id": "FA-M1-02",
-     "type": "fiche",
-     "modele": "pdf",
-     "categorie": "apport",
-     "titre": "Références juridiques et historique",
-     "quand": "D'où vient la répartition des compétences, et quels textes la fixent.",
-     "pdf": "assets/fiches/FA-M1-02.pdf",
-     "competences": [
-        "C01"
-     ],
-     "version": "0.3"
+   "id": "FA-M1-02",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Références juridiques et historique",
+   "quand": "D'où vient la répartition des compétences, et quels textes la fixent.",
+   "pdf": "assets/fiches/FA-M1-02.pdf",
+   "competences": [
+    "C01"
+   ],
+   "version": "0.3"
   },
   "FA-M1-03": {
-     "id": "FA-M1-03",
-     "type": "fiche",
-     "modele": "pdf",
-     "categorie": "apport",
-     "titre": "Reconnaître et vérifier un texte",
-     "quand": "Qui prend le texte, de quand il date, s'il est en vigueur.",
-     "pdf": "assets/fiches/FA-M1-03.pdf",
-     "competences": [
-        "C17"
-     ],
-     "version": "0.3"
+   "id": "FA-M1-03",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Reconnaître et vérifier un texte",
+   "quand": "Qui prend le texte, de quand il date, s'il est en vigueur.",
+   "pdf": "assets/fiches/FA-M1-03.pdf",
+   "competences": [
+    "C17"
+   ],
+   "version": "0.3"
   }
  },
  "illustrations": {
@@ -2744,5 +2786,5 @@ window.DINA_DATA = {
    "alt": "Trois questions avant d'utiliser une information : qui l'a produite ? de quand date-t-elle ? est-elle en vigueur ? Selon les réponses : je l'utilise, je vérifie, ou je l'écarte."
   }
  },
- "source": "Storyboard — M1 en pages v0.10.md"
+ "source": "Storyboard — M1 en pages v0.12.md"
 };
