@@ -836,7 +836,8 @@ window.DINA_DATA = {
    "competences": [
     "C21"
    ],
-   "version": "0.1"
+   "version": "0.1",
+   "pdf": "assets/fiches/FO-BIL-E1.pdf"
   }
  },
  "illustrations": {
