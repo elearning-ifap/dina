@@ -40,6 +40,31 @@
     return u.length ? Math.round(100 * u.reduce(function (a, e) { return a + (POND[e] || 0); }, 0) / u.length) : 0;
   }
 
+  /* Intégration dans LIANE : la colonne « Intégration Moodle » de chaque étape du parcours se déduit des jalons
+     (activité créée, réglée, paquet déposé, vérifiée), pondérés selon l'effort. */
+  var COL_MOODLE = (D.etapesFabrication || []).indexOf("Intégration Moodle");
+  if (D.integration && COL_MOODLE >= 0) {
+    var libJalon = {};
+    D.integration.jalons.forEach(function (j) { libJalon[j.code] = j; });
+    D.integration.activites.forEach(function (a) {
+      var p = D.parcours.filter(function (x) { return x.code === a.code; })[0];
+      if (!p) return;
+      var frac = a.faits.reduce(function (n, c) { return n + (libJalon[c] ? libJalon[c].poids : 0); }, 0);
+      p.etats[COL_MOODLE] = frac >= 0.999 ? "livre" : frac > 0 ? "en_cours" : "a_faire";
+      p._integ = { frac: frac, faits: a.faits.length, total: D.integration.jalons.length,
+        texte: a.faits.map(function (c) { return libJalon[c] ? libJalon[c].libelle.toLowerCase() : c; }).join(", ") };
+    });
+  }
+  /* Avancement d'une étape du parcours : l'intégration compte pour sa part réelle (jalons), pas pour 50 % forfaitaires */
+  function pourcentEtape(p) {
+    var t = 0, n = 0;
+    p.etats.forEach(function (e, i) {
+      if (e === "sans_objet") return;
+      n++; t += (i === COL_MOODLE && p._integ) ? p._integ.frac : (POND[e] || 0);
+    });
+    return n ? Math.round(100 * t / n) : 0;
+  }
+
   /* Ancres : un identifiant par livrable et par étape du parcours, pour les liens des tâches */
   var parTitre = {}, parCode = {};
   tous.forEach(function (l, i) { l._id = "l-" + (i + 1); parTitre[l.titre] = l; });
@@ -373,11 +398,11 @@
     }).join("");
     var entete = '<div class="m-entete" aria-hidden="true"><div>Étape du parcours</div>' + D.etapesFabrication.map(function (e) { return "<div>" + esc(e) + "</div>"; }).join("") + "</div>";
     $("modules-apercu").innerHTML = D.parcours.map(function (p) {
-      var pc = pourcent(p.etats);
+      var pc = pourcentEtape(p);
       return '<a class="module-raccourci" href="#' + p._id + '"><span class="code">' + esc(p.code) + '</span><strong>' + esc(p.titre) + '</strong><span class="module-pourcent">' + pc + ' %</span><span class="module-mini-jauge"><span style="width:' + pc + '%"></span></span></a>';
     }).join("");
     $("matrice").innerHTML = entete + D.parcours.map(function (p) {
-      var pc = pourcent(p.etats);
+      var pc = pourcentEtape(p);
       var acts = (p.actions || []);
       var blocActions = '<div class="m-actions"><h4>Actions à conduire</h4>' + (acts.length ? "<ul>" + acts.map(function (a) {
           return "<li><span>" + esc(a.titre) + "</span>" + (a.doc ? ' <a class="lien-doc" href="' + esc(a.doc) + '" target="_blank" rel="noopener">' + esc(a.docTexte || "Ouvrir le document") + "</a>" : "") + (a.qui ? '<span class="m-qui">' + esc([].concat(a.qui).map(nom).join(", ")) + "</span>" : "") +
@@ -388,7 +413,9 @@
         (p.sousTitre ? "<small>" + esc(p.sousTitre) + "</small>" : "") + (p.note ? '<details class="m-note"><summary>Où en est-on</summary><small>' + esc(p.note) + "</small></details>" : "") +
         "<small>" + (p.duree != null ? "Durée prévue : " + fr(p.duree) + "\u00a0j" : '<span class="a-estimer">Durée à estimer</span>') + "</small></div>" +
         p.etats.map(function (s, i) {
-          return '<div class="m-cell"><span class="etiquette-mobile" aria-hidden="true">' + esc(COURT[i] || D.etapesFabrication[i]) + "</span>" + pastille(s, D.etapesFabrication[i]) + "</div>";
+          var detail = (i === COL_MOODLE && p._integ && p._integ.frac > 0 && p._integ.frac < 1)
+            ? '<small class="m-integ" title="' + esc("Fait : " + p._integ.texte) + '">' + Math.round(100 * p._integ.frac) + "\u00a0%</small>" : "";
+          return '<div class="m-cell"><span class="etiquette-mobile" aria-hidden="true">' + esc(COURT[i] || D.etapesFabrication[i]) + "</span>" + pastille(s, D.etapesFabrication[i] + (i === COL_MOODLE && p._integ ? " (" + p._integ.faits + " / " + p._integ.total + " étapes : " + p._integ.texte + ")" : "")) + detail + "</div>";
         }).join("") + blocActions + "</div>";
     }).join("");
   })();
