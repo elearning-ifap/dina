@@ -192,6 +192,19 @@ def controler(illus, blocs):
             erreurs.append(f"id en double : {i}")
         vus.add(i)
     fiches = {b["id"] for b in blocs if b.get("type") == "fiche"}
+    # Fiches en PDF (D154, D168) : champ « pdf » = chemin sous src/ ; modèle « pdf » = pseudo-fiche d'apport
+    for b in blocs:
+        if b.get("type") != "fiche":
+            continue
+        chemin = b.get("pdf")
+        if b.get("modele") == "pdf" and not chemin:
+            erreurs.append(f"{b.get('id')} : modèle « pdf » sans champ « pdf »")
+        if chemin and not (RACINE / "src" / str(chemin)).exists():
+            erreurs.append(f"{b.get('id')} : fichier PDF introuvable ({chemin})")
+    for b in blocs:
+        for f in b.get("fiches_pdf", []) or []:   # écrans d'apport des modules en écrans (m1.js)
+            if f not in fiches:
+                erreurs.append(f"{b.get('id')} : fiches_pdf → fiche {f} inexistante")
     # Dossier fil rouge (D58) : chaque jalon pointe vers une étape du module
     for m in (b for b in blocs if b.get("type") == "module"):
         sections = {s.get("id") for s in m.get("sections", []) or []}
