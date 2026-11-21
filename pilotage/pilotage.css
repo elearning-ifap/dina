@@ -355,3 +355,8 @@ a.global-barre:hover, a.global-barre:focus-visible { background: var(--gris-clai
 .jalons-liane li { display: flex; gap: .6rem; padding: .18rem 0; color: var(--texte-2); }
 .jalons-liane b { flex: 0 0 2.8rem; color: var(--texte); font-variant-numeric: tabular-nums; }
 .m-integ { display: block; font-size: .72rem; color: var(--texte-2); margin-top: .15rem; font-variant-numeric: tabular-nums; }
+
+/* Contenus du parcours (image de synthèse) */
+.contenus-parcours figure { margin: 1rem 0 0; }
+.contenus-parcours img { display: block; width: 100%; height: auto; border-radius: var(--rayon); border: 1px solid var(--bordure); box-shadow: var(--ombre); }
+.contenus-parcours figcaption { margin-top: .5rem; font-size: .85rem; color: var(--texte-2); }
