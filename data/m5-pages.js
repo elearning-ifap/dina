@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M5 en pages v0.1.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M5 en pages v0.2.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M5-PAGES",
@@ -331,6 +331,12 @@ window.DINA_DATA = {
      "texte": "Noa vient de voir deux choses : une façon d'expliquer qui s'adapte, et un traitement qui ne change pas.",
      "regle": "J'accueille chacun avec les mêmes égards. J'adapte ma façon d'expliquer, jamais ce à quoi la personne a droit. Ce qui dépasse mon rôle, je le transmets.",
      "regle_clair": "**L'égalité de traitement**, c'est traiter chacun de la même façon, sans passe-droit pour une connaissance. **Orienter**, c'est indiquer le bon service quand la demande n'est pas la mienne.",
+     "visuels": [
+      {
+       "remplace": "methode",
+       "image": "INF-M5-01"
+      }
+     ],
      "methode_titre": "Cinq repères pour accueillir",
      "methode": [
       "Je salue, je me présente (nom, service) et j'écoute avec bienveillance.",
@@ -467,7 +473,8 @@ window.DINA_DATA = {
    ],
    "fiches": [
     "FICHE-M5-E1",
-    "FICHE-M5-CONN1"
+    "FICHE-M5-CONN1",
+    "FA-M5-01"
    ],
    "suite": "M5-P1-FIN"
   },
@@ -670,6 +677,12 @@ window.DINA_DATA = {
      "texte": "Noa a deux réflexes : ne pas relayer, et se demander ce que dit son badge.",
      "regle": "En service, je reste neutre. En dehors, je m'exprime avec mesure. Ce que je sais par mes fonctions, je le garde.",
      "regle_clair": "**La neutralité**, c'est ne pas mêler ses opinions à son travail. **La réserve**, c'est la mesure avec laquelle je m'exprime, même en dehors du service. **La discrétion**, c'est ne pas répéter ce que je sais par mes fonctions.",
+     "visuels": [
+      {
+       "remplace": "methode",
+       "image": "INF-M5-02"
+      }
+     ],
      "methode_titre": "Quatre repères pour garder sa réserve",
      "methode": [
       "Je ne relaie aucun message militant, surtout pas par la messagerie professionnelle.",
@@ -767,7 +780,8 @@ window.DINA_DATA = {
     }
    ],
    "fiches": [
-    "FICHE-M5-CONN2"
+    "FICHE-M5-CONN2",
+    "FA-M5-02"
    ],
    "suite": "M5-P2-FIN"
   },
@@ -962,6 +976,12 @@ window.DINA_DATA = {
      "texte": "Noa a signalé le lien, il ne traite plus le dossier, et il n'a rien dit à son cousin. Voici pourquoi, et comment décider quand la situation est moins nette.",
      "regle": "Si j'ai un lien avec un dossier, je le signale et je ne le traite pas. Je ne donne à personne d'information non publique. Avant d'accepter un cadeau, je demande conseil.",
      "regle_clair": "Un **conflit d'intérêts**, c'est quand un lien personnel pourrait influencer, ou sembler influencer, mon travail. **Se déporter**, c'est cesser de traiter le dossier et le faire confier à un autre agent.",
+     "visuels": [
+      {
+       "remplace": "methode",
+       "image": "INF-M5-03"
+      }
+     ],
      "methode_titre": "Six questions avant de décider",
      "methode": [
       "Qui est concerné ? Ai-je un lien avec lui (famille, proche, intérêt) ?",
@@ -1315,6 +1335,12 @@ window.DINA_DATA = {
      "texte": "Onze personnes reçues, c'est de l'activité. Reste à regarder ce que cela a donné pour les habitants, et comment on le saura la prochaine fois.",
      "regle": "Je distingue ce qu'on a fait, ce qu'on a obtenu et ce qui a servi. Je pars d'un constat factuel, je propose une amélioration simple, et je dis comment on saura qu'elle a marché.",
      "regle_clair": "**L'activité**, c'est ce qu'on a fait. **Le résultat**, c'est ce qu'on a obtenu. **L'utilité**, c'est ce que cela change pour l'usager. Un **indicateur** est un repère simple, souvent chiffré, qui permet de suivre un résultat.",
+     "visuels": [
+      {
+       "remplace": "methode",
+       "image": "INF-M5-04"
+      }
+     ],
      "methode_titre": "Cinq repères pour améliorer un service",
      "methode": [
       "Je rappelle l'objectif : à quoi sert ce que je fais, pour l'usager ?",
@@ -2280,6 +2306,7 @@ window.DINA_DATA = {
   "M5-SOR-1": {
    "id": "M5-SOR-1",
    "type": "narration",
+   "illustration": "ILL-S09",
    "etape": "Bilan",
    "titre": "Ce que Noa a appris cette semaine",
    "texte": "Vendredi, fin de matinée. Joël passe au bureau : la deuxième permanence est confirmée, avec la fiche « Ma prochaine étape » et un relevé des habitants qui repartent en sachant quoi faire. Ariane a présenté la note aux partenaires. Voici ce que Noa sait faire maintenant.",
@@ -2364,7 +2391,9 @@ window.DINA_DATA = {
     "FICHE-M5-E2",
     "FICHE-M5-E3",
     "FICHE-M5-CONN1",
-    "FICHE-M5-CONN2"
+    "FICHE-M5-CONN2",
+    "FA-M5-01",
+    "FA-M5-02"
    ],
    "suite": "M5-FIN"
   },
@@ -2457,7 +2486,8 @@ window.DINA_DATA = {
     "C13"
    ],
    "version": "0.1",
-   "valider": "Accueil : bonnes pratiques (DITP Services Publics+ : métropolitain, jamais une règle) ; impartialité (page DRHFPNC) ; secret (délib. 81 art. 20). Relais linguistique : à valider par un référent coutumier. Corpus M5, questions 3 et 4."
+   "valider": "Accueil : bonnes pratiques (DITP Services Publics+ : métropolitain, jamais une règle) ; impartialité (page DRHFPNC) ; secret (délib. 81 art. 20). Relais linguistique : à valider par un référent coutumier. Corpus M5, questions 3 et 4.",
+   "pdf": "assets/fiches/FO-M5-E1.pdf"
   },
   "FICHE-M5-E2": {
    "id": "FICHE-M5-E2",
@@ -2531,7 +2561,8 @@ window.DINA_DATA = {
     "C13"
    ],
    "version": "0.1",
-   "valider": "Grille inspirée du guide AFA 2022 (repère métropolitain, pas une règle) ; délibération 81 art. 19, 19-1, 20. Conflit d'intérêts : pas de définition calédonienne ; aucun référent déontologue affirmé. Corpus M5, questions 1 et 2."
+   "valider": "Grille inspirée du guide AFA 2022 (repère métropolitain, pas une règle) ; délibération 81 art. 19, 19-1, 20. Conflit d'intérêts : pas de définition calédonienne ; aucun référent déontologue affirmé. Corpus M5, questions 1 et 2.",
+   "pdf": "assets/fiches/FO-M5-E2.pdf"
   },
   "FICHE-M5-E3": {
    "id": "FICHE-M5-E3",
@@ -2588,7 +2619,8 @@ window.DINA_DATA = {
     "C20"
    ],
    "version": "0.1",
-   "valider": "Qualité de service et amélioration continue : aucune norme calédonienne commune ; méthode (DRHFPNC rapport 2021-2022, DITP Services Publics+ : métropolitain, bonne pratique). Corpus M5, question 3."
+   "valider": "Qualité de service et amélioration continue : aucune norme calédonienne commune ; méthode (DRHFPNC rapport 2021-2022, DITP Services Publics+ : métropolitain, bonne pratique). Corpus M5, question 3.",
+   "pdf": "assets/fiches/FO-M5-E3.pdf"
   },
   "FICHE-M5-CONN1": {
    "id": "FICHE-M5-CONN1",
@@ -2692,6 +2724,34 @@ window.DINA_DATA = {
    ],
    "version": "0.1",
    "valider": "Délibération 81 art. 20 à 22 (couvert) ; circulaire DRHFPNC du 18-06-2024 à citer avec précaution ; fondement juridique de la sincérité de l'information à confirmer par un juriste (limites de l'obéissance, art. 22). Mise en forme A4 recto verso : D154."
+  },
+  "FA-M5-01": {
+   "id": "FA-M5-01",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Les principes du service public en situations",
+   "quand": "Égalité, neutralité, continuité et adaptabilité, vues en situations.",
+   "pdf": "assets/fiches/FA-M5-01.pdf",
+   "competences": [
+    "C13",
+    "C16"
+   ],
+   "version": "0.1"
+  },
+  "FA-M5-02": {
+   "id": "FA-M5-02",
+   "type": "fiche",
+   "modele": "pdf",
+   "categorie": "apport",
+   "titre": "Loyauté, réserve, discrétion",
+   "quand": "Ce que je peux dire, publier ou partager, en service et en dehors.",
+   "pdf": "assets/fiches/FA-M5-02.pdf",
+   "competences": [
+    "C13",
+    "C14"
+   ],
+   "version": "0.1"
   }
  },
  "illustrations": {
@@ -2761,5 +2821,5 @@ window.DINA_DATA = {
    "alt": "Cinq étapes en frise : l'objectif, activité résultat utilité, un constat factuel, une amélioration simple, un indicateur."
   }
  },
- "source": "Storyboard — M5 en pages v0.1.md"
+ "source": "Storyboard — M5 en pages v0.2.md"
 };
