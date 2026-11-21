@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — Bilan de parcours en pages v0.1.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — Bilan de parcours en pages v0.2.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "BIL-PAGES",
@@ -251,7 +251,7 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Évaluation",
    "titre": "Six situations nouvelles",
-   "texte": "Six situations nouvelles, deux par repère. Bilan réussi avec 5 réponses justes sur 6, dont une au moins par repère.\nSinon, une seconde tentative vous est proposée sur d'autres situations, quand vous voulez. Réussie ou non, votre parcours reste ouvert.\n",
+   "texte": "Six situations nouvelles, deux par repère. Bilan réussi avec 5 réponses justes sur 6 (au moins 80 %). Avec les cinq modules réussis, il vous donne le badge du parcours DINA.\nSinon, une seconde tentative vous est proposée sur d'autres situations, quand vous voulez. Réussie ou non, votre parcours reste ouvert.\n",
    "suite": "BIL-EVA-E1A"
   },
   "BIL-EVA-E1A": {
@@ -642,15 +642,15 @@ window.DINA_DATA = {
    "id": "BIL-EVA-RES",
    "type": "eval-resultat",
    "etape": "Évaluation",
-   "regle": "5 réponses justes sur 6, au moins une par repère",
+   "regle": "5 réponses justes sur 6 (au moins 80 %)",
    "preuves": {
     "E1": "Analyser une situation vécue",
     "E2": "Accueillir un retour",
     "E3": "Choisir un axe de progrès"
    },
-   "texte_reussi": "Évaluation réussie : vous savez prendre du recul sur votre pratique. Vous regardez ce qui a marché et ce qui peut changer, vous accueillez un retour et vous le demandez vous-même, vous choisissez une chose à faire autrement et une ressource pour vous aider.\n",
+   "texte_reussi": "Évaluation réussie : le bilan est validé. Le badge du parcours DINA vous est remis dans Moodle dès que les cinq modules et ce bilan sont réussis. Vous savez prendre du recul sur votre pratique : vous regardez ce qui a marché et ce qui peut changer, vous accueillez un retour et vous le demandez vous-même, vous choisissez une chose à faire autrement et une ressource pour vous aider.\n",
    "texte_echec": "Certains repères sont encore à consolider. Une nouvelle tentative vous est proposée, sur six autres situations.\n",
-   "texte_echec_final": "Certains repères restent à consolider. Nous vous conseillons de relire la fiche « Mon plan de progrès » dans votre carnet. Vous reprendrez l'évaluation quand vous le voudrez, depuis le sommaire : les deux séries de situations alternent d'une tentative à l'autre. Votre parcours DINA reste ouvert.\n",
+   "texte_echec_final": "Certains repères restent à consolider. Nous vous conseillons de relire la fiche « Mon plan de progrès » dans votre carnet. Vous reprendrez l'évaluation quand vous le voudrez, depuis le sommaire : les deux séries de situations alternent d'une tentative à l'autre. Votre parcours DINA reste ouvert, et le badge du parcours vous attend dès que le bilan est réussi.\n",
    "consolider": {
     "E1": {
      "texte": "Quand quelque chose s'est mal passé, je regarde ce qui a marché, ce qui a posé problème, et je choisis un changement concret. Je ne généralise pas, je ne cherche pas de coupable. À revoir : « Trois gestes pour prendre du recul ».",
@@ -765,14 +765,18 @@ window.DINA_DATA = {
      "texte": "Revenir sur sa semaine, accueillir un retour, choisir une chose à faire autrement."
     },
     {
+     "titre": "Un badge pour tout le parcours",
+     "texte": "Cinq modules réussis et ce bilan réussi : le badge du parcours DINA est à vous."
+    },
+    {
      "titre": "Un parcours qui reste ouvert",
      "texte": "Vous pouvez revenir sur n'importe quel module, quand vous voulez."
     }
    ],
    "dossier": "Le dossier Passerelles se clôt sur un retour d'expérience : Ariane en retient ce que Noa a appris, pas seulement ce que l'ÉLAN a livré.",
    "prochain": {
-    "titre": "Questionnaire de fin et attestation",
-    "texte": "Dans Moodle, il vous reste à répondre au questionnaire de fin de parcours. Votre avis nous aide à améliorer DINA."
+    "titre": "Dans Moodle : votre badge et le questionnaire de fin",
+    "texte": "Le badge « Parcours DINA accompli » vous est remis quand les cinq modules et ce bilan sont réussis. Il vous reste ensuite à répondre au questionnaire de fin : votre avis nous aide à améliorer DINA."
    },
    "suite": "MENU"
   }
@@ -837,10 +841,10 @@ window.DINA_DATA = {
  },
  "illustrations": {
   "ILL-B1": {
-   "scene": "Salle de réunion de l'ÉLAN, trois mois plus tard : Noa présente ses notes à Ariane, Samuel et Malia (à produire)",
+   "scene": "Salle de réunion de l'ÉLAN, trois mois plus tard : Noa présente ses notes à Ariane, Samuel et Malia (lieu L7 ; à produire, prompt prêt)",
    "personnages": "Noa, Ariane, Samuel, Malia",
    "alt": "Dans une salle de réunion de l'ÉLAN à Koné, Noa, debout près d'un tableau blanc, présente ses notes à Ariane, Samuel et Malia, assis autour de la table."
   }
  },
- "source": "Storyboard — Bilan de parcours en pages v0.1.md"
+ "source": "Storyboard — Bilan de parcours en pages v0.2.md"
 };

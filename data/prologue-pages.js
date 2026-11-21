@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — Prologue en pages v0.2.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — Prologue en pages v0.3.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "PRO-PAGES",
@@ -376,7 +376,7 @@ window.DINA_DATA = {
       {
        "icone": "i-medaille",
        "recto": "Gagnez des badges",
-       "verso": "Chaque module réussi vous donne un badge. En réussissant les cinq, vous obtenez le badge du parcours DINA."
+       "verso": "Chaque module réussi vous donne un badge. Quand vous avez réussi les cinq modules, puis le bilan de parcours (5 réponses justes sur 6), vous obtenez le badge du parcours DINA."
       },
       {
        "icone": "i-cadenas",
@@ -443,5 +443,5 @@ window.DINA_DATA = {
    "alt": "Organigramme de l'ÉLAN. En haut, Ariane, directrice. Pôle études et projets : Samuel, responsable du pôle, puis Noa, chargé d'études et d'appui aux projets, et Malia, chargée d'études et d'évaluation, marraine de Noa. Pôle ressources et administration : Ana, développement des compétences, et Cédric, accueil et logistique. En bas, les partenaires, qui ne dépendent pas de l'ÉLAN : Joël et Teiva, association Passerelles ; Léna, administration provinciale ; Élise, une commune. Chaque personne a son statut indiqué."
   }
  },
- "source": "Storyboard — Prologue en pages v0.2.md"
+ "source": "Storyboard — Prologue en pages v0.3.md"
 };
