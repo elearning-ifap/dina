@@ -158,13 +158,15 @@ window.DINA_PILOTAGE = {
       ],
       note: "17-11 : descriptif v0.2 (1 h 15, trois repères). Storyboard « M5 en pages v0.1 » : cinq pages (lundi à jeudi, défi), évaluation, bilan et 5 fiches. Page « m5-pages » construite le 17-11, pas encore rejouée dans un navigateur ; 18-11 : les 13 images (9 scènes, 4 infographies) sont produites et placées. D163 : la preuve de la compétence C19 est cherchée dans M5." },
     { code: "BIL", titre: "Bilan de parcours", sousTitre: "",
-      etats: ["sans_objet", "a_faire", "a_faire", "a_faire", "sans_objet", "a_faire", "a_faire"],
+      etats: ["sans_objet", "a_faire", "a_valider", "a_valider", "a_faire", "en_cours", "a_faire"],
       actions: [
-        { titre: "Concevoir le bilan de parcours et l'évaluation de la compétence C21", qui: "marc", lie: "BIL" },
+        { titre: "Relire le storyboard « Bilan de parcours en pages v0.1 » : fil « trois mois plus tard », trois repères, douze situations d'évaluation, fiche « Mon plan de progrès »", qui: "marc", lie: "BIL" },
+        { titre: "Décider du badge du parcours DINA (annoncé au prologue, non prévu par D150)", qui: "marc", lie: "BIL" },
+        { titre: "Produire l'illustration ILL-B1 (retour d'expérience de Noa) et le PDF de la fiche « Mon plan de progrès »", qui: "marc", lie: "BIL" },
         { titre: "Faire valider le corpus par les experts spécialisés", qui: "mnb", lie: "Validation experte du contenu juridique : experts en vacation et budget propre à DINA" },
         { titre: "Produire le paquet SCORM et l'intégrer dans LIANE", qui: "marc", lie: "Paquets SCORM : prologue, 5 modules, bilan" }
       ],
-      note: "Clôture du parcours et évaluation de la compétence C21." }
+      note: "21-11 : première version écrite (storyboard « Bilan de parcours en pages v0.1 »), page « bilan-pages » construite et rejouée : 4 contrôles sur 4 sans écart (sauvegarde 541 / 4 096). Environ 20 minutes : « Trois mois plus tard » (retour d'expérience de Noa à Ariane, fin de M5), « Prendre du recul » (trois gestes, réponse libre), évaluation de C21 (trois repères, six situations par série, deux séries, 5 sur 6 avec un repère au moins), « Mon plan de progrès » (fiche outil). Aucune règle juridique : pas de validation experte propre à C21. Le SCORM ne lit pas les scores des modules : pas de tableau de résultats. À valider : le fil, les repères, les situations, le badge du parcours." }
   ],
 
   /* Livrables par catégorie.

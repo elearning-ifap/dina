@@ -38,6 +38,7 @@ MODULES = {
     "m4-pages": "m4-pages.html",
     "m3-pages": "m3-pages.html",
     "m5-pages": "m5-pages.html",
+    "bilan-pages": "bilan-pages.html",
 }
 TAILLES = {1366: 768, 390: 844}
 FINS = ("fin", "pos-suite")   # derniers écrans : leur bouton quitte la page, on s'arrête dessus
