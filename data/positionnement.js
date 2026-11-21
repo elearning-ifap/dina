@@ -50,6 +50,7 @@ window.DINA_DATA = {
    "type": "narration",
    "etape": "Positionnement",
    "titre": "Une semaine de travail",
+   "illustration": "ILL-POS1",
    "texte": "Vous travaillez dans un service public calédonien depuis quelques jours ou quelques mois.\nAvant de commencer votre parcours DINA, nous vous proposons de vivre une semaine de travail à travers 15 situations professionnelles, du lundi au vendredi.\nPour chaque situation, plusieurs façons d'agir vous sont proposées. Choisissez celle qui correspond le mieux à ce que vous feriez spontanément. Une seule passe : votre premier réflexe compte.\nAprès chaque choix, vous voyez ce qui se passe et ce que la situation travaille. Les explications viennent ensuite, dans les modules.\nÀ la fin de l'activité, vous découvrez votre positionnement sur les 21 compétences du socle DINA et dans quel module chaque sujet est travaillé.\nPas de note, pas d'échec : ce positionnement, c'est entre vous et votre écran !\n",
    "a_retenir": "Version de démonstration : contenus non validés par un expert, réponses non enregistrées.",
    "suite": "POS-S01"
@@ -756,6 +757,7 @@ window.DINA_DATA = {
   "POS-S16": {
    "id": "POS-S16",
    "type": "reponse-libre",
+   "illustration": "ILL-POS2",
    "etape": "Positionnement",
    "titre": "Votre semaine se termine",
    "texte": "Vendredi, 17 h. Voici ce que vous avez vécu cette semaine.",

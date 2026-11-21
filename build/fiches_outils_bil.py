@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""DINA — fiches outils BIL en PDF A4 (une page), rendues depuis data/bilan-pages.js via fiche.html + fiche.js.
-Usage : python fiches_outils_bilan.py --racine <dossier contenant fiche.html, css/, js/, assets/> --donnees <bilan-pages.js> --sortie <dossier>
-Source unique : les fiches du storyboard « BIL en pages » (écran et PDF identiques). Aucun texte pédagogique ici."""
+"""DINA — fiche outil du bilan de parcours en PDF A4 (une page), rendues depuis data/bilan-pages.js via fiche.html + fiche.js.
+Usage : python fiches_outils_bil.py --racine <dossier contenant fiche.html, css/, js/, assets/> --donnees <bilan-pages.js> --sortie <dossier>
+Source unique : les fiches du storyboard « Bilan de parcours en pages » (écran et PDF identiques). Aucun texte pédagogique ici."""
 import argparse, pathlib, shutil, sys, tempfile
 IDS = [("FICHE-BIL-E1", "FO-BIL-E1")]
 ap = argparse.ArgumentParser()

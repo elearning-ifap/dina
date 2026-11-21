@@ -49,7 +49,7 @@
   } else if (f.modele === "aide-memoire") {
     var NOMBRES = ["", "Une étape", "Deux étapes", "Trois étapes", "Quatre étapes", "Cinq étapes", "Six étapes", "Sept étapes"];
     corps += '<h2>' + esc(f.titre_etapes || NOMBRES[f.etapes.length] || "Les étapes") + '</h2><ol class="fiche-etapes">' + f.etapes.map(function (e) { return "<li><strong>" + esc(e.titre) + "</strong><span>" + inline(e.texte) + "</span></li>"; }).join("") + "</ol>";
-    corps += '<h2>' + esc(f.titre_types || "Quel type de demande ?") + '</h2><div class="fiche-types">' + f.types.map(function (t) {
+    if ((f.types || []).length) corps += '<h2>' + esc(f.titre_types || "Quel type de demande ?") + '</h2><div class="fiche-types">' + f.types.map(function (t) {
       var titre = t.lien ? '<a href="' + esc(t.lien) + '" target="_blank" rel="noopener">' + esc(t.titre) + "</a>" : esc(t.titre);
       /* Site web (27-10) : picto, adresse en évidence, puis ce qu'on y trouve */
       if (t.lien) return '<div class="site"><strong>' + ic("i-site") + titre + '</strong><span class="lien">' + esc(t.lien.replace(/^https?:\/\/(www\.)?/, "")) +

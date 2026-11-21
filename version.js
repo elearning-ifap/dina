@@ -36,7 +36,7 @@ window.DINA_VERSION = {
       duree: "15 à 20 min environ", disponible: true },
     { code: "prologue", fichier: "prologue-pages.html", cle: "dina-prologue", titre: "Prologue « Bienvenue à l'ÉLAN »",
       texte: "Vous rencontrez Noa, ses collègues et l'organisation où il prend son poste.",
-      duree: "environ 10 min", disponible: true },
+      duree: "8 à 10 min", disponible: true },
     { code: "m1", fichier: "m1-pages.html", cle: "dina-m1", titre: "Module 1 « Je me repère »",
       texte: "Comprendre mon environnement. Institutions, acteurs publics, environnement professionnel, contexte calédonien, recherche d'une information fiable.",
       duree: "1 h 05 environ", disponible: true },
@@ -67,6 +67,7 @@ window.DINA_VERSION = {
   contact: "Contact : IFAP",
 
   historique: [
-    { numero: "0.1", date: "28-10-2026", lien: "v0.1/index.html", resume: "Version présentée aux employeurs le 28-10." }
+    { numero: "0.2", date: "06-11-2026", resume: "Positionnement, prologue et module 1 en écrans." },
+    { numero: "0.1", date: "28-10-2026", resume: "Version présentée aux employeurs le 28-10 (non archivée en ligne)." }
   ]
 };

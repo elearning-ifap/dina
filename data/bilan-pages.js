@@ -91,7 +91,6 @@ window.DINA_DATA = {
      "type": "recit",
      "phase": "situation",
      "titre": "Le retour d'expérience",
-     "illustration": "ILL-B1",
      "texte": "Trois mois ont passé depuis la première permanence de Passerelles. Ariane a réuni Samuel, Malia et Noa pour un retour d'expérience sur le dossier, de la première demande à la permanence.\n\nNoa a préparé quelques notes.",
      "repliques": [
       {
@@ -650,7 +649,7 @@ window.DINA_DATA = {
    },
    "texte_reussi": "Évaluation réussie : le bilan est validé. Le badge du parcours DINA vous est remis dans Moodle dès que les cinq modules et ce bilan sont réussis. Vous savez prendre du recul sur votre pratique : vous regardez ce qui a marché et ce qui peut changer, vous accueillez un retour et vous le demandez vous-même, vous choisissez une chose à faire autrement et une ressource pour vous aider.\n",
    "texte_echec": "Certains repères sont encore à consolider. Une nouvelle tentative vous est proposée, sur six autres situations.\n",
-   "texte_echec_final": "Certains repères restent à consolider. Nous vous conseillons de relire la fiche « Mon plan de progrès » dans votre carnet. Vous reprendrez l'évaluation quand vous le voudrez, depuis le sommaire : les deux séries de situations alternent d'une tentative à l'autre. Votre parcours DINA reste ouvert, et le badge du parcours vous attend dès que le bilan est réussi.\n",
+   "texte_echec_final": "Certains repères restent à consolider. Nous vous conseillons de relire la fiche « Mon plan de progrès » dans votre carnet. Vous reprendrez l'évaluation quand vous le voudrez, depuis le sommaire : les deux séries de situations alternent d'une tentative à l'autre. Votre parcours DINA reste ouvert, et le badge du parcours vous attend dès que ce bilan et les cinq modules sont réussis.\n",
    "consolider": {
     "E1": {
      "texte": "Quand quelque chose s'est mal passé, je regarde ce qui a marché, ce qui a posé problème, et je choisis un changement concret. Je ne généralise pas, je ne cherche pas de coupable. À revoir : « Trois gestes pour prendre du recul ».",

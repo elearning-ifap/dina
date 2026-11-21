@@ -2696,7 +2696,8 @@ window.DINA_DATA = {
     "C02",
     "C18"
    ],
-   "version": "0.1"
+   "version": "0.1",
+   "pdf": "assets/fiches/FO-M1-DEF.pdf"
   },
   "FA-M1-01": {
    "id": "FA-M1-01",

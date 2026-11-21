@@ -171,7 +171,7 @@
   if (V.historique && V.historique.length) {
     $("bloc-historique").hidden = false;
     $("historique").innerHTML = V.historique.map(function (h) {
-      return '<li><a href="' + esc(h.lien) + '">Version ' + esc(h.numero) + "</a> · " + esc(h.date) + (h.resume ? " — " + txt(h.resume) : "") + "</li>";
+      return "<li>" + (h.lien ? '<a href="' + esc(h.lien) + '">Version ' + esc(h.numero) + "</a>" : "Version " + esc(h.numero)) + " · " + esc(h.date) + (h.resume ? " — " + txt(h.resume) : "") + "</li>";
     }).join("");
   }
 

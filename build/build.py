@@ -457,6 +457,11 @@ def main():
         if ill and bl.get("type") != "hotspot" and not any((img / f"{ill}.{x}").exists() for x in ("jpg", "png")):
             print(f"  image absente : {ill} ({bl.get('id')}) — écran affiché sans illustration")
             del bl["illustration"]
+        for pb in bl.get("blocs") or []:   # blocs des pages qui défilent (récit, explorer…)
+            ill = pb.get("illustration")
+            if ill and pb.get("type") != "hotspot" and not any((img / f"{ill}.{x}").exists() for x in ("jpg", "png")):
+                print(f"  image absente : {ill} ({bl.get('id')}, bloc {pb.get('type')}) — bloc affiché sans illustration")
+                del pb["illustration"]
     # T10 : infographie absente du dossier d'images → le bloc en code (grille, méthode) reste affiché
     for bl in blocs:
         for pb in bl.get("blocs") or []:
