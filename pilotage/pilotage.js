@@ -99,7 +99,16 @@
     }).length;
     var plat = []; D.categories.forEach(function (c) { if (c.code === "plateforme") c.livrables.forEach(function (l) { plat.push(l.statut); }); });
     var platFaits = plat.filter(function (x) { return x === "valide" || x === "livre"; }).length;
-    var avanceInteg = progression(plat.concat(integrables.map(function (p) { return p.etats[colonnesMoodle]; })));
+    var I = D.integration || null, poidsActivites = 0, compteJalons = {};
+    if (I) {
+      I.jalons.forEach(function (j) { compteJalons[j.code] = 0; });
+      I.activites.forEach(function (a) {
+        I.jalons.forEach(function (j) { if (a.faits.indexOf(j.code) >= 0) { compteJalons[j.code]++; poidsActivites += j.poids; } });
+      });
+    }
+    var avanceInteg = I
+      ? Math.round(100 * (plat.reduce(function (n, x) { return n + (P[x] || 0); }, 0) + poidsActivites) / (plat.length + I.activites.length))
+      : progression(plat.concat(integrables.map(function (p) { return p.etats[colonnesMoodle]; })));
     function jours(d) { var m = String(d || "").split("-"); return m.length === 3 ? Date.UTC(+m[2], +m[1] - 1, +m[0]) / 864e5 : 0; }
     function jauge(pc, couleur) {
       return '<div class="jauge" role="img" aria-label="' + pc + ' %"><span style="width:' + Math.max(0, Math.min(pc, 100)) + '%;--c:' + couleur + '"></span></div>';
@@ -110,7 +119,10 @@
       jauge(avanceDep, "var(--bleu-progression)") + '<p class="explication">' + dep.length + ' livrables · hors production</p></article>';
     html += '<article class="indicateur"><h3>Intégration dans LIANE</h3><p class="grand">' + avanceInteg + '<small> %</small></p>' +
       jauge(avanceInteg, "var(--turquoise)") +
-      '<p class="explication">Cours, réglages et paquets : ' + platFaits + ' / ' + plat.length + ' livrables de la plateforme validés ou livrés · ' + integres + ' / ' + integrables.length + ' paquets finaux intégrés et validés</p></article>';
+      (I ? '<ul class="jalons-liane">' + I.jalons.map(function (j) {
+        return '<li><b>' + compteJalons[j.code] + ' / ' + I.activites.length + '</b> ' + esc(j.libelle) + '</li>';
+      }).join("") + '</ul><p class="explication">Activités SCORM pondérées selon l\u2019effort (création et réglages 70 %, dépôt et vérification 30 %) · ' + plat.length + ' chantiers de la plateforme</p>'
+        : '<p class="explication">' + integres + ' / ' + integrables.length + ' paquets finaux intégrés</p>') + '</article>';
     var T = D.temps;
     if (T && T.prevuJours) {
       var ventilation = T.productionParGroupe || {};
@@ -143,7 +155,7 @@
     function resume(id, items) {
       $(id).innerHTML = items.map(function (item) { return '<div class="resume-item"><strong>' + esc(item[0]) + '</strong><span>' + esc(item[1]) + '</span></div>'; }).join("");
     }
-    resume("resume-production", [[avanceProd+" %","Avancement pédagogique et numérique"],[integres+" / "+integrables.length,"Étapes intégrées dans LIANE"],[T && T.prevuJours ? fr(T.prevuJours-passeProduction)+" j" : "—","Budget de production restant"]]);
+    resume("resume-production", [[avanceProd+" %","Avancement pédagogique et numérique"],(I ? [compteJalons.reglee+" / "+I.activites.length,"Activités SCORM prêtes dans LIANE"] : [integres+" / "+integrables.length,"Étapes intégrées dans LIANE"]),[T && T.prevuJours ? fr(T.prevuJours-passeProduction)+" j" : "—","Budget de production restant"]]);
     resume("resume-deploiement", [[avanceDep+" %","Avancement du déploiement"],[dep.filter(function(l){return l.statut==="valide"||l.statut==="livre";}).length+" / "+dep.length,"Livrables terminés"],[T && T.prevuJours ? fr(peripherique)+" j" : "—","Temps périphérique mobilisé"]]);
   })();
 
