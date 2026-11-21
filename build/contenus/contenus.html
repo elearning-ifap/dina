@@ -1,0 +1,67 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>DINA — les contenus du parcours</title><style>
+@font-face{font-family:"Lato";font-weight:400;src:url("../../assets/fonts/lato-latin-400-normal.woff2")}
+@font-face{font-family:"Lato";font-weight:700;src:url("../../assets/fonts/lato-latin-700-normal.woff2")}
+@font-face{font-family:"Nunito";font-weight:800;src:url("../../assets/fonts/nunito-latin-800-normal.woff2")}
+:root{--tq:#00B2B8;--bleu:#1F767A;--anth:#3C3C3B;--jaune:#FFCB00;--fond:#F7F5F2;--bord:#E8E4DF;--txt:#2D3748}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1920px;background:var(--fond);font-family:Lato,sans-serif;color:var(--txt)}
+#planche{padding:46px 56px 40px;background:var(--fond)}
+.haut{display:flex;align-items:center;gap:28px;margin-bottom:26px}
+.haut img{height:64px}
+.haut .t h1{font:800 44px/1.05 Nunito,sans-serif;color:var(--anth)}
+.haut .t p{font-size:21px;color:#5a6472;margin-top:6px}
+.bandeau{display:flex;gap:16px;margin-bottom:22px}
+.etape{flex:1;background:#fff;border:1px solid var(--bord);border-left:6px solid var(--jaune);border-radius:12px;padding:14px 20px}
+.etape b{font:800 21px Nunito,sans-serif;color:var(--anth)} .etape span{float:right;font-size:16px;color:#6b7380;font-weight:700}
+.etape p{font-size:17px;margin-top:5px;line-height:1.35}
+.grille{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:22px}
+.mod{background:#fff;border:1px solid var(--bord);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.mod header{background:var(--tq);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:12px 18px}
+.mod .code{font:800 30px Nunito,sans-serif} .mod .duree{font-weight:700;font-size:17px;background:rgba(255,255,255,.2);border-radius:999px;padding:3px 12px}
+.mod h2{font:800 24px/1.15 Nunito,sans-serif;color:var(--anth);padding:16px 18px 2px}
+.mod .st{font-size:16px;color:var(--bleu);font-weight:700;padding:0 18px 10px;text-transform:uppercase;letter-spacing:.04em}
+.mod ul{list-style:none;padding:4px 18px 14px;flex:1}
+.mod li{font-size:17.5px;line-height:1.35;padding:8px 0 8px 22px;position:relative;border-top:1px solid #F0ECE7}
+.mod li:first-child{border-top:0}
+.mod li::before{content:"";position:absolute;left:2px;top:15px;width:9px;height:9px;border-radius:50%;background:var(--tq)}
+.mod footer{margin-top:auto;background:#FFF7D6;padding:12px 18px;font-size:16px;line-height:1.3;color:var(--anth)}
+.mod .fil{display:block;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#997A00;margin-bottom:3px}
+.bas{display:flex;gap:16px;align-items:stretch}
+.bas .etape{border-left-color:var(--bleu)}
+.bas .note{flex:1.3;font-size:16.5px;line-height:1.4;color:#5a6472;padding:14px 4px}
+.pied{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:14px;color:#8a8f96}
+.pied img{height:30px}
+</style></head><body><div id="planche">
+<div class="haut"><img src="../../assets/logo/logo-dina.svg" alt="DINA"><div class="t"><h1>Ce que l'agent découvre dans DINA</h1>
+<p>Le parcours d'intégration en ligne des nouveaux agents publics calédoniens : les contenus abordés, module par module</p></div></div>
+<div class="bandeau">
+ <div class="etape"><b>Test de positionnement</b><span>15 à 20 min</span><p>Une première semaine en situation : quinze choix, un profil sur six domaines.</p></div>
+ <div class="etape"><b>Prologue « Bienvenue à l'ÉLAN »</b><span>8 à 10 min</span><p>Noa, son équipe, l'établissement où il travaille à Koné, et comment on apprend dans DINA.</p></div>
+</div>
+<div class="grille"><article class="mod" id="carte-m1">
+ <header><span class="code">M1</span><span class="duree">1 h 05</span></header>
+ <h2>Je me repère</h2><p class="st">Comprendre mon environnement</p>
+ <ul><li>Qui fait quoi : l&#x27;État, la Nouvelle-Calédonie, les provinces, les communes</li><li>Les institutions : congrès, gouvernement, Sénat coutumier, assemblées de province</li><li>Quatre repères historiques, de Nainville-les-Roches à l&#x27;accord de Nouméa</li><li>Loi du pays, délibération, arrêté : reconnaître un texte et le vérifier</li><li>Mon employeur : qui décide, qui encadre, qui aide</li><li>Trouver une information fiable</li></ul>
+ <footer><span class="fil">Fil rouge</span>Le premier appel de Joël : transmettre avec le contexte</footer></article><article class="mod" id="carte-m2">
+ <header><span class="code">M2</span><span class="duree">1 h</span></header>
+ <h2>Je trouve ma place</h2><p class="st">Situer mon rôle</p>
+ <ul><li>Ma fiche de poste : ce qui relève de moi, ce que je fais valider</li><li>Mon statut en repères : fonctionnaire, contractuel, positions</li><li>Exécuter les instructions, et leurs limites</li><li>Avancer quand la consigne est floue ; le circuit d&#x27;une note</li><li>Demander un appui au bon moment</li><li>Organiser ma semaine, tenir mes échéances, télétravail</li></ul>
+ <footer><span class="fil">Fil rouge</span>Une première note pour le dossier, malgré une matinée qui déraille</footer></article><article class="mod" id="carte-m3">
+ <header><span class="code">M3</span><span class="duree">1 h 30</span></header>
+ <h2>Je travaille avec les autres</h2><p class="st">Coopérer et communiquer</p>
+ <ul><li>Choisir le bon canal et les bons mots</li><li>Écrire en professionnel : clair, factuel, discret</li><li>Transmettre entre services : pour action, pour information</li><li>La convention : un accord écrit entre organisations</li><li>Contribuer à un projet : rôles, jalons, livrables</li><li>Désamorcer un malentendu ; faire face au changement</li></ul>
+ <footer><span class="fil">Fil rouge</span>La réunion de lancement, en salle communale</footer></article><article class="mod" id="carte-m4">
+ <header><span class="code">M4</span><span class="duree">1 h 45</span></header>
+ <h2>J&#x27;agis dans un cadre sécurisé</h2><p class="st">Règles, information, moyens, santé</p>
+ <ul><li>Trouver la bonne règle, et vérifier qu&#x27;elle est à jour</li><li>Protéger l&#x27;information : données personnelles, outils d&#x27;IA, courriels piégés, documents à masquer</li><li>Les moyens du service : véhicule, matériel, fournisseurs</li><li>Commande publique : besoin, contrat, bon de commande, service fait</li><li>Santé et sécurité : repérer un risque, alerter, appeler les secours</li><li>Harcèlement : écouter et orienter, sans qualifier</li></ul>
+ <footer><span class="fil">Fil rouge</span>Une journée de tournée sur les six lieux du diagnostic</footer></article><article class="mod" id="carte-m5">
+ <header><span class="code">M5</span><span class="duree">1 h 15</span></header>
+ <h2>J&#x27;incarne le service public</h2><p class="st">Servir l&#x27;usager</p>
+ <ul><li>Accueillir et orienter chaque usager avec les mêmes égards</li><li>Égalité, neutralité, continuité, adaptabilité</li><li>Réserve et discrétion, y compris sur les réseaux sociaux</li><li>Lien d&#x27;intérêt et cadeaux : repérer, signaler, demander conseil</li><li>Mesurer et améliorer un service : constat, idée, indicateur</li><li>Rendre compte fidèlement</li></ul>
+ <footer><span class="fil">Fil rouge</span>La première permanence de Passerelles</footer></article></div>
+<div class="bas">
+ <div class="etape"><b>Mon bilan</b><span>20 min environ</span><p>Trois mois plus tard : analyser une situation vécue, accueillir un retour, choisir un axe de progrès. Mon plan de progrès.</p></div>
+ <div class="note">Chaque module est une semaine de travail de Noa, du lundi au vendredi : des situations, des apports, un défi le jeudi, une évaluation le vendredi. Le dossier Passerelles relie les modules. Des fiches à télécharger accompagnent chaque module.</div>
+</div>
+<div class="pied"><span>IFAP — DINA · contenus au 22 novembre 2026, sous réserve de la validation experte</span><img src="../../assets/logo/logo-ifap.png" alt="IFAP"></div>
+</div></body></html>
