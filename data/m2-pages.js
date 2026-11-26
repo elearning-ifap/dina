@@ -1,4 +1,4 @@
-/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.8.md » — ne pas modifier à la main. */
+/* GÉNÉRÉ par build/build.py depuis « Storyboard — M2 en pages v0.9.md » — ne pas modifier à la main. */
 window.DINA_DATA = {
  "module": {
   "id": "M2-PAGES",
@@ -551,7 +551,7 @@ window.DINA_DATA = {
        "icone": "i-chemin",
        "titre": "Ce qui dépend du statut",
        "items": [
-        "La façon d'être recruté : concours ou contrat",
+        "La façon d'être recruté : concours, titre ou autre voie pour le fonctionnaire ; contrat pour le contractuel",
         "Le déroulement de la carrière",
         "Certaines règles de congés et de fin de fonctions"
        ]
@@ -3093,7 +3093,7 @@ window.DINA_DATA = {
     },
     {
      "titre": "Ce qui dépend du statut",
-     "texte": "La façon d'être recruté (concours ou contrat), le début des fonctions (un stage avant la titularisation, pour le fonctionnaire), la carrière (grade et avancement, ou durée du contrat), certaines règles de congés et de fin de fonctions."
+     "texte": "La façon d'être recruté (concours, titre ou autre voie pour le fonctionnaire ; contrat pour le contractuel), le début des fonctions (un stage avant la titularisation, pour le fonctionnaire), la carrière (grade et avancement, ou durée du contrat), certaines règles de congés et de fin de fonctions."
     },
     {
      "titre": "Le télétravail",
@@ -3203,5 +3203,5 @@ window.DINA_DATA = {
    "alt": "Vendredi après-midi. Noa range ses documents à son bureau, détendu, la semaine terminée."
   }
  },
- "source": "Storyboard — M2 en pages v0.8.md"
+ "source": "Storyboard — M2 en pages v0.9.md"
 };
